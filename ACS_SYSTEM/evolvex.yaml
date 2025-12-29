@@ -1,0 +1,35 @@
+# FILE: pipelines/evolvex.yaml (New section for HE)
+
+# --- Homomorphic Pipeline Example ---
+
+- step: he_setup
+  operation: he_setup_context # A simple setup function called once
+
+- step: data_prep
+  operation: prep_data_array
+  input: $PAYLOAD
+
+- step: encrypt_for_he
+  operation: he_encrypt
+  input: $data_prep.output
+  output_var: Encrypted_Data_A
+
+- step: load_second_data
+  operation: threat_vault_load # Assuming you fetch a second ciphertext from the vault
+  key: "sensitive_count_b"
+  output_var: Encrypted_Data_B
+
+- step: homomorphic_addition
+  operation: he_eval_add 
+  input: 
+    - $Encrypted_Data_A
+    - $Encrypted_Data_B
+  output_var: Encrypted_Sum_Result 
+  description: "Computes A + B without decrypting either value."
+
+- step: final_decryption
+  operation: he_decrypt 
+  input: $Encrypted_Sum_Result
+  description: "Decrypts the sum result only on a trusted endpoint."
+  # The output of this step would be the plaintext sum!
+

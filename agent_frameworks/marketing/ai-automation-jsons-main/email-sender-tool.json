@@ -1,0 +1,252 @@
+{
+  "name": "email_sender_tool",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n\"from\": \"simeon@cover-io.com\",\n  \"to\": \"simealdana@gmail.com\",\n  \"subject\": \"Test Mentorship Email\",\n  \"html\": \"<h1>Test Email</h1><p>This is a test email for the mentorship endpoint.</p>\",\n  \"files\": []\n}"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [-120, -40],
+      "id": "d96cbf7d-cc91-4fdd-860b-9e4c6f7caf67",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "1dYNfbD3u7ZGQLZgOmPu6b4YgEuVcB-b5",
+          "mode": "list",
+          "cachedResultName": "mentorship_1_to_1_presentation_templete.pdf",
+          "cachedResultUrl": "https://drive.google.com/file/d/1dYNfbD3u7ZGQLZgOmPu6b4YgEuVcB-b5/view?usp=drivesdk"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [340, -80],
+      "id": "76a56a9a-0c4e-430c-80d8-de43d2ccc226",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "RUqxOxzb71obsOAf",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://simeon.cover-io.com/api/mentorship_mail",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "{\n    \"Content-Type\": \"application/json\",\n    \"Accept\": \"application/json\"\n}",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "=from",
+              "value": "={{ $('When Executed by Another Workflow').item.json.from }}"
+            },
+            {
+              "name": "to",
+              "value": "={{ $('When Executed by Another Workflow').item.json.to }}"
+            },
+            {
+              "name": "=subject",
+              "value": "={{ $('When Executed by Another Workflow').item.json.subject }}"
+            },
+            {
+              "name": "html",
+              "value": "={{ $('When Executed by Another Workflow').item.json.html }}"
+            },
+            {
+              "name": "files",
+              "value": "={{ [$json] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [940, -80],
+      "id": "20f9cf60-def7-48d8-bf6b-16999a584e65",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ab9812f1-e35d-4a27-82ba-8623c129efe9",
+              "leftValue": "={{ $json.from }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "f7dd0f47-48fc-4449-85e3-d568f9948fae",
+              "leftValue": "={{ $json.to }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "8a9b54e9-692f-48af-873b-262f2a0a8ae9",
+              "leftValue": "={{ $json.subject }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "0a1e25ca-315e-4d9d-a22c-ff7243eabfb9",
+              "leftValue": "={{ $json.html }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [100, -40],
+      "id": "9bd12696-6104-469d-81e9-0ff8c2d69206",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "errorMessage": "A required property is needed"
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [340, 100],
+      "id": "17bf710a-0d8a-4013-a72b-5faa270d61f7",
+      "name": "Stop and Error"
+    },
+    {
+      "parameters": {
+        "setAllData": false,
+        "options": {
+          "keepAsBase64": true
+        }
+      },
+      "id": "2399db0e-2728-432a-abaa-4571e43a7edd",
+      "name": "Convert to/from binary data",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1.1,
+      "position": [540, -80]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"filename\": \"mentorship_1_to_1_presentation_templete.pdf\",\n  \"contentType\": \"application/pdf\",\n\"content\": \"{{ $json.data }}\"\n}\n ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [740, -80],
+      "id": "9f9ec234-4218-46d3-a7bb-1f9b8232109f",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Convert to/from binary data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to/from binary data": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "90a53bed-e99b-4234-933b-0cf7baafb0d6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f8eaf8bef1c6467fb3687216a5c1296ee5e886fb01cb197574b7f8e91332a8d8"
+  },
+  "id": "YoaB2dWpo8gKVPkR",
+  "tags": []
+}

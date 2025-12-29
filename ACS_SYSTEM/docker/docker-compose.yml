@@ -1,0 +1,181 @@
+version: '3.8'
+
+services:
+  # Security Monitoring Stack
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=true
+      - ELASTIC_PASSWORD=ChangeThisPassword123!
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - elastic_data:/usr/share/elasticsearch/data
+    networks:
+      - security_net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=ChangeThisPassword123!
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - security_net
+
+  # Intrusion Detection System
+  suricata:
+    image: jasonish/suricata:latest
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - ./suricata/rules:/etc/suricata/rules
+      - ./suricata/logs:/var/log/suricata
+      - suricata_data:/var/lib/suricata
+    command: -i eth0
+
+  # Code Quality & Security Scanner
+  sonarqube:
+    image: sonarqube:community
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+    ports:
+      - "9000:9000"
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+    networks:
+      - security_net
+
+  # Vulnerability Scanner
+  openvas:
+    image: mikesplain/openvas:latest
+    ports:
+      - "443:443"
+      - "9390:9390"
+    volumes:
+      - openvas_data:/var/lib/openvas
+    networks:
+      - security_net
+
+  # Web Application Firewall
+  modsecurity:
+    build: ./modsecurity
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./modsecurity/rules:/etc/modsecurity/rules
+      - ./modsecurity/logs:/var/log/modsecurity
+    networks:
+      - security_net
+
+  # Security Audit Dashboard
+  security_dashboard:
+    build: ./dashboard
+    ports:
+      - "8080:8080"
+    environment:
+      - ELASTIC_HOST=elasticsearch
+      - ELASTIC_PORT=9200
+      - ELASTIC_USER=elastic
+      - ELASTIC_PASSWORD=ChangeThisPassword123!
+    depends_on:
+      - elasticsearch
+    networks:
+      - security_net
+
+  # Automated Code Auditor
+  code_auditor:
+    build: ./code_auditor
+    volumes:
+      - ./target_code:/code_to_audit
+      - ./audit_reports:/reports
+    environment:
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+      - AUDIT_SCHEDULE=0 2 * * *  # Daily at 2 AM
+    networks:
+      - security_net
+
+  # Secrets Scanner
+  gitleaks:
+    image: zricethezav/gitleaks:latest
+    volumes:
+      - ./target_repos:/repos
+      - ./gitleaks_reports:/reports
+    command: detect --source=/repos --report-path=/reports/gitleaks-report.json
+    networks:
+      - security_net
+
+  # Log Aggregator
+  fluentd:
+    build: ./fluentd
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+    volumes:
+      - ./fluentd/conf:/fluentd/etc
+    depends_on:
+      - elasticsearch
+    networks:
+      - security_net
+
+  # Threat Intelligence Feed
+  misp:
+    image: coolacid/misp-docker:core-latest
+    ports:
+      - "8443:443"
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_DATABASE=misp
+      - MYSQL_USER=misp
+      - MYSQL_PASSWORD=ChangeThisPassword123!
+    depends_on:
+      - mysql
+    volumes:
+      - misp_data:/var/www/MISP
+    networks:
+      - security_net
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=ChangeThisPassword123!
+      - MYSQL_DATABASE=misp
+      - MYSQL_USER=misp
+      - MYSQL_PASSWORD=ChangeThisPassword123!
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - security_net
+
+volumes:
+  elastic_data:
+  suricata_data:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+  openvas_data:
+  misp_data:
+  mysql_data:
+
+networks:
+  security_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

@@ -1,0 +1,1393 @@
+{
+  "tabConfigurations": {
+    "generic-tab-1": {
+      "id": "generic-tab-1",
+      "title": "Streaming Inventory Planning",
+      "description": "Premium Content Monetization Strategy",
+      "icon": "live_tv",
+      "defaultAgent": "inventoryoptimization",
+      "contextButtonLabel": "... streaming inventory data",
+      "availableAgents": [
+        "inventoryoptimization",
+        "adloadoptimization",
+        "revenueformatselector",
+        "campaignexecutiontiming",
+        "mediaplanner",
+        "audiencestrategy",
+        "adformatselector"
+      ],
+      "scenarios": [
+        {
+          "id": "premium-content-inventory-optimization",
+          "title": "Premium Content Inventory Yield Optimization",
+          "description": "Q: Our Enchanted Kingdoms Season 3 premiere is projected to reach 12.5M viewers. How should we optimize ad load and pricing strategy for premium subscriber satisfaction? Consider family-friendly brand alignment and seasonal demand patterns.",
+          "stage": 1,
+          "query": "Our Enchanted Kingdoms Season 3 premiere is projected to reach 12.5M viewers. How should we optimize ad load and pricing strategy for premium subscriber satisfaction? Consider family-friendly brand alignment and seasonal demand patterns.",
+          "category": "Publisher Revenue Operations",
+          "agentType": "MediaPlanningAgent",
+          "agentObject": "[object Object]"
+        },
+        {
+          "id": "live-sports-inventory-planning",
+          "title": "Live Sports Championship Inventory Strategy",
+          "description": "Q: The Winter Championship Series expects 28M viewers across 12 events. Develop inventory allocation strategy balancing premium sponsorship opportunities, standard ad slots, and interactive advertising formats while maintaining broadcast quality.",
+          "stage": 2,
+          "query": "The Winter Championship Series expects 28M viewers across 12 events. Develop inventory allocation strategy balancing premium sponsorship opportunities, standard ad slots, and interactive advertising formats while maintaining broadcast quality.",
+          "category": "Ad Monetization Team",
+          "agentType": "YieldOptimizationAgent",
+          "agentObject": "[object Object]"
+        },
+        {
+          "id": "subscriber-tier-ad-load-balance",
+          "title": "Multi-Tier Subscriber Ad Load Optimization",
+          "description": "Q: Balance ad loads across our three subscription tiers (Premium $14.99 ad-free, Standard $7.99 limited ads, Basic $4.99 standard ads) to maximize revenue per user while minimizing churn to competitors offering ad-free alternatives.",
+          "stage": 3,
+          "query": "Balance ad loads across our three subscription tiers (Premium $14.99 ad-free, Standard $7.99 limited ads, Basic $4.99 standard ads) to maximize revenue per user while minimizing churn to competitors offering ad-free alternatives.",
+          "category": "Publisher Revenue Operations",
+          "agentType": "FormatStrategyOptimizerAgent",
+          "agent": "[object Object]"
+        },
+        {
+          "id": "seasonal-content-demand-forecasting",
+          "title": "Seasonal Content Demand & Pricing Strategy",
+          "description": "Q: Forecast Q1 2025 inventory demand across our content portfolio considering holiday viewing patterns, new content releases, and competitive streaming launches. Recommend dynamic pricing strategies for different content categories.",
+          "stage": 4,
+          "query": "Forecast Q1 2025 inventory demand across our content portfolio considering holiday viewing patterns, new content releases, and competitive streaming launches. Recommend dynamic pricing strategies for different content categories.",
+          "category": "Demand Forecasting & Pricing",
+          "agentType": "AdLoadOptimizationAgent"
+        },
+        {
+          "id": "family-content-brand-safety-optimization",
+          "title": "Family Content Brand Safety & Revenue Balance",
+          "description": "Q: Optimize brand safety standards for our G/PG-rated family content while maximizing advertiser appeal. How can we attract premium family-focused brands while maintaining our 98.5% brand safety score and competitive CPMs?",
+          "stage": 5,
+          "query": "Optimize brand safety standards for our G/PG-rated family content while maximizing advertiser appeal. How can we attract premium family-focused brands while maintaining our 98.5% brand safety score and competitive CPMs?",
+          "category": "Brand Safety & Premium Positioning",
+          "agentType": "MediaPlanningAgent"
+        },
+        {
+          "id": "international-content-localization-strategy",
+          "title": "International Content Localized Advertising Strategy",
+          "description": "Q: Develop advertising strategy for our international content library across different regions. Consider local brand preferences, cultural sensitivities, and regional CPM variations while maintaining global brand safety standards.",
+          "stage": 6,
+          "query": "Develop advertising strategy for our international content library across different regions. Consider local brand preferences, cultural sensitivities, and regional CPM variations while maintaining global brand safety standards.",
+          "category": "International Monetization Strategy",
+          "agentType": "CampaignOptimizationAgent"
+        }
+      ],
+      "visualizations": [
+        {
+          "type": "segments-visualization",
+          "visualizationType": "segments",
+          "gridSpan": 2,
+          "title": "Content Inventory Performance",
+          "subtitle": "Premium Content Monetization Analysis",
+          "segments": [
+            {
+              "primaryLabel": "Original Series Premium Inventory",
+              "secondaryLabel": "Enchanted Kingdoms Season 3 Launch",
+              "description": "High-value family content with selective premium advertising partnerships",
+              "actualValue": "$32.75 CPM",
+              "targetValue": "$28.50 CPM",
+              "actualLabel": "Achieved CPM",
+              "targetLabel": "Target CPM",
+              "primaryMetric": {
+                "label": "Fill Rate",
+                "value": "94.2%"
+              },
+              "secondaryMetric": {
+                "label": "Brand Safety Score",
+                "value": "98.5%"
+              },
+              "revenueAmount": "$4,200,000",
+              "statusIndicator": "premium",
+              "confidenceLevel": "high",
+              "performanceLevel": "high",
+              "metadata": {
+                "size": "12.5M projected viewers",
+                "growth": "240 available ad slots",
+                "engagement": "96% viewability rate"
+              }
+            },
+            {
+              "primaryLabel": "Live Sports Championship Events",
+              "secondaryLabel": "Winter Championship Series",
+              "description": "Premium live event inventory with title sponsorship and branded segment opportunities",
+              "actualValue": "$48.90 CPM",
+              "targetValue": "$45.75 CPM",
+              "primaryMetric": {
+                "label": "Live Engagement",
+                "value": "97.8%"
+              },
+              "secondaryMetric": {
+                "label": "Completion Rate",
+                "value": "97%"
+              },
+              "revenueAmount": "$7,800,000",
+              "statusIndicator": "premium",
+              "confidenceLevel": "high",
+              "performanceLevel": "high",
+              "metadata": {
+                "size": "28M projected viewers",
+                "growth": "180 available ad slots",
+                "engagement": "98% viewability rate"
+              }
+            }
+          ],
+          "summary": {
+            "totalSegments": 2,
+            "activeSegments": 2,
+            "topPerformer": "Live Sports Championship Events",
+            "growthOpportunity": "International content localization and regional advertising"
+          }
+        },
+        {
+          "type": "channels-visualization",
+          "visualizationType": "channels",
+          "title": "Content Category Performance",
+          "gridSpan": 2,
+          "subtitle": "Streaming Inventory Monetization Analysis",
+          "channels": [
+            {
+              "primaryLabel": "Family Original Series",
+              "secondaryLabel": "Premium Scripted Content",
+              "description": "High-engagement family entertainment with premium brand partnerships and educational value",
+              "primaryScore": {
+                "label": "Advertiser Demand",
+                "value": "94/100"
+              },
+              "secondaryScore": {
+                "label": "Family Co-Viewing",
+                "value": "89%"
+              },
+              "qualityScore": "Premium",
+              "statusIndicator": "verified",
+              "targetValue": "$32.75 CPM",
+              "actualValue": "$35.20 CPM",
+              "targetLabel": "Target CPM",
+              "actualLabel": "Achieved CPM",
+              "confidenceLevel": "high"
+            },
+            {
+              "primaryLabel": "Live Sports Events",
+              "secondaryLabel": "Real-Time Premium Content",
+              "description": "High-value live programming with championship events and exclusive sports coverage",
+              "primaryScore": {
+                "label": "Advertiser Demand",
+                "value": "98/100"
+              },
+              "secondaryScore": {
+                "label": "Live Engagement",
+                "value": "97.8%"
+              },
+              "qualityScore": "Premium+",
+              "statusIndicator": "verified",
+              "targetValue": "$45.75 CPM",
+              "actualValue": "$48.90 CPM",
+              "targetLabel": "Target CPM",
+              "actualLabel": "Achieved CPM",
+              "confidenceLevel": "high"
+            },
+            {
+              "primaryLabel": "Educational Documentaries",
+              "secondaryLabel": "Brand-Safe Learning Content",
+              "description": "High-quality educational programming with environmental and science focus for conscious consumers",
+              "primaryScore": {
+                "label": "Advertiser Demand",
+                "value": "86/100"
+              },
+              "secondaryScore": {
+                "label": "Brand Safety Score",
+                "value": "98.5%"
+              },
+              "qualityScore": "Premium",
+              "statusIndicator": "verified",
+              "targetValue": "$24.50 CPM",
+              "actualValue": "$26.80 CPM",
+              "targetLabel": "Target CPM",
+              "actualLabel": "Achieved CPM",
+              "confidenceLevel": "high"
+            }
+          ],
+          "summary": {
+            "totalChannels": 3,
+            "activeChannels": 3,
+            "topPerformer": "Live Sports Events",
+            "recommendedFocus": "Expand international content localization and cultural programming"
+          }
+        },
+        {
+          "type": "metrics-visualization",
+          "templateId": "metrics-visualization",
+          "title": "Streaming Inventory KPIs",
+          "gridSpan": 2,
+          "subtitle": "Premium Content Monetization Metrics",
+          "metrics": [
+            {
+              "primaryLabel": "Inventory Performance",
+              "secondaryLabel": "Revenue Optimization",
+              "items": [
+                {
+                  "primaryLabel": "Average Fill Rate",
+                  "actualValue": "94.2%",
+                  "targetValue": "90.0%",
+                  "actualLabel": "Current Fill Rate",
+                  "targetLabel": "Target Fill Rate",
+                  "unit": "%",
+                  "trend": "up",
+                  "confidenceLevel": "high",
+                  "isPrimary": true
+                },
+                {
+                  "primaryLabel": "Premium Inventory Share",
+                  "actualValue": "85%",
+                  "targetValue": "80%",
+                  "actualLabel": "Premium Content",
+                  "targetLabel": "Target Premium",
+                  "unit": "%",
+                  "trend": "up",
+                  "confidenceLevel": "high",
+                  "isPrimary": false
+                }
+              ]
+            },
+            {
+              "primaryLabel": "Subscriber Experience",
+              "secondaryLabel": "Retention & Satisfaction",
+              "items": [
+                {
+                  "primaryLabel": "Ad Completion Rate",
+                  "actualValue": "96.8%",
+                  "targetValue": "95.0%",
+                  "actualLabel": "Completion Rate",
+                  "targetLabel": "Target Rate",
+                  "unit": "%",
+                  "trend": "up",
+                  "confidenceLevel": "high",
+                  "isPrimary": false
+                },
+                {
+                  "primaryLabel": "Brand Safety Score",
+                  "actualValue": "98.5%",
+                  "targetValue": "97.0%",
+                  "actualLabel": "Safety Score",
+                  "targetLabel": "Target Score",
+                  "unit": "%",
+                  "trend": "stable",
+                  "confidenceLevel": "high",
+                  "isPrimary": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "segments-visualization",
+          "visualizationType": "segments",
+          "gridSpan": 2,
+          "title": "Audience Segments Performance",
+          "subtitle": "Viewer Demographics & Engagement Analysis",
+          "segments": [
+            {
+              "primaryLabel": "Premium Family Subscribers",
+              "secondaryLabel": "High-Value Multi-Generational Households",
+              "description": "Affluent families with children who consume premium streaming content across multiple devices",
+              "actualValue": "2,850,000",
+              "targetValue": "3,200,000",
+              "actualLabel": "Monthly Active Viewers",
+              "targetLabel": "Target Reach",
+              "primaryMetric": {
+                "label": "Ad Completion Rate",
+                "value": "94.2%"
+              },
+              "secondaryMetric": {
+                "label": "Average CPM",
+                "value": "$32.75"
+              },
+              "revenueAmount": "$4,200,000",
+              "statusIndicator": "premium",
+              "confidenceLevel": "high",
+              "performanceLevel": "high",
+              "metadata": {
+                "size": "8.2M households across core markets",
+                "growth": "Parents 32-48, Children 6-16",
+                "engagement": "$85,000+ household income"
+              }
+            },
+            {
+              "primaryLabel": "Live Sports Premium Viewers",
+              "secondaryLabel": "High-Engagement Sports Fans",
+              "description": "Dedicated sports fans who pay premium for live events and exclusive sports content",
+              "actualValue": "5,200,000",
+              "targetValue": "5,800,000",
+              "actualLabel": "Active Sports Viewers",
+              "targetLabel": "Target Reach",
+              "primaryMetric": {
+                "label": "Live Event Engagement",
+                "value": "97.8%"
+              },
+              "secondaryMetric": {
+                "label": "Premium CPM",
+                "value": "$48.90"
+              },
+              "revenueAmount": "$7,800,000",
+              "statusIndicator": "premium",
+              "confidenceLevel": "high",
+              "performanceLevel": "high",
+              "metadata": {
+                "size": "15.4M active sports viewers",
+                "growth": "25-54 years (core 28-45)",
+                "engagement": "$65,000+ household income"
+              }
+            }
+          ],
+          "summary": {
+            "totalSegments": 2,
+            "activeSegments": 2,
+            "topPerformer": "Live Sports Premium Viewers",
+            "growthOpportunity": "International content localization and regional advertising"
+          }
+        },
+        {
+          "type": "metrics-visualization",
+          "visualizationType": "metrics",
+          "title": "Platform Performance Metrics",
+          "gridSpan": 2,
+          "subtitle": "Streaming Platform Operational KPIs",
+          "metrics": [
+            {
+              "primaryLabel": "Inventory Management",
+              "secondaryLabel": "Available Slots & Reach",
+              "items": [
+                {
+                  "primaryLabel": "Available Inventory Slots",
+                  "actualValue": "250",
+                  "targetValue": "280",
+                  "actualLabel": "Current Slots",
+                  "targetLabel": "Target Slots",
+                  "unit": "slots",
+                  "trend": "up",
+                  "confidenceLevel": "high",
+                  "isPrimary": true
+                },
+                {
+                  "primaryLabel": "Total Estimated Reach",
+                  "actualValue": "24.7M",
+                  "targetValue": "28.0M",
+                  "actualLabel": "Current Reach",
+                  "targetLabel": "Target Reach",
+                  "unit": "viewers",
+                  "trend": "up",
+                  "confidenceLevel": "high",
+                  "isPrimary": false
+                }
+              ]
+            },
+            {
+              "primaryLabel": "Quality & Performance",
+              "secondaryLabel": "Brand Safety & Satisfaction",
+              "items": [
+                {
+                  "primaryLabel": "Average Brand Safety",
+                  "actualValue": "98%",
+                  "targetValue": "97%",
+                  "actualLabel": "Safety Score",
+                  "targetLabel": "Target Score",
+                  "unit": "%",
+                  "trend": "stable",
+                  "confidenceLevel": "high",
+                  "isPrimary": false
+                },
+                {
+                  "primaryLabel": "Advertiser Satisfaction",
+                  "actualValue": "94%",
+                  "targetValue": "92%",
+                  "actualLabel": "Satisfaction Rate",
+                  "targetLabel": "Target Rate",
+                  "unit": "%",
+                  "trend": "up",
+                  "confidenceLevel": "high",
+                  "isPrimary": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "contextData": {
+        "userProfile": {
+          "name": "Marcus Rodriguez",
+          "role": "VP of Ad Operations at MagicStream Entertainment",
+          "challenge": "Optimize streaming inventory yield across premium content while maintaining subscriber experience",
+          "timeline": "Q1 2025 inventory planning for major content releases and seasonal programming"
+        },
+        "streamingPlatform": {
+          "name": "MagicStream Entertainment",
+          "category": "Premium Streaming Platform",
+          "positioning": "Family-friendly entertainment with premium original content",
+          "contentLibrary": [
+            "Original Series & Movies",
+            "Live Sports Events",
+            "Documentary Programming",
+            "Kids & Family Content",
+            "International Content"
+          ],
+          "subscriberTiers": {
+            "premium": "Ad-free experience - $14.99/month",
+            "standard": "Limited ads - $7.99/month",
+            "basic": "Standard ad load - $4.99/month"
+          },
+          "inventoryStrategy": {
+            "premiumPlacements": "High-value content with selective advertising",
+            "standardInventory": "Broad content catalog with optimized ad load",
+            "liveEvents": "Premium sports and event-based advertising",
+            "internationalContent": "Localized advertising opportunities"
+          },
+          "brandSafetyStandards": {
+            "level": "Family-Safe Premium",
+            "contentRatings": [
+              "G - General Audiences",
+              "PG - Parental Guidance",
+              "PG-13 - Parents Strongly Cautioned",
+              "TV-Y - Children's Programming",
+              "TV-G - General Audience Television"
+            ],
+            "advertisingGuidelines": [
+              "Family-friendly brand alignment required",
+              "No adult content or mature themes",
+              "Educational and aspirational messaging preferred",
+              "Premium brand partnerships prioritized",
+              "Contextual content matching enforced"
+            ]
+          }
+        },
+        "contentInventory": [
+          {
+            "id": "original-series-q1-2025",
+            "contentType": "Original Series",
+            "title": "Enchanted Kingdoms: Season 3 Premiere",
+            "inventoryValue": 8500000,
+            "adSlots": 240,
+            "expectedViewership": 12500000,
+            "duration": 8,
+            "contentRating": "PG",
+            "targetDemographics": [
+              "Families with children 8-16",
+              "Fantasy entertainment enthusiasts",
+              "Premium subscribers"
+            ],
+            "inventoryMetrics": {
+              "projectedCPM": 28.5,
+              "completionRate": 0.94,
+              "brandSafetyScore": 98.5,
+              "viewabilityRate": 0.96,
+              "audienceEngagement": 0.89,
+              "premiumInventoryShare": 0.85
+            },
+            "monetizationStrategy": {
+              "adLoadOptimization": "Premium placement strategy",
+              "formatMix": "30s video + interactive overlays",
+              "seasonalPricing": "Q1 premiere premium +40%",
+              "brandPartnerships": "Integrated sponsorship opportunities"
+            }
+          },
+          {
+            "id": "live-sports-championship-2025",
+            "contentType": "Live Sports",
+            "title": "Winter Championship Series",
+            "inventoryValue": 15200000,
+            "adSlots": 180,
+            "expectedViewership": 28000000,
+            "duration": 12,
+            "contentRating": "G",
+            "targetDemographics": [
+              "Sports enthusiasts 18-54",
+              "Premium live event viewers",
+              "Multi-generational families"
+            ],
+            "inventoryMetrics": {
+              "projectedCPM": 45.75,
+              "completionRate": 0.97,
+              "brandSafetyScore": 99.2,
+              "viewabilityRate": 0.98,
+              "audienceEngagement": 0.95,
+              "premiumInventoryShare": 0.95
+            },
+            "monetizationStrategy": {
+              "adLoadOptimization": "Live event premium pricing",
+              "formatMix": "15s/30s video + real-time graphics",
+              "seasonalPricing": "Championship premium +65%",
+              "brandPartnerships": "Title sponsorship + branded segments"
+            }
+          }
+        ],
+        "viewerSegments": [
+          {
+            "segmentId": "premium_family_viewers",
+            "primaryLabel": "Premium Family Subscribers",
+            "secondaryLabel": "High-Value Multi-Generational Households",
+            "description": "Affluent families with children who consume premium streaming content across multiple devices",
+            "size": "8.2M households across core markets",
+            "demographics": {
+              "age": "Parents 32-48, Children 6-16",
+              "income": "$85,000+ household income",
+              "education": "College-educated, tech-savvy families",
+              "lifestyle": "Premium entertainment consumers, brand-conscious",
+              "location": "Suburban and urban centers in North America"
+            },
+            "actualValue": "2,850,000",
+            "targetValue": "3,200,000",
+            "actualLabel": "Monthly Active Viewers",
+            "targetLabel": "Target Reach",
+            "primaryMetric": {
+              "label": "Ad Completion Rate",
+              "value": "94.2%"
+            },
+            "secondaryMetric": {
+              "label": "Average CPM",
+              "value": "$32.75"
+            },
+            "revenueContribution": "$4,200,000",
+            "statusIndicator": "premium",
+            "confidenceLevel": "high",
+            "performanceLevel": "high",
+            "viewingBehavior": {
+              "contentPreferences": "Original series, family movies, educational content",
+              "peakViewingTimes": "7-9 PM weekdays, 2-8 PM weekends",
+              "deviceUsage": "Smart TV primary, tablet secondary",
+              "adTolerance": "High for relevant, family-friendly brands"
+            }
+          },
+          {
+            "segmentId": "sports_enthusiasts",
+            "primaryLabel": "Live Sports Premium Viewers",
+            "secondaryLabel": "High-Engagement Sports Fans",
+            "description": "Dedicated sports fans who pay premium for live events and exclusive sports content",
+            "size": "15.4M active sports viewers",
+            "demographics": {
+              "age": "25-54 years (core 28-45)",
+              "income": "$65,000+ household income",
+              "lifestyle": "Sports-focused, social viewing, brand loyal",
+              "location": "National coverage with regional preferences"
+            },
+            "actualValue": "5,200,000",
+            "targetValue": "5,800,000",
+            "primaryMetric": {
+              "label": "Live Event Engagement",
+              "value": "97.8%"
+            },
+            "secondaryMetric": {
+              "label": "Premium CPM",
+              "value": "$48.90"
+            },
+            "revenueContribution": "$7,800,000",
+            "statusIndicator": "premium",
+            "confidenceLevel": "high",
+            "performanceLevel": "high",
+            "viewingBehavior": {
+              "contentPreferences": "Live sports, sports documentaries, athlete profiles",
+              "peakViewingTimes": "Event-driven, weekend heavy",
+              "deviceUsage": "Large screen TV, mobile for stats",
+              "adTolerance": "Very high during natural breaks"
+            }
+          }
+        ],
+        "networks": [
+          {
+            "id": "premium-business-network",
+            "primaryLabel": "Premium Business Publisher Network",
+            "secondaryLabel": "Professional Content Ecosystem",
+            "description": "High-quality business and technology publishers with verified professional audiences",
+            "primaryScore": {
+              "label": "Campaign Performance",
+              "value": "92/100"
+            },
+            "secondaryScore": {
+              "label": "Brand Safety Score",
+              "value": "96.8%"
+            },
+            "qualityScore": "Excellent",
+            "statusIndicator": "verified",
+            "targetValue": "$18.50 CPM",
+            "actualValue": "$17.25 CPM",
+            "targetLabel": "Target CPM",
+            "actualLabel": "Optimized CPM",
+            "confidenceLevel": "high",
+            "metadata": {
+              "category": "Business & Technology",
+              "reach": "12.8M qualified professionals",
+              "engagement": "Real-time bid optimization active"
+            },
+            "campaignCapabilities": {
+              "realTimeBidding": "Advanced algorithms",
+              "creativeOptimization": "AI-powered personalization",
+              "placementSchema": "Dynamic inventory allocation",
+              "skuLevelTracking": "Full attribution chain"
+            }
+          },
+          {
+            "id": "lifestyle-commerce-network",
+            "primaryLabel": "Lifestyle & E-commerce Publishers",
+            "secondaryLabel": "Fashion & Shopping Content",
+            "description": "Premium lifestyle publishers with high-intent shopping audiences and commerce integration",
+            "primaryScore": {
+              "label": "Campaign Performance",
+              "value": "89/100"
+            },
+            "secondaryScore": {
+              "label": "Conversion Rate",
+              "value": "9.2%"
+            },
+            "qualityScore": "Premium",
+            "statusIndicator": "verified",
+            "targetValue": "$14.75 CPM",
+            "actualValue": "$13.90 CPM",
+            "confidenceLevel": "high",
+            "campaignCapabilities": {
+              "realTimeBidding": "Revenue-optimized bidding",
+              "creativeOptimization": "Dynamic product catalogs",
+              "placementSchema": "Contextual + behavioral targeting",
+              "skuLevelTracking": "Product-level attribution"
+            }
+          },
+          {
+            "id": "mobile-app-network",
+            "primaryLabel": "Premium Mobile App Network",
+            "secondaryLabel": "In-App Advertising Ecosystem",
+            "description": "High-engagement mobile applications with advanced targeting and creative capabilities",
+            "primaryScore": {
+              "label": "Campaign Performance",
+              "value": "94/100"
+            },
+            "secondaryScore": {
+              "label": "Viewability Rate",
+              "value": "87.3%"
+            },
+            "qualityScore": "Premium",
+            "statusIndicator": "active",
+            "targetValue": "$22.00 CPM",
+            "actualValue": "$20.50 CPM",
+            "confidenceLevel": "high",
+            "campaignCapabilities": {
+              "realTimeBidding": "Machine learning optimization",
+              "creativeOptimization": "Interactive ad formats",
+              "placementSchema": "App-specific inventory",
+              "skuLevelTracking": "Cross-device attribution"
+            }
+          }
+        ],
+        "campaignManagementCapabilities": {
+          "campaignSetup": {
+            "averageSetupTime": "2.5 days",
+            "automatedWorkflows": "85% automated",
+            "schemaCompliance": "100% validated",
+            "qualityAssurance": "Multi-stage verification"
+          },
+          "creativeManagement": {
+            "aiGeneratedAssets": "200+ variants per campaign",
+            "approvalCycle": "15 hours average",
+            "realTimeUpdates": "Instant deployment",
+            "brandSafetyChecks": "Automated screening"
+          },
+          "biddingOptimization": {
+            "realTimeBidding": "Sub-100ms response",
+            "pricingModels": [
+              "CPC",
+              "CPM",
+              "CPA",
+              "ROAS"
+            ],
+            "optimizationAlgorithms": "Machine learning enhanced",
+            "bidWinRate": "68% average"
+          },
+          "dataFoundation": {
+            "skuLevelTracking": "Full product attribution",
+            "pixelIntegration": "Cross-domain tracking",
+            "audienceBuilding": "Real-time segmentation",
+            "dataQuality": "96.5% accuracy score"
+          }
+        }
+      }
+    },
+    "generic-tab-5": {
+      "id": "generic-tab-5",
+      "title": "Campaign Management Portal",
+      "description": "Agentic Advertising Ecosystem Dashboard",
+      "icon": "campaign",
+      "defaultAgent": "AgencyAgent",
+      "availableAgents": [
+        "AgencyAgent",
+        "AdvertiserAgent",
+        "PublisherAgent",
+        "SignalAgent",
+        "IdentityAgent",
+        "VerificationAgent",
+        "MeasurementAgent"
+      ],
+      "scenarios": [
+        {
+          "id": "advertiser-campaign-brief",
+          "title": "Advertiser Campaign Brief Submission (A2A)",
+          "description": "Submit a campaign brief from Advertiser Agent to Agency Agent using A2A protocol for reasoning and negotiation.",
+          "query": "I need to submit a campaign brief for Acme Energy's new sustainable solar panel product launch. Our objectives are: build brand awareness among environmentally conscious homeowners aged 35-55, drive consideration for residential solar solutions, and establish thought leadership in clean energy. Budget is $2M for Q1 2025, targeting CTV and online video channels. We require tier_1 brand safety and want a brand lift measurement study. Please coordinate with the Agency Agent to develop a comprehensive media plan.",
+          "category": "Agentic Advertising - A2A Protocol",
+          "agentType": "AdvertiserAgent"
+        },
+        {
+          "id": "agency-orchestration-discovery",
+          "title": "Agency Agent Orchestration & AdCP Discovery",
+          "description": "Agency Agent coordinates multi-agent workflow using AdCP Media Buy Protocol for inventory discovery.",
+          "query": "As the Agency Agent for Acme Energy's $2M sustainable energy campaign, I need to orchestrate the complete campaign workflow. First, use AdCP get_products to discover premium CTV inventory from ESPN, Fox Sports, and YouTube that aligns with environmental content. Target sports enthusiasts interested in sustainability. Then coordinate with Signal Agent for audience targeting, Identity Agent for reach estimation, and Verification Agent for brand safety verification before presenting the media plan to the Advertiser Agent for approval.",
+          "category": "Agentic Advertising - AdCP Protocol",
+          "agentType": "AgencyAgent"
+        },
+        {
+          "id": "signal-discovery-activation",
+          "title": "Signal Agent Discovery & Activation via AdCP",
+          "description": "Signal Agent discovers and activates audience segments using AdCP Signals Protocol.",
+          "query": "Use AdCP Signals Protocol to discover audience segments for environmentally conscious homeowners interested in sustainable technology. Search for segments from LiveRamp, Oracle Data Cloud, and Experian that match our target: household income $75k+, ages 35-55, interest in clean energy and home improvement. Once identified, activate the best-matching segments on The Trade Desk platform for our Acme Energy campaign. Return the DSP segment IDs for targeting.",
+          "category": "Agentic Advertising - AdCP Signals",
+          "agentType": "SignalAgent"
+        },
+        {
+          "id": "identity-reach-estimation",
+          "title": "Identity Agent Cross-Device Reach Estimation (MCP)",
+          "description": "Identity Agent provides deterministic reach estimation using MCP protocol.",
+          "query": "Using MCP protocol, estimate the deduplicated cross-device reach for our Acme Energy campaign. We're targeting the 'environmentally conscious homeowners' segment across CTV, mobile, and desktop channels. Calculate household-level reach using UID2 and RampID identity graphs. Provide frequency cap recommendations and privacy-compliant token resolution for our $2M budget allocation across 45 days.",
+          "category": "Agentic Advertising - MCP Protocol",
+          "agentType": "IdentityAgent"
+        },
+        {
+          "id": "verification-brand-safety",
+          "title": "Verification Agent Brand Safety & Quality Assurance (MCP + A2A)",
+          "description": "Verification Agent performs brand safety verification using MCP and alerts via A2A.",
+          "query": "Verify brand safety for our Acme Energy campaign placements using MCP protocol. Check the following publisher properties: ESPN.com, FoxSports.com, YouTube environmental documentaries, and streaming fitness content. Apply tier_1 brand safety standards. Flag any properties with brand safety scores below 90 or fraud risk above 5%. If any incidents are detected, prepare an A2A alert for the Agency Agent with investigation details and recommended actions.",
+          "category": "Agentic Advertising - MCP + A2A",
+          "agentType": "VerificationAgent"
+        },
+        {
+          "id": "measurement-brand-lift",
+          "title": "Measurement Agent Brand Lift Study Configuration (MCP + A2A)",
+          "description": "Measurement Agent configures brand lift study using MCP and reports results via A2A.",
+          "query": "Configure a brand lift study for Acme Energy's Q1 2025 campaign using MCP protocol. Study parameters: measure brand awareness, ad recall, and purchase intent among environmentally conscious homeowners. Use Lucid as the measurement provider with a control/exposed methodology. Budget $8,000 for the study. Once configured, prepare interim and final reports to be delivered to the Agency Agent via A2A protocol with actionable insights on creative performance.",
+          "category": "Agentic Advertising - MCP + A2A",
+          "agentType": "MeasurementAgent"
+        },
+        {
+          "id": "publisher-media-buy",
+          "title": "Publisher Agent Media Buy Creation & Delivery (AdCP)",
+          "description": "Publisher Agent creates media buy packages and tracks delivery using AdCP Media Buy Protocol.",
+          "query": "As Publisher Agent for ESPN Premium CTV inventory, process the incoming media buy request from Agency Agent using AdCP Media Buy Protocol. Create a media buy package for Acme Energy with: $500,000 budget allocation, premium sports documentary placements, 30-second video format, tier_1 brand safety, and environmental content alignment. Confirm creative deadlines, provide delivery projections, and set up real-time delivery tracking. Return the media_buy_id and package confirmation.",
+          "category": "Agentic Advertising - AdCP Media Buy",
+          "agentType": "PublisherAgent"
+        },
+        {
+          "id": "complete-campaign-flow",
+          "title": "Complete Agentic Campaign Flow Integration",
+          "description": "End-to-end demonstration of all seven agents coordinating via A2A, AdCP, and MCP protocols.",
+          "query": "Execute the complete agentic advertising workflow for Acme Energy's $2M sustainable energy campaign: 1) Receive campaign brief from Advertiser Agent (A2A), 2) Discover inventory via Publisher Agent (AdCP Media Buy), 3) Find audience segments via Signal Agent (AdCP Signals), 4) Estimate reach via Identity Agent (MCP), 5) Verify brand safety via Verification Agent (MCP), 6) Configure measurement via Measurement Agent (MCP), 7) Present media plan to Advertiser Agent for approval (A2A), 8) Execute campaign via Publisher Agent (AdCP). Coordinate all agents and report status at each step.",
+          "category": "Agentic Advertising - Full Workflow",
+          "agentType": "AgencyAgent"
+        },
+        {
+          "id": "agency-publisher-negotiation",
+          "title": "Agency-Publisher Rate Negotiation (A2A)",
+          "description": "Agency and Publisher Agents negotiate premium inventory rates using A2A protocol.",
+          "query": "Initiate A2A negotiation with Publisher Agent for premium NFL Playoff inventory. Our Acme Energy campaign needs 50M impressions during the playoff window, but current CPMs of $48.90 exceed our $42 target. Propose a volume commitment deal: guaranteed $1.2M spend in exchange for $42 CPM floor and first-look rights on environmental documentary inventory. Include brand safety guarantees and delivery commitments in the negotiation.",
+          "category": "Agentic Advertising - A2A Negotiation",
+          "agentType": "AgencyAgent"
+        },
+        {
+          "id": "verification-incident-alert",
+          "title": "Verification Agent Incident Alert & Investigation (A2A)",
+          "description": "Verification Agent detects brand safety incident and escalates via A2A protocol.",
+          "query": "ALERT: Brand safety incident detected on YouTube placement for Acme Energy campaign. A video in our environmental documentary targeting was flagged for controversial climate content that conflicts with brand guidelines. Current brand safety score dropped from 96 to 78. Prepare A2A incident report for Agency Agent including: incident details, affected impressions (estimated 125,000), recommended immediate actions (pause placement, exclude content category), and investigation timeline. Request acknowledgment and escalation decision.",
+          "category": "Agentic Advertising - A2A Alerts",
+          "agentType": "VerificationAgent"
+        },
+        {
+          "id": "measurement-interim-report",
+          "title": "Measurement Agent Interim Results Report (A2A)",
+          "description": "Measurement Agent delivers interim brand lift results via A2A protocol.",
+          "query": "Deliver Week 2 interim brand lift report for Acme Energy campaign via A2A protocol to Agency Agent. Results show: +28% brand awareness lift (target: 25%), +18% ad recall (target: 20%), +12% purchase intent (target: 15%). Key insight: 30-second creative format showing 2x lift compared to 15-second spots. Environmental documentary placements outperforming sports content by 34%. Recommend budget reallocation from sports to documentary inventory. Request Agency Agent feedback on optimization recommendations.",
+          "category": "Agentic Advertising - A2A Reports",
+          "agentType": "MeasurementAgent"
+        },
+        {
+          "id": "artf-bid-enrichment",
+          "title": "ARTF Container Bid Enrichment Flow",
+          "description": "Identity and Verification Agents enrich bid requests via ARTF containers in exchange infrastructure.",
+          "query": "Explain the ARTF (Ad Request Transform Framework) container flow for real-time bid enrichment. When a bid request enters the exchange: 1) Identity Container adds UID2 tokens, RampID, household_id, and device_count for cross-device targeting, 2) Verification Container adds brand_safety_score, ivt_risk (fraud detection), and viewability_prediction. Show how these enriched signals flow to DSPs for better targeting and brand safety decisions. This is infrastructure-level processing, not direct agent communication.",
+          "category": "Agentic Advertising - ARTF Infrastructure",
+          "agentType": "IdentityAgent"
+        },
+        {
+          "id": "advertiser-approval-workflow",
+          "title": "Advertiser Agent Media Plan Approval (A2A)",
+          "description": "Advertiser Agent reviews and approves media plan from Agency Agent via A2A protocol.",
+          "query": "Review the media plan submitted by Agency Agent for Acme Energy Q1 2025 campaign. Plan includes: $2M total budget, 60% CTV ($1.2M), 40% online video ($800K), targeting environmentally conscious homeowners 35-55, tier_1 brand safety, brand lift study included. Projected reach: 2.1M households, 78% match rate, estimated +25% brand awareness lift. Evaluate against our objectives and brand guidelines. Provide approval decision with any modifications or clarifying questions via A2A response.",
+          "category": "Agentic Advertising - A2A Approval",
+          "agentType": "AdvertiserAgent"
+        },
+        {
+          "id": "signal-segment-performance",
+          "title": "Signal Agent Segment Performance Analysis",
+          "description": "Signal Agent analyzes activated segment performance and recommends optimizations.",
+          "query": "Analyze performance of activated audience segments for Acme Energy campaign after Week 1. Segments activated: lr_exp_homeowners_eco (LiveRamp), oracle_green_tech_intenders, experian_solar_considerers. Compare conversion rates, CPAs, and brand lift contribution across segments. Identify top-performing segment for budget reallocation. Recommend new lookalike segments to test based on converter profiles. Prepare optimization recommendations for Agency Agent.",
+          "category": "Agentic Advertising - Signal Optimization",
+          "agentType": "SignalAgent"
+        },
+        {
+          "id": "publisher-delivery-tracking",
+          "title": "Publisher Agent Delivery Tracking & Optimization",
+          "description": "Publisher Agent tracks media buy delivery and provides pacing recommendations.",
+          "query": "Provide delivery status for Acme Energy media buy (media_buy_id: mb_acme_q1_2025) using AdCP get_media_buy_delivery. Current status after Day 15 of 45-day campaign: Check impressions delivered vs. target, pacing status, completion rates by placement, and brand safety compliance. If under-pacing, recommend inventory reallocation. If over-pacing, suggest budget optimization. Include viewability metrics and any delivery issues requiring Agency Agent attention.",
+          "category": "Agentic Advertising - AdCP Delivery",
+          "agentType": "PublisherAgent"
+        },
+        {
+          "id": "agency-budget-reallocation",
+          "title": "Agency Agent Budget Reallocation Request (A2A)",
+          "description": "Agency Agent requests budget reallocation approval from Advertiser Agent via A2A.",
+          "query": "Based on Week 2 performance data, I'm requesting budget reallocation approval from Advertiser Agent via A2A protocol. Recommendation: shift $200K from sports content (underperforming at 0.8% CVR) to environmental documentaries (outperforming at 1.4% CVR). This reallocation is projected to improve overall campaign CPA by 18% and increase brand lift by 6 percentage points. Measurement Agent data supports this recommendation. Requesting approval within 24 hours to optimize remaining campaign flight.",
+          "category": "Agentic Advertising - A2A Budget",
+          "agentType": "AgencyAgent"
+        }
+      ],
+      "availableCampaigns": [
+        {
+          "id": "camp-acme-energy-q1",
+          "advertiser": "Acme Energy Solutions",
+          "campaign": "Sustainable Solar Q1 2025",
+          "budget": 2000000,
+          "duration": 45,
+          "targetAudience": "environmentally_conscious_homeowners",
+          "protocols": ["A2A", "AdCP", "MCP"],
+          "expectedMetrics": {
+            "roas": 3.2,
+            "ctr": 0.015,
+            "cvr": 0.014,
+            "impressions": 85000000,
+            "brandLift": 0.25
+          }
+        },
+        {
+          "id": "camp-greentech-awareness",
+          "advertiser": "GreenTech Industries",
+          "campaign": "Clean Energy Awareness",
+          "budget": 1250000,
+          "duration": 30,
+          "targetAudience": "sustainability_millennials",
+          "protocols": ["A2A", "AdCP", "MCP"],
+          "expectedMetrics": {
+            "roas": 2.8,
+            "ctr": 0.018,
+            "cvr": 0.012,
+            "impressions": 62000000,
+            "brandLift": 0.22
+          }
+        },
+        {
+          "id": "camp-ecolife-launch",
+          "advertiser": "EcoLife Products",
+          "campaign": "Sustainable Living Launch",
+          "budget": 850000,
+          "duration": 28,
+          "targetAudience": "eco_conscious_families",
+          "protocols": ["A2A", "AdCP Signals", "MCP"],
+          "expectedMetrics": {
+            "roas": 3.5,
+            "ctr": 0.016,
+            "cvr": 0.015,
+            "impressions": 45000000,
+            "brandLift": 0.20
+          }
+        }
+      ],
+      "visualizations": [
+        {
+          "type": "metrics-visualization",
+          "visualizationType": "metrics",
+          "title": "Portfolio Overview",
+          "gridSpan": 2,
+          "data": {
+            "visualizationType": "metrics",
+            "title": "Portfolio Overview",
+            "subtitle": "Key Performance Indicators",
+            "metrics": [
+              {
+                "primaryLabel": "Portfolio Performance",
+                "secondaryLabel": "Core KPIs",
+                "items": [
+                  {
+                    "primaryLabel": "Revenue Forecast",
+                    "actualValue": "dynamic",
+                    "valueKey": "totalRevenueForecast",
+                    "format": "currency",
+                    "icon": "attach_money"
+                  },
+                  {
+                    "primaryLabel": "Portfolio Fill Rate",
+                    "actualValue": "dynamic",
+                    "valueKey": "averageFillRate",
+                    "format": "percentage",
+                    "icon": "donut_small"
+                  },
+                  {
+                    "primaryLabel": "Yield Optimization",
+                    "actualValue": "dynamic",
+                    "valueKey": "averageYieldOptimization",
+                    "format": "percentage",
+                    "icon": "trending_up"
+                  },
+                  {
+                    "primaryLabel": "Avg CPM Floor",
+                    "actualValue": "dynamic",
+                    "valueKey": "averageCPMFloor",
+                    "format": "currency",
+                    "icon": "monetization_on"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "context-selector",
+          "title": "Publisher Selection",
+          "entityType": "publisher",
+          "displayFields": [
+            "name",
+            "tier",
+            "cpmFloor"
+          ],
+          "metricFields": [
+            "brandSafety",
+            "fillRateForecast"
+          ]
+        },
+        {
+          "type": "context-selector",
+          "title": "Campaign Selection",
+          "entityType": "campaign",
+          "displayFields": [
+            "campaign",
+            "advertiser",
+            "budget"
+          ],
+          "metricFields": [
+            "roas",
+            "ctr"
+          ]
+        },
+        {
+          "type": "segments-visualization",
+          "visualizationType": "segments",
+          "gridSpan": 2,
+          "title": "Target Audience Segments",
+          "subtitle": "Advertiser Campaign Audience Analysis",
+          "segments": [
+            {
+              "primaryLabel": "Environmentally Conscious Homeowners",
+              "secondaryLabel": "Sustainable Technology Adopters",
+              "description": "Affluent homeowners interested in clean energy solutions and sustainable living practices",
+              "actualValue": "4,250,000",
+              "targetValue": "5,000,000",
+              "actualLabel": "Current Reach",
+              "targetLabel": "Target Reach",
+              "primaryMetric": {
+                "label": "Conversion Rate",
+                "value": "1.4%"
+              },
+              "secondaryMetric": {
+                "label": "Average CPA",
+                "value": "$79.83"
+              },
+              "revenueAmount": "$285,000",
+              "statusIndicator": "active",
+              "confidenceLevel": "high",
+              "performanceLevel": "high",
+              "metadata": {
+                "size": "Household income $75k+",
+                "growth": "Ages 35-55, college educated",
+                "engagement": "Environmental documentary viewers"
+              }
+            },
+            {
+              "primaryLabel": "Sustainability-Focused Millennials",
+              "secondaryLabel": "Clean Energy Early Adopters",
+              "description": "Tech-savvy millennials prioritizing environmental impact in purchasing decisions",
+              "actualValue": "3,100,000",
+              "targetValue": "3,800,000",
+              "actualLabel": "Current Reach",
+              "targetLabel": "Target Reach",
+              "primaryMetric": {
+                "label": "Brand Lift",
+                "value": "22%"
+              },
+              "secondaryMetric": {
+                "label": "Engagement Rate",
+                "value": "91%"
+              },
+              "revenueAmount": "$125,000",
+              "statusIndicator": "active",
+              "confidenceLevel": "high",
+              "performanceLevel": "medium",
+              "metadata": {
+                "size": "Ages 28-42, urban/suburban",
+                "growth": "High social media engagement",
+                "engagement": "Sustainability content consumers"
+              }
+            }
+          ],
+          "summary": {
+            "totalSegments": 2,
+            "activeSegments": 2,
+            "topPerformer": "Environmentally Conscious Homeowners",
+            "growthOpportunity": "Expand reach to younger demographics interested in home ownership"
+          }
+        },
+        {
+          "type": "metrics-visualization",
+          "visualizationType": "metrics",
+          "title": "Platform Performance Metrics",
+          "gridSpan": 2,
+          "subtitle": "Campaign Management Platform KPIs",
+          "metrics": [
+            {
+              "primaryLabel": "Campaign Management",
+              "secondaryLabel": "Active Campaigns & Budget",
+              "items": [
+                {
+                  "primaryLabel": "Total Active Campaigns",
+                  "actualValue": "2",
+                  "targetValue": "3",
+                  "actualLabel": "Current Campaigns",
+                  "targetLabel": "Target Campaigns",
+                  "unit": "campaigns",
+                  "trend": "stable",
+                  "confidenceLevel": "high",
+                  "isPrimary": true
+                },
+                {
+                  "primaryLabel": "Total Campaign Budget",
+                  "actualValue": "$410,000",
+                  "targetValue": "$500,000",
+                  "actualLabel": "Current Budget",
+                  "targetLabel": "Target Budget",
+                  "unit": "$",
+                  "trend": "up",
+                  "confidenceLevel": "high",
+                  "isPrimary": false
+                }
+              ]
+            },
+            {
+              "primaryLabel": "Performance Metrics",
+              "secondaryLabel": "Efficiency & Results",
+              "items": [
+                {
+                  "primaryLabel": "Average CTR",
+                  "actualValue": "1.5%",
+                  "targetValue": "1.8%",
+                  "actualLabel": "Current CTR",
+                  "targetLabel": "Target CTR",
+                  "unit": "%",
+                  "trend": "up",
+                  "confidenceLevel": "medium",
+                  "isPrimary": false
+                },
+                {
+                  "primaryLabel": "Average Brand Lift",
+                  "actualValue": "20%",
+                  "targetValue": "25%",
+                  "actualLabel": "Current Lift",
+                  "targetLabel": "Target Lift",
+                  "unit": "%",
+                  "trend": "up",
+                  "confidenceLevel": "high",
+                  "isPrimary": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "segments-visualization",
+          "visualizationType": "segments",
+          "gridSpan": 2,
+          "title": "Active Campaign Performance",
+          "subtitle": "Current Campaign Status & Metrics",
+          "segments": [
+            {
+              "primaryLabel": "SolarMax Pro Launch Campaign",
+              "secondaryLabel": "EcoTech Solutions - Premium Solar Technology",
+              "description": "45-day campaign targeting environmentally conscious homeowners with premium solar panel technology",
+              "actualValue": "$142,500",
+              "targetValue": "$285,000",
+              "actualLabel": "Spent Budget",
+              "targetLabel": "Total Budget",
+              "primaryMetric": {
+                "label": "Days Remaining",
+                "value": "23"
+              },
+              "secondaryMetric": {
+                "label": "Current CPA",
+                "value": "$79.83"
+              },
+              "revenueAmount": "$285,000",
+              "statusIndicator": "active",
+              "confidenceLevel": "high",
+              "performanceLevel": "high",
+              "metadata": {
+                "size": "8.5M impressions delivered",
+                "growth": "1,785 conversions achieved",
+                "engagement": "1.5% CTR, 89% completion rate"
+              }
+            },
+            {
+              "primaryLabel": "Clean Energy Awareness Initiative",
+              "secondaryLabel": "EcoTech Solutions - Brand Awareness Campaign",
+              "description": "30-day awareness campaign targeting sustainability-focused millennials with clean energy messaging",
+              "actualValue": "$89,250",
+              "targetValue": "$125,000",
+              "actualLabel": "Spent Budget",
+              "targetLabel": "Total Budget",
+              "primaryMetric": {
+                "label": "Days Remaining",
+                "value": "8"
+              },
+              "secondaryMetric": {
+                "label": "Brand Lift",
+                "value": "22%"
+              },
+              "revenueAmount": "$125,000",
+              "statusIndicator": "active",
+              "confidenceLevel": "high",
+              "performanceLevel": "medium",
+              "metadata": {
+                "size": "6.2M impressions delivered",
+                "growth": "1,240 conversions achieved",
+                "engagement": "1.5% CTR, 91% completion rate"
+              }
+            }
+          ],
+          "summary": {
+            "totalSegments": 2,
+            "activeSegments": 2,
+            "topPerformer": "SolarMax Pro Launch Campaign",
+            "growthOpportunity": "Expand budget allocation to high-performing environmental documentary placements"
+          }
+        }
+      ],
+      "contextData": {
+        "advertiserProfile": {
+          "name": "Jennifer Park",
+          "role": "Digital Marketing Manager at EcoTech Solutions",
+          "company": "EcoTech Solutions",
+          "industry": "Sustainable Technology",
+          "challenge": "Launch awareness campaign for new solar panel technology on MagicStream's premium content",
+          "campaignObjectives": [
+            "Build brand awareness among environmentally conscious families",
+            "Drive consideration for residential solar solutions",
+            "Establish thought leadership in clean energy space"
+          ]
+        },
+        "availableInventory": [
+          {
+            "id": "inventory-family-originals",
+            "contentType": "Family Original Series",
+            "title": "Enchanted Kingdoms & Nature Documentaries",
+            "availableSlots": 120,
+            "estimatedReach": 8500000,
+            "cpmRange": "$28-35",
+            "brandSafety": 98,
+            "viewability": 96,
+            "completionRate": 94,
+            "audienceAlignment": "Families with environmental values",
+            "contentRating": "G/PG",
+            "peakViewingTimes": "7-9 PM weekdays, 2-8 PM weekends",
+            "seasonalMultiplier": 1.2,
+            "recommendedBudget": "$180,000-220,000"
+          },
+          {
+            "id": "inventory-sports-events",
+            "contentType": "Live Sports Events",
+            "title": "Winter Championship & Outdoor Sports",
+            "availableSlots": 45,
+            "estimatedReach": 12000000,
+            "cpmRange": "$42-55",
+            "brandSafety": 99,
+            "viewability": 98,
+            "completionRate": 97,
+            "audienceAlignment": "Active lifestyle enthusiasts",
+            "contentRating": "G",
+            "peakViewingTimes": "Event-driven, weekend heavy",
+            "seasonalMultiplier": 1.6,
+            "recommendedBudget": "$280,000-350,000"
+          },
+          {
+            "id": "inventory-documentary-programming",
+            "contentType": "Environmental Documentaries",
+            "title": "Climate Solutions & Innovation Series",
+            "availableSlots": 85,
+            "estimatedReach": 4200000,
+            "cpmRange": "$22-28",
+            "brandSafety": 97,
+            "viewability": 95,
+            "completionRate": 92,
+            "audienceAlignment": "Environmentally conscious adults",
+            "contentRating": "PG/PG-13",
+            "peakViewingTimes": "8-10 PM weekdays",
+            "seasonalMultiplier": 1.1,
+            "recommendedBudget": "$120,000-150,000"
+          }
+        ],
+        "activeCampaigns": [
+          {
+            "id": "camp-ecotech-solar-2025",
+            "advertiser": "EcoTech Solutions",
+            "campaign": "SolarMax Pro Launch Campaign",
+            "budget": 285000,
+            "spent": 142500,
+            "duration": 45,
+            "daysRemaining": 23,
+            "status": "Active",
+            "targetAudience": "Environmentally conscious homeowners",
+            "currentMetrics": {
+              "impressions": 8500000,
+              "clicks": 127500,
+              "ctr": 0.015,
+              "conversions": 1785,
+              "cvr": 0.014,
+              "cpa": 79.83,
+              "brandLift": 0.18,
+              "completionRate": 0.89
+            },
+            "targetMetrics": {
+              "impressions": 15000000,
+              "ctr": 0.018,
+              "cvr": 0.016,
+              "cpa": 75,
+              "brandLift": 0.25
+            },
+            "contentPlacements": [
+              "Environmental Documentaries - 45%",
+              "Family Original Series - 35%",
+              "Live Sports Events - 20%"
+            ]
+          },
+          {
+            "id": "camp-greentech-awareness",
+            "advertiser": "EcoTech Solutions",
+            "campaign": "Clean Energy Awareness Initiative",
+            "budget": 125000,
+            "spent": 89250,
+            "duration": 30,
+            "daysRemaining": 8,
+            "status": "Active",
+            "targetAudience": "Sustainability-focused millennials",
+            "currentMetrics": {
+              "impressions": 6200000,
+              "clicks": 93000,
+              "ctr": 0.015,
+              "conversions": 1240,
+              "cvr": 0.013,
+              "cpa": 71.98,
+              "brandLift": 0.22,
+              "completionRate": 0.91
+            },
+            "targetMetrics": {
+              "impressions": 8500000,
+              "ctr": 0.016,
+              "cvr": 0.015,
+              "cpa": 68,
+              "brandLift": 0.28
+            },
+            "contentPlacements": [
+              "Environmental Documentaries - 60%",
+              "Family Original Series - 25%",
+              "Live Sports Events - 15%"
+            ]
+          }
+        ],
+        "campaignInsights": [
+          {
+            "id": "insight-audience-performance",
+            "title": "Audience Segment Performance Analysis",
+            "category": "Audience Intelligence",
+            "insight": "Environmental documentary viewers show 34% higher conversion rates for solar technology ads compared to general family content",
+            "recommendation": "Increase budget allocation to environmental programming by 25%",
+            "impact": "Projected 18% improvement in campaign efficiency",
+            "confidence": "High",
+            "dataPoints": [
+              "Environmental docs: 1.8% CVR, $65 CPA",
+              "Family content: 1.3% CVR, $85 CPA",
+              "Sports events: 1.1% CVR, $95 CPA"
+            ]
+          },
+          {
+            "id": "insight-timing-optimization",
+            "title": "Optimal Viewing Time Analysis",
+            "category": "Temporal Targeting",
+            "insight": "Peak engagement for sustainability content occurs 8-10 PM weekdays, with 28% higher completion rates",
+            "recommendation": "Shift 40% of budget to prime evening slots",
+            "impact": "Estimated 15% increase in brand awareness lift",
+            "confidence": "High",
+            "dataPoints": [
+              "8-10 PM: 94% completion rate",
+              "6-8 PM: 87% completion rate",
+              "Weekend afternoons: 82% completion rate"
+            ]
+          },
+          {
+            "id": "insight-creative-performance",
+            "title": "Creative Asset Performance Tracking",
+            "category": "Creative Optimization",
+            "insight": "30-second educational format outperforms 15-second promotional by 42% in brand recall",
+            "recommendation": "Prioritize longer-form educational creative assets",
+            "impact": "Projected 22% improvement in brand lift metrics",
+            "confidence": "Medium-High",
+            "dataPoints": [
+              "30s educational: 68% brand recall",
+              "15s promotional: 48% brand recall",
+              "Interactive format: 71% engagement rate"
+            ]
+          }
+        ],
+        "campaignMetrics": {
+          "totalActiveCampaigns": 2,
+          "totalBudget": 410000,
+          "totalSpent": 231750,
+          "averageCPM": 18.75,
+          "totalImpressions": 14700000,
+          "totalClicks": 220500,
+          "averageCTR": 0.015,
+          "totalConversions": 3025,
+          "averageCVR": 0.0137,
+          "averageCPA": 76.61,
+          "averageBrandLift": 0.2
+        },
+        "platformMetrics": {
+          "availableInventorySlots": 250,
+          "averageInventoryCPM": 31.5,
+          "totalEstimatedReach": 24700000,
+          "averageBrandSafety": 98,
+          "averageViewability": 96.3,
+          "averageCompletionRate": 93.7,
+          "advertiserSatisfaction": 94
+        },
+        "selfServiceCapabilities": [
+          "Real-time campaign performance monitoring and optimization",
+          "Automated audience targeting and lookalike modeling",
+          "Dynamic creative optimization and A/B testing",
+          "Cross-content attribution and brand lift measurement",
+          "Predictive budget allocation and pacing recommendations",
+          "Contextual content alignment and brand safety monitoring",
+          "Advanced reporting and competitive intelligence insights",
+          "Self-service campaign setup and creative asset management"
+        ]
+      }
+    }
+  }
+}

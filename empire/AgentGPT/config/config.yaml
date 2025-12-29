@@ -1,0 +1,184 @@
+# ADAP Integration System Configuration
+# All settings are configurable via environment variables
+
+# System Settings
+system:
+  name: "ADAP Integration System"
+  version: "1.0.0"
+  debug: false
+  timezone: "UTC"
+
+# Server Configuration
+server:
+  host: "0.0.0.0"
+  port: 8080
+  workers: 4
+  max_request_size: "100MB"
+  cors_origins: ["*"]
+
+# Database Configuration
+database:
+  url: "sqlite:///data/adap_integration.db"
+  pool_size: 10
+  max_overflow: 20
+  echo: false
+
+# Redis Configuration (for caching and queues)
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  password: ""
+  decode_responses: true
+
+# Storage Paths
+storage:
+  base_path: "./data"
+  repos_path: "./data/repositories"
+  comprehension_path: "./data/comprehension"
+  plugins_path: "./data/plugins"
+  temp_path: "./data/temp"
+  logs_path: "./data/logs"
+
+# Git Configuration
+git:
+  clone_timeout: 300  # 5 minutes
+  shallow_clone: false
+  max_repo_size: "500MB"
+  supported_hosts:
+    - github.com
+    - gitlab.com
+    - bitbucket.org
+
+# Algorithm Analysis
+analysis:
+  max_file_size: "10MB"
+  excluded_patterns:
+    - "__pycache__"
+    - ".git"
+    - ".pytest_cache"
+    - "*.pyc"
+    - "test_*"
+    - "*_test.py"
+    - "setup.py"
+    - "docs/"
+    - "examples/"
+  
+  # Algorithm categories and their keywords
+  categories:
+    ciphers:
+      keywords: ["encrypt", "decrypt", "cipher", "crypto", "aes", "rsa", "hash"]
+      priority: 1
+    
+    sorting:
+      keywords: ["sort", "quicksort", "mergesort", "bubblesort", "heapsort"]
+      priority: 2
+    
+    searching:
+      keywords: ["search", "binary", "linear", "bfs", "dfs", "find"]
+      priority: 2
+    
+    graph:
+      keywords: ["graph", "node", "edge", "vertex", "dijkstra", "path"]
+      priority: 3
+    
+    matrix:
+      keywords: ["matrix", "linear", "algebra", "vector", "decomposition"]
+      priority: 3
+    
+    ml:
+      keywords: ["machine", "learning", "neural", "network", "train", "model"]
+      priority: 4
+    
+    numerical:
+      keywords: ["numerical", "math", "integrate", "derivative", "equation"]
+      priority: 4
+    
+    dynamic:
+      keywords: ["dynamic", "programming", "memoization", "dp", "knapsack"]
+      priority: 5
+    
+    optimization:
+      keywords: ["optimize", "genetic", "minimize", "maximize", "gradient"]
+      priority: 5
+    
+    string:
+      keywords: ["string", "pattern", "match", "regex", "substring"]
+      priority: 6
+    
+    structures:
+      keywords: ["stack", "queue", "tree", "heap", "linked", "list"]
+      priority: 6
+
+# Plugin Generation
+plugins:
+  template_path: "./templates/plugin_template.py"
+  auto_generate: true
+  validate_imports: true
+  add_tests: true
+
+# Security Settings
+security:
+  enable_sandboxing: true
+  max_execution_time: 30  # seconds
+  allowed_imports:
+    - math
+    - random
+    - collections
+    - itertools
+    - functools
+    - datetime
+    - json
+    - re
+    - typing
+  
+  forbidden_imports:
+    - os
+    - subprocess
+    - sys
+    - eval
+    - exec
+    - __import__
+
+# Integration Settings
+integration:
+  parallel_analysis: true
+  max_workers: 4
+  chunk_size: 50
+  auto_categorize: true
+  generate_metadata: true
+  create_documentation: true
+
+# Monitoring
+monitoring:
+  enable_metrics: true
+  metrics_port: 9090
+  log_level: "INFO"
+  log_format: "json"
+  
+# Notifications
+notifications:
+  enable: true
+  channels:
+    webhook:
+      url: ""
+      events: ["integration_complete", "error"]
+
+# Cache Settings
+cache:
+  enable: true
+  ttl: 3600  # 1 hour
+  max_size: 1000
+  
+# UI Settings
+ui:
+  theme: "dark"
+  enable_realtime: true
+  max_upload_size: "50MB"
+  session_timeout: 3600
+  
+# API Settings
+api:
+  rate_limit: 100  # requests per minute
+  enable_swagger: true
+  api_key_header: "X-API-Key"

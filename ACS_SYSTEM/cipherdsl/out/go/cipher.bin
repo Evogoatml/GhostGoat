@@ -1,0 +1,19 @@
+{
+  "id": "480bad31c9faccc2",
+  "steps": [
+    {
+      "op": "rolling_key"
+    },
+    {
+      "op": "aesgcm_enc",
+      "nonce_b64": "dFyujNchMDl0tGq/",
+      "aad_b64": "YWRhcA=="
+    },
+    {
+      "op": "chacha20poly1305_enc",
+      "nonce_b64": "DNRUAlF+NHDFPuir",
+      "aad_b64": "ZXZvbHZl"
+    }
+  ],
+  "data_b64": "yoqy3BonvhuGY7VrndUvWm1STIMC2Rmw30+uWuwBcV9ardRWJkTZOw3XUVA8s+Q="
+}

@@ -1,0 +1,6 @@
+moe:
+  enabled: true
+  num_experts: 16
+  top_k: 2
+  capacity_factor: 1.25
+  aux_loss_coef: 0.01

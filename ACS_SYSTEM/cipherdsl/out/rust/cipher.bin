@@ -1,0 +1,19 @@
+{
+  "id": "62cd265bc9316f81",
+  "steps": [
+    {
+      "op": "rolling_key"
+    },
+    {
+      "op": "aesgcm_enc",
+      "nonce_b64": "TZQJCalDH+thaUwo",
+      "aad_b64": "YWRhcA=="
+    },
+    {
+      "op": "chacha20poly1305_enc",
+      "nonce_b64": "n4C6PzMAXGl9cOo/",
+      "aad_b64": "ZXZvbHZl"
+    }
+  ],
+  "data_b64": "0sP4gz6BX3P772+GOBKxBr1cD34hMzz+PkskthM29I9iO0MUindnv7ksyJwTQhYBRihwuh4g"
+}

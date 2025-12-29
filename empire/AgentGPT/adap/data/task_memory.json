@@ -1,0 +1,82 @@
+[
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761474004.8112588
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761474706.6840076
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761474814.1431017
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761475755.7252786
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761475980.899201
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761476828.0490034
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761483499.712033
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761483966.787954
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761484242.6312575
+  },
+  {
+    "ts": 1761629723.2053432,
+    "task": "learn",
+    "result": "success",
+    "metrics": {
+      "len": 59
+    }
+  }
+]

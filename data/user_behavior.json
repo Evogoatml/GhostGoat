@@ -1,0 +1,47 @@
+[
+  {
+    "command": "system_boot",
+    "result": "success",
+    "time": 1761474004.8016603
+  },
+  {
+    "command": "system_boot",
+    "result": "success",
+    "time": 1761474706.6719666
+  },
+  {
+    "command": "system_boot",
+    "result": "success",
+    "time": 1761474814.1336198
+  },
+  {
+    "command": "system_boot",
+    "result": "success",
+    "time": 1761475755.7019196
+  },
+  {
+    "command": "system_boot",
+    "result": "success",
+    "time": 1761475980.8922117
+  },
+  {
+    "command": "system_boot",
+    "result": "success",
+    "time": 1761476828.0403912
+  },
+  {
+    "command": "system_boot",
+    "result": "success",
+    "time": 1761483499.6925507
+  },
+  {
+    "command": "system_boot",
+    "result": "success",
+    "time": 1761483966.7843773
+  },
+  {
+    "command": "system_boot",
+    "result": "success",
+    "time": 1761484242.6248696
+  }
+]

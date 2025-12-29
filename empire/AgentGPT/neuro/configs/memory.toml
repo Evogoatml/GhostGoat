@@ -1,0 +1,15 @@
+[store]
+path = "memory_store"
+index = "episodic.faiss"
+meta = "meta.parquet"
+dim = 768
+metric = "ip"  # or "l2"
+
+[policy]
+surprise_sigma = 2.0
+reward_threshold = 0.1
+dedup_cosine = 0.02
+short_buffer = 200000
+long_max = 20000000
+evict = "age_utility"
+k_read = 32

@@ -1,0 +1,13 @@
+# pipelines/evolvex.yaml
+name: EvolveX
+key_source: env:EVOLVE_SEED
+meta:
+  version: 1
+  note: "rolling → AES-GCM → ChaCha20 → Whirlpool (future)"
+steps:
+  - op: rolling_key
+    extra: time_ns
+  - op: aesgcm_enc
+    aad: "adap"
+  - op: chacha20poly1305_enc
+    aad: "evolve"

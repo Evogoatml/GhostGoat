@@ -1,0 +1,123 @@
+"""
+ADAP Integration System - Database Models
+SQLAlchemy models for tracking integration jobs and algorithms.
+"""
+
+from datetime import datetime
+from sqlalchemy import (
+    Column, Integer, String, Boolean, DateTime, Text,
+    ForeignKey, Float, JSON
+)
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship, sessionmaker
+
+Base = declarative_base()
+
+
+# ------------------------
+# Integration Jobs
+# ------------------------
+class IntegrationJob(Base):
+    __tablename__ = 'integration_jobs'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    repo_url = Column(String(500), nullable=False)
+    status = Column(String(50), nullable=False, default='pending')
+    algorithms_found = Column(Integer, default=0)
+    algorithms_integrated = Column(Integer, default=0)
+
+    created_at = Column(DateTime, default=datetime.utcnow)
+    started_at = Column(DateTime)
+    completed_at = Column(DateTime)
+
+    error_message = Column(Text)
+
+    # Relationships
+    algorithms = relationship("AlgorithmRecord", back_populates="job", cascade="all, delete-orphan")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'repo_url': self.repo_url,
+            'status': self.status,
+            'algorithms_found': self.algorithms_found,
+            'algorithms_integrated': self.algorithms_integrated,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'completed_at': self.completed_at.isoformat() if self.completed_at else None,
+            'error_message': self.error_message
+        }
+
+
+# ------------------------
+# Algorithm Records
+# ------------------------
+class AlgorithmRecord(Base):
+    __tablename__ = 'algorithms'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    job_id = Column(Integer, ForeignKey('integration_jobs.id'), nullable=False)
+
+    name = Column(String(200), nullable=False)
+    category = Column(String(50), nullable=False)
+    file_path = Column(String(500), nullable=False)
+    target_path = Column(String(500))
+    plugin_path = Column(String(500))
+
+    complexity = Column(JSON)
+    functions = Column(JSON, default=list)
+    classes = Column(JSON, default=list)
+    dependencies = Column(JSON, default=list)
+    patterns = Column(JSON, default=list)
+    docstrings = Column(JSON, default=list)
+
+    integrated = Column(Boolean, default=False)
+    integration_date = Column(DateTime)
+
+    file_hash = Column(String(64))
+    size = Column(Integer)
+    lines = Column(Integer)
+
+    # Relationship
+    job = relationship("IntegrationJob", back_populates="algorithms")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'job_id': self.job_id,
+            'name': self.name,
+            'category': self.category,
+            'file_path': self.file_path,
+            'target_path': self.target_path,
+            'plugin_path': self.plugin_path,
+            'complexity': self.complexity,
+            'integrated': self.integrated,
+            'size': self.size,
+            'lines': self.lines
+        }
+
+
+# ------------------------
+# System Metrics
+# ------------------------
+class SystemMetrics(Base):
+    __tablename__ = 'system_metrics'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    timestamp = Column(DateTime, default=datetime.utcnow)
+    cpu_usage = Column(Float)
+    memory_usage = Column(Float)
+    disk_usage = Column(Float)
+    active_jobs = Column(Integer)
+    total_algorithms = Column(Integer)
+
+
+# ------------------------
+# Database Initialization
+# ------------------------
+def init_db(engine):
+    """Initialize all database tables."""
+    Base.metadata.create_all(bind=engine)
+
+
+# Session factory
+Session = sessionmaker()

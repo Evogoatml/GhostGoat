@@ -1,0 +1,32 @@
+{
+  "universal_api_client": {
+    "name": "universal_api_client",
+    "has_main": false,
+    "doc": "Universal API client for adap agent\n@jarviscmd: Call any HTTP API with custom endpoint and API key."
+  },
+  "scheduler": {
+    "name": "scheduler",
+    "has_main": false,
+    "doc": "Basic scheduler for reminders and jobs\n@jarviscmd: Schedule a reminder or shell command."
+  },
+  "file_manager": {
+    "name": "file_manager",
+    "has_main": false,
+    "doc": "Basic file management\n@jarviscmd: Move, copy, or delete a file."
+  },
+  "log_viewer": {
+    "name": "log_viewer",
+    "has_main": false,
+    "doc": "View adap agent logs\n@jarviscmd: Display action logs and memory."
+  },
+  "github_loader": {
+    "name": "github_loader",
+    "has_main": false,
+    "doc": "GitHub plugin loader\n@jarviscmd: Download and install a plugin from a GitHub raw URL."
+  },
+  "llama2_ollama": {
+    "name": "llama2_ollama",
+    "has_main": false,
+    "doc": "Llama2 (Ollama local API)\n@jarviscmd: Query Llama2-uncensored running on local Ollama server."
+  }
+}

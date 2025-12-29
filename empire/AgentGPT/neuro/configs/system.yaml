@@ -1,0 +1,49 @@
+# Loss mixture
+loss_weights:
+  pred: 1.0          # predictive coding / next-state
+  ssl: 1.0           # masked/contrastive
+  rl: 0.5            # actor-critic TD
+  ewc: 5.0           # Fisher penalty
+  energy: 0.1        # sparsity + activation reg
+
+# Backbone
+backbone:
+  model_name: "roberta-base"
+  seq_len: 1024
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  precision: "bf16"
+  grad_checkpoint: true
+
+# Training
+train:
+  batch_size: 64
+  grad_accum: 2
+  lr: 2.0e-4
+  min_lr: 1.0e-5
+  wd: 0.05
+  epochs: 5
+  replay_ratio: 0.25
+  fisher_samples: 4096
+
+# Sparsity
+sparsity:
+  target_density: 0.2
+  prune_start_step: 2000
+  prune_end_step: 20000
+  movement: true
+
+# Uncertainty and triggers
+meta:
+  ensemble_heads: 4
+  drift_window: 2048
+  trigger:
+    epistemic: 0.2
+    td_error: 1.0
+    drift: 0.3
+
+# Logging
+log:
+  wandb_project: "neuro-selfeff"
+  kpis: ["sample_eff","energy_per_inf","sparsity","replay_live","forget_score"]

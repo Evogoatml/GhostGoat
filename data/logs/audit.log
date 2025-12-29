@@ -1,0 +1,6 @@
+{"ts": 1761474003, "event": "plugin_loaded", "plugin": "universal_api_client", "sig": "zj9UH4xe9PIAqc145nwmF1Vur7tP/+tE3Xg8CDHmktXTBhr9erDnrHgwgO1H9sD5Xq1R1EVcb71wvlHrdKEJDg=="}
+{"ts": 1761474003, "event": "plugin_loaded", "plugin": "scheduler", "sig": "oP4BW8B2jp34GhGwIof7Ex8HgEhFwrgNukh9oOzPsPIstHlMpv7xx+oCQeXR1juA5JFScavZyqxhflxvpMT+Aw=="}
+{"ts": 1761474003, "event": "plugin_loaded", "plugin": "file_manager", "sig": "gleyFRi5wR26ePBCLBGK00XC3EnDWdOiGc+9d+UEoKhn54/kzG97UKp6K786TqiUA0BCAZQ+fSzAW+Eo2CphAw=="}
+{"ts": 1761474003, "event": "plugin_loaded", "plugin": "log_viewer", "sig": "T8u0QrgnRk1X6l6HjW5ucdeUo1aOE5pqSwsCAFjGbAiFuWK43mfI2zB8uH+SB8g2PI0MqnLD91/CKXw8308MBw=="}
+{"ts": 1761474003, "event": "plugin_loaded", "plugin": "github_loader", "sig": "djKht01ULHkkSo8/Sg79GyQvFr39PsGoFnNSaknpdkykxgnUYRuy8X3+DY9svxXZMN67gVmFQq+n2ssmWlq2AQ=="}
+{"ts": 1761474003, "event": "plugin_loaded", "plugin": "llama2_ollama", "sig": "gCdu1krWtBJRo6YONoNiqXX08dRmU9zXbiaxowy4ngrcXKDLaXt8Cufw7RsLZYfO7XW8iHHDZb2zE6vUnDS8DA=="}
