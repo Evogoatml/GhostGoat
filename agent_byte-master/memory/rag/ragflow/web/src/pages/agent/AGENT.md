@@ -1,0 +1,651 @@
+# AGENT - agent
+**Auto-generated folder agent**
+**Last Updated:** 2026-03-06 03:56:31
+**Folder Path:** `/home/user/GhostGoat/core/reasoning/brain/rag/ragflow/web/src/pages/agent`
+**Agent ID:** `pending`
+
+---
+
+## Folder Context
+
+This agent maintains awareness of all files in this folder and connects to the central neural network at `.backend/`
+
+### Files Tracked (196)
+
+#### .css Files (1)
+
+- `form/components/prompt-editor/index.css`
+  - Size: 1.0KB
+  - Modified: 2026-03-03
+
+#### .tsx Files (195)
+
+- `../agents/agent-card.tsx`
+  - Size: 1.5KB
+  - Modified: 2026-03-03
+- `../agents/agent-dropdown.tsx`
+  - Size: 2.2KB
+  - Modified: 2026-03-03
+- `../agents/agent-log-detail-modal.tsx`
+  - Size: 2.3KB
+  - Modified: 2026-03-03
+- `../agents/agent-log-page.tsx`
+  - Size: 10.7KB
+  - Modified: 2026-03-03
+- `../agents/agent-templates.tsx`
+  - Size: 4.2KB
+  - Modified: 2026-03-03
+- `../agents/create-agent-dialog.tsx`
+  - Size: 1.1KB
+  - Modified: 2026-03-03
+- `../agents/create-agent-form.tsx`
+  - Size: 3.4KB
+  - Modified: 2026-03-03
+- `../agents/index.tsx`
+  - Size: 6.7KB
+  - Modified: 2026-03-03
+- `../agents/name-form-field.tsx`
+  - Size: 616B
+  - Modified: 2026-03-03
+- `../agents/template-card.tsx`
+  - Size: 1.9KB
+  - Modified: 2026-03-03
+- `../agents/template-sidebar.tsx`
+  - Size: 3.2KB
+  - Modified: 2026-03-03
+- `../agents/upload-agent-dialog/index.tsx`
+  - Size: 1.0KB
+  - Modified: 2026-03-03
+- `../agents/upload-agent-dialog/upload-agent-form.tsx`
+  - Size: 1.9KB
+  - Modified: 2026-03-03
+- `canvas/context-menu/index.tsx`
+  - Size: 2.8KB
+  - Modified: 2026-03-03
+- `canvas/context.tsx`
+  - Size: 1.3KB
+  - Modified: 2026-03-03
+- `canvas/edge/index.tsx`
+  - Size: 3.8KB
+  - Modified: 2026-03-03
+- `canvas/index.tsx`
+  - Size: 12.9KB
+  - Modified: 2026-03-03
+- `canvas/node/agent-node.tsx`
+  - Size: 4.0KB
+  - Modified: 2026-03-03
+- `canvas/node/begin-node.tsx`
+  - Size: 2.2KB
+  - Modified: 2026-03-03
+- `canvas/node/card.tsx`
+  - Size: 2.4KB
+  - Modified: 2026-03-03
+- `canvas/node/categorize-node.tsx`
+  - Size: 1.8KB
+  - Modified: 2026-03-03
+- `canvas/node/data-operations-node.tsx`
+  - Size: 710B
+  - Modified: 2026-03-03
+- `canvas/node/dropdown/accordion-operators.tsx`
+  - Size: 6.9KB
+  - Modified: 2026-03-03
+- `canvas/node/dropdown/next-step-dropdown.tsx`
+  - Size: 3.3KB
+  - Modified: 2026-03-03
+- `canvas/node/dropdown/operator-item-list.tsx`
+  - Size: 3.1KB
+  - Modified: 2026-03-03
+- `canvas/node/exit-loop-node.tsx`
+  - Size: 695B
+  - Modified: 2026-03-03
+- `canvas/node/extractor-node.tsx`
+  - Size: 425B
+  - Modified: 2026-03-03
+- `canvas/node/file-node.tsx`
+  - Size: 2.1KB
+  - Modified: 2026-03-03
+- `canvas/node/handle-icon.tsx`
+  - Size: 404B
+  - Modified: 2026-03-03
+- `canvas/node/handle.tsx`
+  - Size: 2.6KB
+  - Modified: 2026-03-03
+- `canvas/node/index.tsx`
+  - Size: 1.4KB
+  - Modified: 2026-03-03
+- `canvas/node/iteration-node.tsx`
+  - Size: 2.4KB
+  - Modified: 2026-03-03
+- `canvas/node/keyword-node.tsx`
+  - Size: 1.5KB
+  - Modified: 2026-03-03
+- `canvas/node/labeled-group-node.tsx`
+  - Size: 1.8KB
+  - Modified: 2026-03-03
+- `canvas/node/list-operations-node.tsx`
+  - Size: 667B
+  - Modified: 2026-03-03
+- `canvas/node/loop-node.tsx`
+  - Size: 602B
+  - Modified: 2026-03-03
+- `canvas/node/message-node.tsx`
+  - Size: 1.4KB
+  - Modified: 2026-03-03
+- `canvas/node/node-header.tsx`
+  - Size: 821B
+  - Modified: 2026-03-03
+- `canvas/node/node-wrapper.tsx`
+  - Size: 1006B
+  - Modified: 2026-03-03
+- `canvas/node/note-node/index.tsx`
+  - Size: 3.5KB
+  - Modified: 2026-03-03
+- `canvas/node/parser-node.tsx`
+  - Size: 1.7KB
+  - Modified: 2026-03-03
+- `canvas/node/placeholder-node.tsx`
+  - Size: 863B
+  - Modified: 2026-03-03
+- `canvas/node/popover.tsx`
+  - Size: 3.6KB
+  - Modified: 2026-03-03
+- `canvas/node/resize-icon.tsx`
+  - Size: 744B
+  - Modified: 2026-03-03
+- `canvas/node/retrieval-node.tsx`
+  - Size: 2.4KB
+  - Modified: 2026-03-03
+- `canvas/node/rewrite-node.tsx`
+  - Size: 1.5KB
+  - Modified: 2026-03-03
+- `canvas/node/splitter-node.tsx`
+  - Size: 1.7KB
+  - Modified: 2026-03-03
+- `canvas/node/switch-node.tsx`
+  - Size: 4.0KB
+  - Modified: 2026-03-03
+- `canvas/node/tokenizer-node.tsx`
+  - Size: 1.6KB
+  - Modified: 2026-03-03
+- `canvas/node/tool-node.tsx`
+  - Size: 2.8KB
+  - Modified: 2026-03-03
+- `canvas/node/toolbar.tsx`
+  - Size: 2.6KB
+  - Modified: 2026-03-03
+- `canvas/node/variable-aggregator-node.tsx`
+  - Size: 1.3KB
+  - Modified: 2026-03-03
+- `canvas/node/variable-assigner-node.tsx`
+  - Size: 1.1KB
+  - Modified: 2026-03-03
+- `chat/box.tsx`
+  - Size: 4.9KB
+  - Modified: 2026-03-03
+- `chat/chat-sheet.tsx`
+  - Size: 891B
+  - Modified: 2026-03-03
+- `chat/use-get-file-icon.tsx`
+  - Size: 378B
+  - Modified: 2026-03-03
+- `constant/index.tsx`
+  - Size: 20.8KB
+  - Modified: 2026-03-03
+- `constant/pipeline.tsx`
+  - Size: 5.7KB
+  - Modified: 2026-03-03
+- `debug-content/index.tsx`
+  - Size: 7.4KB
+  - Modified: 2026-03-03
+- `debug-content/popover-form.tsx`
+  - Size: 2.6KB
+  - Modified: 2026-03-03
+- `debug-content/uploader.tsx`
+  - Size: 3.5KB
+  - Modified: 2026-03-03
+- `flow-tooltip.tsx`
+  - Size: 461B
+  - Modified: 2026-03-03
+- `form-sheet/form-config-map.tsx`
+  - Size: 4.8KB
+  - Modified: 2026-03-03
+- `form-sheet/next.tsx`
+  - Size: 3.4KB
+  - Modified: 2026-03-03
+- `form-sheet/single-debug-sheet/index.tsx`
+  - Size: 2.8KB
+  - Modified: 2026-03-03
+- `form-sheet/title-input.tsx`
+  - Size: 1.7KB
+  - Modified: 2026-03-03
+- `form/agent-form/agent-tools.tsx`
+  - Size: 5.7KB
+  - Modified: 2026-03-03
+- `form/agent-form/dynamic-prompt.tsx`
+  - Size: 2.6KB
+  - Modified: 2026-03-03
+- `form/agent-form/dynamic-tool.tsx`
+  - Size: 1.7KB
+  - Modified: 2026-03-03
+- `form/agent-form/index.tsx`
+  - Size: 11.7KB
+  - Modified: 2026-03-03
+- `form/agent-form/structured-output-dialog.tsx`
+  - Size: 1.6KB
+  - Modified: 2026-03-03
+- `form/agent-form/structured-output-panel.tsx`
+  - Size: 346B
+  - Modified: 2026-03-03
+- `form/agent-form/tool-popover/index.tsx`
+  - Size: 2.6KB
+  - Modified: 2026-03-03
+- `form/agent-form/tool-popover/tool-command.tsx`
+  - Size: 4.1KB
+  - Modified: 2026-03-03
+- `form/arxiv-form/index.tsx`
+  - Size: 2.6KB
+  - Modified: 2026-03-03
+- `form/begin-form/begin-dynamic-options.tsx`
+  - Size: 1.6KB
+  - Modified: 2026-03-03
+- `form/begin-form/index.tsx`
+  - Size: 5.7KB
+  - Modified: 2026-03-03
+- `form/begin-form/parameter-dialog.tsx`
+  - Size: 5.9KB
+  - Modified: 2026-03-03
+- `form/begin-form/query-table.tsx`
+  - Size: 5.2KB
+  - Modified: 2026-03-03
+- `form/bing-form/index.tsx`
+  - Size: 3.5KB
+  - Modified: 2026-03-03
+- `form/categorize-form/dynamic-categorize.tsx`
+  - Size: 6.7KB
+  - Modified: 2026-03-03
+- `form/categorize-form/dynamic-example.tsx`
+  - Size: 1.8KB
+  - Modified: 2026-03-03
+- `form/categorize-form/index.tsx`
+  - Size: 1.7KB
+  - Modified: 2026-03-03
+- `form/code-form/index.tsx`
+  - Size: 5.1KB
+  - Modified: 2026-03-03
+- `form/code-form/next-variable.tsx`
+  - Size: 3.8KB
+  - Modified: 2026-03-03
+- `form/components/api-key-field.tsx`
+  - Size: 767B
+  - Modified: 2026-03-03
+- `form/components/description-field.tsx`
+  - Size: 641B
+  - Modified: 2026-03-03
+- `form/components/dynamic-fom-header.tsx`
+  - Size: 708B
+  - Modified: 2026-03-03
+- `form/components/form-wrapper.tsx`
+  - Size: 312B
+  - Modified: 2026-03-03
+- `form/components/output.tsx`
+  - Size: 1.3KB
+  - Modified: 2026-03-03
+- `form/components/prompt-editor/index.tsx`
+  - Size: 5.2KB
+  - Modified: 2026-03-03
+- `form/components/prompt-editor/paste-handler-plugin.tsx`
+  - Size: 2.3KB
+  - Modified: 2026-03-03
+- `form/components/prompt-editor/variable-node.tsx`
+  - Size: 1.9KB
+  - Modified: 2026-03-03
+- `form/components/prompt-editor/variable-on-change-plugin.tsx`
+  - Size: 1.2KB
+  - Modified: 2026-03-03
+- `form/components/prompt-editor/variable-picker-plugin.tsx`
+  - Size: 11.0KB
+  - Modified: 2026-03-03
+- `form/components/query-variable-list.tsx`
+  - Size: 1.7KB
+  - Modified: 2026-03-03
+- `form/components/query-variable.tsx`
+  - Size: 2.0KB
+  - Modified: 2026-03-03
+- `form/components/select-with-secondary-menu.tsx`
+  - Size: 7.1KB
+  - Modified: 2026-03-03
+- `form/components/structured-output-secondary-menu.tsx`
+  - Size: 4.7KB
+  - Modified: 2026-03-03
+- `form/crawler-form/index.tsx`
+  - Size: 2.7KB
+  - Modified: 2026-03-03
+- `form/data-operations-form/filter-values.tsx`
+  - Size: 2.6KB
+  - Modified: 2026-03-03
+- `form/data-operations-form/index.tsx`
+  - Size: 4.4KB
+  - Modified: 2026-03-03
+- `form/data-operations-form/select-keys.tsx`
+  - Size: 1.4KB
+  - Modified: 2026-03-03
+- `form/data-operations-form/updates.tsx`
+  - Size: 1.9KB
+  - Modified: 2026-03-03
+- `form/duckduckgo-form/index.tsx`
+  - Size: 2.5KB
+  - Modified: 2026-03-03
+- `form/email-form/index.tsx`
+  - Size: 4.0KB
+  - Modified: 2026-03-03
+- `form/exesql-form/index.tsx`
+  - Size: 5.0KB
+  - Modified: 2026-03-03
+- `form/extractor-form/index.tsx`
+  - Size: 3.6KB
+  - Modified: 2026-03-03
+- `form/github-form/index.tsx`
+  - Size: 1.6KB
+  - Modified: 2026-03-03
+- `form/google-form/index.tsx`
+  - Size: 4.0KB
+  - Modified: 2026-03-03
+- `form/google-scholar-form/index.tsx`
+  - Size: 4.7KB
+  - Modified: 2026-03-03
+- `form/hierarchical-merger-form/index.tsx`
+  - Size: 5.5KB
+  - Modified: 2026-03-03
+- `form/invoke-form/index.tsx`
+  - Size: 6.8KB
+  - Modified: 2026-03-03
+- `form/invoke-form/variable-dialog.tsx`
+  - Size: 3.4KB
+  - Modified: 2026-03-03
+- `form/invoke-form/variable-table.tsx`
+  - Size: 5.4KB
+  - Modified: 2026-03-03
+- `form/iteration-form/dynamic-output.tsx`
+  - Size: 3.4KB
+  - Modified: 2026-03-03
+- `form/iteration-form/index.tsx`
+  - Size: 1.8KB
+  - Modified: 2026-03-03
+- `form/iteration-start-from/index.tsx`
+  - Size: 582B
+  - Modified: 2026-03-03
+- `form/list-operations-form/index.tsx`
+  - Size: 6.3KB
+  - Modified: 2026-03-03
+- `form/loop-form/dynamic-variables.tsx`
+  - Size: 7.2KB
+  - Modified: 2026-03-03
+- `form/loop-form/index.tsx`
+  - Size: 1.7KB
+  - Modified: 2026-03-03
+- `form/loop-form/loop-termination-condition.tsx`
+  - Size: 9.9KB
+  - Modified: 2026-03-03
+- `form/message-form/index.tsx`
+  - Size: 5.0KB
+  - Modified: 2026-03-03
+- `form/parser-form/common-form-fields.tsx`
+  - Size: 2.8KB
+  - Modified: 2026-03-03
+- `form/parser-form/email-form-fields.tsx`
+  - Size: 909B
+  - Modified: 2026-03-03
+- `form/parser-form/image-form-fields.tsx`
+  - Size: 1.9KB
+  - Modified: 2026-03-03
+- `form/parser-form/index.tsx`
+  - Size: 6.7KB
+  - Modified: 2026-03-03
+- `form/parser-form/pdf-form-fields.tsx`
+  - Size: 3.9KB
+  - Modified: 2026-03-03
+- `form/parser-form/ppt-form-fields.tsx`
+  - Size: 3.7KB
+  - Modified: 2026-03-03
+- `form/parser-form/spreadsheet-form-fields.tsx`
+  - Size: 3.7KB
+  - Modified: 2026-03-03
+- `form/parser-form/video-form-fields.tsx`
+  - Size: 914B
+  - Modified: 2026-03-03
+- `form/pubmed-form/index.tsx`
+  - Size: 2.4KB
+  - Modified: 2026-03-03
+- `form/retrieval-form/next.tsx`
+  - Size: 4.4KB
+  - Modified: 2026-03-03
+- `form/rewrite-question-form/index.tsx`
+  - Size: 1.8KB
+  - Modified: 2026-03-03
+- `form/searxng-form/index.tsx`
+  - Size: 2.2KB
+  - Modified: 2026-03-03
+- `form/splitter-form/index.tsx`
+  - Size: 3.3KB
+  - Modified: 2026-03-03
+- `form/string-transform-form/index.tsx`
+  - Size: 5.1KB
+  - Modified: 2026-03-03
+- `form/switch-form/index.tsx`
+  - Size: 8.8KB
+  - Modified: 2026-03-03
+- `form/tavily-extract-form/index.tsx`
+  - Size: 3.6KB
+  - Modified: 2026-03-03
+- `form/tavily-form/dynamic-domain.tsx`
+  - Size: 1.6KB
+  - Modified: 2026-03-03
+- `form/tavily-form/index.tsx`
+  - Size: 6.7KB
+  - Modified: 2026-03-03
+- `form/tokenizer-form/index.tsx`
+  - Size: 2.8KB
+  - Modified: 2026-03-03
+- `form/tool-form/arxiv-form/index.tsx`
+  - Size: 986B
+  - Modified: 2026-03-03
+- `form/tool-form/bing-form/index.tsx`
+  - Size: 856B
+  - Modified: 2026-03-03
+- `form/tool-form/constant.tsx`
+  - Size: 1.4KB
+  - Modified: 2026-03-03
+- `form/tool-form/crawler-form/index.tsx`
+  - Size: 980B
+  - Modified: 2026-03-03
+- `form/tool-form/duckduckgo-form/index.tsx`
+  - Size: 1019B
+  - Modified: 2026-03-03
+- `form/tool-form/email-form/index.tsx`
+  - Size: 986B
+  - Modified: 2026-03-03
+- `form/tool-form/exesql-form/index.tsx`
+  - Size: 1.1KB
+  - Modified: 2026-03-03
+- `form/tool-form/github-form/index.tsx`
+  - Size: 983B
+  - Modified: 2026-03-03
+- `form/tool-form/google-form/index.tsx`
+  - Size: 1.1KB
+  - Modified: 2026-03-03
+- `form/tool-form/google-scholar-form/index.tsx`
+  - Size: 1.0KB
+  - Modified: 2026-03-03
+- `form/tool-form/index.tsx`
+  - Size: 543B
+  - Modified: 2026-03-03
+- `form/tool-form/mcp-form/index.tsx`
+  - Size: 3.3KB
+  - Modified: 2026-03-03
+- `form/tool-form/mcp-form/mcp-card.tsx`
+  - Size: 562B
+  - Modified: 2026-03-03
+- `form/tool-form/pubmed-form/index.tsx`
+  - Size: 1016B
+  - Modified: 2026-03-03
+- `form/tool-form/retrieval-form/index.tsx`
+  - Size: 2.5KB
+  - Modified: 2026-03-03
+- `form/tool-form/searxng-form/index.tsx`
+  - Size: 1.5KB
+  - Modified: 2026-03-03
+- `form/tool-form/tavily-form/index.tsx`
+  - Size: 1011B
+  - Modified: 2026-03-03
+- `form/tool-form/wencai-form/index.tsx`
+  - Size: 986B
+  - Modified: 2026-03-03
+- `form/tool-form/wikipedia-form/index.tsx`
+  - Size: 1023B
+  - Modified: 2026-03-03
+- `form/tool-form/yahoo-finance-form/index.tsx`
+  - Size: 1.0KB
+  - Modified: 2026-03-03
+- `form/user-fill-up-form/index.tsx`
+  - Size: 4.3KB
+  - Modified: 2026-03-03
+- `form/variable-aggregator-form/dynamic-group-variable.tsx`
+  - Size: 3.2KB
+  - Modified: 2026-03-03
+- `form/variable-aggregator-form/index.tsx`
+  - Size: 2.3KB
+  - Modified: 2026-03-03
+- `form/variable-aggregator-form/name-input.tsx`
+  - Size: 1.6KB
+  - Modified: 2026-03-03
+- `form/variable-assigner-form/dynamic-variables.tsx`
+  - Size: 8.3KB
+  - Modified: 2026-03-03
+- `form/variable-assigner-form/index.tsx`
+  - Size: 1.7KB
+  - Modified: 2026-03-03
+- `form/wencai-form/index.tsx`
+  - Size: 2.7KB
+  - Modified: 2026-03-03
+- `form/wikipedia-form/index.tsx`
+  - Size: 2.5KB
+  - Modified: 2026-03-03
+- `form/yahoo-finance-form/index.tsx`
+  - Size: 3.3KB
+  - Modified: 2026-03-03
+- `gobal-variable-sheet/component/add-variable-modal.tsx`
+  - Size: 3.8KB
+  - Modified: 2026-03-03
+- `gobal-variable-sheet/hooks/use-form.tsx`
+  - Size: 1.3KB
+  - Modified: 2026-03-03
+- `gobal-variable-sheet/hooks/use-object-fields.tsx`
+  - Size: 9.1KB
+  - Modified: 2026-03-03
+- `gobal-variable-sheet/index.tsx`
+  - Size: 5.9KB
+  - Modified: 2026-03-03
+- `hooks.tsx`
+  - Size: 7.9KB
+  - Modified: 2026-03-03
+- `hooks/use-before-delete.tsx`
+  - Size: 2.7KB
+  - Modified: 2026-03-03
+- `hooks/use-build-options.tsx`
+  - Size: 629B
+  - Modified: 2026-03-03
+- `hooks/use-get-begin-query.tsx`
+  - Size: 12.9KB
+  - Modified: 2026-03-03
+- `hooks/use-show-drawer.tsx`
+  - Size: 4.8KB
+  - Modified: 2026-03-03
+- `index.tsx`
+  - Size: 9.6KB
+  - Modified: 2026-03-03
+- `log-sheet/index.tsx`
+  - Size: 1.4KB
+  - Modified: 2026-03-03
+- `log-sheet/tool-timeline-item.tsx`
+  - Size: 7.9KB
+  - Modified: 2026-03-03
+- `log-sheet/workflow-timeline.tsx`
+  - Size: 12.5KB
+  - Modified: 2026-03-03
+- `operator-icon.tsx`
+  - Size: 3.5KB
+  - Modified: 2026-03-03
+- `pipeline-log-sheet/dataflow-timeline.tsx`
+  - Size: 5.1KB
+  - Modified: 2026-03-03
+- `pipeline-log-sheet/index.tsx`
+  - Size: 3.8KB
+  - Modified: 2026-03-03
+- `pipeline-run-sheet/index.tsx`
+  - Size: 889B
+  - Modified: 2026-03-03
+- `pipeline-run-sheet/uploader.tsx`
+  - Size: 1.5KB
+  - Modified: 2026-03-03
+- `run-sheet/index.tsx`
+  - Size: 1.9KB
+  - Modified: 2026-03-03
+- `setting-dialog/index.tsx`
+  - Size: 1.3KB
+  - Modified: 2026-03-03
+- `setting-dialog/setting-form.tsx`
+  - Size: 3.2KB
+  - Modified: 2026-03-03
+- `share/index.tsx`
+  - Size: 7.3KB
+  - Modified: 2026-03-03
+- `share/parameter-dialog.tsx`
+  - Size: 862B
+  - Modified: 2026-03-03
+- `version-dialog/index.tsx`
+  - Size: 5.0KB
+  - Modified: 2026-03-03
+
+---
+
+## Statistics
+
+- **Total Files:** 196
+- **Total Size:** 639.0KB
+- **File Types:** 2
+
+---
+
+## Neural Network Connection
+
+This agent is connected to the central neural backend:
+
+- **Backend Path:** `.backend/`
+- **Knowledge Graph:** Shared across all agents
+- **Agent Registry:** `.backend/agents.json`
+
+### Query This Agent
+
+```python
+from core.distributed_agent_system import DistributedAgentSystem
+system = DistributedAgentSystem()
+context = system.backend.get_folder_context('/home/user/GhostGoat/core/reasoning/brain/rag/ragflow/web/src/pages/agent')
+```
+
+---
+
+## Purpose
+
+This AGENT.md file provides:
+
+1. **Folder Awareness** — Know what files exist here
+2. **Context for AI** — Help AI understand this folder's purpose
+3. **Navigation** — Quick reference for developers
+4. **Neural Link** — Connection to central knowledge graph
+
+**Note:** This file is auto-generated. Regenerate with `make agents` or `python -m core.distributed_agent_system`.
+
+---
+
+*Generated by GhostGoat Distributed Agent System*
+*Last scan: 2026-03-06 03:56:31*

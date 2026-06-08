@@ -1,0 +1,250 @@
+[
+  {
+    "task": "write a python function",
+    "solution": "Define the function with a clear docstring, type hints, and a single responsibility. Use snake_case for names. Include at least one worked example in the docstring. Raise ValueError/TypeError for bad inputs rather than silently returning None.",
+    "domain": "coding",
+    "agent": "CodeArchitect",
+    "tags": ["python", "functions", "coding"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "debug a python error traceback",
+    "solution": "1. Read the full traceback bottom-up — the last frame is where the error occurred. 2. Identify the exception type and message. 3. Check if the error is a NameError (undefined variable), TypeError (wrong type), AttributeError (wrong object), or ValueError (bad value). 4. Add print() or logging.debug() calls around the failure point. 5. Use pdb.set_trace() or breakpoint() for step-by-step inspection. 6. Fix the root cause, not just the symptom.",
+    "domain": "coding",
+    "agent": "DebugMaster",
+    "tags": ["debugging", "python", "errors"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "refactor code to improve readability",
+    "solution": "1. Extract long functions into smaller, named helpers (<20 lines each). 2. Replace magic numbers/strings with named constants. 3. Remove duplicated code into shared utilities. 4. Rename variables to describe their purpose (not their type). 5. Replace nested if/else chains with early returns (guard clauses). 6. Add docstrings only where the logic is not self-evident. 7. Run tests after each refactor step to catch regressions.",
+    "domain": "coding",
+    "agent": "RefactorExpert",
+    "tags": ["refactoring", "clean-code", "readability"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "review code for security vulnerabilities",
+    "solution": "Check for: 1. SQL injection — use parameterised queries, never string concatenation. 2. Command injection — avoid subprocess with shell=True and user input. 3. XSS — escape all user-supplied HTML output. 4. Insecure deserialization — never unpickle untrusted data. 5. Hardcoded secrets — scan for API keys, passwords, tokens in source. 6. Path traversal — validate and sanitise file paths with os.path.realpath. 7. SSRF — validate URLs before outbound requests. 8. Weak crypto — reject MD5/SHA1 for security; use SHA-256+ or bcrypt for passwords.",
+    "domain": "coding",
+    "agent": "SecurityAuditor",
+    "tags": ["security", "audit", "owasp", "vulnerabilities"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "optimise slow python code for performance",
+    "solution": "1. Profile first with cProfile or py-spy — never optimise without data. 2. Move inner-loop work outside loops. 3. Replace list comprehensions with generator expressions where memory matters. 4. Use built-in functions (map, filter, sum) over manual loops — they're implemented in C. 5. Vectorise numeric operations with NumPy instead of Python loops. 6. Cache expensive pure-function results with functools.lru_cache. 7. Use asyncio for I/O-bound work, multiprocessing for CPU-bound. 8. Consider Cython or Numba for hot numeric paths.",
+    "domain": "coding",
+    "agent": "PerformanceOptimizer",
+    "tags": ["performance", "profiling", "optimisation", "python"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "implement a rest api endpoint",
+    "solution": "1. Choose a framework: FastAPI (async, auto-docs), Flask (simple), or Django REST (full-featured). 2. Define request schema with Pydantic models for automatic validation. 3. Return consistent JSON with status codes: 200 OK, 201 Created, 400 Bad Request, 401 Unauthorized, 404 Not Found, 500 Internal Error. 4. Add authentication (JWT Bearer or API key in header). 5. Implement rate limiting to prevent abuse. 6. Log all requests at INFO level, errors at ERROR level. 7. Write integration tests that actually hit the endpoint.",
+    "domain": "coding",
+    "agent": "CodeArchitect",
+    "tags": ["api", "rest", "web", "fastapi", "flask"],
+    "confidence_boost": 8
+  },
+  {
+    "task": "write unit tests for python code",
+    "solution": "Use pytest. Structure tests with Arrange-Act-Assert. Name tests test_<function>_<scenario>_<expected>. Test: happy path, edge cases (empty input, zero, None), and error paths (assert raises). Mock external dependencies with unittest.mock.patch. Aim for high coverage on business logic, not on trivial getters. Run with pytest -v --tb=short. Add parametrize for data-driven tests.",
+    "domain": "coding",
+    "agent": "CodeArchitect",
+    "tags": ["testing", "pytest", "unit-tests", "tdd"],
+    "confidence_boost": 8
+  },
+  {
+    "task": "set up a database schema",
+    "solution": "1. Normalise to 3NF to eliminate redundancy — split repeated groups into separate tables. 2. Every table needs a primary key (prefer UUID or auto-increment int). 3. Add foreign keys with ON DELETE CASCADE or RESTRICT depending on semantics. 4. Index columns used in WHERE, JOIN, and ORDER BY clauses. 5. Use VARCHAR with explicit limits, not TEXT for columns with known bounds. 6. Add created_at/updated_at timestamps to every entity table. 7. Write migration scripts (Alembic for Python) — never modify production schema directly.",
+    "domain": "coding",
+    "agent": "CodeArchitect",
+    "tags": ["database", "sql", "schema", "migration"],
+    "confidence_boost": 8
+  },
+  {
+    "task": "research a topic and summarise findings",
+    "solution": "1. Define the research question precisely before starting. 2. Search multiple sources: academic (Google Scholar, arXiv), news (Reuters, BBC), and primary sources. 3. Assess source credibility: author expertise, publication date, peer review status, conflicts of interest. 4. Extract key claims and note which sources support each. 5. Identify areas of consensus vs. disagreement. 6. Synthesise into a structured summary: background, main findings, limitations, open questions. 7. Cite all sources with URLs and access dates.",
+    "domain": "research",
+    "agent": "DataGatherer",
+    "tags": ["research", "summarisation", "information-gathering"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "find and validate information sources",
+    "solution": "Credibility checklist: 1. Author — does the author have verifiable credentials in this field? 2. Publication — is it a peer-reviewed journal, established news outlet, or government publication? 3. Date — is the information current enough for the topic? 4. Evidence — does the source cite primary data or is it opinion? 5. Cross-reference — do at least 2-3 independent sources corroborate the claim? 6. Bias — check AllSides or MediaBiasFactCheck for news outlets. 7. Red flags: anonymous authors, no citations, sensational headlines, no publication date.",
+    "domain": "research",
+    "agent": "SourceValidator",
+    "tags": ["fact-checking", "source-validation", "research-quality"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "identify patterns in data",
+    "solution": "1. Start with descriptive statistics: mean, median, std deviation, percentiles, min/max. 2. Plot distributions (histogram, box plot) to spot skew and outliers. 3. Check correlations (Pearson for linear, Spearman for rank) between variables. 4. Apply time-series decomposition if data is temporal (trend + seasonality + residual). 5. Use clustering (K-means, DBSCAN) to find natural groupings. 6. Test for statistical significance — avoid over-interpreting noise. 7. Document every pattern found with the supporting data and its limitations.",
+    "domain": "research",
+    "agent": "PatternFinder",
+    "tags": ["data-analysis", "patterns", "statistics", "clustering"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "synthesise information from multiple sources",
+    "solution": "1. Group sources by theme or claim, not chronologically. 2. For each theme: state the consensus, then note the dissenting views with their evidence. 3. Use a matrix to map sources vs. key claims — helps spot gaps. 4. Weight sources by credibility and recency. 5. Write the synthesis around themes, not source-by-source summaries. 6. Highlight where sources contradict each other and explain why (different methodologies, time periods, populations). 7. End with your own assessment of confidence level for each conclusion.",
+    "domain": "research",
+    "agent": "SynthesisEngine",
+    "tags": ["synthesis", "research", "literature-review"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "analyse market trends and momentum",
+    "solution": "1. Calculate price momentum: 1-month, 3-month, 6-month, 12-month returns. 2. Compare to benchmark (S&P 500 or sector ETF) for relative momentum. 3. Check volume profile — momentum with increasing volume is stronger than with declining volume. 4. Use RSI (14-period) to gauge overbought (>70) / oversold (<30) conditions. 5. Apply moving average crossovers (50-day vs 200-day) for trend direction. 6. Identify support/resistance levels from prior price peaks/troughs. 7. Account for macro regime: rising rates favour value, falling rates favour growth.",
+    "domain": "trading",
+    "agent": "MomentumHunter",
+    "tags": ["trading", "momentum", "technical-analysis", "markets"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "assess and manage trading risk",
+    "solution": "1. Size positions using Kelly criterion or fixed fractional (1-2% of portfolio per trade max). 2. Set stop-loss at a level that would invalidate the trade thesis, not at an arbitrary % from entry. 3. Measure portfolio correlation — holding 10 correlated positions is not diversification. 4. Track Value-at-Risk (VaR) at 95% and 99% confidence — know your expected worst day. 5. Monitor drawdown: if portfolio drops >10% from peak, reduce risk exposure. 6. Stress test against historical crashes (2008, 2020 COVID, 2022 crypto winter). 7. Never risk more than you can afford to lose on a single idea.",
+    "domain": "trading",
+    "agent": "RiskGuardian",
+    "tags": ["risk-management", "trading", "position-sizing", "drawdown"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "monitor blockchain on-chain metrics",
+    "solution": "Key on-chain signals to track: 1. Active addresses (rising = growing adoption, falling = declining use). 2. Exchange inflows/outflows (large inflows = potential sell pressure). 3. MVRV ratio (Market Value / Realised Value) > 3.5 is historically overvalued. 4. NVT ratio (Network Value / Transaction volume) — high NVT = speculative vs. low NVT = utility-driven. 5. Miner revenue and hash rate — sustained mining after price drops signals long-term confidence. 6. Stablecoin supply ratio — more stables on-chain = more dry powder for buying. 7. Whale wallet movements via Glassnode or Nansen alerts.",
+    "domain": "trading",
+    "agent": "OnChainSentry",
+    "tags": ["blockchain", "on-chain", "crypto", "defi", "metrics"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "detect market regime changes",
+    "solution": "Regime classification approach: 1. Trend regime: 200-day MA slope positive/negative. 2. Volatility regime: VIX > 30 = high vol (risk-off), VIX < 20 = low vol (risk-on). 3. Correlation regime: when stock-bond correlation turns positive, traditional 60/40 hedging breaks. 4. Liquidity regime: monitor Fed balance sheet, credit spreads (HY vs IG), and cross-currency basis swaps. 5. Growth regime: use ISM PMI > 50 = expansion, < 50 = contraction. 6. Hidden Markov Models can formally classify regimes from returns data. 7. Adjust position sizing and asset mix when regime shifts are detected.",
+    "domain": "trading",
+    "agent": "RegimeSensor",
+    "tags": ["regime", "macro", "volatility", "risk-regime", "trading"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "analyse a dataset for insights",
+    "solution": "Analysis pipeline: 1. Load and inspect: shape, dtypes, sample rows, null counts. 2. Clean: handle nulls (drop, impute, or flag), fix dtypes, deduplicate. 3. Univariate analysis: distribution of each variable (histograms, value counts). 4. Bivariate analysis: correlations, scatter plots, group comparisons. 5. Feature engineering: create derived columns that capture domain knowledge. 6. Hypothesis testing: use appropriate statistical test (t-test, chi-square, ANOVA) with p < 0.05 threshold. 7. Visualise findings: use matplotlib/seaborn for static, plotly for interactive. 8. Write a narrative summary linking each finding to business implications.",
+    "domain": "analysis",
+    "agent": "DataAnalyzer",
+    "tags": ["data-analysis", "pandas", "statistics", "eda"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "detect anomalies in a dataset",
+    "solution": "Anomaly detection strategies: 1. Statistical: flag values beyond 3 standard deviations from mean (assumes Gaussian). 2. IQR method: flag values < Q1-1.5*IQR or > Q3+1.5*IQR — more robust to outliers. 3. Isolation Forest: tree-based, effective on high-dimensional data, no distribution assumption. 4. DBSCAN: density-based clustering — points with few neighbours are anomalies. 5. Autoencoder: train on normal data, high reconstruction error = anomaly (good for time-series). 6. Time-series specific: STL decomposition then check residuals, or LSTM-based predictive error. 7. Always validate detected anomalies with domain experts before acting on them.",
+    "domain": "analysis",
+    "agent": "AnomalyDetector",
+    "tags": ["anomaly-detection", "outliers", "isolation-forest", "statistics"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "find root cause of a system problem",
+    "solution": "Root cause analysis (RCA) process: 1. Define the problem clearly with when/where/how-often/impact. 2. Gather data: logs, metrics, traces from the time window of the incident. 3. Build a timeline — what changed? (deployments, config changes, traffic spikes). 4. Apply 5-Why technique: ask why 5 times to drill past symptoms. 5. Use Fishbone/Ishikawa diagram for multi-factor problems. 6. Confirm root cause by reproducing the problem in a test environment. 7. Fix the root cause — not just the symptom. 8. Write a post-mortem with timeline, RCA, fix, and preventive measures.",
+    "domain": "analysis",
+    "agent": "RootCauseFinder",
+    "tags": ["rca", "debugging", "incident-analysis", "5-why"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "spot trends in time series data",
+    "solution": "Time-series trend analysis: 1. Resample to appropriate granularity (hourly/daily/weekly) before analysis. 2. Apply rolling mean (7-day, 30-day) to smooth noise and reveal trend. 3. Use STL decomposition (statsmodels) to separate trend, seasonality, and residual. 4. Test for stationarity with Augmented Dickey-Fuller — non-stationary series need differencing. 5. For forecasting: ARIMA for univariate, Prophet for seasonal patterns with holidays, LSTM for complex multivariate. 6. Quantify trend strength with Mann-Kendall test (p < 0.05 = significant trend). 7. Always plot the raw data alongside any smoothed/transformed version.",
+    "domain": "analysis",
+    "agent": "TrendSpotter",
+    "tags": ["time-series", "trend", "forecasting", "statistics"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "plan a software project",
+    "solution": "Project planning steps: 1. Break goal into epics (major feature areas), then stories (user-facing slices), then tasks (engineering work units). 2. Estimate using T-shirt sizes (S/M/L/XL) first, then convert top stories to hours. 3. Identify critical path — which tasks block others? 4. Map dependencies explicitly (task B cannot start until A is complete). 5. Allocate resources: who is responsible for each epic (RACI matrix). 6. Set milestones with hard dates for external dependencies only. 7. Build 20% buffer into the timeline for unknowns. 8. Define Definition of Done for each story before work starts.",
+    "domain": "planning",
+    "agent": "GoalDecomposer",
+    "tags": ["project-planning", "agile", "estimation", "milestones"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "identify and mitigate project risks",
+    "solution": "Risk management process: 1. Brainstorm risks across categories: technical (new tech, integration), resource (key-person dependency, budget), timeline (external dependencies, scope creep), and external (regulatory, market). 2. Score each risk: Probability (1-5) × Impact (1-5) = Risk Score. 3. Focus mitigation on high-score risks (>12). 4. For each high risk: define a mitigation plan (reduce probability) AND a contingency plan (reduce impact if it happens). 5. Assign a risk owner. 6. Review risk register weekly — risks evolve as the project progresses. 7. Log risks that materialised for future project post-mortems.",
+    "domain": "planning",
+    "agent": "RiskMapper",
+    "tags": ["risk-management", "planning", "mitigation", "project"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "allocate resources for a project",
+    "solution": "Resource allocation approach: 1. List all tasks and their skill requirements. 2. Map available people to skills — identify gaps early. 3. Check for over-allocation: same person on >2 parallel tasks is a risk. 4. Level the schedule: move non-critical tasks to even out workload peaks. 5. Identify shared resources (DevOps, design) that serve multiple teams — create booking systems for contention. 6. Track actual vs planned utilisation weekly. 7. Keep 10-15% of capacity unallocated for emergencies and context-switching overhead. 8. Plan for ramp-up time when adding new team members (first 2 weeks are low productivity).",
+    "domain": "planning",
+    "agent": "ResourceAllocator",
+    "tags": ["resources", "planning", "team", "capacity"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "build a project timeline",
+    "solution": "Timeline construction: 1. Start from the fixed end-date constraint (if any) and work backwards. 2. Sequence tasks using dependency graph — parallel paths where possible. 3. Assign duration estimates based on historical data or expert judgement. 4. Add buffer: 20% for new technology, 10% for well-understood work. 5. Mark external dependencies (client review, third-party API access) as date-fixed milestones. 6. Use Gantt chart for visual communication with stakeholders. 7. Track schedule variance weekly: Earned Value = % complete × planned budget. 8. If >10% behind schedule, escalate and replan — do not just hope to catch up.",
+    "domain": "planning",
+    "agent": "TimelineBuilder",
+    "tags": ["timeline", "gantt", "scheduling", "project-management"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "generate creative ideas for a project",
+    "solution": "Idea generation techniques: 1. Brainstorm without judgement first — quantity over quality (IDEO rule: 'Yes, and...'). 2. Use SCAMPER: Substitute, Combine, Adapt, Modify/Magnify, Put to other uses, Eliminate, Reverse. 3. Random association: combine your challenge with a random unrelated object to spark lateral thinking. 4. 'How might we...' framing: turn problem statements into opportunity questions. 5. Analogical thinking: how would nature / a child / a luxury brand approach this? 6. Worst possible idea: brainstorm terrible ideas then invert them. 7. Sleep on it — diffuse thinking mode often surfaces connections active thinking misses.",
+    "domain": "creative",
+    "agent": "IdeaGenerator",
+    "tags": ["creativity", "brainstorming", "ideation", "innovation"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "write a story or narrative",
+    "solution": "Story structure (Three-Act): Act 1 — establish protagonist, world, and inciting incident (15% of length). Act 2 — rising stakes, obstacles, midpoint reversal (70%). Act 3 — climax and resolution (15%). Principles: 1. Show don't tell — use specific sensory details, not adjectives. 2. Every scene must change the protagonist's situation (better or worse). 3. Dialogue reveals character; avoid on-the-nose exposition. 4. Subtext: what characters want vs. what they say. 5. End scenes a beat early — let the reader fill the gap. 6. Read aloud to catch rhythm and awkward phrasing. 7. First draft: write fast, don't edit. Editing is a separate pass.",
+    "domain": "creative",
+    "agent": "StoryWeaver",
+    "tags": ["writing", "storytelling", "narrative", "fiction"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "optimise a machine learning model",
+    "solution": "ML optimisation pipeline: 1. Establish a baseline first (simple model) before tuning complex ones. 2. Check data quality — bad data causes more problems than wrong algorithms. 3. Feature engineering: domain-specific features often beat hyperparameter tuning. 4. Hyperparameter tuning: use Optuna or Ray Tune for efficient search (Bayesian > grid search). 5. Regularisation: add L1/L2 or dropout if overfitting. 6. Ensemble: combine diverse models (bagging, boosting, stacking). 7. Learning rate scheduling: warmup then cosine decay for deep learning. 8. Monitor training with validation loss — stop when it plateaus (early stopping). 9. Profile training time — data loading is often the bottleneck, not compute.",
+    "domain": "coding",
+    "agent": "PerformanceOptimizer",
+    "tags": ["machine-learning", "optimisation", "hyperparameter-tuning", "deep-learning"],
+    "confidence_boost": 8
+  },
+  {
+    "task": "design a system architecture",
+    "solution": "Architecture design process: 1. Start with requirements: functional (what it does) and non-functional (scale, latency, availability). 2. Choose architecture style based on needs: monolith (simple, small team), microservices (independent scaling), event-driven (high throughput, loose coupling). 3. Draw C4 diagram: Context → Container → Component. 4. Identify data flows and boundaries — where does data cross service/trust boundaries? 5. Design for failure: every external dependency will fail. 6. API design first — agree on contracts before implementation. 7. Estimate scale: req/sec, data volume, growth rate — size infrastructure to 3-5x expected load. 8. Document Architecture Decision Records (ADRs) for key tradeoffs.",
+    "domain": "coding",
+    "agent": "CodeArchitect",
+    "tags": ["architecture", "system-design", "microservices", "scalability"],
+    "confidence_boost": 8
+  },
+  {
+    "task": "predict future values or outcomes",
+    "solution": "Predictive modelling approach: 1. Frame as regression (continuous output) or classification (categorical). 2. Feature selection: use domain knowledge + correlation analysis + feature importance from a tree model. 3. Train/val/test split: 70/15/15 — never use test set until final evaluation. 4. Baseline: naive model (predict mean, or last value) — your model must beat this. 5. Choose model: XGBoost/LightGBM for tabular, LSTM/Transformer for sequences, linear models when interpretability matters. 6. Cross-validate (k-fold=5) for robust performance estimates. 7. Evaluate with appropriate metrics: MAE/RMSE for regression, F1/AUC for classification. 8. Quantify prediction uncertainty — a point estimate without confidence interval is dangerous.",
+    "domain": "analysis",
+    "agent": "PredictiveModeler",
+    "tags": ["prediction", "forecasting", "machine-learning", "regression", "classification"],
+    "confidence_boost": 10
+  },
+  {
+    "task": "set up monitoring and alerting for a system",
+    "solution": "Observability stack: 1. Metrics: instrument with Prometheus counters, gauges, histograms. Scrape every 15s. 2. Logs: structured JSON logs with level, timestamp, service, trace_id, request_id. Ship to ELK or Grafana Loki. 3. Traces: use OpenTelemetry SDK to trace requests across services — critical for microservices. 4. Dashboards: Grafana dashboards showing the four golden signals: latency, traffic, errors, saturation. 5. Alerts: page on SLA breach (p99 latency > threshold, error rate > 1%), not on low-severity warnings. 6. On-call runbooks: every alert must have a linked runbook with diagnosis steps. 7. Test alerts in staging before relying on them in production.",
+    "domain": "coding",
+    "agent": "CodeArchitect",
+    "tags": ["monitoring", "observability", "prometheus", "grafana", "alerting"],
+    "confidence_boost": 8
+  },
+  {
+    "task": "decompose a complex goal into steps",
+    "solution": "Goal decomposition method: 1. State the outcome in SMART terms (Specific, Measurable, Achievable, Relevant, Time-bound). 2. Identify the 3-5 major phases required to reach the outcome. 3. For each phase, list the 3-5 concrete tasks with a clear definition of done. 4. Map inter-task dependencies (which tasks block others). 5. Sequence tasks: independent tasks can run in parallel; dependent tasks must be serial. 6. Assign ownership — one person responsible per task. 7. Review the decomposition for missing steps (what assumptions am I making that could be wrong?). 8. Timebox each task to prevent scope creep.",
+    "domain": "planning",
+    "agent": "GoalDecomposer",
+    "tags": ["decomposition", "planning", "tasks", "goal-setting"],
+    "confidence_boost": 10
+  }
+]

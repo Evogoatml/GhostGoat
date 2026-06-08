@@ -1,0 +1,47 @@
+[
+  {
+    "gap": "test gap",
+    "attempt": 1,
+    "passed": true
+  },
+  {
+    "gap": "new gap",
+    "attempt": 1,
+    "passed": true
+  },
+  {
+    "gap": "adap_pipeline tool system \u2192 GhostGoat orchestrator",
+    "attempt": 1,
+    "passed": true
+  },
+  {
+    "gap": "SSH agent mesh network",
+    "attempt": 1,
+    "passed": true
+  },
+  {
+    "gap": "Persistent agent performance metrics",
+    "attempt": 1,
+    "passed": true
+  },
+  {
+    "gap": "-----------",
+    "attempt": 1,
+    "passed": true
+  },
+  {
+    "gap": "Self-evolving ASI (asi/)",
+    "attempt": 1,
+    "passed": true
+  },
+  {
+    "gap": "`interpreter.py`",
+    "attempt": 1,
+    "passed": true
+  },
+  {
+    "gap": "-----------",
+    "attempt": 1,
+    "passed": true
+  }
+]

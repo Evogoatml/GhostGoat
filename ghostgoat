@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+"""
+GhostGoat Unified CLI Launcher
+Usage:
+  ./ghostgoat shell              — Interactive cognitive shell
+  ./ghostgoat api                — Start FastAPI cognitive server
+  ./ghostgoat bot <name>         — Start Telegram bot (orchestrator, brain, swarm)
+  ./ghostgoat status             — Print system status
+  ./ghostgoat demo "<goal>"      — Run one cognitive goal
+"""
+import sys
+import os
+import json
+import asyncio
+import argparse
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+
+
+def cmd_shell(args):
+    from run_cognitive_system import main
+    main()
+
+
+def cmd_api(args):
+    port = args.port or int(os.getenv("COGNITIVE_API_PORT", "8500"))
+    print(f"Starting API server on port {port}...")
+    os.system(f"cd {ROOT} && python3 api/cognitive_api.py")
+
+
+def cmd_bot(args):
+    name = args.name or "orchestrator"
+    bot_file = os.path.join(ROOT, "bots", f"{name}_bot.py")
+    if not os.path.exists(bot_file):
+        print(f"Bot not found: {bot_file}")
+        print(f"Available: orchestrator, brain, swarm")
+        sys.exit(1)
+    print(f"Starting {name} bot...")
+    os.system(f"cd {ROOT} && python3 {bot_file}")
+
+
+def cmd_status(args):
+    from run_cognitive_system import bootstrap
+    s = bootstrap()
+    print(json.dumps({
+        "brain": s["brain"].get_state(),
+        "network": s["network"].get_fleet_status(),
+        "workflows": s["workflows"].list_workflows(),
+        "memory": s["memory"].stats(),
+        "graphrag": s["graphrag"].get_stats(),
+        "knowledge_tank": s["knowledge_tank"].get_stats(),
+    }, indent=2, default=str))
+
+
+async def _demo(goal):
+    from run_cognitive_system import bootstrap
+    s = bootstrap()
+    engine = s["engine"]
+    network = s["network"]
+    def _make_dispatch(agent_id):
+        return lambda p: network.dispatch(agent_id, p)
+    agents = {aid: _make_dispatch(aid) for aid in network.executors.keys()}
+    result = await engine.process(goal, agents=agents)
+    print(json.dumps(result, indent=2, default=str))
+
+
+def cmd_demo(args):
+    goal = " ".join(args.goal)
+    asyncio.run(_demo(goal))
+
+
+def main():
+    parser = argparse.ArgumentParser(description="GhostGoat Unified CLI")
+    sub = parser.add_subparsers(dest="command")
+
+    sub.add_parser("shell", help="Interactive cognitive shell")
+    sub.add_parser("api", help="Start FastAPI cognitive server")
+
+    p_bot = sub.add_parser("bot", help="Start Telegram bot")
+    p_bot.add_argument("name", nargs="?", default="orchestrator", help="Bot name: orchestrator, brain, swarm")
+
+    sub.add_parser("status", help="Print system status")
+
+    p_demo = sub.add_parser("demo", help="Run one cognitive goal")
+    p_demo.add_argument("goal", nargs="+", help="Goal text")
+
+    args = parser.parse_args()
+
+    if args.command == "shell":
+        cmd_shell(args)
+    elif args.command == "api":
+        cmd_api(args)
+    elif args.command == "bot":
+        cmd_bot(args)
+    elif args.command == "status":
+        cmd_status(args)
+    elif args.command == "demo":
+        cmd_demo(args)
+    else:
+        parser.print_help()
+
+
+if __name__ == "__main__":
+    main()
+

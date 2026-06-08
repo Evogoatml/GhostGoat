@@ -1,0 +1,1530 @@
+.
+├── adapters
+│   ├── agent_byte_events.py
+│   ├── AGENT.md
+│   ├── crewai_adapter.py
+│   ├── executor.py
+│   ├── __init__.py
+│   ├── langgraph_adapter.py
+│   ├── __pycache__
+│   │   ├── __init__.py
+│   │   └── nlm_layer.cpython-313.pyc
+│   ├── registry.py
+│   ├── swarms_adapter.py
+│   ├── telegram_agent_byte.py
+│   └── traversal.py
+├── AGENT.md
+├── agents
+│   ├── __init__.py
+│   ├── knowledge.py
+│   ├── __pycache__
+│   │   ├── holographic_node_graph_rag.cpython-313.pyc
+│   │   └── knowledge.cpython-313.pyc
+│   └── self_improve_loop.py
+├── axioms.py
+├── brain.txt
+├── dual_brain.json
+├── fix.sh
+├── holon.py
+├── __init__.py
+├── knowledge_finetune.jsonl
+├── memory
+│   ├── AGENT.md
+│   ├── brain_memory.db
+│   ├── brain_optimizer.db
+│   ├── conversation.py
+│   ├── __init__.py
+│   ├── memory_embeddings.json
+│   ├── quantum_graph.py
+│   ├── rag
+│   │   ├── agentic_rag_mcp
+│   │   │   ├── AGENT.md
+│   │   │   ├── config.py
+│   │   │   ├── __init__.py
+│   │   │   ├── mcp-client.py
+│   │   │   ├── README.md
+│   │   │   └── server.py
+│   │   ├── AGENT.md
+│   │   ├── __init__.py
+│   │   └── rag_system.py
+│   └── vault.py
+├── meta_godel_agent.py
+├── paradox_aware_orchestrator.py
+├── personas.py
+├── pmmago.py
+├── __pycache__
+│   ├── dual_brain_neural.cpython-313.pyc
+│   ├── ghostgoat_dual_brain.cpython-313.pyc
+│   ├── __init__.cpython-313.pyc
+│   └── __init__.py
+├── system.py
+├── telegram_bot.py
+└── trainer
+    ├── crdt_knowledge.py
+    ├── decision_maker.py
+    ├── elite_knowledge.py
+    ├── fine_tune_from_knowledge2.py
+    ├── fine_tune_from_knowledge.py
+    ├── knowledge
+    │   ├── AGENT.md
+    │   ├── dataset
+    │   │   ├── AGENT.md
+    │   │   ├── builder.py
+    │   │   ├── dataset_builder.py
+    │   │   ├── dataset_client.py
+    │   │   ├── dataset_ws.py
+    │   │   ├── __init__.py
+    │   │   ├── load_datasets.py
+    │   │   ├── Modelfile
+    │   │   ├── pentesting_train.json
+    │   │   └── pentesting_train.jsonl
+    │   ├── __init__.py
+    │   └── training
+    │       ├── 3D Graphs
+    │       │   ├── 3D.ipynb
+    │       │   └── __init__.py
+    │       ├── Aadhar number validator.py
+    │       ├── Add_Times.py
+    │       ├── AGENT.md
+    │       ├── Air_Canvas
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   └── README.md
+    │       ├── amongus.py
+    │       ├── anagram_checker.py
+    │       ├── anagrams.py
+    │       ├── Array_Equilibrium_Index.py
+    │       ├── Assessing women's safety in Indian cities through Twitter Data Analysis
+    │       │   ├── AGENT.md
+    │       │   ├── CODE
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── __init__.py
+    │       │   │   ├── MachineLearning.py
+    │       │   │   └── nltkdownload.py
+    │       │   ├── __init__.py
+    │       │   ├── Leveraging Machine learning for Assessing women's safety in Indian cities through Twitter Data Analysis
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── download_nltk.bat
+    │       │   │   ├── __init__.py
+    │       │   │   ├── MachineLearning.py
+    │       │   │   ├── MeToo_tweets.csv
+    │       │   │   ├── nltkdownload.py
+    │       │   │   └── run.bat
+    │       │   └── README.md
+    │       ├── atm_mini_project.py
+    │       ├── Atm.py
+    │       ├── Automated_Mailing
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── mail.py
+    │       │   └── README.md
+    │       ├── Automatic Birthday Wisher Using Python
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   └── main.py
+    │       ├── Auto Shutdown
+    │       │   ├── AGENT.md
+    │       │   ├── auto_shutdown.py
+    │       │   ├── __init__.py
+    │       │   └── README.md
+    │       ├── Bank_Account.py
+    │       ├── blockchain-transaction-scraping
+    │       │   ├── AGENT.md
+    │       │   ├── configure.py
+    │       │   ├── debug.py
+    │       │   ├── demo.py
+    │       │   ├── enhanced_test.py
+    │       │   ├── examples.py
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   ├── README.md
+    │       │   └── src
+    │       │       ├── AGENT.md
+    │       │       ├── blockchain_scraper.py
+    │       │       ├── __init__.py
+    │       │       └── utils.py
+    │       ├── calculator.py
+    │       ├── Check Internet Speed Using Python
+    │       │   ├── CheckInternetSpeedUsingPython.ipynb
+    │       │   └── __init__.py
+    │       ├── CircularLinkedList.py
+    │       ├── ColorMind
+    │       │   ├── AGENT.md
+    │       │   ├── colormind.py
+    │       │   ├── __init__.py
+    │       │   └── README.md
+    │       ├── Colors
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── multicoloredline.py
+    │       │   ├── pixel_sort.py
+    │       │   ├── primary_colors.py
+    │       │   └── print_colors.py
+    │       ├── colour detection mini project python
+    │       │   ├── __init__.py
+    │       │   └── source code
+    │       │       ├── AGENT.md
+    │       │       ├── color detection mini project.py
+    │       │       ├── colors.csv
+    │       │       └── __init__.py
+    │       ├── convert celsius into fahrenheit.py
+    │       ├── convert_time.py
+    │       ├── convert_wind_direction_to_degrees.py
+    │       ├── count the numbers of two vovels.py
+    │       ├── create_dir_if_not_there.py
+    │       ├── Credit_Card_Validator.py
+    │       ├── cricket_live_score.py
+    │       ├── cricket_news.py
+    │       ├── Cricket_score.py
+    │       ├── Cryptocurrency Tracker
+    │       │   ├── AGENT.md
+    │       │   ├── crypto_tracker.py
+    │       │   ├── __init__.py
+    │       │   └── README.md
+    │       ├── CSV_file.py
+    │       ├── currency converter
+    │       │   ├── AGENT.md
+    │       │   ├── country.txt
+    │       │   ├── gui.ui
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   └── README.md
+    │       ├── Currency_Converter
+    │       │   ├── AGENT.md
+    │       │   ├── currency converter.py
+    │       │   ├── __init__.py
+    │       │   └── Readme.md
+    │       ├── daily_checks.py
+    │       ├── daily_horoscope.py
+    │       ├── Data-Mining-Algorithms
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── knn.py
+    │       │   └── README.md
+    │       ├── date-timeclient.py
+    │       ├── date-timeserver.py
+    │       ├── Day_of_week.py
+    │       ├── days_from_date.py
+    │       ├── Delete_Linked_List.py
+    │       ├── Desktop_Notification_Scheduler
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   └── Readme.md
+    │       ├── detecting_english_programmatically.py
+    │       ├── Detect_Remove_loop.py
+    │       ├── diamond.py
+    │       ├── Dictionary opperations (input,update a dict).py
+    │       ├── diction.py
+    │       ├── digital_clock.py
+    │       ├── digitalclock.py
+    │       ├── dir_test.py
+    │       ├── DiscordVCBot
+    │       │   ├── AGENT.md
+    │       │   ├── dynamic_vc_bot.py
+    │       │   ├── __init__.py
+    │       │   └── README.md
+    │       ├── DNS Verifier
+    │       │   ├── AGENT.md
+    │       │   ├── DNS_Verifier.py
+    │       │   ├── __init__.py
+    │       │   └── README.md
+    │       ├── Downloaded Files Organizer
+    │       │   ├── AGENT.md
+    │       │   ├── browser_status.py
+    │       │   ├── __init__.py
+    │       │   ├── move_to_directory.py
+    │       │   ├── obs.py
+    │       │   ├── readme.md
+    │       │   └── requirements.txt
+    │       ├── Eligible_to_Vote.py
+    │       ├── Email-Automation.py
+    │       ├── Energy_Consumption_Tracker
+    │       │   ├── AGENT.md
+    │       │   ├── energy_tracker.py
+    │       │   ├── __init__.py
+    │       │   └── README.md
+    │       ├── env_check.py
+    │       ├── environment.yml
+    │       ├── ex20.py
+    │       ├── Exception_Handling_in_Python.py
+    │       ├── Expense_Tracker
+    │       │   ├── AGENT.md
+    │       │   ├── cli.py
+    │       │   ├── data.json
+    │       │   ├── demo.py
+    │       │   ├── __init__.py
+    │       │   ├── ledger.py
+    │       │   ├── models.py
+    │       │   ├── README.md
+    │       │   ├── reports.py
+    │       │   └── storage.py
+    │       ├── Face and eye Recognition
+    │       │   ├── AGENT.md
+    │       │   ├── face_recofnation_first.py
+    │       │   ├── gesture_control.py
+    │       │   └── __init__.py
+    │       ├── facebook id hack.py
+    │       ├── factorial_perm_comp.py
+    │       ├── fastapi.py
+    │       ├── fetch_news.py
+    │       ├── Fetch Tweets By User
+    │       │   ├── AGENT.md
+    │       │   ├── fetch_users_tweet.py
+    │       │   └── __init__.py
+    │       ├── fF
+    │       ├── file_ext_changer.py
+    │       ├── fileinfo.py
+    │       ├── Find current weather of any city using openweathermap API.py
+    │       ├── FindingResolutionOfAnImage.py
+    │       ├── findlargestno.md
+    │       ├── fischer_yates_shuffle.py
+    │       ├── FizzBuzz.py
+    │       ├── folder_size.py
+    │       ├── framework
+    │       │   ├── add_two_number.py
+    │       │   ├── add_two_nums.py
+    │       │   ├── AGENT.md
+    │       │   ├── area_of_square_app.py
+    │       │   ├── AREA OF TRIANGLE.py
+    │       │   ├── Armstrong_number
+    │       │   ├── armstrongnumber.py
+    │       │   ├── Armstrong_number.py
+    │       │   ├── ASCIIvaluecharacter.py
+    │       │   ├── avg_xdspam_confidence.py
+    │       │   ├── balance_parenthesis.py
+    │       │   ├── base_b_to_equivalent_decimal.py
+    │       │   ├── Base Converter Number system.py
+    │       │   ├── basic_cal.py
+    │       │   ├── binary_exponentiation.py
+    │       │   ├── binary_search.py
+    │       │   ├── binary-tree-max-path-sum.py
+    │       │   ├── blockchain
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── diophantine_equation.py
+    │       │   │   ├── __init__.py
+    │       │   │   └── README.md
+    │       │   ├── Caesar Cipher Encoder  & Decoder.py
+    │       │   ├── calculator.py
+    │       │   ├── check  if a number positive , negative or zero
+    │       │   ├── check_prime.py
+    │       │   ├── check whether the string is Symmetrical or Palindrome.py
+    │       │   ├── ciphers
+    │       │   │   ├── Bacon Cypher
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── bacon_cypher.py
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── Readme.md
+    │       │   │   └── __init__.py
+    │       │   ├── collatz_sequence.py
+    │       │   ├── conversions
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── astronomical_length_scale_conversion.py
+    │       │   │   ├── binary_to_decimal.py
+    │       │   │   ├── binary_to_hexadecimal.py
+    │       │   │   ├── binary_to_octal.py
+    │       │   │   ├── convert_number_to_words.py
+    │       │   │   ├── decimal_to_any.py
+    │       │   │   ├── decimal_to_binary.py
+    │       │   │   ├── decimal_to_hexadecimal.py
+    │       │   │   ├── decimal_to_octal.py
+    │       │   │   ├── energy_conversions.py
+    │       │   │   ├── excel_title_to_column.py
+    │       │   │   ├── hexadecimal_to_decimal.py
+    │       │   │   ├── hex_to_bin.py
+    │       │   │   ├── __init__.py
+    │       │   │   ├── ipv4_conversion.py
+    │       │   │   ├── length_conversion.py
+    │       │   │   ├── molecular_chemistry.py
+    │       │   │   ├── octal_to_binary.py
+    │       │   │   ├── octal_to_decimal.py
+    │       │   │   ├── octal_to_hexadecimal.py
+    │       │   │   ├── prefix_conversions.py
+    │       │   │   ├── prefix_conversions_string.py
+    │       │   │   ├── pressure_conversions.py
+    │       │   │   ├── README.md
+    │       │   │   ├── rectangular_to_polar.py
+    │       │   │   ├── rgb_cmyk_conversion.py
+    │       │   │   ├── rgb_hsv_conversion.py
+    │       │   │   ├── roman_numerals.py
+    │       │   │   ├── speed_conversions.py
+    │       │   │   ├── temperature_conversions.py
+    │       │   │   ├── time_conversions.py
+    │       │   │   ├── volume_conversions.py
+    │       │   │   └── weight_conversion.py
+    │       │   ├── CountMillionCharacter.py
+    │       │   ├── CountMillionCharacters-2.0.py
+    │       │   ├── data_compression
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── binary
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── binary-script.js
+    │       │   │   │   ├── binary_search_trees
+    │       │   │   │   │   └── __init__.py
+    │       │   │   │   ├── binary_tree
+    │       │   │   │   │   ├── AGENT.md
+    │       │   │   │   │   ├── basic_binary_tree.py
+    │       │   │   │   │   └── __init__.py
+    │       │   │   │   └── __init__.py
+    │       │   │   ├── bit_manipulation
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── binary_and_operator.py
+    │       │   │   │   ├── binary_coded_decimal.py
+    │       │   │   │   ├── binary_count_setbits.py
+    │       │   │   │   ├── binary_count_trailing_zeros.py
+    │       │   │   │   ├── binary_or_operator.py
+    │       │   │   │   ├── binary_shifts.py
+    │       │   │   │   ├── binary_twos_complement.py
+    │       │   │   │   ├── binary_xor_operator.py
+    │       │   │   │   ├── bitwise_addition_recursive.py
+    │       │   │   │   ├── count_1s_brian_kernighan_method.py
+    │       │   │   │   ├── count_number_of_one_bits.py
+    │       │   │   │   ├── excess_3_code.py
+    │       │   │   │   ├── find_previous_power_of_two.py
+    │       │   │   │   ├── find_unique_number.py
+    │       │   │   │   ├── gray_code_sequence.py
+    │       │   │   │   ├── highest_set_bit.py
+    │       │   │   │   ├── index_of_rightmost_set_bit.py
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── is_even.py
+    │       │   │   │   ├── is_power_of_two.py
+    │       │   │   │   ├── largest_pow_of_two_le_num.py
+    │       │   │   │   ├── missing_number.py
+    │       │   │   │   ├── numbers_different_signs.py
+    │       │   │   │   ├── power_of_4.py
+    │       │   │   │   ├── README.md
+    │       │   │   │   ├── reverse_bits.py
+    │       │   │   │   ├── single_bit_manipulation_operations.py
+    │       │   │   │   └── swap_all_odd_and_even_bits.py
+    │       │   │   ├── burrows_wheeler.py
+    │       │   │   ├── coordinate_compression.py
+    │       │   │   ├── huffman.py
+    │       │   │   ├── __init__.py
+    │       │   │   ├── lempel_ziv_decompress.py
+    │       │   │   ├── lempel_ziv.py
+    │       │   │   ├── lz77.py
+    │       │   │   ├── peak_signal_to_noise_ratio.py
+    │       │   │   ├── README.md
+    │       │   │   └── run_length_encoding.py
+    │       │   ├── data_structures
+    │       │   │   └── __init__.py
+    │       │   ├── Decimal number to binary function.py
+    │       │   ├── decimal_to_base_b.py
+    │       │   ├── decimal to binary.py
+    │       │   ├── Decimal_To_Binary.py
+    │       │   ├── decode-string.py
+    │       │   ├── dec_to_hex.py
+    │       │   ├── divide_and_conquer
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── closest_pair_of_points.py
+    │       │   │   ├── convex_hull.py
+    │       │   │   ├── heaps_algorithm_iterative.py
+    │       │   │   ├── heaps_algorithm.py
+    │       │   │   ├── __init__.py
+    │       │   │   ├── inversions.py
+    │       │   │   ├── kth_order_statistic.py
+    │       │   │   ├── max_difference_pair.py
+    │       │   │   ├── max_subarray.py
+    │       │   │   ├── mergesort.py
+    │       │   │   ├── peak.py
+    │       │   │   ├── power.py
+    │       │   │   └── strassen_matrix_multiplication.py
+    │       │   ├── Divide Operator.py
+    │       │   ├── divisors_of_a_number.py
+    │       │   ├── dynamic_programming
+    │       │   │   └── __init__.py
+    │       │   ├── Electronics_Algorithms
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── __init__.py
+    │       │   │   ├── Ohms_law.py
+    │       │   │   └── resistance.py
+    │       │   ├── encoding L
+    │       │   │   ├── base32
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── base32-script.js
+    │       │   │   │   └── __init__.py
+    │       │   │   ├── base64
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── base64-script.js
+    │       │   │   │   └── __init__.py
+    │       │   │   ├── hashes
+    │       │   │   │   └── __init__.py
+    │       │   │   ├── __init__.py
+    │       │   │   ├── MD5
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── MD5.cs
+    │       │   │   └── MD5Test.cs
+    │       │   ├── encryption languages
+    │       │   │   └── __init__.py
+    │       │   ├── equations.py
+    │       │   ├── factors.py
+    │       │   ├── FibonacciNumbersWithGenerators.py
+    │       │   ├── fibonacci.py
+    │       │   ├── Fibonacci_sequence_recursive_sol.py
+    │       │   ├── fibonacci_SIMPLIFIED
+    │       │   ├── fibonici series.py
+    │       │   ├── find_cube_root.py
+    │       │   ├── FIND FACTORIAL OF A NUMBER.py
+    │       │   ├── finding LCM.py
+    │       │   ├── findingPrimes.py
+    │       │   ├── find_prime.py
+    │       │   ├── four_digit_num_combination.py
+    │       │   ├── Generate a random number between 0 to 9.py
+    │       │   ├── generate_permutations.py
+    │       │   ├── get_crypto_price.py
+    │       │   ├── Graphs
+    │       │   │   └── __init__.py
+    │       │   ├── greedy_methods
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── best_time_to_buy_and_sell_stock.py
+    │       │   │   ├── fractional_cover_problem.py
+    │       │   │   ├── fractional_knapsack_2.py
+    │       │   │   ├── fractional_knapsack.py
+    │       │   │   ├── gas_station.py
+    │       │   │   ├── __init__.py
+    │       │   │   ├── minimum_coin_change.py
+    │       │   │   ├── minimum_waiting_time.py
+    │       │   │   ├── optimal_merge_pattern.py
+    │       │   │   └── smallest_range.py
+    │       │   ├── hamming-numbers.py
+    │       │   ├── happy_num.py
+    │       │   ├── how to display the fibonacci sequence up to n-.py
+    │       │   ├── __init__.py
+    │       │   ├── input matrice,product any order!.py
+    │       │   ├── insertion_sort.py
+    │       │   ├── knapsack
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── greedy_knapsack.py
+    │       │   │   ├── __init__.py
+    │       │   │   ├── knapsack.py
+    │       │   │   ├── README.md
+    │       │   │   ├── recursive_approach_knapsack.py
+    │       │   │   └── tests
+    │       │   │       ├── AGENT.md
+    │       │   │       ├── __init__.py
+    │       │   │       ├── test_greedy_knapsack.py
+    │       │   │       └── test_knapsack.py
+    │       │   ├── Koch Curve
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── __init__.py
+    │       │   │   ├── koch curve.py
+    │       │   │   └── README.txt
+    │       │   ├── Luhn_Algorithm.py
+    │       │   ├── Maths
+    │       │   │   ├── 3n+1.py
+    │       │   │   ├── absMax.py
+    │       │   │   ├── absMin.py
+    │       │   │   ├── abs.py
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── arithmetic_analysis
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── bisection.py
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── intersection.py
+    │       │   │   │   ├── lu_decomposition.py
+    │       │   │   │   ├── newton_method.py
+    │       │   │   │   └── newton_raphson_method.py
+    │       │   │   ├── average.py
+    │       │   │   ├── boolean_algebra
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── quine_mc_cluskey.py
+    │       │   │   ├── extended_euclidean_algorithm.py
+    │       │   │   ├── find_lcm.py
+    │       │   │   ├── FindMax.py
+    │       │   │   ├── FindMin.py
+    │       │   │   ├── __init__.py
+    │       │   │   ├── linear_algebra
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── gaussian_elimination.py
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── jacobi_iteration_method.py
+    │       │   │   │   ├── lu_decomposition.py
+    │       │   │   │   ├── matrix_inversion.py
+    │       │   │   │   ├── README.md
+    │       │   │   │   └── src
+    │       │   │   │       ├── AGENT.md
+    │       │   │   │       ├── conjugate_gradient.py
+    │       │   │   │       ├── gaussian_elimination_pivoting.py
+    │       │   │   │       ├── __init__.py
+    │       │   │   │       ├── lib.py
+    │       │   │   │       ├── polynom_for_points.py
+    │       │   │   │       ├── power_iteration.py
+    │       │   │   │       ├── rank_of_matrix.py
+    │       │   │   │       ├── rayleigh_quotient.py
+    │       │   │   │       ├── schur_complement.py
+    │       │   │   │       ├── test_linear_algebra.py
+    │       │   │   │       └── transformations_2d.py
+    │       │   │   ├── linear_algebra_python
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── README.md
+    │       │   │   │   └── src
+    │       │   │   │       ├── AGENT.md
+    │       │   │   │       ├── __init__.py
+    │       │   │   │       ├── lib.py
+    │       │   │   │       └── tests.py
+    │       │   │   ├── MathNet.Numerics.4.4.0.nupkg
+    │       │   │   └── Quadratic Equation Solver
+    │       │   │       ├── AGENT.md
+    │       │   │       ├── __init__.py
+    │       │   │       └── solver.py
+    │       │   ├── Multiply.py
+    │       │   ├── Number reverse.py
+    │       │   ├── pkgs
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── __init__.py
+    │       │   │   ├── packages
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── MathNet.Numerics.4.4.0
+    │       │   │   │   │   ├── __init__.py
+    │       │   │   │   │   ├── lib
+    │       │   │   │   │   │   ├── __init__.py
+    │       │   │   │   │   │   ├── net40
+    │       │   │   │   │   │   │   ├── __init__.py
+    │       │   │   │   │   │   │   └── MathNet.Numerics.dll
+    │       │   │   │   │   │   ├── net461
+    │       │   │   │   │   │   │   ├── __init__.py
+    │       │   │   │   │   │   │   └── MathNet.Numerics.dll
+    │       │   │   │   │   │   ├── netstandard1.3
+    │       │   │   │   │   │   │   ├── __init__.py
+    │       │   │   │   │   │   │   └── MathNet.Numerics.dll
+    │       │   │   │   │   │   └── netstandard2.0
+    │       │   │   │   │   │       ├── __init__.py
+    │       │   │   │   │   │       └── MathNet.Numerics.dll
+    │       │   │   │   │   └── MathNet.Numerics.4.4.0.nupkg
+    │       │   │   │   └── repositories.config
+    │       │   │   ├── packages.config
+    │       │   │   ├── README.md
+    │       │   │   ├── SecurityLibrary
+    │       │   │   │   ├── AES
+    │       │   │   │   │   ├── AES.cs
+    │       │   │   │   │   ├── ExtendedEuclid.cs
+    │       │   │   │   │   └── __init__.py
+    │       │   │   │   ├── bin
+    │       │   │   │   │   ├── Debug
+    │       │   │   │   │   │   ├── __init__.py
+    │       │   │   │   │   │   ├── MathNet.Numerics.dll
+    │       │   │   │   │   │   ├── SecurityLibrary.dll
+    │       │   │   │   │   │   └── SecurityLibrary.pdb
+    │       │   │   │   │   └── __init__.py
+    │       │   │   │   ├── CryptographicTechnique.cs
+    │       │   │   │   ├── DES
+    │       │   │   │   │   ├── DES.cs
+    │       │   │   │   │   ├── __init__.py
+    │       │   │   │   │   └── TripleDES.cs
+    │       │   │   │   ├── DiffieHellman
+    │       │   │   │   │   ├── DiffieHellman.cs
+    │       │   │   │   │   └── __init__.py
+    │       │   │   │   ├── ElGamal
+    │       │   │   │   │   ├── ELGAMAL.cs
+    │       │   │   │   │   └── __init__.py
+    │       │   │   │   ├── Exceptions
+    │       │   │   │   │   ├── __init__.py
+    │       │   │   │   │   └── InvalidAnlysisException.cs
+    │       │   │   │   ├── ICryptographicTechnique.cs
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── MainAlgorithms
+    │       │   │   │   │   ├── AutokeyVigenere.cs
+    │       │   │   │   │   ├── Ceaser.cs
+    │       │   │   │   │   ├── Columnar.cs
+    │       │   │   │   │   ├── HillCipher.cs
+    │       │   │   │   │   ├── __init__.py
+    │       │   │   │   │   ├── Monoalphabetic.cs
+    │       │   │   │   │   ├── PlayFair.cs
+    │       │   │   │   │   ├── RailFence.cs
+    │       │   │   │   │   └── RepeatingKeyVigenere.cs
+    │       │   │   │   ├── MD5
+    │       │   │   │   │   ├── __init__.py
+    │       │   │   │   │   └── MD5.cs
+    │       │   │   │   ├── obj
+    │       │   │   │   │   ├── Debug
+    │       │   │   │   │   │   ├── DesignTimeResolveAssemblyReferencesInput.cache
+    │       │   │   │   │   │   ├── __init__.py
+    │       │   │   │   │   │   ├── SecurityLibrary.csprojResolveAssemblyReference.cache
+    │       │   │   │   │   │   ├── SecurityLibrary.dll
+    │       │   │   │   │   │   ├── SecurityLibrary.pdb
+    │       │   │   │   │   │   ├── TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+    │       │   │   │   │   │   ├── TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+    │       │   │   │   │   │   └── TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+    │       │   │   │   │   └── __init__.py
+    │       │   │   │   ├── packages.config
+    │       │   │   │   ├── Properties
+    │       │   │   │   │   ├── AssemblyInfo.cs
+    │       │   │   │   │   └── __init__.py
+    │       │   │   │   ├── RC4
+    │       │   │   │   │   ├── __init__.py
+    │       │   │   │   │   └── RC4.cs
+    │       │   │   │   ├── RSA
+    │       │   │   │   │   ├── __init__.py
+    │       │   │   │   │   └── RSA.cs
+    │       │   │   │   └── SecurityLibrary.csproj
+    │       │   │   ├── SecurityLibrary.csproj
+    │       │   │   ├── SecurityPackage (1).sln
+    │       │   │   ├── SecurityPackage (1).suo
+    │       │   │   ├── SecurityPackage.sln
+    │       │   │   ├── SecurityPackage.suo
+    │       │   │   ├── SecurityPackageTest
+    │       │   │   │   ├── AESTest.cs
+    │       │   │   │   ├── bin
+    │       │   │   │   │   ├── Debug
+    │       │   │   │   │   │   ├── __init__.py
+    │       │   │   │   │   │   ├── MathNet.Numerics.dll
+    │       │   │   │   │   │   ├── SecurityLibrary.dll
+    │       │   │   │   │   │   ├── SecurityLibrary.pdb
+    │       │   │   │   │   │   ├── SecurityPackageTest.dll
+    │       │   │   │   │   │   └── SecurityPackageTest.pdb
+    │       │   │   │   │   └── __init__.py
+    │       │   │   │   ├── CeaserTest.cs
+    │       │   │   │   ├── ColumnarTest.cs
+    │       │   │   │   ├── DeffieHelmanTest.cs
+    │       │   │   │   ├── DES3DESTest.cs
+    │       │   │   │   ├── ElGamalTest.cs
+    │       │   │   │   ├── ExtendedEuclidTest.cs
+    │       │   │   │   ├── HillCipherTest.cs
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── MD5Test.cs
+    │       │   │   │   ├── MonoalphabeticTest.cs
+    │       │   │   │   ├── obj
+    │       │   │   │   │   ├── Debug
+    │       │   │   │   │   │   ├── DesignTimeResolveAssemblyReferencesInput.cache
+    │       │   │   │   │   │   ├── __init__.py
+    │       │   │   │   │   │   ├── SecurityPackageTest.csprojResolveAssemblyReference.cache
+    │       │   │   │   │   │   ├── SecurityPackageTest.dll
+    │       │   │   │   │   │   ├── SecurityPackageTest.pdb
+    │       │   │   │   │   │   ├── TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+    │       │   │   │   │   │   ├── TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+    │       │   │   │   │   │   └── TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+    │       │   │   │   │   └── __init__.py
+    │       │   │   │   ├── PlayfairTest.cs
+    │       │   │   │   ├── Properties
+    │       │   │   │   │   ├── AssemblyInfo.cs
+    │       │   │   │   │   └── __init__.py
+    │       │   │   │   ├── RailFenceTest.cs
+    │       │   │   │   ├── RC4Test.cs
+    │       │   │   │   ├── RSATest.cs
+    │       │   │   │   ├── SecurityPackageTest.csproj
+    │       │   │   │   └── VignereTest.cs
+    │       │   │   ├── SecurityPackageTest.csproj
+    │       │   │   ├── SecurityPackage.v12 (1).suo
+    │       │   │   └── SecurityPackage.v12.suo
+    │       │   ├── project_euler
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── __init__.py
+    │       │   │   ├── problem_01
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   ├── sol2.py
+    │       │   │   │   ├── sol3.py
+    │       │   │   │   ├── sol4.py
+    │       │   │   │   └── sol5.py
+    │       │   │   ├── problem_02
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   ├── sol2.py
+    │       │   │   │   └── sol3.py
+    │       │   │   ├── problem_03
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   └── sol2.py
+    │       │   │   ├── problem_04
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   └── sol2.py
+    │       │   │   ├── problem_05
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   └── sol2.py
+    │       │   │   ├── problem_06
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   ├── sol2.py
+    │       │   │   │   └── sol3.py
+    │       │   │   ├── problem_07
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   ├── sol2.py
+    │       │   │   │   └── sol3.py
+    │       │   │   ├── problem_08
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   └── sol2.py
+    │       │   │   ├── problem_09
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   ├── sol2.py
+    │       │   │   │   └── sol3.py
+    │       │   │   ├── problem_10
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   └── sol2.py
+    │       │   │   ├── problem_11
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   └── sol2.py
+    │       │   │   ├── problem_12
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   └── sol2.py
+    │       │   │   ├── problem_13
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   ├── problem_14
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   └── sol2.py
+    │       │   │   ├── problem_15
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   ├── problem_16
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   ├── problem_17
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   ├── problem_19
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   ├── problem_20
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   └── sol2.py
+    │       │   │   ├── problem_21
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   ├── problem_22
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   └── sol2.py
+    │       │   │   ├── problem_24
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   ├── problem_25
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   ├── sol1.py
+    │       │   │   │   └── sol2.py
+    │       │   │   ├── problem_28
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   ├── problem_29
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── solution.py
+    │       │   │   ├── problem_31
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   ├── problem_36
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   ├── problem_40
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   ├── problem_48
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   ├── problem_52
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   ├── problem_53
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   ├── problem_76
+    │       │   │   │   ├── AGENT.md
+    │       │   │   │   ├── __init__.py
+    │       │   │   │   └── sol1.py
+    │       │   │   └── README.md
+    │       │   ├── quantum
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── bb84.py.DISABLED.txt
+    │       │   │   ├── deutsch_jozsa.py.DISABLED.txt
+    │       │   │   ├── half_adder.py.DISABLED.txt
+    │       │   │   ├── __init__.py
+    │       │   │   ├── not_gate.py.DISABLED.txt
+    │       │   │   ├── q_fourier_transform.py
+    │       │   │   ├── q_full_adder.py.DISABLED.txt
+    │       │   │   ├── quantum_entanglement.py.DISABLED.txt
+    │       │   │   ├── quantum_random.py.DISABLED.txt
+    │       │   │   ├── quantum_teleportation.py.DISABLED.txt
+    │       │   │   ├── README.md
+    │       │   │   ├── ripple_adder_classic.py.DISABLED.txt
+    │       │   │   ├── single_qubit_measure.py.DISABLED.txt
+    │       │   │   └── superdense_coding.py.DISABLED.txt
+    │       │   ├── quo.md
+    │       │   ├── random-number-generator.py
+    │       │   ├── Randomnumber.py
+    │       │   ├── Roman Numbers to Decimals
+    │       │   ├── Sorting Algorithms
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── Binary_Insertion_Sort.py
+    │       │   │   ├── brickSort.py
+    │       │   │   ├── Bubble_Sorting_Prog.py
+    │       │   │   ├── bubblesortpgm.py
+    │       │   │   ├── Bubble_sort.py
+    │       │   │   ├── Counting-sort.py
+    │       │   │   ├── Counting Sort.py
+    │       │   │   ├── Count sort.py
+    │       │   │   ├── Cycle Sort.py
+    │       │   │   ├── dual_pivot_quicksort.py
+    │       │   │   ├── heapsort_linkedlist.py
+    │       │   │   ├── heap_sort.py
+    │       │   │   ├── Heap sort.py
+    │       │   │   ├── __init__.py
+    │       │   │   ├── insertion_sort.py
+    │       │   │   ├── Iterative Merge Sort.py
+    │       │   │   ├── Linear_Insertion_Sort.py
+    │       │   │   ├── mergesort_linkedlist.py
+    │       │   │   ├── merge_sort.py
+    │       │   │   ├── Merge-sort.py
+    │       │   │   ├── Merge Sort.py
+    │       │   │   ├── pigeonhole_sort.py
+    │       │   │   ├── quicksort_linkedlist.py
+    │       │   │   ├── quick_sort.py
+    │       │   │   ├── Quick sort.py
+    │       │   │   ├── recursive-quick-sort.py
+    │       │   │   ├── selection_sort.py
+    │       │   │   ├── selectionSort.py
+    │       │   │   ├── Shell Sort.py
+    │       │   │   ├── Sorted_Inserted_Linked_List.py
+    │       │   │   ├── SortingAStringAlphabetically.py
+    │       │   │   ├── Sorting_List.py
+    │       │   │   ├── sorting.py
+    │       │   │   ├── Sort the values of first list using second list.py
+    │       │   │   ├── stooge_sort.py
+    │       │   │   ├── Tim_sort.py
+    │       │   │   └── wave_sort.py
+    │       │   ├── sorts
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── BitonicSort.py
+    │       │   │   ├── bogosort.py
+    │       │   │   ├── bubble_sort.py
+    │       │   │   ├── bucket_sort.py
+    │       │   │   ├── cocktail_shaker_sort.py
+    │       │   │   ├── comb_sort.py
+    │       │   │   ├── counting_sort.py
+    │       │   │   ├── cyclesort.py
+    │       │   │   ├── external-sort.py
+    │       │   │   ├── gnome_sort.py
+    │       │   │   ├── heap_sort.py
+    │       │   │   ├── __init__.py
+    │       │   │   ├── insertion_sort.py
+    │       │   │   ├── merge_sort_fastest.py
+    │       │   │   ├── merge_sort.py
+    │       │   │   ├── normal_distribution_quick_sort.md
+    │       │   │   ├── pancake_sort.py
+    │       │   │   ├── quick_sort_3_partition.py
+    │       │   │   ├── quick_sort.py
+    │       │   │   ├── radix_sort.py
+    │       │   │   ├── random_normal_distribution_quicksort.py
+    │       │   │   ├── selection_sort.py
+    │       │   │   ├── shell_sort.py
+    │       │   │   ├── timsort.py
+    │       │   │   ├── topological_sort.py
+    │       │   │   ├── tree_sort.py
+    │       │   │   └── wiggle_sort.py
+    │       │   ├── strings
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── __init__.py
+    │       │   │   ├── knuth_morris_pratt.py
+    │       │   │   ├── levenshtein_distance.py
+    │       │   │   ├── manacher.py
+    │       │   │   ├── min_cost_string_conversion.py
+    │       │   │   ├── naiveStringSearch.py
+    │       │   │   └── rabin_karp.py
+    │       │   ├── StringToBinary.py
+    │       │   ├── Sum of digits of a number.py
+    │       │   ├── To find the largest number between 3 numbers.py
+    │       │   ├── Translator
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── __init__.py
+    │       │   │   ├── README.md
+    │       │   │   └── translator.py
+    │       │   ├── Triplets with zero sum
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── find_Triplets_with_zero_sum.py
+    │       │   │   ├── __init__.py
+    │       │   │   └── Readme.md
+    │       │   ├── Two-Body-Problem
+    │       │   │   ├── 2body_improved.py
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── __init__.py
+    │       │   │   └── README.md
+    │       │   ├── two_sum.py
+    │       │   ├── Type_of_angles_of_triangle.py
+    │       │   ├── word_patterns.py
+    │       │   ├── words
+    │       │   └── XML
+    │       │       ├── HTML parsing
+    │       │       └── __init__.py
+    │       ├── frequency_finder.py
+    │       ├── friday.py
+    │       ├── ftp_send_receive.py
+    │       ├── gambler.py
+    │       ├── gcd.py
+    │       ├── GestureController.py
+    │       ├── get_info_remoute_srv.py
+    │       ├── Google_Image_Downloader
+    │       │   ├── AGENT.md
+    │       │   ├── create_dir.py
+    │       │   ├── image_grapper.py
+    │       │   └── __init__.py
+    │       ├── googlemaps.py
+    │       ├── Google_News.py
+    │       ├── googleweb.py
+    │       ├── greaterno.py
+    │       ├── greattwono.py
+    │       ├── Gregorian_Calendar.py
+    │       ├── Grocery calculator.py
+    │       ├── GroupSms_Way2.py
+    │       ├── gstin_scraper.py
+    │       ├── Guessing and Dare - Bilal.py
+    │       ├── Habit_tracker
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   └── README.md
+    │       ├── HandTrack
+    │       │   ├── AGENT.md
+    │       │   ├── base.py
+    │       │   ├── HTrackMod.py
+    │       │   ├── __init__.py
+    │       │   └── VolumeControl.py
+    │       ├── HappyNumber
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── Question.md
+    │       │   └── solution.py
+    │       ├── heap_sort.py
+    │       ├── helloworld.py
+    │       ├── highscore.json
+    │       ├── Hotel-Management.py
+    │       ├── Image_resize.py
+    │       ├── Image to sketch converter.py
+    │       ├── index.py
+    │       ├── Indian States Game
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   ├── missed_states.csv
+    │       │   ├── README.md
+    │       │   └── states.csv
+    │       ├── Infix_to_Postfix.py
+    │       ├── inheritance_YahV1729.py
+    │       ├── __init__.py
+    │       ├── Inorder_traversal.py
+    │       ├── Insertion_Sort.py
+    │       ├── Insert_operation_on_Linked_List.py
+    │       ├── Instagram Scrapper
+    │       │   ├── __init__.py
+    │       │   └── scrapper.ipynb
+    │       ├── insta_image_saving
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── instagram_image_scrapping.ipynb
+    │       │   └── instructions.txt
+    │       ├── Internet Speed Checker
+    │       ├── IPV4_DecimalIP.py
+    │       ├── Job_scheduling.py
+    │       ├── JsonParser.py
+    │       ├── Kilometerstomile.py
+    │       ├── Letter_Counter.py
+    │       ├── LETTER GUESSER.py
+    │       ├── LICENSE
+    │       ├── LICENSE.md
+    │       ├── linear_congruential_generator.py
+    │       ├── LinkedLists all Types
+    │       │   ├── AGENT.md
+    │       │   ├── circular_linked_list.py
+    │       │   ├── doubly_linked_list.py
+    │       │   ├── __init__.py
+    │       │   └── singly_linked_list.py
+    │       ├── List.py
+    │       ├── Mastermind_GUIinterface.py
+    │       ├── Medical_AI_Agent
+    │       │   ├── AGENT.md
+    │       │   ├── app.py
+    │       │   ├── __init__.py
+    │       │   ├── RAG.py
+    │       │   └── readme.md
+    │       ├── Memory_game.py
+    │       ├── Merge_linked_list.py
+    │       ├── ML
+    │       ├── ML House Prediction.ipynb
+    │       ├── MobiusFunction.py
+    │       ├── modbot
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── modbot.py
+    │       │   └── readme.md
+    │       ├── Model Usage.ipynb
+    │       ├── mood-based-song-recommender
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── README.md
+    │       │   ├── song-recommender-adv.py
+    │       │   ├── song-recommender-inter.py
+    │       │   └── song-recommender.py
+    │       ├── Mp3_media_player.py
+    │       ├── multi-agent-researcher
+    │       │   ├── AGENT.md
+    │       │   ├── ai.py
+    │       │   ├── app.py
+    │       │   ├── __init__.py
+    │       │   ├── README.md
+    │       │   ├── report.md
+    │       │   ├── reports
+    │       │   │   ├── 2025-09-13_An_Automated_Investigation_into_Various_transfomer_report.md
+    │       │   │   ├── AGENT.md
+    │       │   │   └── __init__.py
+    │       │   └── tools
+    │       │       ├── AGENT.md
+    │       │       ├── custom_tool.py
+    │       │       └── __init__.py
+    │       ├── MusicVisualizer
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── music_visualizer.py
+    │       │   └── README.md
+    │       ├── MySQL_Databses.py
+    │       ├── Namaste.py
+    │       ├── nested_brackets.py
+    │       ├── notepad_GUI_tkinter.py
+    │       ├── NumPy Array Exponentiation.py
+    │       ├── NumPyVision
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   └── Readme.md
+    │       ├── Organise.py
+    │       ├── OTP Verification System
+    │       ├── Palindrome_Checker.py
+    │       ├── palindrome.py
+    │       ├── parsexml.py
+    │       ├── Password Generator
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── pass_gen.py
+    │       │   ├── requirements_new.txt
+    │       │   └── requirements.txt
+    │       ├── Password_Generator
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── password_generator.py
+    │       │   └── README.md
+    │       ├── password_manager.py
+    │       ├── Patterns
+    │       │   ├── AGENT.md
+    │       │   ├── half triangle pattern.py
+    │       │   ├── __init__.py
+    │       │   ├── pattern2.py
+    │       │   ├── pattern5.py
+    │       │   ├── pattern6.py
+    │       │   └── patterns.py
+    │       ├── Pc_information.py
+    │       ├── PDF Q&A RAG
+    │       │   ├── AGENT.md
+    │       │   ├── app.py
+    │       │   ├── __init__.py
+    │       │   ├── pdf_qa_system
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── app.py
+    │       │   │   ├── __init__.py
+    │       │   │   └── utils
+    │       │   │       ├── AGENT.md
+    │       │   │       ├── embeddings.py
+    │       │   │       ├── __init__.py
+    │       │   │       ├── llm_handler.py
+    │       │   │       ├── pdf_processor.py
+    │       │   │       └── vector_store.py
+    │       │   └── utils
+    │       │       ├── AGENT.md
+    │       │       ├── embeddings.py
+    │       │       ├── __init__.py
+    │       │       ├── llm_handler.py
+    │       │       ├── pdf_processor.py
+    │       │       └── vector_store.py
+    │       ├── PDFtoAudiobook.py
+    │       ├── Periodic_elements.py
+    │       ├── Phone number Details using Python
+    │       │   ├── __init__.py
+    │       │   └── PhoneNumberDetailsUsingPython.ipynb
+    │       ├── Pie Chart Generator
+    │       ├── Polyline.py
+    │       ├── Pomodoro (tkinter).py
+    │       ├── PORT SCANNER.PY
+    │       ├── primelib.py
+    │       ├── Prime_number.py
+    │       ├── Python-Array-Equilibrium-Index.py
+    │       ├── Python Distance.py
+    │       ├── Python-Scraping-main
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   └── scrape.py
+    │       ├── python-snake
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   └── python-snake-game.py
+    │       ├── Python_swapping.py
+    │       ├── Python_template.py
+    │       ├── Python Voice Generator.py
+    │       ├── qr.py
+    │       ├── QuadraticCalc.py
+    │       ├── quine_cluskey.py
+    │       ├── Random Anime Character
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   └── randomAnimeCharacter.py
+    │       ├── ReadFromCSV.py
+    │       ├── README.md
+    │       ├── Restaurant Problem_Decision_Tree.py
+    │       ├── Restaurant_Problem_Decision_Tree.py
+    │       ├── resume_ranker.py
+    │       ├── Reverse_list_in_groups.py
+    │       ├── Rotate_Linked_List.py
+    │       ├── scripts
+    │       │   ├── Add_two_Linked_List.py
+    │       │   ├── AGENT.md
+    │       │   ├── Anonymous_TextApp.py
+    │       │   ├── AreaOfTriangle.py
+    │       │   ├── ARKA.py
+    │       │   ├── A solution to project euler problem 3.py
+    │       │   ├── audio_steganography.py
+    │       │   ├── Audio_Summarizer.py
+    │       │   ├── AutokeyVigenere.cs
+    │       │   ├── automail.py
+    │       │   ├── backup_automater_services.py
+    │       │   ├── Bank Application .ipynb
+    │       │   ├── batch_file_rename.py
+    │       │   ├── Battery_notifier.py
+    │       │   ├── billing.py
+    │       │   ├── binod.py
+    │       │   ├── birthdays.py
+    │       │   ├── bodymass.py
+    │       │   ├── bookstore_manangement_system.py
+    │       │   ├── bpnn.py
+    │       │   ├── BruteForce.py
+    │       │   ├── build_directory_md.py
+    │       │   ├── Calendar (GUI).py
+    │       │   ├── cartesian_product.py
+    │       │   ├── changemac.py
+    │       │   ├── chaos.py
+    │       │   ├── check_file.py
+    │       │   ├── check_for_sqlite_files.py
+    │       │   ├── check_input.py
+    │       │   ├── check_internet_con.py
+    │       │   ├── chicks_n_rabs.py
+    │       │   ├── Chrome Dino Automater.py
+    │       │   ├── cicd
+    │       │   ├── class.dat
+    │       │   ├── classicIndianCardMatch.py
+    │       │   ├── Classification_human_or_horse.py
+    │       │   ├── CliYoutubeDownloader.py
+    │       │   ├── cloning_a_list.py
+    │       │   ├── close_pull_requests_with_awaiting_changes.sh
+    │       │   ├── close_pull_requests_with_failing_tests.sh
+    │       │   ├── close_pull_requests_with_require_descriptive_names.sh
+    │       │   ├── close_pull_requests_with_require_tests.sh
+    │       │   ├── close_pull_requests_with_require_type_hints.sh
+    │       │   ├── CODE_OF_CONDUCT.md
+    │       │   ├── Collatz-Conjecture.py
+    │       │   ├── colorma_as_color.py
+    │       │   ├── colour spiral.py
+    │       │   ├── Columnar.cs
+    │       │   ├── ColumnarTest.cs
+    │       │   ├── compass_code.py
+    │       │   ├── consonant.py
+    │       │   ├── CONTRIBUTING.md
+    │       │   ├── Conversation.py
+    │       │   ├── convolution_neural_network.py
+    │       │   ├── CryptographicTechnique.cs
+    │       │   ├── decision_tree.py
+    │       │   ├── DeffieHelmanTest.cs
+    │       │   ├── ElGamalTest.cs
+    │       │   ├── ExtendedEuclidTest.cs
+    │       │   ├── fcn.ipynb
+    │       │   ├── find_git_conflicts.sh
+    │       │   ├── get_youtube_view.py
+    │       │   ├── google.py
+    │       │   ├── gradient_descent.py
+    │       │   ├── ICryptographicTechnique.cs
+    │       │   ├── img_steganography.py
+    │       │   ├── index.html
+    │       │   ├── __init__.py
+    │       │   ├── k_means_clust.py
+    │       │   ├── License
+    │       │   ├── linear_regression.py
+    │       │   ├── logistic_regression.py
+    │       │   ├── main.css
+    │       │   ├── Monoalphabetic.cs
+    │       │   ├── MonoalphabeticTest.cs
+    │       │   ├── morse.py
+    │       │   ├── NaiveBayes.ipynb
+    │       │   ├── perceptron.py
+    │       │   ├── PlayFair.cs
+    │       │   ├── PlayfairTest.cs
+    │       │   ├── project_euler_answers.json
+    │       │   ├── RailFence.cs
+    │       │   ├── rail_fence.py
+    │       │   ├── RailFenceTest.cs
+    │       │   ├── random_forest_classification.py
+    │       │   ├── Random Forest Classifier.ipynb
+    │       │   ├── Random Forest Regression.ipynb
+    │       │   ├── random_forest_regression.py
+    │       │   ├── repositories.config
+    │       │   ├── requirements.txt
+    │       │   ├── reuters_one_vs_rest_classifier.ipynb
+    │       │   ├── scoring_functions.py
+    │       │   ├── style.css
+    │       │   ├── theme.js
+    │       │   ├── validate_filenames.py
+    │       │   └── validate_solutions.py
+    │       ├── Secret message generator GUI by tkinter.py
+    │       ├── SECURITY.md
+    │       ├── Shortest Distance between Two Lines.py
+    │       ├── sierpinski_triangle.py
+    │       ├── SimpleStopWatch.py
+    │       ├── simple_timer_app
+    │       │   ├── AGENT.md
+    │       │   ├── custom_thread.py
+    │       │   ├── defaults.py
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   └── README.md
+    │       ├── smart_caeser_decrypt.py
+    │       ├── Smart_Todo_List
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   └── readme.md
+    │       ├── SOUNDEX.py
+    │       ├── SpeechToText.py
+    │       ├── Split_Circular_Linked_List.py
+    │       ├── Spotify to YtMusic
+    │       │   ├── AGENT.md
+    │       │   ├── browser.json
+    │       │   ├── creds.json
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   └── readme.md
+    │       ├── src
+    │       │   ├── __init__.py
+    │       │   ├── saniya-exp-currency-converter-advanced
+    │       │   │   ├── AGENT.md
+    │       │   │   ├── __init__.py
+    │       │   │   ├── main.py
+    │       │   │   └── README.md
+    │       │   └── saniya-exp-weather-data-analysis
+    │       │       ├── AGENT.md
+    │       │       ├── data.csv
+    │       │       ├── __init__.py
+    │       │       ├── main.py
+    │       │       └── README.md
+    │       ├── Stock Prediction Model
+    │       │   ├── AGENT.md
+    │       │   ├── app.py
+    │       │   ├── __init__.py
+    │       │   └── README.md
+    │       ├── String_Palindrome.py
+    │       ├── Strings.py
+    │       ├── sys-log-analysis
+    │       │   ├── AGENT.md
+    │       │   ├── csv_to_html.py
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   └── README.md
+    │       ├── TaskManager.py
+    │       ├── TaskPlanner.py
+    │       ├── Tesla.py
+    │       ├── Text Editor
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   └── README.md
+    │       ├── Timetable_Operations.py
+    │       ├── Todo_GUi.py
+    │       ├── To print series 1,12,123,1234......py
+    │       ├── tower_of_hanoi.py
+    │       ├── TrackSpendingHabits
+    │       │   ├── AGENT.md
+    │       │   ├── budget_manager.py
+    │       │   ├── expense_tracker.py
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   ├── README.md
+    │       │   └── report_generator.py
+    │       ├── training
+    │       │   └── __init__.py
+    │       ├── Trending youtube videos
+    │       ├── Trending youtube videos.py
+    │       ├── TTS.py
+    │       ├── Turtle_Star.py
+    │       ├── Tweet Pre-Processing.py
+    │       ├── TypeMaster_Pro
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── README.md
+    │       │   └── typemaster_pro.py
+    │       ├── Type of angles of a triangle.py
+    │       ├── Typing Speed Test
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── README.md
+    │       │   └── typing_speed_test.py
+    │       ├── UI-Apps
+    │       │   ├── AGENT.md
+    │       │   ├── clock.py
+    │       │   ├── __init__.py
+    │       │   └── README.md
+    │       ├── Unit Digit of a raised to power b.py
+    │       ├── Untitled.ipynb
+    │       ├── Use-Hand-Gesture-to-control-volume
+    │       │   ├── AGENT.md
+    │       │   ├── hand_gesture_control.py
+    │       │   ├── __init__.py
+    │       │   └── README.md
+    │       ├── vibetune
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── keep_alive.py
+    │       │   ├── main.py
+    │       │   └── readme.md
+    │       ├── Virtual_Study_Group_Schedular
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── README.md
+    │       │   └── virtual_study_group_scheduler.py
+    │       ├── Voice_Assistant
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   ├── musicLibrary.py
+    │       │   └── Readme.md
+    │       ├── Voice Command Calculator.py
+    │       ├── WeatherGUI.py
+    │       ├── weather_information
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   └── weather_info.py
+    │       ├── web_programming
+    │       │   ├── AGENT.md
+    │       │   ├── co2_emission.py
+    │       │   ├── covid_stats_via_xpath.py
+    │       │   ├── crawl_google_results.py
+    │       │   ├── crawl_google_scholar_citation.py
+    │       │   ├── currency_converter.py
+    │       │   ├── current_stock_price.py
+    │       │   ├── current_weather.py
+    │       │   ├── daily_horoscope.py
+    │       │   ├── download_images_from_google_query.py
+    │       │   ├── emails_from_url.py
+    │       │   ├── fetch_anime_and_play.py
+    │       │   ├── fetch_bbc_news.py
+    │       │   ├── fetch_github_info.py
+    │       │   ├── fetch_jobs.py
+    │       │   ├── fetch_quotes.py
+    │       │   ├── fetch_well_rx_price.py
+    │       │   ├── get_amazon_product_data.py
+    │       │   ├── get_imdb_top_250_movies_csv.py
+    │       │   ├── get_ip_geolocation.py
+    │       │   ├── get_top_billionaires.py
+    │       │   ├── get_top_hn_posts.py
+    │       │   ├── giphy.py
+    │       │   ├── __init__.py
+    │       │   ├── nasa_data.py
+    │       │   ├── open_google_results.py
+    │       │   ├── random_anime_character.py
+    │       │   ├── recaptcha_verification.py
+    │       │   ├── search_books_by_isbn.py
+    │       │   ├── slack_message.py
+    │       │   ├── test_fetch_github_info.py
+    │       │   └── world_covid19_stats.py
+    │       ├── Web Scraping Best Animes
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   └── README.md
+    │       ├── Web Socket.py
+    │       ├── WikipediaModule.py
+    │       ├── wiki_search.py
+    │       ├── WordCloud
+    │       │   ├── AGENT.md
+    │       │   ├── __init__.py
+    │       │   ├── main.py
+    │       │   └── README.md
+    │       └── Wordle
+    │           ├── AGENT.md
+    │           ├── __init__.py
+    │           └── main.py
+    ├── knowledge_graph.py
+    ├── knowledge_system.py
+    ├── knowledge_tank.db
+    ├── knowledge_tank.py
+    ├── learning
+    │   ├── AGENT.md
+    │   ├── experience_learner.py
+    │   ├── __init__.py
+    │   ├── learning_core.py
+    │   ├── loop_guardian.py
+    │   ├── neural_core.py
+    │   ├── neural_plasticity.py
+    │   └── user_behavior.py
+    ├── metadata
+    │   └── __init__.py
+    ├── pattern_interpreter.py
+    ├── processed
+    │   ├── __init__.py
+    │   ├── test
+    │   │   └── __init__.py
+    │   ├── train
+    │   │   ├── __init__.py
+    │   │   └── train_agentic.py
+    │   └── val
+    │       └── __init__.py
+    ├── promoted
+    │   └── __init__.py
+    ├── __pycache__
+    │   └── fine_tune_from_knowledge2.cpython-313.pyc
+    ├── raw
+    │   └── __init__.py
+    ├── replay_buffer
+    │   └── __init__.py
+    ├── self_builder.py
+    ├── skill_classifier.py
+    ├── skill_discovery.py
+    ├── synthetic
+    │   └── __init__.py
+    ├── trainer.py
+    ├── transfer_mapper.py
+    └── vector_store.py
+
+205 directories, 1323 files

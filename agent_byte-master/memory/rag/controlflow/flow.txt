@@ -1,0 +1,319 @@
+.
+├── AGENT.md
+├── agents
+│   ├── AGENT.md
+│   ├── agent.py
+│   ├── __init__.py
+│   └── names.py
+├── cli
+│   ├── AGENT.md
+│   ├── dev.py
+│   ├── __init__.py
+│   └── main.py
+├── decorators.py
+├── defaults.py
+├── docs
+│   ├── AGENT.md
+│   ├── assets
+│   │   ├── AGENT.md
+│   │   ├── code.css
+│   │   └── __init__.py
+│   ├── blog
+│   │   ├── agentic-loop.mdx
+│   │   ├── __init__.py
+│   │   └── tasks-and-agents.mdx
+│   ├── concepts
+│   │   ├── agents.mdx
+│   │   ├── concepts.mdx
+│   │   ├── flows.mdx
+│   │   ├── __init__.py
+│   │   └── tasks.mdx
+│   ├── examples
+│   │   ├── agent-engineer.mdx
+│   │   ├── anonymization.mdx
+│   │   ├── call-routing.mdx
+│   │   ├── code-explanation.mdx
+│   │   ├── features
+│   │   │   ├── dependent-tasks.mdx
+│   │   │   ├── early-termination.mdx
+│   │   │   ├── __init__.py
+│   │   │   ├── memory.mdx
+│   │   │   ├── multi-llm.mdx
+│   │   │   ├── private-flows.mdx
+│   │   │   └── tools.mdx
+│   │   ├── generate-people.mdx
+│   │   ├── headline-categorization.mdx
+│   │   ├── __init__.py
+│   │   ├── language-tutor.mdx
+│   │   ├── named-entity-recognition.mdx
+│   │   ├── pineapple-pizza.mdx
+│   │   ├── rock-paper-scissors.mdx
+│   │   ├── seinfeld-conversation.mdx
+│   │   ├── sentiment-classifier.mdx
+│   │   ├── standardize-addresses.mdx
+│   │   ├── summarization.mdx
+│   │   └── translation.mdx
+│   ├── glossary
+│   │   ├── agentic-workflows.mdx
+│   │   ├── agents.mdx
+│   │   ├── cf-agent.mdx
+│   │   ├── cf-flow.mdx
+│   │   ├── cf-task.mdx
+│   │   ├── dependencies.mdx
+│   │   ├── fine-tuning.mdx
+│   │   ├── flow-engineering.mdx
+│   │   ├── flow-orchestration.mdx
+│   │   ├── glossary.mdx
+│   │   ├── __init__.py
+│   │   ├── llm.mdx
+│   │   ├── prompt-engineering.mdx
+│   │   ├── task-orchestration.mdx
+│   │   ├── tools.mdx
+│   │   └── workflow.mdx
+│   ├── guides
+│   │   ├── configure-llms.mdx
+│   │   ├── default-agent.mdx
+│   │   ├── default-memory.mdx
+│   │   ├── __init__.py
+│   │   └── settings.mdx
+│   ├── __init__.py
+│   ├── installation.mdx
+│   ├── llm-guides
+│   │   ├── AGENT.md
+│   │   ├── examples-guide.md
+│   │   ├── __init__.py
+│   │   ├── llm-guide.md
+│   │   └── style-guide.md
+│   ├── mint.json
+│   ├── patterns
+│   │   ├── dependencies.mdx
+│   │   ├── history.mdx
+│   │   ├── __init__.py
+│   │   ├── instructions.mdx
+│   │   ├── interactivity.mdx
+│   │   ├── memory.mdx
+│   │   ├── planning.mdx
+│   │   ├── running-tasks.mdx
+│   │   ├── streaming.mdx
+│   │   ├── task-results.mdx
+│   │   └── tools.mdx
+│   ├── quickstart.mdx
+│   ├── script.js
+│   ├── snippets
+│   │   ├── __init__.py
+│   │   └── version-badge.mdx
+│   ├── style.css
+│   └── welcome.mdx
+├── events
+│   ├── AGENT.md
+│   ├── base.py
+│   ├── events.py
+│   ├── history.py
+│   ├── __init__.py
+│   ├── message_compiler.py
+│   ├── orchestrator_events.py
+│   └── task_events.py
+├── examples
+│   ├── AGENT.md
+│   ├── anonymization.py
+│   ├── asyncpg-memory.py
+│   ├── call_routing.py
+│   ├── code_explanation.py
+│   ├── early_termination.py
+│   ├── generate_people.py
+│   ├── headline_categorization.py
+│   ├── __init__.py
+│   ├── language_tutor.py
+│   ├── memory.py
+│   ├── named_entity_recognition.py
+│   ├── pg-memory.py
+│   ├── pineapple_pizza.py
+│   ├── private_flows.py
+│   ├── reasoning.py
+│   ├── rock_paper_scissors.py
+│   ├── seinfeld.py
+│   ├── sentiment_classifier.py
+│   ├── slackbot
+│   │   ├── AGENT.md
+│   │   ├── agents.py
+│   │   ├── custom_types.py
+│   │   ├── __init__.py
+│   │   ├── main.py
+│   │   ├── moderation.py
+│   │   ├── settings.py
+│   │   └── tools.py
+│   ├── standardize_addresses.py
+│   ├── summarization.py
+│   └── translation.py
+├── flows
+│   ├── AGENT.md
+│   ├── flow.py
+│   ├── graph.py
+│   └── __init__.py
+├── flow.txt
+├── handlers
+│   ├── AGENT.md
+│   ├── callback_handler.py
+│   ├── __init__.py
+│   ├── print_handler.py
+│   └── queue_handler.py
+├── __init__.py
+├── instructions.py
+├── llm
+│   ├── AGENT.md
+│   ├── __init__.py
+│   ├── messages.py
+│   ├── models.py
+│   └── rules.py
+├── MANIFEST.in
+├── memory
+│   ├── AGENT.md
+│   ├── async_memory.py
+│   ├── __init__.py
+│   ├── memory.py
+│   └── providers
+│       ├── AGENT.md
+│       ├── chroma.py
+│       ├── __init__.py
+│       ├── lance.py
+│       └── postgres.py
+├── mypy.ini
+├── orchestration
+│   ├── AGENT.md
+│   ├── conditions.py
+│   ├── handler.py
+│   ├── __init__.py
+│   ├── orchestrator.py
+│   ├── prompt_templates
+│   │   ├── agent.jinja
+│   │   ├── flow.jinja
+│   │   ├── __init__.py
+│   │   ├── instructions.jinja
+│   │   ├── llm_instructions.jinja
+│   │   ├── memories.jinja
+│   │   ├── task.jinja
+│   │   ├── tasks.jinja
+│   │   └── tools.jinja
+│   ├── prompt_templates.py
+│   └── turn_strategies.py
+├── planning
+│   ├── AGENT.md
+│   └── __init__.py
+├── plan.py
+├── pyproject.toml
+├── README.md
+├── requirements-dev.lock
+├── requirements.lock
+├── run.py
+├── settings.py
+├── stream.py
+├── tasks
+│   ├── AGENT.md
+│   ├── __init__.py
+│   ├── task.py
+│   └── validators.py
+├── tests
+│   ├── AGENT.md
+│   ├── agents
+│   │   ├── AGENT.md
+│   │   ├── __init__.py
+│   │   └── test_agents.py
+│   ├── ai_tests
+│   │   ├── AGENT.md
+│   │   ├── __init__.py
+│   │   └── test_tasks.py
+│   ├── cli
+│   │   ├── AGENT.md
+│   │   ├── __init__.py
+│   │   └── test_cli.py
+│   ├── conftest.py
+│   ├── deprecated
+│   │   ├── AGENT.md
+│   │   ├── __init__.py
+│   │   ├── test_agent.py
+│   │   └── test_task.py
+│   ├── events
+│   │   ├── AGENT.md
+│   │   ├── __init__.py
+│   │   └── test_history.py
+│   ├── fixtures
+│   │   ├── AGENT.md
+│   │   ├── controlflow.py
+│   │   ├── __init__.py
+│   │   └── instructions.py
+│   ├── flows
+│   │   ├── AGENT.md
+│   │   ├── __init__.py
+│   │   ├── test_flows.py
+│   │   ├── test_graph.py
+│   │   └── test_sign_guestbook.py
+│   ├── __init__.py
+│   ├── llm
+│   │   ├── AGENT.md
+│   │   ├── __init__.py
+│   │   └── test_models.py
+│   ├── memory
+│   │   ├── AGENT.md
+│   │   ├── __init__.py
+│   │   └── test_memory.py
+│   ├── orchestration
+│   │   ├── AGENT.md
+│   │   ├── __init__.py
+│   │   ├── test_orchestrator.py
+│   │   ├── test_rules.py
+│   │   └── test_turn_strategies.py
+│   ├── tasks
+│   │   ├── AGENT.md
+│   │   ├── __init__.py
+│   │   ├── test_tasks.py
+│   │   └── test_validators.py
+│   ├── test_decorator.py
+│   ├── test_defaults.py
+│   ├── test_instructions.py
+│   ├── test_planning.py
+│   ├── test_run.py
+│   ├── test_settings.py
+│   ├── tools
+│   │   ├── AGENT.md
+│   │   ├── __init__.py
+│   │   ├── test_lc_tools.py
+│   │   └── test_tools.py
+│   └── utilities
+│       ├── AGENT.md
+│       ├── __init__.py
+│       ├── test_general.py
+│       └── test_testing.py
+├── tools
+│   ├── AGENT.md
+│   ├── code.py
+│   ├── filesystem.py
+│   ├── __init__.py
+│   ├── input.py
+│   ├── tools.py
+│   └── web.py
+├── tui
+│   ├── AGENT.md
+│   ├── app.py
+│   ├── app.tcss
+│   ├── basic.py
+│   ├── __init__.py
+│   ├── task.py
+│   ├── test2.py
+│   ├── test.py
+│   └── thread.py
+├── utilities
+│   ├── AGENT.md
+│   ├── asyncio.py
+│   ├── context.py
+│   ├── general.py
+│   ├── __init__.py
+│   ├── jinja.py
+│   ├── logging.py
+│   ├── marvin.py
+│   ├── prefect.py
+│   ├── rich.py
+│   ├── tasks.py
+│   └── testing.py
+└── uv.lock
+
+43 directories, 274 files

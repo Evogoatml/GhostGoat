@@ -1,0 +1,19 @@
+[project]
+name = "nexus-lattice"
+version = "2.0.0"
+description = "Enterprise Holonic Multi-Agent Coding Orchestrator — Lattice Sovereignty"
+requires-python = ">=3.11"
+dependencies = [
+    "pycrdt>=0.10.0",
+    "litellm>=1.60.0",
+    "pydantic>=2.10.0",
+    "structlog>=25.1.0",
+    "psutil>=7.0.0",
+    "numpy>=2.0.0",
+    "aiofiles>=24.1.0",
+    "gitpython>=3.1.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.scripts]
+nexus = "main:main"

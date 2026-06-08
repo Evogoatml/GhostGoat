@@ -1,0 +1,16 @@
+[package]
+name = "ghostgoat-backend"
+version = "0.1.0"
+edition = "2021"
+description = "Filesystem scanner and agent manifest generator for GhostGoat"
+
+[dependencies]
+anyhow = "1"
+chrono = "0.4"
+rayon = "1"
+rusqlite = { version = "0.31", features = ["bundled"] }
+walkdir = "2"
+
+[profile.release]
+opt-level = 3
+lto = true

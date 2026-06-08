@@ -1,0 +1,14 @@
+agent_name: ${AGENT_NAME:-EvoGoat}
+max_iters: 12
+thought_budget_tokens: 2048
+memory:
+  db_path: memory/agent.db
+  embed_model: "sentence-transformers/all-MiniLM-L6-v2"
+tools:
+  - shell
+  - web_search
+  - read_file
+  - write_file
+policies:
+  allow_shell: true
+  deny_patterns: ["rm -rf", ":(){:|:&};:"]

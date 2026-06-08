@@ -1,0 +1,179 @@
+#!/bin/bash
+
+# GhostGoat Master Control Script
+
+GHOSTGOAT_DIR=~/GhostGoat
+
+show_banner() {
+    echo "═══════════════════════════════════════════════════════"
+    echo "🐐 GHOSTGOAT MULTI-AGENT SYSTEM"
+    echo "═══════════════════════════════════════════════════════"
+    echo ""
+}
+
+show_menu() {
+    echo "What would you like to do?"
+    echo ""
+    echo "  1) Run smoke tests"
+    echo "  2) Run demo"
+    echo "  3) Start interactive shell"
+    echo "  4) Edit configuration (.env)"
+    echo "  5) View system status"
+    echo "  6) Install additional packages"
+    echo "  7) Update GhostGoat"
+    echo "  8) View logs"
+    echo "  9) Show quick start guide"
+    echo "  0) Exit"
+    echo ""
+    read -p "Select option: " choice
+    echo ""
+}
+
+run_tests() {
+    cd $GHOSTGOAT_DIR/tests
+    source $GHOSTGOAT_DIR/venv/bin/activate
+    python smoke_test.py
+    read -p "Press Enter to continue..."
+}
+
+run_demo() {
+    cd $GHOSTGOAT_DIR
+    source $GHOSTGOAT_DIR/venv/bin/activate
+    python demo_ghostgoat.py
+    read -p "Press Enter to continue..."
+}
+
+start_shell() {
+    cd $GHOSTGOAT_DIR
+    source $GHOSTGOAT_DIR/venv/bin/activate
+    ./start_ghostgoat.sh
+}
+
+edit_config() {
+    nano $GHOSTGOAT_DIR/.env
+}
+
+show_status() {
+    echo "🐐 GhostGoat System Status"
+    echo "═══════════════════════════════════════════════════════"
+    echo ""
+    echo "📂 Directory: $GHOSTGOAT_DIR"
+    echo "🐍 Python: $(which python3)"
+    echo "📦 Virtual env: $([ -d "$GHOSTGOAT_DIR/venv" ] && echo "✅ Active" || echo "❌ Missing")"
+    echo ""
+    
+    # Check key files
+    echo "Core Files:"
+    [ -f "$GHOSTGOAT_DIR/config/unified_config.py" ] && echo "  ✅ unified_config.py" || echo "  ❌ unified_config.py"
+    [ -f "$GHOSTGOAT_DIR/core/memory/unified_memory.py" ] && echo "  ✅ unified_memory.py" || echo "  ❌ unified_memory.py"
+    [ -f "$GHOSTGOAT_DIR/frameworks/llm/multi_llm.py" ] && echo "  ✅ multi_llm.py" || echo "  ❌ multi_llm.py"
+    echo ""
+    
+    # Check API keys
+    if [ -f "$GHOSTGOAT_DIR/.env" ]; then
+        source $GHOSTGOAT_DIR/.env
+        if [ -z "$OPENAI_API_KEY" ] || [ "$OPENAI_API_KEY" = "your-openai-key-here" ]; then
+            echo "🔑 API Keys: ⚠️  Not configured"
+        else
+            echo "🔑 API Keys: ✅ Configured"
+        fi
+    else
+        echo "🔑 API Keys: ❌ .env file missing"
+    fi
+    echo ""
+    
+    read -p "Press Enter to continue..."
+}
+
+install_packages() {
+    cd $GHOSTGOAT_DIR
+    source venv/bin/activate
+    
+    echo "Available packages to install:"
+    echo ""
+    echo "  1) CrewAI (multi-agent framework)"
+    echo "  2) LangChain (LLM framework)"
+    echo "  3) Sentence Transformers (embeddings)"
+    echo "  4) All of the above"
+    echo "  5) Custom package"
+    echo "  0) Back"
+    echo ""
+    read -p "Select: " pkg_choice
+    
+    case $pkg_choice in
+        1)
+            pip install crewai crewai-tools
+            ;;
+        2)
+            pip install langchain langchain-community langgraph
+            ;;
+        3)
+            pip install sentence-transformers
+            ;;
+        4)
+            pip install crewai crewai-tools langchain langchain-community langgraph sentence-transformers
+            ;;
+        5)
+            read -p "Package name: " pkg_name
+            pip install $pkg_name
+            ;;
+    esac
+    
+    read -p "Press Enter to continue..."
+}
+
+update_system() {
+    cd $GHOSTGOAT_DIR
+    source venv/bin/activate
+    
+    echo "Updating GhostGoat..."
+    pip install --upgrade pip
+    pip install -r requirements.txt --upgrade
+    echo "✅ Update complete!"
+    
+    read -p "Press Enter to continue..."
+}
+
+view_logs() {
+    echo "📋 Recent logs:"
+    echo ""
+    
+    if [ -d "$GHOSTGOAT_DIR/logs" ]; then
+        ls -lh $GHOSTGOAT_DIR/logs/
+    else
+        echo "No logs directory found"
+    fi
+    
+    read -p "Press Enter to continue..."
+}
+
+show_guide() {
+    if [ -f "$GHOSTGOAT_DIR/QUICK_START.md" ]; then
+        cat $GHOSTGOAT_DIR/QUICK_START.md | less
+    else
+        echo "Quick start guide not found"
+        read -p "Press Enter to continue..."
+    fi
+}
+
+# Main loop
+while true; do
+    clear
+    show_banner
+    show_menu
+    
+    case $choice in
+        1) run_tests ;;
+        2) run_demo ;;
+        3) start_shell ;;
+        4) edit_config ;;
+        5) show_status ;;
+        6) install_packages ;;
+        7) update_system ;;
+        8) view_logs ;;
+        9) show_guide ;;
+        0) echo "🐐 Goodbye!"; exit 0 ;;
+        *) echo "Invalid option"; sleep 1 ;;
+    esac
+done
+

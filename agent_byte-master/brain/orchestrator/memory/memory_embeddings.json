@@ -1,0 +1,20 @@
+[
+  {
+    "user": 4321,
+    "key": "input",
+    "text": "Analyze input",
+    "embedding": []
+  },
+  {
+    "user": 4321,
+    "key": "input",
+    "text": "Process data",
+    "embedding": []
+  },
+  {
+    "user": 4321,
+    "key": "input",
+    "text": "Generate output",
+    "embedding": []
+  }
+]

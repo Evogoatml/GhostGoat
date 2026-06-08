@@ -1,0 +1,235 @@
+{
+  "abilities": [
+    {
+      "id": "divide_and_conquer_search",
+      "name": "Divide and Conquer Search",
+      "ability_type": "divide_and_conquer",
+      "description": "Recursively partition problem space, eliminating halves based on comparison to find target in logarithmic time",
+      "parameters": {
+        "partition_fn": "Function to split problem into two halves",
+        "comparison_fn": "Function to compare middle element with target",
+        "elimination_direction": "Which half to keep ('left', 'right', or 'both')",
+        "base_case_condition": "When to stop recursion (usually when size <= 1)"
+      },
+      "examples": [
+        "Binary search in sorted array",
+        "Finding square root via binary search",
+        "Searching in rotated sorted array",
+        "Finding peak element in array"
+      ],
+      "preconditions": [
+        "Problem space can be ordered or partitioned",
+        "Comparison operation provides directional information",
+        "Problem exhibits monotonicity or similar property enabling elimination"
+      ],
+      "postconditions": [
+        "Target found or determined absent",
+        "Time complexity reduced from O(n) to O(log n)",
+        "Space complexity O(1) for iterative or O(log n) for recursive"
+      ],
+      "complexity_impact": "Reduces time complexity from linear to logarithmic",
+      "domain_tags": [
+        "search",
+        "sorting",
+        "optimization",
+        "mathematics"
+      ],
+      "confidence": 0.9,
+      "usage_count": 0,
+      "last_used": null
+    },
+    {
+      "id": "mathematical_optimization_sqrt",
+      "name": "Square Root Optimization",
+      "ability_type": "mathematical_optimization",
+      "description": "Use mathematical properties to reduce search space from O(n) to O(\u221an) by leveraging factor pairs or bounds",
+      "parameters": {
+        "bound_function": "Function that provides optimization bound (e.g., sqrt(n))",
+        "check_function": "Function to test if a candidate satisfies conditions",
+        "iteration_direction": "Direction to iterate (ascending, descending, or both)"
+      },
+      "examples": [
+        "Prime number testing (check divisors up to \u221an)",
+        "Finding factors of a number",
+        "Integer square root calculation",
+        "Checking perfect numbers"
+      ],
+      "preconditions": [
+        "Problem has a mathematical property enabling bounds",
+        "Solution space exhibits symmetry or pairing",
+        "Upper bound can be computed efficiently"
+      ],
+      "postconditions": [
+        "Time complexity reduced from O(n) to O(\u221an)",
+        "Correctness maintained through mathematical proof",
+        "Often enables early termination"
+      ],
+      "complexity_impact": "Reduces time complexity from linear to square root",
+      "domain_tags": [
+        "number_theory",
+        "arithmetic",
+        "factorization",
+        "primes"
+      ],
+      "confidence": 0.85,
+      "usage_count": 0,
+      "last_used": null
+    },
+    {
+      "id": "dynamic_programming_memoization",
+      "name": "Dynamic Programming with Memoization",
+      "ability_type": "dynamic_programming",
+      "description": "Solve problems by breaking into overlapping subproblems and caching results to avoid recomputation",
+      "parameters": {
+        "state_representation": "How to represent subproblem state",
+        "recurrence_relation": "How to compute state from substates",
+        "base_cases": "Known solutions for smallest subproblems",
+        "cache_strategy": "How to store and retrieve computed states"
+      },
+      "examples": [
+        "Fibonacci sequence calculation",
+        "Shortest path in grid (unique paths)",
+        "Knapsack problem",
+        "Longest common subsequence",
+        "Minimum coin change"
+      ],
+      "preconditions": [
+        "Problem can be divided into subproblems",
+        "Subproblems overlap (same subproblems solved multiple times)",
+        "Optimal solution can be constructed from optimal sub-solutions",
+        "Subproblems have a finite, describable state space"
+      ],
+      "postconditions": [
+        "Time complexity often reduced from exponential to polynomial",
+        "Space complexity proportional to number of unique states",
+        "Solution builds up from base cases"
+      ],
+      "complexity_impact": "Reduces time complexity by eliminating redundant computation",
+      "domain_tags": [
+        "sequences",
+        "optimization",
+        "combinatorics",
+        "graph_algorithms"
+      ],
+      "confidence": 0.9,
+      "usage_count": 0,
+      "last_used": null
+    },
+    {
+      "id": "rate_based_transformation",
+      "name": "Rate-Based Transformation",
+      "ability_type": "rate_based_transformation",
+      "description": "Convert between domains using an intermediate reference point or rate",
+      "parameters": {
+        "rate_table": "Mapping from domain A to reference and reference to domain B",
+        "reference_point": "Common reference for conversion (e.g., USD for currency)",
+        "transformation_function": "Function to apply rate (usually multiplication/division)",
+        "inverse_available": "Whether inverse transformation is also available"
+      },
+      "examples": [
+        "Currency conversion via USD as base",
+        "Unit conversion (metric to imperial via SI units)",
+        "Coordinate system transformations",
+        "Encoding/decoding via intermediate format"
+      ],
+      "preconditions": [
+        "Conversion is transitive (A\u2192B = A\u2192RATE\u2192B)",
+        "Reference point is stable or rates can be obtained",
+        "Transformation function is well-defined and invertible (or pseudo-invertible)"
+      ],
+      "postconditions": [
+        "Conversion possible even without direct A\u2192B rate",
+        "Enables chaining multiple conversions",
+        "Allows offline operation with cached rates"
+      ],
+      "complexity_impact": "Enables conversion with O(1) lookup after rate acquisition",
+      "domain_tags": [
+        "currency",
+        "units",
+        "coordinates",
+        "encoding"
+      ],
+      "confidence": 0.9,
+      "usage_count": 0,
+      "last_used": null
+    },
+    {
+      "id": "fault_tolerant_querying",
+      "name": "Fault Tolerant Querying",
+      "ability_type": "fault_tolerant_querying",
+      "description": "Design queries that degrade gracefully with structured fallback responses",
+      "parameters": {
+        "primary_query": "The main query to execute",
+        "fallback_strategy": "What to do when primary fails (alternative, partial, default)",
+        "error_handling": "How to classify and respond to different error types",
+        "response_structure": "Consistent format for success and failure responses"
+      },
+      "examples": [
+        "DNS lookup returning structured response with availability status",
+        "API calls with circuit breaker pattern",
+        "Database queries with cached fallbacks",
+        "Network requests with timeout and retry logic"
+      ],
+      "preconditions": [
+        "Query can fail in identifiable ways",
+        "Some value can be provided even when primary goal fails",
+        "Callers can handle structured responses"
+      ],
+      "postconditions": [
+        "System remains usable even when external services fail",
+        "Failures provide diagnostic information",
+        "User experience degrades gracefully rather than catastrophically"
+      ],
+      "complexity_impact": "Adds constant overhead for error handling but improves reliability",
+      "domain_tags": [
+        "networking",
+        "apis",
+        "databases",
+        "external_services"
+      ],
+      "confidence": 0.8,
+      "usage_count": 0,
+      "last_used": null
+    },
+    {
+      "id": "iterative_refinement_loop",
+      "name": "Iterative Refinement Loop",
+      "ability_type": "iterative_refinement",
+      "description": "Progressively improve solution through feedback cycles and measurement",
+      "parameters": {
+        "baseline_establishment": "How to establish initial solution or state",
+        "feedback_mechanism": "How to measure quality or identify issues",
+        "improvement_strategy": "How to modify solution based on feedback",
+        "termination_condition": "When to stop iterating (good enough, max iterations, convergence)"
+      },
+      "examples": [
+        "Interactive currency converter with input validation",
+        "Auto-shutdown with configurable delay and confirmation",
+        "Optimization algorithms (gradient descent, hill climbing)",
+        "Debugging through hypothesis testing and fixing"
+      ],
+      "preconditions": [
+        "Baseline solution can be established",
+        "Feedback can be gathered about solution quality",
+        "Improvements can be made based on feedback",
+        "Process can converge or reach acceptable state"
+      ],
+      "postconditions": [
+        "Solution quality improves over iterations",
+        "Process terminates when goals met or no further improvement possible",
+        "Final solution better than initial baseline"
+      ],
+      "complexity_impact": "Adds iterative overhead but can dramatically improve solution quality",
+      "domain_tags": [
+        "optimization",
+        "debugging",
+        "tuning",
+        "interactive_systems"
+      ],
+      "confidence": 0.75,
+      "usage_count": 0,
+      "last_used": null
+    }
+  ],
+  "last_updated": "1778450491.1976154"
+}

@@ -1,0 +1,20 @@
+[project]
+name = "evoagent"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+  "openai>=1.45.0",
+  "tiktoken",
+  "numpy",
+  "pydantic>=2",
+  "rich",
+  "uvloop; sys_platform == 'linux'",
+  "python-dotenv",
+  "duckduckgo-search>=6",
+  "aiohttp",
+  "sqlalchemy>=2",
+  "faiss-cpu; platform_machine != 'aarch64'",
+  "sentence-transformers"
+]
+
+[tool.uv]  # optional if you use uv

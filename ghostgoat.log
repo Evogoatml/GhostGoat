@@ -1,0 +1,13 @@
+2026-05-14 23:03:12,212 - ghostgoat.main - INFO - ============================================================
+2026-05-14 23:03:12,212 - ghostgoat.main - INFO - GhostGoat - Autonomous Multi-Agent Orchestration Platform
+2026-05-14 23:03:12,212 - ghostgoat.main - INFO - ============================================================
+2026-05-14 23:03:12,212 - ghostgoat.main - INFO - Platform: linux
+2026-05-14 23:03:12,213 - ghostgoat.main - INFO - Python: 3.13.5 (main, May  5 2026, 21:05:52) [GCC 14.2.0]
+2026-05-14 23:03:12,213 - ghostgoat.main - INFO - Working Directory: /home/popic/projects/GhostGoat
+2026-05-14 23:03:12,213 - ghostgoat.main - INFO - ============================================================
+2026-05-14 23:03:12,213 - ghostgoat.main - INFO - Starting GhostGoat in full mode (API + dashboard)...
+2026-05-14 23:03:23,924 - ghostgoat.main - INFO - Starting GhostGoat API server on port 8420...
+2026-05-14 23:03:25,927 - ghostgoat.main - ERROR - API server failed to start: /usr/bin/python: Error while finding module specification for 'api.server' (ModuleNotFoundError: No module named 'api')
+
+2026-05-14 23:03:25,927 - ghostgoat.main - ERROR - Failed to start API server
+2026-05-14 23:03:25,927 - ghostgoat.main - ERROR - GhostGoat failed to start properly

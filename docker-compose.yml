@@ -1,0 +1,44 @@
+version: "3.8"
+services:
+  ghostgoat:
+    build: .
+    ports:
+      - "8420:8420"
+    environment:
+      - GHOSTGOAT_WORKERS=${GHOSTGOAT_WORKERS:-8}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8420/api/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    profiles:
+      - default
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    profiles:
+      - default
+      - full
+      - prod
+  chromadb:
+    image: chromadb/chroma:0.4.22
+    ports:
+      - "8000:8000"
+    profiles:
+      - default
+      - full
+      - prod
+  neo4j:
+    image: neo4j:5
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    profiles:
+      - full
+  ollama:
+    image: ollama/ollama:0.1.30
+    ports:
+      - "11434:11434"
+    profiles:
+      - full

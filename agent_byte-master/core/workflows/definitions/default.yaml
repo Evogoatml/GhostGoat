@@ -1,0 +1,33 @@
+name: default
+description: Default cognitive workflow — gather, analyze, execute, report.
+steps:
+  - name: gather
+    agent: research-1
+    action: retrieve
+    payload:
+      query: "{{goal}}"
+    retries: 1
+    timeout: 20
+  - name: analyze
+    agent: analyst-1
+    action: analyze
+    payload:
+      input: "{{gather_result}}"
+    retries: 1
+    timeout: 20
+  - name: execute
+    agent: shell-1
+    action: run
+    payload:
+      command: "echo 'Executing goal: {{goal}}'"
+    condition: "{{analyze_result.success}}"
+    retries: 2
+    timeout: 30
+  - name: report
+    agent: analyst-1
+    action: summarize
+    payload:
+      input: "{{execute_result}}"
+    retries: 1
+    timeout: 20
+

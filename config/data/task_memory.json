@@ -1,0 +1,160 @@
+[
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761474004.8112588
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761474706.6840076
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761474814.1431017
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761475755.7252786
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761475980.899201
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761476828.0490034
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761483499.712033
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761483966.787954
+  },
+  {
+    "task": "startup",
+    "result": "success",
+    "metrics": {
+      "duration": 0.5
+    },
+    "timestamp": 1761484242.6312575
+  },
+  {
+    "task": "task_a",
+    "result": "success",
+    "timestamp": 1778124730.268005,
+    "metrics": {}
+  },
+  {
+    "task": "task_b",
+    "result": "success",
+    "timestamp": 1778124730.27733,
+    "metrics": {}
+  },
+  {
+    "task": "task_b",
+    "result": "failure",
+    "timestamp": 1778124730.278124,
+    "metrics": {}
+  },
+  {
+    "task": "my_task",
+    "result": "success",
+    "timestamp": 1778124730.286868,
+    "metrics": {
+      "latency": 0.5
+    }
+  },
+  {
+    "task": "ts_task",
+    "result": "success",
+    "timestamp": 1778124730.295982,
+    "metrics": {}
+  },
+  {
+    "task": "good_task",
+    "result": "success",
+    "timestamp": 1778124730.308006,
+    "metrics": {}
+  },
+  {
+    "task": "good_task",
+    "result": "success",
+    "timestamp": 1778124730.30884,
+    "metrics": {}
+  },
+  {
+    "task": "good_task",
+    "result": "success",
+    "timestamp": 1778124730.309584,
+    "metrics": {}
+  },
+  {
+    "task": "mixed",
+    "result": "success",
+    "timestamp": 1778124730.315409,
+    "metrics": {}
+  },
+  {
+    "task": "mixed",
+    "result": "failure",
+    "timestamp": 1778124730.316187,
+    "metrics": {}
+  },
+  {
+    "task": "mixed",
+    "result": "success",
+    "timestamp": 1778124730.31763,
+    "metrics": {}
+  },
+  {
+    "task": "bad_task",
+    "result": "failure",
+    "timestamp": 1778124730.322564,
+    "metrics": {}
+  },
+  {
+    "task": "bad_task",
+    "result": "failure",
+    "timestamp": 1778124730.323358,
+    "metrics": {}
+  },
+  {
+    "task": "persist_task",
+    "result": "success",
+    "timestamp": 1778124730.329042,
+    "metrics": {}
+  }
+]

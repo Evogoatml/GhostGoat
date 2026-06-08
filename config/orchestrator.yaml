@@ -1,0 +1,46 @@
+# GhostGoat Dynamic Orchestrator Configuration
+brain:
+  modules:
+    - neuro
+    - react
+    - symbolic
+    - paradox
+    - graphrag
+    - creative  # Our new creative module
+  weights:
+    neuro: 0.15
+    react: 0.15
+    symbolic: 0.2
+    paradox: 0.1
+    graphrag: 0.15
+    creative: 0.25  # Higher weight for creative thinking
+  adaptive_learning: true
+  max_workers: 7
+
+agents:
+  routing:
+    scan: AgentK
+    code: AgentK
+    exploit: AgentK
+    research: AgentGPT
+    plan: SuperAGI
+    parallel: SwarmsAI
+    multi: CrewAI
+    # Example of adding a custom agent type
+    analyze: CustomAnalyzerAgent
+  dynamic_loading: true
+
+model:
+  name: llama3.2
+  timeout: 30
+  temperature: 0.7
+
+memory:
+  file: /home/popic/.pentest_brain.json
+  adaptive_pruning: true
+  max_entries: 1500
+
+# Example of custom settings that plugins can access
+custom_settings:
+  enable_experimental_features: true
+  max_thought_iterations: 5

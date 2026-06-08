@@ -1,0 +1,853 @@
+# AGENT — `ragflow`
+
+> Auto-generated folder agent. **Do not edit manually** — regenerated on every scan.
+
+| Field | Value |
+|---|---|
+| **Folder** | `core/memory/rag/ragflow` |
+| **Agent ID** | `65a4c604` |
+| **Last Updated** | `2026-04-30 03:39:22` |
+| **Files Tracked** | `765` |
+| **Total Size** | `8.75 MB` |
+| **Neural Backend** | `../../../../.backend/` |
+
+---
+
+## Files in this Folder
+
+#### `.css` (6 files)
+
+- **`intergrations/extension_chrome/styles/options.css`** — 1.5 KB, modified 2026-04-23
+- **`intergrations/extension_chrome/styles/popup.css`** — 341 B, modified 2026-04-23
+- **`web/src/components/jsonjoy-builder/index.css`** — 6.6 KB, modified 2026-04-23
+- **`web/src/components/prompt-editor/index.css`** — 1.3 KB, modified 2026-04-23
+- **`web/src/pages/agent/form/components/prompt-editor/index.css`** — 1.0 KB, modified 2026-04-23
+- **`web/tailwind.css`** — 9.1 KB, modified 2026-04-23
+
+#### `.js` (9 files)
+
+- **`intergrations/extension_chrome/background.js`** — 516 B, modified 2026-04-23
+- **`intergrations/extension_chrome/content.js`** — 1.8 KB, modified 2026-04-23
+- **`intergrations/extension_chrome/options.js`** — 1.0 KB, modified 2026-04-23
+- **`intergrations/extension_chrome/popup.js`** — 826 B, modified 2026-04-23
+- **`web/.eslintrc.js`** — 908 B, modified 2026-04-23
+- **`web/postcss.config.js`** — 104 B, modified 2026-04-23
+- **`web/public/iconfont.js`** — 215.6 KB, modified 2026-04-23
+- **`web/public/pdfjs-dist/pdf.worker.min.js`** — 1041.1 KB, modified 2026-04-23
+- **`web/tailwind.config.js`** — 8.1 KB, modified 2026-04-23
+
+#### `.json` (67 files)
+
+- **`agent/templates/advanced_ingestion_pipeline.json`** — 41.2 KB, modified 2026-04-23
+- **`agent/templates/choose_your_knowledge_base_agent.json`** — 21.4 KB, modified 2026-04-23
+- **`agent/templates/choose_your_knowledge_base_workflow.json`** — 21.0 KB, modified 2026-04-23
+- **`agent/templates/chunk_summary.json`** — 25.6 KB, modified 2026-04-23
+- **`agent/templates/customer_review_analysis.json`** — 27.0 KB, modified 2026-04-23
+- **`agent/templates/customer_service.json`** — 47.2 KB, modified 2026-04-23
+- **`agent/templates/customer_support.json`** — 53.8 KB, modified 2026-04-23
+- **`agent/templates/cv_analysis_and_candidate_evaluation.json`** — 29.1 KB, modified 2026-04-23
+- **`agent/templates/deep_research.json`** — 144.2 KB, modified 2026-04-23
+- **`agent/templates/deep_search_r.json`** — 144.1 KB, modified 2026-04-23
+- **`agent/templates/ecommerce_customer_service_workflow.json`** — 55.2 KB, modified 2026-04-23
+- **`agent/templates/generate_SEO_blog.json`** — 67.6 KB, modified 2026-04-23
+- **`agent/templates/image_lingo.json`** — 17.5 KB, modified 2026-04-23
+- **`agent/templates/knowledge_base_report.json`** — 24.0 KB, modified 2026-04-23
+- **`agent/templates/knowledge_base_report_r.json`** — 24.0 KB, modified 2026-04-23
+- **`agent/templates/market_generate_seo_blog.json`** — 62.2 KB, modified 2026-04-23
+- **`agent/templates/seo_blog.json`** — 62.2 KB, modified 2026-04-23
+- **`agent/templates/sql_assistant.json`** — 36.5 KB, modified 2026-04-23
+- **`agent/templates/stock_research_report.json`** — 86.4 KB, modified 2026-04-23
+- **`agent/templates/technical_docs_qa.json`** — 28.2 KB, modified 2026-04-23
+- **`agent/templates/title_chunker.json`** — 20.6 KB, modified 2026-04-23
+- **`agent/templates/trip_planner.json`** — 26.7 KB, modified 2026-04-23
+- **`agent/templates/user_interaction.json`** — 25.2 KB, modified 2026-04-23
+- **`agent/templates/web_search_assistant.json`** — 30.5 KB, modified 2026-04-23
+- **`agent/test/dsl_examples/categorize_and_agent_with_tavily.json`** — 2.9 KB, modified 2026-04-23
+- **`agent/test/dsl_examples/exesql.json`** — 1.2 KB, modified 2026-04-23
+- **`agent/test/dsl_examples/headhunter_zh.json`** — 8.3 KB, modified 2026-04-23
+- **`agent/test/dsl_examples/iteration.json`** — 3.9 KB, modified 2026-04-23
+- **`agent/test/dsl_examples/retrieval_and_generate.json`** — 2.3 KB, modified 2026-04-23
+- **`agent/test/dsl_examples/retrieval_categorize_and_generate.json`** — 3.6 KB, modified 2026-04-23
+- **`agent/test/dsl_examples/tavily_and_generate.json`** — 2.0 KB, modified 2026-04-23
+- **`conf/infinity_mapping.json`** — 2.5 KB, modified 2026-04-23
+- **`conf/llm_factories.json`** — 194.5 KB, modified 2026-04-23
+- **`conf/mapping.json`** — 4.3 KB, modified 2026-04-23
+- **`conf/os_mapping.json`** — 5.6 KB, modified 2026-04-23
+- **`deepdoc/parser/resume/entities/res/corp.tks.freq.json`** — 1.2 KB, modified 2026-04-23
+- **`deepdoc/parser/resume/entities/res/corp_tag.json`** — 281.4 KB, modified 2026-04-23
+- **`deepdoc/parser/resume/entities/res/good_corp.json`** — 17.9 KB, modified 2026-04-23
+- **`deepdoc/parser/resume/entities/res/good_sch.json`** — 10.8 KB, modified 2026-04-23
+- **`docs/_category_.json`** — 135 B, modified 2026-04-23
+- **`docs/contribution/_category_.json`** — 151 B, modified 2026-04-23
+- **`docs/develop/_category_.json`** — 145 B, modified 2026-04-23
+- **`docs/develop/mcp/_category_.json`** — 171 B, modified 2026-04-23
+- **`docs/guides/_category_.json`** — 151 B, modified 2026-04-23
+- **`docs/guides/agent/_category_.json`** — 286 B, modified 2026-04-23
+- **`docs/guides/agent/agent_component_reference/_category_.json`** — 174 B, modified 2026-04-23
+- **`docs/guides/agent/best_practices/_category_.json`** — 158 B, modified 2026-04-23
+- **`docs/guides/chat/_category_.json`** — 130 B, modified 2026-04-23
+- **`docs/guides/chat/best_practices/_category_.json`** — 166 B, modified 2026-04-23
+- **`docs/guides/dataset/_category_.json`** — 145 B, modified 2026-04-23
+- **`docs/guides/dataset/add_data_source/_category_.json`** — 145 B, modified 2026-04-23
+- **`docs/guides/dataset/best_practices/_category_.json`** — 160 B, modified 2026-04-23
+- **`docs/guides/models/_category_.json`** — 137 B, modified 2026-04-23
+- **`docs/guides/team/_category_.json`** — 130 B, modified 2026-04-23
+- **`docs/references/_category_.json`** — 139 B, modified 2026-04-23
+- **`intergrations/chatgpt-on-wechat/plugins/config.json`** — 69 B, modified 2026-04-23
+- **`intergrations/extension_chrome/manifest.json`** — 721 B, modified 2026-04-23
+- **`rag/flow/tests/dsl_examples/general_pdf_all.json`** — 3.6 KB, modified 2026-04-23
+- **`rag/flow/tests/dsl_examples/hierarchical_merger.json`** — 2.1 KB, modified 2026-04-23
+- **`rag/res/ner.json`** — 229.8 KB, modified 2026-04-23
+- **`rag/res/synonym.json`** — 262.1 KB, modified 2026-04-23
+- **`sandbox/executor_manager/seccomp-profile-default.json`** — 970 B, modified 2026-04-23
+- **`sandbox/sandbox_base_image/nodejs/package.json`** — 267 B, modified 2026-04-23
+- **`sdk/python/test/test_sdk_api/test_data/test.json`** — 2.1 KB, modified 2026-04-23
+- **`web/package.json`** — 5.8 KB, modified 2026-04-23
+- **`web/src/conf.json`** — 27 B, modified 2026-04-23
+- **`web/tsconfig.json`** — 91 B, modified 2026-04-23
+
+#### `.md` (102 files)
+
+- **`CLAUDE.md`** — 3.5 KB, modified 2026-04-23
+- **`README.md`** — 15.7 KB, modified 2026-04-23
+- **`README_id.md`** — 14.8 KB, modified 2026-04-23
+- **`README_ja.md`** — 18.0 KB, modified 2026-04-23
+- **`README_ko.md`** — 16.6 KB, modified 2026-04-23
+- **`README_pt_br.md`** — 17.0 KB, modified 2026-04-23
+- **`README_tzh.md`** — 16.3 KB, modified 2026-04-23
+- **`README_zh.md`** — 16.3 KB, modified 2026-04-23
+- **`SECURITY.md`** — 1.9 KB, modified 2026-04-23
+- **`admin/client/README.md`** — 5.9 KB, modified 2026-04-23
+- **`api/apps/auth/README.md`** — 2.0 KB, modified 2026-04-23
+- **`api/common/README.md`** — 207 B, modified 2026-04-23
+- **`deepdoc/README.md`** — 5.7 KB, modified 2026-04-23
+- **`deepdoc/README_zh.md`** — 5.6 KB, modified 2026-04-23
+- **`docker/README.md`** — 11.8 KB, modified 2026-04-23
+- **`docs/configurations.md`** — 10.1 KB, modified 2026-04-23
+- **`docs/contribution/contributing.md`** — 2.1 KB, modified 2026-04-23
+- **`docs/develop/acquire_ragflow_api_key.md`** — 764 B, modified 2026-04-23
+- **`docs/develop/launch_ragflow_from_source.md`** — 3.5 KB, modified 2026-04-23
+- **`docs/develop/mcp/launch_mcp_server.md`** — 11.6 KB, modified 2026-04-23
+- **`docs/develop/mcp/mcp_client_example.md`** — 6.7 KB, modified 2026-04-23
+- **`docs/develop/mcp/mcp_tools.md`** — 654 B, modified 2026-04-23
+- **`docs/develop/switch_doc_engine.md`** — 770 B, modified 2026-04-23
+- **`docs/guides/accessing_admin_ui.md`** — 2.1 KB, modified 2026-04-23
+- **`docs/guides/agent/agent_component_reference/chunker_title.md`** — 1.0 KB, modified 2026-04-23
+- **`docs/guides/agent/agent_component_reference/chunker_token.md`** — 1.4 KB, modified 2026-04-23
+- **`docs/guides/agent/agent_component_reference/execute_sql.md`** — 2.4 KB, modified 2026-04-23
+- **`docs/guides/agent/agent_component_reference/indexer.md`** — 871 B, modified 2026-04-23
+- **`docs/guides/agent/agent_component_reference/parser.md`** — 6.0 KB, modified 2026-04-23
+- **`docs/guides/agent/agent_component_reference/transformer.md`** — 4.0 KB, modified 2026-04-23
+- **`docs/guides/agent/agent_introduction.md`** — 2.4 KB, modified 2026-04-23
+- **`docs/guides/agent/best_practices/accelerate_agent_question_answering.md`** — 3.7 KB, modified 2026-04-23
+- **`docs/guides/agent/embed_agent_into_webpage.md`** — 640 B, modified 2026-04-23
+- **`docs/guides/agent/sandbox_quickstart.md`** — 2.9 KB, modified 2026-04-23
+- **`docs/guides/ai_search.md`** — 1.6 KB, modified 2026-04-23
+- **`docs/guides/chat/implement_deep_research.md`** — 932 B, modified 2026-04-23
+- **`docs/guides/chat/set_chat_variables.md`** — 4.6 KB, modified 2026-04-23
+- **`docs/guides/chat/start_chat.md`** — 9.1 KB, modified 2026-04-23
+- **`docs/guides/dataset/add_data_source/add_google_drive.md`** — 6.5 KB, modified 2026-04-23
+- **`docs/guides/dataset/configure_knowledge_base.md`** — 9.7 KB, modified 2026-04-23
+- **`docs/guides/dataset/construct_knowledge_graph.md`** — 5.4 KB, modified 2026-04-23
+- **`docs/guides/dataset/enable_excel2html.md`** — 2.0 KB, modified 2026-04-23
+- **`docs/guides/dataset/enable_raptor.md`** — 5.3 KB, modified 2026-04-23
+- **`docs/guides/dataset/extract_table_of_contents.md`** — 1.7 KB, modified 2026-04-23
+- **`docs/guides/dataset/run_retrieval_test.md`** — 6.4 KB, modified 2026-04-23
+- **`docs/guides/dataset/select_pdf_parser.md`** — 5.1 KB, modified 2026-04-23
+- **`docs/guides/dataset/set_metadata.md`** — 1.3 KB, modified 2026-04-23
+- **`docs/guides/dataset/set_page_rank.md`** — 2.1 KB, modified 2026-04-23
+- **`docs/guides/dataset/use_tag_sets.md`** — 6.1 KB, modified 2026-04-23
+- **`docs/guides/manage_files.md`** — 3.7 KB, modified 2026-04-23
+- **`docs/guides/manage_users_and_services.md`** — 15.6 KB, modified 2026-04-23
+- **`docs/guides/migration/migrate_from_docker_compose.md`** — 3.5 KB, modified 2026-04-23
+- **`docs/guides/models/llm_api_key_setup.md`** — 2.4 KB, modified 2026-04-23
+- **`docs/guides/run_health_check.md`** — 3.2 KB, modified 2026-04-23
+- **`docs/guides/team/join_or_leave_team.md`** — 1.2 KB, modified 2026-04-23
+- **`docs/guides/team/manage_team_members.md`** — 1.6 KB, modified 2026-04-23
+- **`docs/guides/team/share_agents.md`** — 649 B, modified 2026-04-23
+- **`docs/guides/team/share_chat_assistant.md`** — 191 B, modified 2026-04-23
+- **`docs/guides/team/share_knowledge_bases.md`** — 592 B, modified 2026-04-23
+- **`docs/guides/team/share_model.md`** — 124 B, modified 2026-04-23
+- **`docs/references/http_api_reference.md`** — 129.7 KB, modified 2026-04-23
+- **`docs/references/python_api_reference.md`** — 51.7 KB, modified 2026-04-23
+- **`docs/release_notes.md`** — 34.3 KB, modified 2026-04-23
+- **`intergrations/chatgpt-on-wechat/plugins/README.md`** — 3.4 KB, modified 2026-04-23
+- **`intergrations/extension_chrome/README.md`** — 2.6 KB, modified 2026-04-23
+- **`intergrations/firecrawl/INSTALLATION.md`** — 5.1 KB, modified 2026-04-23
+- **`intergrations/firecrawl/README.md`** — 7.4 KB, modified 2026-04-23
+- **`plugin/README.md`** — 3.9 KB, modified 2026-04-23
+- **`plugin/README_zh.md`** — 4.0 KB, modified 2026-04-23
+- **`rag/prompts/analyze_task_system.md`** — 2.2 KB, modified 2026-04-23
+- **`rag/prompts/analyze_task_user.md`** — 526 B, modified 2026-04-23
+- **`rag/prompts/ask_summary.md`** — 575 B, modified 2026-04-23
+- **`rag/prompts/assign_toc_levels.md`** — 1.8 KB, modified 2026-04-23
+- **`rag/prompts/citation_plus.md`** — 384 B, modified 2026-04-23
+- **`rag/prompts/citation_prompt.md`** — 5.3 KB, modified 2026-04-23
+- **`rag/prompts/content_tagging_prompt.md`** — 873 B, modified 2026-04-23
+- **`rag/prompts/cross_languages_sys_prompt.md`** — 751 B, modified 2026-04-23
+- **`rag/prompts/cross_languages_user_prompt.md`** — 70 B, modified 2026-04-23
+- **`rag/prompts/full_question_prompt.md`** — 1.3 KB, modified 2026-04-23
+- **`rag/prompts/keyword_prompt.md`** — 410 B, modified 2026-04-23
+- **`rag/prompts/meta_filter.md`** — 4.2 KB, modified 2026-04-23
+- **`rag/prompts/next_step.md`** — 3.4 KB, modified 2026-04-23
+- **`rag/prompts/question_prompt.md`** — 523 B, modified 2026-04-23
+- **`rag/prompts/rank_memory.md`** — 857 B, modified 2026-04-23
+- **`rag/prompts/reflect.md`** — 3.0 KB, modified 2026-04-23
+- **`rag/prompts/related_question.md`** — 2.2 KB, modified 2026-04-23
+- **`rag/prompts/structured_output_prompt.md`** — 666 B, modified 2026-04-23
+- **`rag/prompts/summary4memory.md`** — 1.2 KB, modified 2026-04-23
+- **`rag/prompts/toc_detection.md`** — 1.9 KB, modified 2026-04-23
+- **`rag/prompts/toc_extraction.md`** — 1.8 KB, modified 2026-04-23
+- **`rag/prompts/toc_extraction_continue.md`** — 2.1 KB, modified 2026-04-23
+- **`rag/prompts/toc_from_text_system.md`** — 3.8 KB, modified 2026-04-23
+- **`rag/prompts/toc_from_text_user.md`** — 154 B, modified 2026-04-23
+- **`rag/prompts/toc_index.md`** — 704 B, modified 2026-04-23
+- **`rag/prompts/toc_relevance_system.md`** — 3.5 KB, modified 2026-04-23
+- **`rag/prompts/toc_relevance_user.md`** — 405 B, modified 2026-04-23
+- **`rag/prompts/tool_call_summary.md`** — 964 B, modified 2026-04-23
+- **`rag/prompts/vision_llm_describe_prompt.md`** — 1.2 KB, modified 2026-04-23
+- **`rag/prompts/vision_llm_figure_describe_prompt.md`** — 1.5 KB, modified 2026-04-23
+- **`sandbox/README.md`** — 8.4 KB, modified 2026-04-23
+- **`sdk/python/test/test_sdk_api/test_data/test.md`** — 3.5 KB, modified 2026-04-23
+- **`web/README.md`** — 887 B, modified 2026-04-23
+
+#### `.py` (537 files)
+
+- **`admin/client/admin_client.py`** — 36.0 KB, modified 2026-04-23
+- **`admin/server/admin_server.py`** — 2.7 KB, modified 2026-04-23
+- **`admin/server/auth.py`** — 6.4 KB, modified 2026-04-23
+- **`admin/server/config.py`** — 10.3 KB, modified 2026-04-23
+- **`admin/server/exceptions.py`** — 583 B, modified 2026-04-23
+- **`admin/server/models.py`** — 622 B, modified 2026-04-23
+- **`admin/server/responses.py`** — 977 B, modified 2026-04-23
+- **`admin/server/roles.py`** — 2.8 KB, modified 2026-04-23
+- **`admin/server/routes.py`** — 11.5 KB, modified 2026-04-23
+- **`admin/server/services.py`** — 8.7 KB, modified 2026-04-23
+- **`agent/__init__.py`** — 699 B, modified 2026-04-23
+- **`agent/canvas.py`** — 30.6 KB, modified 2026-04-23
+- **`agent/component/__init__.py`** — 2.1 KB, modified 2026-04-23
+- **`agent/component/agent_with_tools.py`** — 18.5 KB, modified 2026-04-23
+- **`agent/component/base.py`** — 21.4 KB, modified 2026-04-23
+- **`agent/component/begin.py`** — 1.9 KB, modified 2026-04-23
+- **`agent/component/categorize.py`** — 5.4 KB, modified 2026-04-23
+- **`agent/component/data_operations.py`** — 7.7 KB, modified 2026-04-23
+- **`agent/component/exit_loop.py`** — 964 B, modified 2026-04-23
+- **`agent/component/fillup.py`** — 2.5 KB, modified 2026-04-23
+- **`agent/component/invoke.py`** — 5.4 KB, modified 2026-04-23
+- **`agent/component/iteration.py`** — 2.3 KB, modified 2026-04-23
+- **`agent/component/iterationitem.py`** — 2.8 KB, modified 2026-04-23
+- **`agent/component/list_operations.py`** — 4.9 KB, modified 2026-04-23
+- **`agent/component/llm.py`** — 17.4 KB, modified 2026-04-23
+- **`agent/component/loop.py`** — 2.8 KB, modified 2026-04-23
+- **`agent/component/loopitem.py`** — 5.4 KB, modified 2026-04-23
+- **`agent/component/message.py`** — 8.6 KB, modified 2026-04-23
+- **`agent/component/string_transform.py`** — 3.6 KB, modified 2026-04-23
+- **`agent/component/switch.py`** — 5.3 KB, modified 2026-04-23
+- **`agent/component/varaiable_aggregator.py`** — 3.0 KB, modified 2026-04-23
+- **`agent/component/variable_assigner.py`** — 6.6 KB, modified 2026-04-23
+- **`agent/component/webhook.py`** — 1.1 KB, modified 2026-04-23
+- **`agent/settings.py`** — 660 B, modified 2026-04-23
+- **`agent/test/client.py`** — 1.9 KB, modified 2026-04-23
+- **`agent/tools/__init__.py`** — 1.7 KB, modified 2026-04-23
+- **`agent/tools/akshare.py`** — 1.9 KB, modified 2026-04-23
+- **`agent/tools/arxiv.py`** — 4.2 KB, modified 2026-04-23
+- **`agent/tools/base.py`** — 7.1 KB, modified 2026-04-23
+- **`agent/tools/code_exec.py`** — 12.3 KB, modified 2026-04-23
+- **`agent/tools/crawler.py`** — 2.4 KB, modified 2026-04-23
+- **`agent/tools/deepl.py`** — 2.6 KB, modified 2026-04-23
+- **`agent/tools/duckduckgo.py`** — 5.7 KB, modified 2026-04-23
+- **`agent/tools/email.py`** — 8.6 KB, modified 2026-04-23
+- **`agent/tools/exesql.py`** — 10.5 KB, modified 2026-04-23
+- **`agent/tools/github.py`** — 3.8 KB, modified 2026-04-23
+- **`agent/tools/google.py`** — 8.8 KB, modified 2026-04-23
+- **`agent/tools/googlescholar.py`** — 4.4 KB, modified 2026-04-23
+- **`agent/tools/jin10.py`** — 6.4 KB, modified 2026-04-23
+- **`agent/tools/pubmed.py`** — 6.4 KB, modified 2026-04-23
+- **`agent/tools/qweather.py`** — 6.4 KB, modified 2026-04-23
+- **`agent/tools/retrieval.py`** — 10.1 KB, modified 2026-04-23
+- **`agent/tools/searxng.py`** — 5.9 KB, modified 2026-04-23
+- **`agent/tools/tavily.py`** — 10.2 KB, modified 2026-04-23
+- **`agent/tools/tushare.py`** — 2.9 KB, modified 2026-04-23
+- **`agent/tools/wencai.py`** — 5.2 KB, modified 2026-04-23
+- **`agent/tools/wikipedia.py`** — 4.4 KB, modified 2026-04-23
+- **`agent/tools/yahoofinance.py`** — 5.1 KB, modified 2026-04-23
+- **`agentic_reasoning/__init__.py`** — 59 B, modified 2026-04-23
+- **`agentic_reasoning/deep_research.py`** — 10.8 KB, modified 2026-04-23
+- **`agentic_reasoning/prompts.py`** — 6.3 KB, modified 2026-04-23
+- **`api/__init__.py`** — 699 B, modified 2026-04-23
+- **`api/apps/__init__.py`** — 9.0 KB, modified 2026-04-23
+- **`api/apps/api_app.py`** — 4.5 KB, modified 2026-04-23
+- **`api/apps/auth/__init__.py`** — 1.2 KB, modified 2026-04-23
+- **`api/apps/auth/github.py`** — 3.5 KB, modified 2026-04-23
+- **`api/apps/auth/oauth.py`** — 5.3 KB, modified 2026-04-23
+- **`api/apps/auth/oidc.py`** — 3.7 KB, modified 2026-04-23
+- **`api/apps/canvas_app.py`** — 21.4 KB, modified 2026-04-23
+- **`api/apps/chunk_app.py`** — 18.5 KB, modified 2026-04-23
+- **`api/apps/connector_app.py`** — 15.4 KB, modified 2026-04-23
+- **`api/apps/conversation_app.py`** — 17.7 KB, modified 2026-04-23
+- **`api/apps/dialog_app.py`** — 9.0 KB, modified 2026-04-23
+- **`api/apps/document_app.py`** — 30.1 KB, modified 2026-04-23
+- **`api/apps/evaluation_app.py`** — 14.0 KB, modified 2026-04-23
+- **`api/apps/file2document_app.py`** — 5.6 KB, modified 2026-04-23
+- **`api/apps/file_app.py`** — 17.9 KB, modified 2026-04-23
+- **`api/apps/kb_app.py`** — 34.9 KB, modified 2026-04-23
+- **`api/apps/langfuse_app.py`** — 3.8 KB, modified 2026-04-23
+- **`api/apps/llm_app.py`** — 15.7 KB, modified 2026-04-23
+- **`api/apps/mcp_server_app.py`** — 16.9 KB, modified 2026-04-23
+- **`api/apps/plugin_app.py`** — 1.0 KB, modified 2026-04-23
+- **`api/apps/sdk/agents.py`** — 6.6 KB, modified 2026-04-23
+- **`api/apps/sdk/chat.py`** — 15.0 KB, modified 2026-04-23
+- **`api/apps/sdk/dataset.py`** — 23.8 KB, modified 2026-04-23
+- **`api/apps/sdk/dify_retrieval.py`** — 6.2 KB, modified 2026-04-23
+- **`api/apps/sdk/doc.py`** — 54.1 KB, modified 2026-04-23
+- **`api/apps/sdk/files.py`** — 25.2 KB, modified 2026-04-23
+- **`api/apps/sdk/session.py`** — 46.8 KB, modified 2026-04-23
+- **`api/apps/search_app.py`** — 7.8 KB, modified 2026-04-23
+- **`api/apps/system_app.py`** — 9.5 KB, modified 2026-04-23
+- **`api/apps/tenant_app.py`** — 5.0 KB, modified 2026-04-23
+- **`api/apps/user_app.py`** — 32.1 KB, modified 2026-04-23
+- **`api/common/base64.py`** — 783 B, modified 2026-04-23
+- **`api/common/check_team_permission.py`** — 1.9 KB, modified 2026-04-23
+- **`api/common/exceptions.py`** — 1.3 KB, modified 2026-04-23
+- **`api/constants.py`** — 847 B, modified 2026-04-23
+- **`api/db/__init__.py`** — 2.1 KB, modified 2026-04-23
+- **`api/db/db_models.py`** — 58.1 KB, modified 2026-04-23
+- **`api/db/db_utils.py`** — 3.9 KB, modified 2026-04-23
+- **`api/db/init_data.py`** — 7.0 KB, modified 2026-04-23
+- **`api/db/joint_services/__init__.py`** — 0 B, modified 2026-04-23
+- **`api/db/joint_services/user_account_service.py`** — 15.6 KB, modified 2026-04-23
+- **`api/db/reload_config_base.py`** — 1.0 KB, modified 2026-04-23
+- **`api/db/runtime_config.py`** — 1.5 KB, modified 2026-04-23
+- **`api/db/services/__init__.py`** — 3.1 KB, modified 2026-04-23
+- **`api/db/services/api_service.py`** — 4.2 KB, modified 2026-04-23
+- **`api/db/services/canvas_service.py`** — 12.6 KB, modified 2026-04-23
+- **`api/db/services/common_service.py`** — 12.6 KB, modified 2026-04-23
+- **`api/db/services/connector_service.py`** — 12.5 KB, modified 2026-04-23
+- **`api/db/services/conversation_service.py`** — 9.2 KB, modified 2026-04-23
+- **`api/db/services/dialog_service.py`** — 37.9 KB, modified 2026-04-23
+- **`api/db/services/document_service.py`** — 39.2 KB, modified 2026-04-23
+- **`api/db/services/evaluation_service.py`** — 21.8 KB, modified 2026-04-23
+- **`api/db/services/file2document_service.py`** — 3.5 KB, modified 2026-04-23
+- **`api/db/services/file_service.py`** — 25.7 KB, modified 2026-04-23
+- **`api/db/services/knowledgebase_service.py`** — 20.9 KB, modified 2026-04-23
+- **`api/db/services/langfuse_service.py`** — 2.7 KB, modified 2026-04-23
+- **`api/db/services/llm_service.py`** — 18.1 KB, modified 2026-04-23
+- **`api/db/services/mcp_server_service.py`** — 3.3 KB, modified 2026-04-23
+- **`api/db/services/pipeline_operation_log_service.py`** — 10.3 KB, modified 2026-04-23
+- **`api/db/services/search_service.py`** — 3.9 KB, modified 2026-04-23
+- **`api/db/services/task_service.py`** — 20.0 KB, modified 2026-04-23
+- **`api/db/services/tenant_llm_service.py`** — 11.6 KB, modified 2026-04-23
+- **`api/db/services/user_canvas_version.py`** — 2.1 KB, modified 2026-04-23
+- **`api/db/services/user_service.py`** — 11.5 KB, modified 2026-04-23
+- **`api/ragflow_server.py`** — 5.5 KB, modified 2026-04-23
+- **`api/settings.py`** — 622 B, modified 2026-04-23
+- **`api/utils/__init__.py`** — 968 B, modified 2026-04-23
+- **`api/utils/api_utils.py`** — 24.4 KB, modified 2026-04-23
+- **`api/utils/base64_image.py`** — 622 B, modified 2026-04-23
+- **`api/utils/commands.py`** — 3.3 KB, modified 2026-04-23
+- **`api/utils/common.py`** — 816 B, modified 2026-04-23
+- **`api/utils/configs.py`** — 1.8 KB, modified 2026-04-23
+- **`api/utils/crypt.py`** — 2.3 KB, modified 2026-04-23
+- **`api/utils/email_templates.py`** — 1.3 KB, modified 2026-04-23
+- **`api/utils/file_utils.py`** — 5.8 KB, modified 2026-04-23
+- **`api/utils/health_utils.py`** — 7.0 KB, modified 2026-04-23
+- **`api/utils/json_encode.py`** — 3.1 KB, modified 2026-04-23
+- **`api/utils/log_utils.py`** — 622 B, modified 2026-04-23
+- **`api/utils/validation_utils.py`** — 28.0 KB, modified 2026-04-23
+- **`api/utils/web_utils.py`** — 6.8 KB, modified 2026-04-23
+- **`api/validation.py`** — 1.6 KB, modified 2026-04-23
+- **`check_comment_ascii.py`** — 1.3 KB, modified 2026-04-23
+- **`common/__init__.py`** — 621 B, modified 2026-04-23
+- **`common/config_utils.py`** — 4.9 KB, modified 2026-04-23
+- **`common/connection_utils.py`** — 5.4 KB, modified 2026-04-23
+- **`common/constants.py`** — 5.6 KB, modified 2026-04-23
+- **`common/data_source/__init__.py`** — 1.6 KB, modified 2026-04-23
+- **`common/data_source/blob_connector.py`** — 10.5 KB, modified 2026-04-23
+- **`common/data_source/config.py`** — 7.7 KB, modified 2026-04-23
+- **`common/data_source/confluence_connector.py`** — 79.2 KB, modified 2026-04-23
+- **`common/data_source/discord_connector.py`** — 12.0 KB, modified 2026-04-23
+- **`common/data_source/dropbox_connector.py`** — 6.8 KB, modified 2026-04-23
+- **`common/data_source/exceptions.py`** — 686 B, modified 2026-04-23
+- **`common/data_source/file_types.py`** — 1.1 KB, modified 2026-04-23
+- **`common/data_source/gmail_connector.py`** — 13.5 KB, modified 2026-04-23
+- **`common/data_source/google_drive/__init__.py`** — 0 B, modified 2026-04-23
+- **`common/data_source/google_drive/connector.py`** — 57.7 KB, modified 2026-04-23
+- **`common/data_source/google_drive/constant.py`** — 228 B, modified 2026-04-23
+- **`common/data_source/google_drive/doc_conversion.py`** — 22.2 KB, modified 2026-04-23
+- **`common/data_source/google_drive/file_retrieval.py`** — 13.5 KB, modified 2026-04-23
+- **`common/data_source/google_drive/model.py`** — 5.2 KB, modified 2026-04-23
+- **`common/data_source/google_drive/section_extraction.py`** — 6.5 KB, modified 2026-04-23
+- **`common/data_source/google_util/__init__.py`** — 0 B, modified 2026-04-23
+- **`common/data_source/google_util/auth.py`** — 6.8 KB, modified 2026-04-23
+- **`common/data_source/google_util/constant.py`** — 2.7 KB, modified 2026-04-23
+- **`common/data_source/google_util/oauth_flow.py`** — 4.8 KB, modified 2026-04-23
+- **`common/data_source/google_util/resource.py`** — 3.9 KB, modified 2026-04-23
+- **`common/data_source/google_util/util.py`** — 8.8 KB, modified 2026-04-23
+- **`common/data_source/google_util/util_threadpool_concurrency.py`** — 4.7 KB, modified 2026-04-23
+- **`common/data_source/html_utils.py`** — 7.7 KB, modified 2026-04-23
+- **`common/data_source/interfaces.py`** — 12.7 KB, modified 2026-04-23
+- **`common/data_source/jira/__init__.py`** — 0 B, modified 2026-04-23
+- **`common/data_source/jira/connector.py`** — 39.0 KB, modified 2026-04-23
+- **`common/data_source/jira/utils.py`** — 4.7 KB, modified 2026-04-23
+- **`common/data_source/models.py`** — 8.0 KB, modified 2026-04-23
+- **`common/data_source/moodle_connector.py`** — 22.2 KB, modified 2026-04-23
+- **`common/data_source/notion_connector.py`** — 25.1 KB, modified 2026-04-23
+- **`common/data_source/sharepoint_connector.py`** — 4.6 KB, modified 2026-04-23
+- **`common/data_source/slack_connector.py`** — 22.1 KB, modified 2026-04-23
+- **`common/data_source/teams_connector.py`** — 4.2 KB, modified 2026-04-23
+- **`common/data_source/utils.py`** — 39.8 KB, modified 2026-04-23
+- **`common/data_source/webdav_connector.py`** — 14.8 KB, modified 2026-04-23
+- **`common/decorator.py`** — 881 B, modified 2026-04-23
+- **`common/exceptions.py`** — 713 B, modified 2026-04-23
+- **`common/file_utils.py`** — 1.2 KB, modified 2026-04-23
+- **`common/float_utils.py`** — 1.4 KB, modified 2026-04-23
+- **`common/http_client.py`** — 6.5 KB, modified 2026-04-23
+- **`common/log_utils.py`** — 2.8 KB, modified 2026-04-23
+- **`common/mcp_tool_call_conn.py`** — 13.0 KB, modified 2026-04-23
+- **`common/misc_utils.py`** — 7.9 KB, modified 2026-04-23
+- **`common/settings.py`** — 11.9 KB, modified 2026-04-23
+- **`common/signal_utils.py`** — 2.0 KB, modified 2026-04-23
+- **`common/string_utils.py`** — 2.8 KB, modified 2026-04-23
+- **`common/time_utils.py`** — 3.7 KB, modified 2026-04-23
+- **`common/token_utils.py`** — 2.7 KB, modified 2026-04-23
+- **`common/versions.py`** — 1.5 KB, modified 2026-04-23
+- **`deepdoc/__init__.py`** — 695 B, modified 2026-04-23
+- **`deepdoc/parser/__init__.py`** — 1.4 KB, modified 2026-04-23
+- **`deepdoc/parser/docling_parser.py`** — 13.4 KB, modified 2026-04-23
+- **`deepdoc/parser/docx_parser.py`** — 5.0 KB, modified 2026-04-23
+- **`deepdoc/parser/excel_parser.py`** — 8.0 KB, modified 2026-04-23
+- **`deepdoc/parser/figure_parser.py`** — 5.9 KB, modified 2026-04-23
+- **`deepdoc/parser/html_parser.py`** — 8.1 KB, modified 2026-04-23
+- **`deepdoc/parser/json_parser.py`** — 6.2 KB, modified 2026-04-23
+- **`deepdoc/parser/markdown_parser.py`** — 11.9 KB, modified 2026-04-23
+- **`deepdoc/parser/mineru_parser.py`** — 26.8 KB, modified 2026-04-23
+- **`deepdoc/parser/pdf_parser.py`** — 58.5 KB, modified 2026-04-23
+- **`deepdoc/parser/ppt_parser.py`** — 3.5 KB, modified 2026-04-23
+- **`deepdoc/parser/resume/__init__.py`** — 3.1 KB, modified 2026-04-23
+- **`deepdoc/parser/resume/entities/__init__.py`** — 621 B, modified 2026-04-23
+- **`deepdoc/parser/resume/entities/corporations.py`** — 3.8 KB, modified 2026-04-23
+- **`deepdoc/parser/resume/entities/degrees.py`** — 1.1 KB, modified 2026-04-23
+- **`deepdoc/parser/resume/entities/industries.py`** — 36.8 KB, modified 2026-04-23
+- **`deepdoc/parser/resume/entities/regions.py`** — 39.2 KB, modified 2026-04-23
+- **`deepdoc/parser/resume/entities/schools.py`** — 2.8 KB, modified 2026-04-23
+- **`deepdoc/parser/resume/step_one.py`** — 6.1 KB, modified 2026-04-23
+- **`deepdoc/parser/resume/step_two.py`** — 25.3 KB, modified 2026-04-23
+- **`deepdoc/parser/tcadp_parser.py`** — 23.2 KB, modified 2026-04-23
+- **`deepdoc/parser/txt_parser.py`** — 2.2 KB, modified 2026-04-23
+- **`deepdoc/parser/utils.py`** — 1023 B, modified 2026-04-23
+- **`deepdoc/vision/__init__.py`** — 2.5 KB, modified 2026-04-23
+- **`deepdoc/vision/layout_recognizer.py`** — 17.5 KB, modified 2026-04-23
+- **`deepdoc/vision/ocr.py`** — 27.1 KB, modified 2026-04-23
+- **`deepdoc/vision/operators.py`** — 23.4 KB, modified 2026-04-23
+- **`deepdoc/vision/postprocess.py`** — 12.9 KB, modified 2026-04-23
+- **`deepdoc/vision/recognizer.py`** — 15.9 KB, modified 2026-04-23
+- **`deepdoc/vision/seeit.py`** — 2.8 KB, modified 2026-04-23
+- **`deepdoc/vision/t_ocr.py`** — 3.1 KB, modified 2026-04-23
+- **`deepdoc/vision/t_recognizer.py`** — 5.7 KB, modified 2026-04-23
+- **`deepdoc/vision/table_structure_recognizer.py`** — 23.1 KB, modified 2026-04-23
+- **`download_deps.py`** — 3.4 KB, modified 2026-04-23
+- **`example/sdk/dataset_example.py`** — 1.5 KB, modified 2026-04-23
+- **`graphrag/__init__.py`** — 0 B, modified 2026-04-23
+- **`graphrag/entity_resolution.py`** — 12.0 KB, modified 2026-04-23
+- **`graphrag/entity_resolution_prompt.py`** — 4.4 KB, modified 2026-04-23
+- **`graphrag/general/__init__.py`** — 0 B, modified 2026-04-23
+- **`graphrag/general/community_report_prompt.py`** — 8.8 KB, modified 2026-04-23
+- **`graphrag/general/community_reports_extractor.py`** — 7.2 KB, modified 2026-04-23
+- **`graphrag/general/entity_embedding.py`** — 1.8 KB, modified 2026-04-23
+- **`graphrag/general/extractor.py`** — 14.1 KB, modified 2026-04-23
+- **`graphrag/general/graph_extractor.py`** — 6.2 KB, modified 2026-04-23
+- **`graphrag/general/graph_prompt.py`** — 11.9 KB, modified 2026-04-23
+- **`graphrag/general/index.py`** — 20.8 KB, modified 2026-04-23
+- **`graphrag/general/leiden.py`** — 5.3 KB, modified 2026-04-23
+- **`graphrag/general/mind_map_extractor.py`** — 6.3 KB, modified 2026-04-23
+- **`graphrag/general/mind_map_prompt.py`** — 1.2 KB, modified 2026-04-23
+- **`graphrag/general/smoke.py`** — 3.1 KB, modified 2026-04-23
+- **`graphrag/light/__init__.py`** — 622 B, modified 2026-04-23
+- **`graphrag/light/graph_extractor.py`** — 6.0 KB, modified 2026-04-23
+- **`graphrag/light/graph_prompt.py`** — 22.8 KB, modified 2026-04-23
+- **`graphrag/light/smoke.py`** — 2.6 KB, modified 2026-04-23
+- **`graphrag/query_analyze_prompt.py`** — 7.7 KB, modified 2026-04-23
+- **`graphrag/search.py`** — 14.4 KB, modified 2026-04-23
+- **`graphrag/utils.py`** — 22.5 KB, modified 2026-04-23
+- **`intergrations/chatgpt-on-wechat/plugins/__init__.py`** — 767 B, modified 2026-04-23
+- **`intergrations/chatgpt-on-wechat/plugins/ragflow_chat.py`** — 5.7 KB, modified 2026-04-23
+- **`intergrations/firecrawl/__init__.py`** — 476 B, modified 2026-04-23
+- **`intergrations/firecrawl/example_usage.py`** — 7.5 KB, modified 2026-04-23
+- **`intergrations/firecrawl/firecrawl_config.py`** — 2.8 KB, modified 2026-04-23
+- **`intergrations/firecrawl/firecrawl_connector.py`** — 9.2 KB, modified 2026-04-23
+- **`intergrations/firecrawl/firecrawl_processor.py`** — 9.5 KB, modified 2026-04-23
+- **`intergrations/firecrawl/firecrawl_ui.py`** — 9.9 KB, modified 2026-04-23
+- **`intergrations/firecrawl/integration.py`** — 5.0 KB, modified 2026-04-23
+- **`intergrations/firecrawl/ragflow_integration.py`** — 6.8 KB, modified 2026-04-23
+- **`mcp/client/client.py`** — 1.9 KB, modified 2026-04-23
+- **`mcp/client/streamable_http_client.py`** — 1.4 KB, modified 2026-04-23
+- **`mcp/server/server.py`** — 29.1 KB, modified 2026-04-23
+- **`plugin/__init__.py`** — 81 B, modified 2026-04-23
+- **`plugin/common.py`** — 35 B, modified 2026-04-23
+- **`plugin/embedded_plugins/llm_tools/bad_calculator.py`** — 1.3 KB, modified 2026-04-23
+- **`plugin/llm_tool_plugin.py`** — 1.3 KB, modified 2026-04-23
+- **`plugin/plugin_manager.py`** — 1.3 KB, modified 2026-04-23
+- **`rag/__init__.py`** — 699 B, modified 2026-04-23
+- **`rag/app/__init__.py`** — 621 B, modified 2026-04-23
+- **`rag/app/audio.py`** — 2.2 KB, modified 2026-04-23
+- **`rag/app/book.py`** — 7.4 KB, modified 2026-04-23
+- **`rag/app/email.py`** — 4.5 KB, modified 2026-04-23
+- **`rag/app/laws.py`** — 7.8 KB, modified 2026-04-23
+- **`rag/app/manual.py`** — 13.0 KB, modified 2026-04-23
+- **`rag/app/naive.py`** — 38.8 KB, modified 2026-04-23
+- **`rag/app/one.py`** — 5.9 KB, modified 2026-04-23
+- **`rag/app/paper.py`** — 11.5 KB, modified 2026-04-23
+- **`rag/app/picture.py`** — 4.0 KB, modified 2026-04-23
+- **`rag/app/presentation.py`** — 8.4 KB, modified 2026-04-23
+- **`rag/app/qa.py`** — 18.9 KB, modified 2026-04-23
+- **`rag/app/resume.py`** — 6.9 KB, modified 2026-04-23
+- **`rag/app/table.py`** — 15.7 KB, modified 2026-04-23
+- **`rag/app/tag.py`** — 5.7 KB, modified 2026-04-23
+- **`rag/benchmark.py`** — 14.1 KB, modified 2026-04-23
+- **`rag/flow/__init__.py`** — 1.9 KB, modified 2026-04-23
+- **`rag/flow/base.py`** — 2.2 KB, modified 2026-04-23
+- **`rag/flow/extractor/__init__.py`** — 621 B, modified 2026-04-23
+- **`rag/flow/extractor/extractor.py`** — 4.2 KB, modified 2026-04-23
+- **`rag/flow/extractor/schema.py`** — 1.6 KB, modified 2026-04-23
+- **`rag/flow/file.py`** — 1.7 KB, modified 2026-04-23
+- **`rag/flow/hierarchical_merger/__init__.py`** — 621 B, modified 2026-04-23
+- **`rag/flow/hierarchical_merger/hierarchical_merger.py`** — 6.4 KB, modified 2026-04-23
+- **`rag/flow/hierarchical_merger/schema.py`** — 1.6 KB, modified 2026-04-23
+- **`rag/flow/parser/__init__.py`** — 620 B, modified 2026-04-23
+- **`rag/flow/parser/parser.py`** — 32.9 KB, modified 2026-04-23
+- **`rag/flow/parser/schema.py`** — 989 B, modified 2026-04-23
+- **`rag/flow/pipeline.py`** — 6.9 KB, modified 2026-04-23
+- **`rag/flow/splitter/__init__.py`** — 621 B, modified 2026-04-23
+- **`rag/flow/splitter/schema.py`** — 1.6 KB, modified 2026-04-23
+- **`rag/flow/splitter/splitter.py`** — 5.5 KB, modified 2026-04-23
+- **`rag/flow/tests/client.py`** — 2.1 KB, modified 2026-04-23
+- **`rag/flow/tokenizer/__init__.py`** — 620 B, modified 2026-04-23
+- **`rag/flow/tokenizer/schema.py`** — 2.5 KB, modified 2026-04-23
+- **`rag/flow/tokenizer/tokenizer.py`** — 8.0 KB, modified 2026-04-23
+- **`rag/llm/__init__.py`** — 6.6 KB, modified 2026-04-23
+- **`rag/llm/chat_model.py`** — 68.2 KB, modified 2026-04-23
+- **`rag/llm/cv_model.py`** — 43.2 KB, modified 2026-04-23
+- **`rag/llm/embedding_model.py`** — 33.6 KB, modified 2026-04-23
+- **`rag/llm/rerank_model.py`** — 17.0 KB, modified 2026-04-23
+- **`rag/llm/sequence2txt_model.py`** — 12.2 KB, modified 2026-04-23
+- **`rag/llm/tts_model.py`** — 14.4 KB, modified 2026-04-23
+- **`rag/nlp/__init__.py`** — 35.3 KB, modified 2026-04-23
+- **`rag/nlp/query.py`** — 10.8 KB, modified 2026-04-23
+- **`rag/nlp/rag_tokenizer.py`** — 1.3 KB, modified 2026-04-23
+- **`rag/nlp/search.py`** — 28.2 KB, modified 2026-04-23
+- **`rag/nlp/surname.py`** — 4.2 KB, modified 2026-04-23
+- **`rag/nlp/synonym.py`** — 3.1 KB, modified 2026-04-23
+- **`rag/nlp/term_weight.py`** — 8.1 KB, modified 2026-04-23
+- **`rag/prompts/__init__.py`** — 179 B, modified 2026-04-23
+- **`rag/prompts/generator.py`** — 31.0 KB, modified 2026-04-23
+- **`rag/prompts/template.py`** — 504 B, modified 2026-04-23
+- **`rag/raptor.py`** — 9.1 KB, modified 2026-04-23
+- **`rag/settings.py`** — 622 B, modified 2026-04-23
+- **`rag/svr/cache_file_svr.py`** — 1.8 KB, modified 2026-04-23
+- **`rag/svr/discord_svr.py`** — 2.6 KB, modified 2026-04-23
+- **`rag/svr/sync_data_source.py`** — 28.1 KB, modified 2026-04-23
+- **`rag/svr/task_executor.py`** — 47.6 KB, modified 2026-04-23
+- **`rag/utils/__init__.py`** — 623 B, modified 2026-04-23
+- **`rag/utils/azure_sas_conn.py`** — 3.0 KB, modified 2026-04-23
+- **`rag/utils/azure_spn_conn.py`** — 3.7 KB, modified 2026-04-23
+- **`rag/utils/base64_image.py`** — 2.8 KB, modified 2026-04-23
+- **`rag/utils/doc_store_conn.py`** — 7.5 KB, modified 2026-04-23
+- **`rag/utils/es_conn.py`** — 25.5 KB, modified 2026-04-23
+- **`rag/utils/file_utils.py`** — 8.2 KB, modified 2026-04-23
+- **`rag/utils/gcs_conn.py`** — 7.5 KB, modified 2026-04-23
+- **`rag/utils/infinity_conn.py`** — 39.8 KB, modified 2026-04-23
+- **`rag/utils/minio_conn.py`** — 6.0 KB, modified 2026-04-23
+- **`rag/utils/ob_conn.py`** — 65.7 KB, modified 2026-04-23
+- **`rag/utils/opendal_conn.py`** — 4.3 KB, modified 2026-04-23
+- **`rag/utils/opensearch_conn.py`** — 22.8 KB, modified 2026-04-23
+- **`rag/utils/oss_conn.py`** — 5.9 KB, modified 2026-04-23
+- **`rag/utils/raptor_utils.py`** — 4.4 KB, modified 2026-04-23
+- **`rag/utils/redis_conn.py`** — 14.1 KB, modified 2026-04-23
+- **`rag/utils/s3_conn.py`** — 7.7 KB, modified 2026-04-23
+- **`rag/utils/storage_factory.py`** — 622 B, modified 2026-04-23
+- **`rag/utils/tavily_conn.py`** — 2.3 KB, modified 2026-04-23
+- **`run_tests.py`** — 8.2 KB, modified 2026-04-23
+- **`sandbox/executor_manager/api/__init__.py`** — 622 B, modified 2026-04-23
+- **`sandbox/executor_manager/api/handlers.py`** — 2.1 KB, modified 2026-04-23
+- **`sandbox/executor_manager/api/routes.py`** — 814 B, modified 2026-04-23
+- **`sandbox/executor_manager/core/__init__.py`** — 622 B, modified 2026-04-23
+- **`sandbox/executor_manager/core/config.py`** — 1.4 KB, modified 2026-04-23
+- **`sandbox/executor_manager/core/container.py`** — 7.4 KB, modified 2026-04-23
+- **`sandbox/executor_manager/core/logger.py`** — 716 B, modified 2026-04-23
+- **`sandbox/executor_manager/main.py`** — 999 B, modified 2026-04-23
+- **`sandbox/executor_manager/models/__init__.py`** — 622 B, modified 2026-04-23
+- **`sandbox/executor_manager/models/enums.py`** — 1.3 KB, modified 2026-04-23
+- **`sandbox/executor_manager/models/schemas.py`** — 1.8 KB, modified 2026-04-23
+- **`sandbox/executor_manager/services/__init__.py`** — 622 B, modified 2026-04-23
+- **`sandbox/executor_manager/services/execution.py`** — 9.4 KB, modified 2026-04-23
+- **`sandbox/executor_manager/services/limiter.py`** — 1.4 KB, modified 2026-04-23
+- **`sandbox/executor_manager/services/security.py`** — 7.6 KB, modified 2026-04-23
+- **`sandbox/executor_manager/util.py`** — 2.3 KB, modified 2026-04-23
+- **`sandbox/executor_manager/utils/__init__.py`** — 622 B, modified 2026-04-23
+- **`sandbox/executor_manager/utils/common.py`** — 1.4 KB, modified 2026-04-23
+- **`sandbox/tests/sandbox_security_tests_full.py`** — 12.7 KB, modified 2026-04-23
+- **`sdk/python/hello_ragflow.py`** — 674 B, modified 2026-04-23
+- **`sdk/python/ragflow_sdk/__init__.py`** — 1.1 KB, modified 2026-04-23
+- **`sdk/python/ragflow_sdk/modules/__init__.py`** — 621 B, modified 2026-04-23
+- **`sdk/python/ragflow_sdk/modules/agent.py`** — 3.2 KB, modified 2026-04-23
+- **`sdk/python/ragflow_sdk/modules/base.py`** — 1.8 KB, modified 2026-04-23
+- **`sdk/python/ragflow_sdk/modules/chat.py`** — 3.6 KB, modified 2026-04-23
+- **`sdk/python/ragflow_sdk/modules/chunk.py`** — 1.9 KB, modified 2026-04-23
+- **`sdk/python/ragflow_sdk/modules/dataset.py`** — 5.3 KB, modified 2026-04-23
+- **`sdk/python/ragflow_sdk/modules/document.py`** — 3.7 KB, modified 2026-04-23
+- **`sdk/python/ragflow_sdk/modules/session.py`** — 4.8 KB, modified 2026-04-23
+- **`sdk/python/ragflow_sdk/ragflow.py`** — 10.1 KB, modified 2026-04-23
+- **`sdk/python/test/conftest.py`** — 4.6 KB, modified 2026-04-23
+- **`sdk/python/test/libs/__init__.py`** — 622 B, modified 2026-04-23
+- **`sdk/python/test/libs/auth.py`** — 860 B, modified 2026-04-23
+- **`sdk/python/test/libs/utils/__init__.py`** — 2.0 KB, modified 2026-04-23
+- **`sdk/python/test/libs/utils/file_utils.py`** — 2.9 KB, modified 2026-04-23
+- **`sdk/python/test/libs/utils/hypothesis_utils.py`** — 1.0 KB, modified 2026-04-23
+- **`sdk/python/test/test_frontend_api/common.py`** — 2.8 KB, modified 2026-04-23
+- **`sdk/python/test/test_frontend_api/get_email.py`** — 733 B, modified 2026-04-23
+- **`sdk/python/test/test_frontend_api/test_chunk.py`** — 2.4 KB, modified 2026-04-23
+- **`sdk/python/test/test_frontend_api/test_dataset.py`** — 5.8 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/common.py`** — 9.2 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/conftest.py`** — 6.1 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_chat_assistant_management/conftest.py`** — 1.6 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_chat_assistant_management/test_create_chat_assistant.py`** — 12.1 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_chat_assistant_management/test_delete_chat_assistants.py`** — 5.3 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_chat_assistant_management/test_list_chat_assistants.py`** — 11.1 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_chat_assistant_management/test_update_chat_assistant.py`** — 12.5 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_chunk_management_within_dataset/conftest.py`** — 1.7 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_chunk_management_within_dataset/test_add_chunk.py`** — 10.5 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_chunk_management_within_dataset/test_delete_chunks.py`** — 7.8 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_chunk_management_within_dataset/test_list_chunks.py`** — 8.4 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_chunk_management_within_dataset/test_retrieval_chunks.py`** — 12.2 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_chunk_management_within_dataset/test_update_chunk.py`** — 10.4 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_dataset_mangement/conftest.py`** — 1.2 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_dataset_mangement/test_create_dataset.py`** — 34.9 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_dataset_mangement/test_delete_datasets.py`** — 8.0 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_dataset_mangement/test_list_datasets.py`** — 12.9 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_dataset_mangement/test_update_dataset.py`** — 35.7 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_file_management_within_dataset/conftest.py`** — 1.7 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_file_management_within_dataset/test_delete_documents.py`** — 6.4 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_file_management_within_dataset/test_download_document.py`** — 5.9 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_file_management_within_dataset/test_list_documents.py`** — 12.6 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_file_management_within_dataset/test_parse_documents.py`** — 8.4 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_file_management_within_dataset/test_stop_parse_documents.py`** — 8.6 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_file_management_within_dataset/test_update_document.py`** — 19.2 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_file_management_within_dataset/test_upload_documents.py`** — 8.5 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_session_management/conftest.py`** — 2.0 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_session_management/test_create_session_with_chat_assistant.py`** — 5.1 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_session_management/test_delete_sessions_with_chat_assistant.py`** — 7.3 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_session_management/test_list_sessions_with_chat_assistant.py`** — 11.1 KB, modified 2026-04-23
+- **`sdk/python/test/test_http_api/test_session_management/test_update_session_with_chat_assistant.py`** — 7.1 KB, modified 2026-04-23
+- **`sdk/python/test/test_sdk_api/common.py`** — 700 B, modified 2026-04-23
+- **`sdk/python/test/test_sdk_api/get_email.py`** — 736 B, modified 2026-04-23
+- **`sdk/python/test/test_sdk_api/t_agent.py`** — 1.2 KB, modified 2026-04-23
+- **`sdk/python/test/test_sdk_api/t_chat.py`** — 4.3 KB, modified 2026-04-23
+- **`sdk/python/test/test_sdk_api/t_chunk.py`** — 7.8 KB, modified 2026-04-23
+- **`sdk/python/test/test_sdk_api/t_dataset.py`** — 3.0 KB, modified 2026-04-23
+- **`sdk/python/test/test_sdk_api/t_document.py`** — 7.6 KB, modified 2026-04-23
+- **`sdk/python/test/test_sdk_api/t_session.py`** — 5.4 KB, modified 2026-04-23
+- **`test/testcases/configs.py`** — 2.3 KB, modified 2026-04-23
+- **`test/testcases/conftest.py`** — 4.6 KB, modified 2026-04-23
+- **`test/testcases/libs/__init__.py`** — 622 B, modified 2026-04-23
+- **`test/testcases/libs/auth.py`** — 1.0 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/common.py`** — 9.0 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/conftest.py`** — 4.9 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_chat_assistant_management/conftest.py`** — 1.4 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_chat_assistant_management/test_create_chat_assistant.py`** — 12.0 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_chat_assistant_management/test_delete_chat_assistants.py`** — 5.4 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_chat_assistant_management/test_list_chat_assistants.py`** — 11.1 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_chat_assistant_management/test_update_chat_assistant.py`** — 12.5 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_chunk_management_within_dataset/conftest.py`** — 1.5 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_chunk_management_within_dataset/test_add_chunk.py`** — 10.4 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_chunk_management_within_dataset/test_delete_chunks.py`** — 7.7 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_chunk_management_within_dataset/test_list_chunks.py`** — 8.5 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_chunk_management_within_dataset/test_retrieval_chunks.py`** — 12.3 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_chunk_management_within_dataset/test_update_chunk.py`** — 10.4 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_dataset_mangement/conftest.py`** — 1.1 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_dataset_mangement/test_create_dataset.py`** — 35.5 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_dataset_mangement/test_delete_datasets.py`** — 7.8 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_dataset_mangement/test_list_datasets.py`** — 12.6 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_dataset_mangement/test_update_dataset.py`** — 35.5 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_file_management_within_dataset/conftest.py`** — 1.7 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_file_management_within_dataset/test_delete_documents.py`** — 6.4 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_file_management_within_dataset/test_download_document.py`** — 5.8 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_file_management_within_dataset/test_list_documents.py`** — 12.6 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_file_management_within_dataset/test_parse_documents.py`** — 8.3 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_file_management_within_dataset/test_stop_parse_documents.py`** — 8.5 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_file_management_within_dataset/test_update_document.py`** — 19.0 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_file_management_within_dataset/test_upload_documents.py`** — 8.3 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_session_management/conftest.py`** — 1.6 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_session_management/test_create_session_with_chat_assistant.py`** — 5.2 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_session_management/test_delete_sessions_with_chat_assistant.py`** — 7.3 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_session_management/test_list_sessions_with_chat_assistant.py`** — 11.1 KB, modified 2026-04-23
+- **`test/testcases/test_http_api/test_session_management/test_update_session_with_chat_assistant.py`** — 7.1 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/common.py`** — 1.9 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/conftest.py`** — 5.2 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_chat_assistant_management/conftest.py`** — 1.5 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_chat_assistant_management/test_create_chat_assistant.py`** — 11.2 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_chat_assistant_management/test_delete_chat_assistants.py`** — 4.3 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_chat_assistant_management/test_list_chat_assistants.py`** — 8.4 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_chat_assistant_management/test_update_chat_assistant.py`** — 10.6 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_chunk_management_within_dataset/conftest.py`** — 1.6 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_chunk_management_within_dataset/test_add_chunk.py`** — 6.6 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_chunk_management_within_dataset/test_delete_chunks.py`** — 4.5 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_chunk_management_within_dataset/test_list_chunks.py`** — 5.6 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_chunk_management_within_dataset/test_retrieval_chunks.py`** — 9.9 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_chunk_management_within_dataset/test_update_chunk.py`** — 5.9 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_dataset_mangement/conftest.py`** — 1.1 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_dataset_mangement/test_create_dataset.py`** — 33.8 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_dataset_mangement/test_delete_datasets.py`** — 6.5 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_dataset_mangement/test_list_datasets.py`** — 10.8 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_dataset_mangement/test_update_dataset.py`** — 32.2 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_file_management_within_dataset/conftest.py`** — 1.8 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_file_management_within_dataset/test_delete_documents.py`** — 4.2 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_file_management_within_dataset/test_download_document.py`** — 2.9 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_file_management_within_dataset/test_list_documents.py`** — 9.6 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_file_management_within_dataset/test_parse_documents.py`** — 6.2 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_file_management_within_dataset/test_stop_parse_documents.py`** — 1.4 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_file_management_within_dataset/test_update_document.py`** — 15.1 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_file_management_within_dataset/test_upload_documents.py`** — 7.9 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_session_management/conftest.py`** — 1.9 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_session_management/test_create_session_with_chat_assistant.py`** — 3.1 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_session_management/test_delete_sessions_with_chat_assistant.py`** — 4.7 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_session_management/test_list_sessions_with_chat_assistant.py`** — 8.8 KB, modified 2026-04-23
+- **`test/testcases/test_sdk_api/test_session_management/test_update_session_with_chat_assistant.py`** — 4.0 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/common.py`** — 9.2 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/conftest.py`** — 5.0 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_chunk_app/conftest.py`** — 1.6 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_chunk_app/test_create_chunk.py`** — 9.9 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_chunk_app/test_list_chunks.py`** — 6.0 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_chunk_app/test_retrieval_chunks.py`** — 12.3 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_chunk_app/test_rm_chunks.py`** — 6.5 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_chunk_app/test_update_chunk.py`** — 10.1 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_dialog_app/conftest.py`** — 1.5 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_dialog_app/test_create_dialog.py`** — 7.6 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_dialog_app/test_delete_dialogs.py`** — 7.6 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_dialog_app/test_dialog_edge_cases.py`** — 9.2 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_dialog_app/test_get_dialog.py`** — 6.8 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_dialog_app/test_list_dialogs.py`** — 7.9 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_dialog_app/test_update_dialog.py`** — 8.0 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_document_app/conftest.py`** — 2.0 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_document_app/test_create_document.py`** — 3.7 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_document_app/test_list_documents.py`** — 8.3 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_document_app/test_paser_documents.py`** — 10.3 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_document_app/test_rm_documents.py`** — 4.1 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_document_app/test_upload_documents.py`** — 7.7 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_kb_app/conftest.py`** — 1.3 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_kb_app/test_create_kb.py`** — 4.0 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_kb_app/test_detail_kb.py`** — 1.9 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_kb_app/test_list_kbs.py`** — 6.6 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_kb_app/test_rm_kb.py`** — 2.0 KB, modified 2026-04-23
+- **`test/testcases/test_web_api/test_kb_app/test_update_kb.py`** — 14.9 KB, modified 2026-04-23
+- **`test/testcases/utils/__init__.py`** — 2.0 KB, modified 2026-04-23
+- **`test/testcases/utils/file_utils.py`** — 2.8 KB, modified 2026-04-23
+- **`test/testcases/utils/hypothesis_utils.py`** — 1.0 KB, modified 2026-04-23
+- **`test/unit_test/common/test_decorator.py`** — 2.2 KB, modified 2026-04-23
+- **`test/unit_test/common/test_file_utils.py`** — 4.6 KB, modified 2026-04-23
+- **`test/unit_test/common/test_float_utils.py`** — 2.9 KB, modified 2026-04-23
+- **`test/unit_test/common/test_misc_utils.py`** — 12.2 KB, modified 2026-04-23
+- **`test/unit_test/common/test_string_utils.py`** — 14.2 KB, modified 2026-04-23
+- **`test/unit_test/common/test_time_utils.py`** — 25.0 KB, modified 2026-04-23
+- **`test/unit_test/common/test_token_utils.py`** — 13.0 KB, modified 2026-04-23
+- **`test/unit_test/utils/test_raptor_utils.py`** — 10.6 KB, modified 2026-04-23
+
+#### `.sh` (11 files)
+
+- **`admin/build_cli_release.sh`** — 1.1 KB, modified 2026-04-23
+- **`docker/entrypoint.sh`** — 8.9 KB, modified 2026-04-23
+- **`docker/launch_backend_service.sh`** — 3.4 KB, modified 2026-04-23
+- **`docker/migration.sh`** — 9.3 KB, modified 2026-04-23
+- **`example/http/dataset_example.sh`** — 1.8 KB, modified 2026-04-23
+- **`sandbox/scripts/restart.sh`** — 706 B, modified 2026-04-23
+- **`sandbox/scripts/start.sh`** — 2.9 KB, modified 2026-04-23
+- **`sandbox/scripts/stop.sh`** — 1.2 KB, modified 2026-04-23
+- **`sandbox/scripts/wait-for-it-http.sh`** — 913 B, modified 2026-04-23
+- **`sandbox/scripts/wait-for-it.sh`** — 1.1 KB, modified 2026-04-23
+- **`show_env.sh`** — 1.8 KB, modified 2026-04-23
+
+#### `.sql` (2 files)
+
+- **`docker/init.sql`** — 53 B, modified 2026-04-23
+- **`docker/oceanbase/init.d/vec_memory.sql`** — 56 B, modified 2026-04-23
+
+#### `.toml` (5 files)
+
+- **`admin/client/pyproject.toml`** — 667 B, modified 2026-04-23
+- **`docker/infinity_conf.toml`** — 1.6 KB, modified 2026-04-23
+- **`pyproject.toml`** — 7.2 KB, modified 2026-04-23
+- **`sandbox/pyproject.toml`** — 513 B, modified 2026-04-23
+- **`sdk/python/pyproject.toml`** — 898 B, modified 2026-04-23
+
+#### `.ts` (3 files)
+
+- **`web/.storybook/main.ts`** — 1.6 KB, modified 2026-04-23
+- **`web/.storybook/preview.ts`** — 533 B, modified 2026-04-23
+- **`web/.umirc.ts`** — 2.0 KB, modified 2026-04-23
+
+#### `.yaml` (18 files)
+
+- **`.pre-commit-config.yaml`** — 470 B, modified 2026-04-23
+- **`conf/service_conf.yaml`** — 4.0 KB, modified 2026-04-23
+- **`helm/Chart.yaml`** — 1.1 KB, modified 2026-04-23
+- **`helm/templates/elasticsearch-config.yaml`** — 569 B, modified 2026-04-23
+- **`helm/templates/elasticsearch.yaml`** — 4.3 KB, modified 2026-04-23
+- **`helm/templates/env.yaml`** — 2.2 KB, modified 2026-04-23
+- **`helm/templates/infinity.yaml`** — 3.4 KB, modified 2026-04-23
+- **`helm/templates/ingress.yaml`** — 1.0 KB, modified 2026-04-23
+- **`helm/templates/minio.yaml`** — 2.8 KB, modified 2026-04-23
+- **`helm/templates/mysql-config.yaml`** — 154 B, modified 2026-04-23
+- **`helm/templates/mysql.yaml`** — 3.3 KB, modified 2026-04-23
+- **`helm/templates/opensearch-config.yaml`** — 605 B, modified 2026-04-23
+- **`helm/templates/opensearch.yaml`** — 4.3 KB, modified 2026-04-23
+- **`helm/templates/ragflow.yaml`** — 3.6 KB, modified 2026-04-23
+- **`helm/templates/ragflow_config.yaml`** — 2.2 KB, modified 2026-04-23
+- **`helm/templates/redis.yaml`** — 3.8 KB, modified 2026-04-23
+- **`helm/templates/tests/test-connection.yaml`** — 402 B, modified 2026-04-23
+- **`helm/values.yaml`** — 5.4 KB, modified 2026-04-23
+
+#### `.yml` (5 files)
+
+- **`docker/docker-compose-CN-oc9.yml`** — 2.0 KB, modified 2026-04-23
+- **`docker/docker-compose-base.yml`** — 7.7 KB, modified 2026-04-23
+- **`docker/docker-compose-macos.yml`** — 1.5 KB, modified 2026-04-23
+- **`docker/docker-compose.yml`** — 5.6 KB, modified 2026-04-23
+- **`sandbox/docker-compose.yml`** — 1.1 KB, modified 2026-04-23
+
+---
+
+## Statistics
+
+| Metric | Value |
+|---|---|
+| Files | 765 |
+| Size | 8.75 MB |
+| Types | 11 |
+
+---
+
+## Neural Network Connection
+
+This agent is part of GhostGoat's **Central Ordinance System**.
+All agents share one neural backend at `.backend/`.
+
+### Query this folder's context
+
+```python
+from core.ordinance.ordinance_client import OrdinanceClient
+
+client = OrdinanceClient()
+
+# All files in this folder
+ctx = client.get_folder_context("/home/popic/GhostGoat/core/memory/rag/ragflow")
+
+# Full-text search across all folders
+results = client.search("your query")
+
+# This agent's neighbours in the knowledge graph
+neighbours = client.get_neighbours("65a4c604")
+```
+
+---
+
+*Generated by GhostGoat Ordinance System — Central Neural Backend*
+*Scan time: 2026-04-30 03:39:22*

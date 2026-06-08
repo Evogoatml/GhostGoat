@@ -1,0 +1,35 @@
+{
+  "agent_id": "exec_test",
+  "creation_time": "2026-04-24T06:09:45.547292",
+  "environments_experienced": [
+    "gg_task_03b91c23-74d6-5acb-b4f3-fd38909b7482"
+  ],
+  "total_episodes": 2,
+  "config": {
+    "learning_rate": 0.001,
+    "gamma": 0.99,
+    "exploration_rate": 0.7920200000000001,
+    "exploration_decay": 0.995,
+    "min_exploration": 0.1,
+    "batch_size": 16,
+    "target_update_frequency": 1000,
+    "experience_buffer_size": 5000,
+    "state_dimensions": 256,
+    "state_clip_range": [
+      -10,
+      10
+    ],
+    "symbolic_decision_threshold": 0.3,
+    "pattern_detection_interval": 10,
+    "save_interval": 100,
+    "checkpoint_keep_count": 5,
+    "similarity_threshold": 0.7,
+    "transfer_confidence_threshold": 0.6,
+    "performance_window": 100
+  },
+  "last_updated": "2026-04-24T06:11:10.986469",
+  "autoencoder_enabled": true,
+  "continuous_networks_enabled": true,
+  "continuous_network_count": 0,
+  "timestamp": 1777025470.9866037
+}

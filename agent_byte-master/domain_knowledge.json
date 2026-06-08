@@ -1,0 +1,402 @@
+{
+  "version": "1.0",
+  "description": "GhostGoat domain knowledge — agent profiles, capabilities, tools, and routing hints used by the orchestrator to assign tasks to the right specialists.",
+  "domains": {
+    "coding": {
+      "description": "Software development, debugging, refactoring, security auditing, performance engineering, and system architecture.",
+      "trigger_keywords": [
+        "code", "function", "class", "debug", "error", "bug", "fix", "implement",
+        "refactor", "optimise", "optimize", "api", "endpoint", "database", "schema",
+        "test", "unit test", "security", "vulnerability", "audit", "architecture",
+        "deploy", "docker", "kubernetes", "ci/cd", "pipeline", "performance", "slow",
+        "python", "javascript", "typescript", "java", "go", "rust", "c++", "sql"
+      ],
+      "agents": {
+        "CodeArchitect": {
+          "role": "Senior software architect and implementer",
+          "strengths": ["system design", "API design", "database schemas", "new feature implementation", "architectural decisions"],
+          "best_for": ["design a system", "implement a feature", "create an API", "set up a database", "build from scratch"],
+          "avoid_for": ["debugging existing bugs", "security audits"]
+        },
+        "DebugMaster": {
+          "role": "Expert debugger and error analyst",
+          "strengths": ["traceback analysis", "runtime errors", "logic bugs", "intermittent failures", "memory leaks"],
+          "best_for": ["fix this error", "debug this crash", "why is this failing", "traceback", "exception"],
+          "avoid_for": ["new implementations", "architecture design"]
+        },
+        "RefactorExpert": {
+          "role": "Code quality and technical debt specialist",
+          "strengths": ["code cleanup", "design patterns", "dependency reduction", "readability improvement", "DRY principles"],
+          "best_for": ["refactor this code", "clean up", "improve code quality", "reduce duplication", "make readable"],
+          "avoid_for": ["new features", "debugging"]
+        },
+        "SecurityAuditor": {
+          "role": "Application security and vulnerability analyst",
+          "strengths": ["OWASP top 10", "code injection", "authentication flaws", "secrets scanning", "dependency vulnerabilities"],
+          "best_for": ["security review", "vulnerability scan", "check for security issues", "penetration test prep", "audit code"],
+          "avoid_for": ["performance optimisation", "new features"]
+        },
+        "PerformanceOptimizer": {
+          "role": "Performance profiling and optimisation engineer",
+          "strengths": ["profiling", "algorithmic complexity", "caching", "async patterns", "database query optimisation"],
+          "best_for": ["slow code", "optimise performance", "reduce latency", "improve throughput", "profile this"],
+          "avoid_for": ["security audits", "code architecture"]
+        }
+      },
+      "tools": ["python", "pytest", "black", "mypy", "bandit", "cProfile", "pdb", "docker", "git"],
+      "common_metrics": ["test_coverage", "cyclomatic_complexity", "lines_of_code", "error_rate", "latency_p99"],
+      "best_practices": [
+        "Write tests before or alongside implementation",
+        "Every function has a single responsibility",
+        "Fail fast with explicit error messages",
+        "Never hardcode secrets — use environment variables",
+        "Profile before optimising",
+        "Document the why, not the what"
+      ]
+    },
+    "research": {
+      "description": "Information gathering, source validation, pattern recognition, synthesis, and citation tracking across academic, news, and primary sources.",
+      "trigger_keywords": [
+        "research", "find", "search", "gather", "collect", "investigate", "explore",
+        "study", "analyse", "survey", "review", "literature", "papers", "articles",
+        "sources", "validate", "fact-check", "summarise", "synthesise", "compare",
+        "what is", "how does", "explain", "overview", "background"
+      ],
+      "agents": {
+        "DataGatherer": {
+          "role": "Multi-source information retrieval specialist",
+          "strengths": ["web search", "academic databases", "primary source retrieval", "structured data extraction"],
+          "best_for": ["find information about", "gather data on", "research topic", "collect sources"],
+          "avoid_for": ["synthesis", "validation of gathered material"]
+        },
+        "PatternFinder": {
+          "role": "Statistical pattern recognition and correlation analyst",
+          "strengths": ["trend detection", "correlation analysis", "clustering", "anomaly identification in research data"],
+          "best_for": ["identify patterns in", "find trends across", "what patterns exist in", "correlate these findings"],
+          "avoid_for": ["source retrieval", "citation management"]
+        },
+        "SourceValidator": {
+          "role": "Source credibility and fact-checking specialist",
+          "strengths": ["credibility assessment", "cross-referencing", "bias detection", "misinformation identification"],
+          "best_for": ["validate this source", "is this reliable", "fact-check", "verify this claim"],
+          "avoid_for": ["data gathering", "synthesis writing"]
+        },
+        "SynthesisEngine": {
+          "role": "Multi-source synthesis and narrative construction",
+          "strengths": ["coherent summary writing", "conflicting source reconciliation", "executive summaries", "structured reports"],
+          "best_for": ["synthesise these findings", "write a summary of", "combine these sources", "create a report on"],
+          "avoid_for": ["source retrieval", "fact-checking"]
+        },
+        "CitationTracker": {
+          "role": "Academic citation and reference management",
+          "strengths": ["paper citation networks", "reference formatting", "source lineage tracking", "academic database search"],
+          "best_for": ["find citations for", "academic papers on", "who cited this", "bibliography for"],
+          "avoid_for": ["general web research", "synthesis"]
+        }
+      },
+      "tools": ["web_search", "arxiv_api", "semantic_scholar", "news_api", "wikipedia_api"],
+      "common_metrics": ["source_count", "credibility_score", "coverage_breadth", "recency_score"],
+      "best_practices": [
+        "Define the research question before searching",
+        "Use at least 3 independent sources for any claim",
+        "Check publication date — older than 3 years may be outdated in fast-moving fields",
+        "Distinguish primary sources (raw data, original papers) from secondary (reviews, summaries)",
+        "Note what the sources do NOT cover — gaps are as informative as findings"
+      ]
+    },
+    "trading": {
+      "description": "Financial market analysis, risk management, on-chain metrics monitoring, regime detection, and trade execution optimisation.",
+      "trigger_keywords": [
+        "market", "trade", "stock", "crypto", "bitcoin", "ethereum", "defi", "price",
+        "momentum", "trend", "buy", "sell", "portfolio", "risk", "return", "alpha",
+        "beta", "volatility", "options", "futures", "on-chain", "blockchain", "wallet",
+        "exchange", "liquidity", "yield", "apy", "drawdown", "sharpe", "roi"
+      ],
+      "agents": {
+        "MomentumHunter": {
+          "role": "Technical analysis and momentum strategy specialist",
+          "strengths": ["price momentum", "trend following", "moving averages", "RSI/MACD", "breakout detection"],
+          "best_for": ["momentum signals", "trend analysis", "technical analysis", "entry/exit timing"],
+          "avoid_for": ["risk sizing", "fundamental analysis"]
+        },
+        "RiskGuardian": {
+          "role": "Portfolio risk management and position sizing",
+          "strengths": ["VaR calculation", "Kelly criterion", "stop-loss placement", "correlation analysis", "drawdown management"],
+          "best_for": ["risk management", "position sizing", "how much to risk", "portfolio risk", "stop loss"],
+          "avoid_for": ["entry signal generation", "on-chain analysis"]
+        },
+        "OnChainSentry": {
+          "role": "Blockchain and DeFi on-chain metric analyst",
+          "strengths": ["wallet tracking", "exchange flows", "DeFi TVL analysis", "whale monitoring", "protocol health"],
+          "best_for": ["on-chain data", "blockchain metrics", "DeFi analysis", "crypto fundamentals", "wallet flows"],
+          "avoid_for": ["traditional equity analysis", "technical charting"]
+        },
+        "RegimeSensor": {
+          "role": "Market regime classification and macro analyst",
+          "strengths": ["regime detection", "macro analysis", "VIX interpretation", "credit spreads", "cross-asset correlation"],
+          "best_for": ["market regime", "macro environment", "risk-on/risk-off", "what regime are we in", "macro trends"],
+          "avoid_for": ["individual security analysis", "execution"]
+        },
+        "ExecutionOptimizer": {
+          "role": "Trade execution and order flow optimisation",
+          "strengths": ["TWAP/VWAP", "slippage reduction", "market impact", "limit vs market orders", "execution timing"],
+          "best_for": ["how to execute this trade", "reduce slippage", "optimal order type", "execution strategy"],
+          "avoid_for": ["strategy generation", "risk assessment"]
+        }
+      },
+      "tools": ["fetch_ohlcv", "get_onchain_metrics", "news_sentiment_api", "option_chain_api"],
+      "common_metrics": ["sharpe_ratio", "sortino_ratio", "max_drawdown", "win_rate", "profit_factor", "calmar_ratio"],
+      "best_practices": [
+        "Never risk more than 1-2% of portfolio on a single trade",
+        "Define exit before entry — know your stop loss and target before placing the order",
+        "Backtest strategies on out-of-sample data before going live",
+        "Beware of survivorship bias in historical data",
+        "Correlation between assets increases during crashes — diversification breaks when you need it most",
+        "Track slippage and execution costs — they compound against you over time"
+      ]
+    },
+    "analysis": {
+      "description": "Exploratory data analysis, anomaly detection, root cause analysis, trend identification, and predictive modelling.",
+      "trigger_keywords": [
+        "analyse", "analyze", "data", "dataset", "anomaly", "outlier", "trend",
+        "pattern", "predict", "forecast", "root cause", "why did", "what caused",
+        "correlation", "distribution", "statistics", "metric", "KPI", "dashboard",
+        "report", "insight", "visualise", "visualize", "chart", "plot"
+      ],
+      "agents": {
+        "DataAnalyzer": {
+          "role": "Exploratory data analysis and statistical insight specialist",
+          "strengths": ["EDA", "descriptive statistics", "data cleaning", "visualisation", "feature engineering"],
+          "best_for": ["analyse this data", "explore this dataset", "what do these numbers mean", "data insights"],
+          "avoid_for": ["predictive modelling", "root cause analysis"]
+        },
+        "TrendSpotter": {
+          "role": "Time-series and longitudinal trend analyst",
+          "strengths": ["time-series decomposition", "seasonality detection", "trend strength testing", "rolling statistics"],
+          "best_for": ["trend over time", "time series analysis", "is this growing", "seasonal patterns"],
+          "avoid_for": ["cross-sectional data analysis", "anomaly detection"]
+        },
+        "AnomalyDetector": {
+          "role": "Statistical and ML-based anomaly detection",
+          "strengths": ["IQR outlier detection", "Isolation Forest", "DBSCAN", "autoencoder anomalies", "rule-based thresholds"],
+          "best_for": ["find anomalies", "detect outliers", "what is unusual", "flag abnormal", "is this normal"],
+          "avoid_for": ["trend analysis", "root cause investigation"]
+        },
+        "RootCauseFinder": {
+          "role": "Causal analysis and incident investigation",
+          "strengths": ["5-Why analysis", "fishbone diagrams", "correlation vs causation", "change-point detection", "post-mortems"],
+          "best_for": ["why did this happen", "root cause", "what caused this", "incident analysis", "post-mortem"],
+          "avoid_for": ["predictive modelling", "exploratory analysis"]
+        },
+        "PredictiveModeler": {
+          "role": "Machine learning and statistical forecasting",
+          "strengths": ["regression", "classification", "time-series forecasting", "model evaluation", "uncertainty quantification"],
+          "best_for": ["predict", "forecast", "what will happen", "model this", "estimate future", "classify this"],
+          "avoid_for": ["exploratory analysis", "root cause investigation"]
+        }
+      },
+      "tools": ["pandas", "numpy", "scikit-learn", "matplotlib", "seaborn", "statsmodels", "plotly"],
+      "common_metrics": ["mae", "rmse", "r2_score", "f1_score", "auc_roc", "precision", "recall"],
+      "best_practices": [
+        "Always inspect raw data before processing",
+        "Correlation is not causation — establish mechanism before claiming cause",
+        "Validate model on held-out data — never evaluate on training data",
+        "Report confidence intervals, not just point estimates",
+        "Visualise distributions — aggregate statistics hide shape",
+        "Document data provenance — where did this data come from and when?"
+      ]
+    },
+    "planning": {
+      "description": "Goal decomposition, resource allocation, risk mapping, timeline building, and dependency tracking for projects and strategies.",
+      "trigger_keywords": [
+        "plan", "planning", "roadmap", "timeline", "schedule", "milestone", "task",
+        "project", "goal", "objective", "strategy", "resource", "team", "budget",
+        "risk", "dependency", "priority", "sprint", "agile", "deadline", "deliverable",
+        "breakdown", "decompose", "steps", "how to achieve", "what do i need to do"
+      ],
+      "agents": {
+        "GoalDecomposer": {
+          "role": "Goal clarification and work breakdown specialist",
+          "strengths": ["SMART goal framing", "WBS creation", "task sequencing", "dependency mapping", "scope definition"],
+          "best_for": ["break down this goal", "what steps do I need", "decompose this project", "how do I achieve"],
+          "avoid_for": ["resource allocation", "risk assessment"]
+        },
+        "ResourceAllocator": {
+          "role": "Resource capacity planning and team assignment",
+          "strengths": ["skill-gap analysis", "capacity levelling", "RACI matrices", "budget allocation", "make-vs-buy decisions"],
+          "best_for": ["who should do this", "allocate resources", "team assignment", "capacity planning", "budget"],
+          "avoid_for": ["goal decomposition", "risk mapping"]
+        },
+        "RiskMapper": {
+          "role": "Project risk identification and mitigation planning",
+          "strengths": ["risk scoring", "mitigation strategies", "contingency planning", "assumption tracking", "risk registers"],
+          "best_for": ["what could go wrong", "risk assessment", "identify risks", "mitigation plan", "contingency"],
+          "avoid_for": ["timeline building", "resource allocation"]
+        },
+        "TimelineBuilder": {
+          "role": "Schedule construction and critical path analysis",
+          "strengths": ["Gantt charts", "critical path method", "schedule compression", "float analysis", "milestone setting"],
+          "best_for": ["build a timeline", "create a schedule", "when will this be done", "Gantt chart", "milestones"],
+          "avoid_for": ["goal decomposition", "resource planning"]
+        },
+        "DependencyTracker": {
+          "role": "Task and system dependency management",
+          "strengths": ["dependency graphs", "blocking issue tracking", "integration dependency management", "critical path monitoring"],
+          "best_for": ["what depends on what", "track dependencies", "blocking tasks", "integration order"],
+          "avoid_for": ["timeline building", "goal decomposition"]
+        }
+      },
+      "tools": ["calendar_api", "project_management_api", "jira_api", "slack_api"],
+      "common_metrics": ["schedule_variance", "resource_utilisation", "risk_score", "milestone_completion_rate"],
+      "best_practices": [
+        "Start with the end state and work backwards",
+        "Write Definition of Done before starting any task",
+        "One owner per task — shared ownership means no ownership",
+        "Separate effort estimation from calendar duration (interruptions eat 40% of time)",
+        "Identify critical path first — delays on it delay everything",
+        "Review plan weekly and update — a plan not maintained is not a plan"
+      ]
+    },
+    "creative": {
+      "description": "Idea generation, storytelling, concept blending, style adaptation, and content quality polishing.",
+      "trigger_keywords": [
+        "write", "create", "generate", "story", "narrative", "content", "blog",
+        "article", "essay", "poem", "script", "idea", "creative", "brainstorm",
+        "concept", "design", "imagine", "invent", "draft", "compelling", "engaging",
+        "pitch", "tagline", "headline", "copy", "marketing", "brand"
+      ],
+      "agents": {
+        "IdeaGenerator": {
+          "role": "Creative ideation and lateral thinking specialist",
+          "strengths": ["SCAMPER method", "random association", "constraint-based creativity", "quantity-first brainstorming"],
+          "best_for": ["generate ideas for", "brainstorm", "what could I do", "creative approaches to", "innovative solutions"],
+          "avoid_for": ["polishing and editing", "structured writing"]
+        },
+        "StoryWeaver": {
+          "role": "Narrative structure and long-form writing",
+          "strengths": ["three-act structure", "character development", "plot construction", "scene writing", "dialogue"],
+          "best_for": ["write a story", "narrative for", "storytelling approach", "plot outline", "character arc"],
+          "avoid_for": ["short-form copy", "idea generation"]
+        },
+        "ConceptBlender": {
+          "role": "Cross-domain concept synthesis and analogy creation",
+          "strengths": ["analogical reasoning", "metaphor construction", "cross-domain transfer", "abstract concept explanation"],
+          "best_for": ["explain like", "combine these concepts", "what if we applied X to Y", "create an analogy for"],
+          "avoid_for": ["factual research", "structured planning"]
+        },
+        "StyleAdaptor": {
+          "role": "Tone, voice, and audience adaptation specialist",
+          "strengths": ["audience analysis", "tone adjustment", "brand voice alignment", "reading level calibration", "localisation"],
+          "best_for": ["rewrite this for", "adapt tone to", "make this more formal/casual", "write for this audience"],
+          "avoid_for": ["idea generation", "content creation from scratch"]
+        },
+        "QualityPolisher": {
+          "role": "Editing, proofreading, and content quality improvement",
+          "strengths": ["grammar and style", "clarity improvement", "structure tightening", "fact checking of claims in text"],
+          "best_for": ["edit this", "improve this draft", "proofread", "make this clearer", "tighten this up"],
+          "avoid_for": ["idea generation", "first-draft writing"]
+        }
+      },
+      "tools": ["grammar_checker", "thesaurus_api", "web_search"],
+      "common_metrics": ["clarity_score", "engagement_score", "originality", "word_count", "readability_grade"],
+      "best_practices": [
+        "Separate generation from evaluation — create first, judge later",
+        "Constraints breed creativity — 'write in exactly 100 words' produces better output than no limits",
+        "Know your audience before writing a single word",
+        "Read your output aloud — bad rhythm and awkward phrasing are immediately obvious",
+        "First drafts are supposed to be imperfect — perfectionism during drafting kills output"
+      ]
+    },
+    "evolution": {
+      "description": "Self-improvement, code generation for new capabilities, system self-modification, and autonomous agent enhancement.",
+      "trigger_keywords": [
+        "improve yourself", "self-improve", "evolve", "generate code for", "write a new skill",
+        "add a capability", "upgrade", "self-modify", "create a new agent", "automate this"
+      ],
+      "agents": {
+        "SelfOptimizer": {
+          "role": "System self-analysis and improvement planner",
+          "strengths": ["performance bottleneck identification", "capability gap analysis", "improvement prioritisation"],
+          "best_for": ["identify areas to improve", "what should I optimise", "system self-assessment"],
+          "avoid_for": ["code writing", "external task execution"]
+        },
+        "CodeWriter": {
+          "role": "Autonomous code generation for new system capabilities",
+          "strengths": ["new skill implementation", "API integration", "tool creation", "self-extending modules"],
+          "best_for": ["write code to", "implement a new skill", "create a new module", "automate this process"],
+          "avoid_for": ["debugging existing code", "planning"]
+        }
+      },
+      "tools": ["python_exec", "file_writer", "git_api"],
+      "common_metrics": ["skill_library_size", "task_success_rate", "capability_coverage"],
+      "best_practices": [
+        "Always require human approval before executing self-generated code in production",
+        "Test generated code in isolation before integrating",
+        "Log all self-modification actions with full diffs",
+        "Maintain a rollback mechanism for every self-evolution step"
+      ]
+    }
+  },
+  "routing_rules": [
+    {
+      "if_keywords_match": ["debug", "error", "traceback", "exception", "crash", "broken", "failing"],
+      "prefer_agent": "DebugMaster",
+      "prefer_domain": "coding"
+    },
+    {
+      "if_keywords_match": ["security", "vulnerability", "exploit", "injection", "xss", "csrf", "cve", "audit"],
+      "prefer_agent": "SecurityAuditor",
+      "prefer_domain": "coding"
+    },
+    {
+      "if_keywords_match": ["slow", "performance", "optimise", "optimize", "fast", "latency", "bottleneck"],
+      "prefer_agent": "PerformanceOptimizer",
+      "prefer_domain": "coding"
+    },
+    {
+      "if_keywords_match": ["predict", "forecast", "model", "ml", "machine learning", "train", "classifier"],
+      "prefer_agent": "PredictiveModeler",
+      "prefer_domain": "analysis"
+    },
+    {
+      "if_keywords_match": ["anomaly", "outlier", "unusual", "abnormal", "flag", "detect"],
+      "prefer_agent": "AnomalyDetector",
+      "prefer_domain": "analysis"
+    },
+    {
+      "if_keywords_match": ["why", "root cause", "what caused", "incident", "post-mortem"],
+      "prefer_agent": "RootCauseFinder",
+      "prefer_domain": "analysis"
+    },
+    {
+      "if_keywords_match": ["blockchain", "on-chain", "defi", "wallet", "crypto fundamentals"],
+      "prefer_agent": "OnChainSentry",
+      "prefer_domain": "trading"
+    },
+    {
+      "if_keywords_match": ["risk", "position size", "stop loss", "drawdown", "portfolio risk"],
+      "prefer_agent": "RiskGuardian",
+      "prefer_domain": "trading"
+    },
+    {
+      "if_keywords_match": ["validate", "fact-check", "credible", "reliable source", "is this true"],
+      "prefer_agent": "SourceValidator",
+      "prefer_domain": "research"
+    },
+    {
+      "if_keywords_match": ["plan", "roadmap", "timeline", "schedule", "how to achieve", "steps to"],
+      "prefer_agent": "GoalDecomposer",
+      "prefer_domain": "planning"
+    },
+    {
+      "if_keywords_match": ["write", "story", "narrative", "blog", "article", "essay"],
+      "prefer_agent": "StoryWeaver",
+      "prefer_domain": "creative"
+    },
+    {
+      "if_keywords_match": ["edit", "proofread", "improve draft", "clearer", "polish"],
+      "prefer_agent": "QualityPolisher",
+      "prefer_domain": "creative"
+    }
+  ]
+}
