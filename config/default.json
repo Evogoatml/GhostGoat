@@ -1,0 +1,6 @@
+{
+  "memory": {
+    "backend": "hopfield",
+    "dimensions": 512
+  }
+}
