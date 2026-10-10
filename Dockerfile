@@ -15,4 +15,4 @@ RUN pip install --no-cache-dir .
 ENV PYTHONPATH=/app
 
 # Default command starts the orchestrator (no venv required)
-CMD ["./venv/bin/python", "main.py"]
+CMD ["python", "main.py"]
