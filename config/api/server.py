@@ -3,18 +3,19 @@
 GhostGoat API Server — exposes real modules over HTTP.
 Dashboard connects here. Falls back to simulation when this isn't running.
 
-Start: python -m api.server
+Start: python config/api/server.py
 """
 
-import asyncio
 import importlib
-import inspect
 import os
 import sys
 import time
 import json
 import logging
-import psutil
+try:
+    import psutil
+except ImportError:
+    psutil = None
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 from dataclasses import dataclass, asdict
@@ -62,19 +63,16 @@ efficiency_engine = _try_import("EfficiencyEngine",
 knowledge_tank_mod = _try_import("KnowledgeTank",
     lambda: __import__("core.reasoning.brain.knowledge.knowledge_tank", fromlist=["KnowledgeTank"]))
 
-# Load the supported orchestrator implementation. It provides a lightweight
-# fallback when its optional integrations are unavailable.
+# Use the existing AgentNetwork as the task dispatcher. The analyst executor
+# is the safe general-purpose route; its provider integration remains optional.
 orchestrator_instance = None
 def _load_orchestrator():
     global orchestrator_instance
     try:
-        module = importlib.import_module("core.ghostgoat_core")
-        orchestrator_instance = module.create_orchestrator(
-            llm_provider=os.getenv("LLM_PROVIDER", "mock"),
-            llm_api_key=os.getenv("LLM_API_KEY"),
-        )
-        logger.info("  [+] %s (provider=%s)", type(orchestrator_instance).__name__,
-                    os.getenv("LLM_PROVIDER", "mock"))
+        module = importlib.import_module("agents.agent_network")
+        orchestrator_instance = module.AgentNetwork()
+        orchestrator_instance.spawn_default_fleet()
+        logger.info("  [+] AgentNetwork task dispatcher")
     except Exception as e:
         logger.warning(f"  [-] LLMOrchestrator: {e}")
 
@@ -140,6 +138,8 @@ def health():
 
 @app.get("/api/system/metrics")
 def system_metrics():
+    if psutil is None:
+        raise HTTPException(status_code=503, detail="System metrics dependency is unavailable")
     cpu = psutil.cpu_percent(interval=0.5)
     mem = psutil.virtual_memory()
     disk = psutil.disk_usage("/")
@@ -251,14 +251,17 @@ async def create_task(req: TaskRequest):
     # Try orchestrator first (full decompose + multi-agent)
     if orchestrator_instance:
         try:
-            result = await asyncio.to_thread(
-                orchestrator_instance.orchestrate, req.description, req.context
+            result = await orchestrator_instance.dispatch(
+                "analyst-1",
+                {
+                    "goal": req.description,
+                    "input": req.description,
+                    "context": req.context or {},
+                },
             )
-            if inspect.isawaitable(result):
-                result = await result
-            entry["status"] = "completed"
+            entry["status"] = "completed" if result.get("success") else "failed"
             entry["result"] = result
-            entry["agent"] = type(orchestrator_instance).__name__
+            entry["agent"] = result.get("agent_id", "analyst-1")
             return {"task": entry}
         except Exception as e:
             logger.error(f"Orchestrator failed: {e}")
