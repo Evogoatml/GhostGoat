@@ -7,9 +7,9 @@ RUN useradd -m ghostgoat && mkdir -p /app && chown ghostgoat:ghostgoat /app
 USER ghostgoat
 WORKDIR /app
 
-# Copy only needed files (Docker uses .dockerignore)
+# Supported install flow: pip install -e . (use ".[full]" for optional extras)
 COPY . .
-RUN pip install --no-cache-dir .
+RUN pip install --no-cache-dir -e .
 
 # Ensure the virtual‑env guard works without a venv
 ENV PYTHONPATH=/app

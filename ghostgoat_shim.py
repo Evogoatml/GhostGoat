@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """GhostGoat namespace shim v3."""
+# DEPRECATED: compatibility-only. Use `python main.py`.
 import sys, types, importlib, importlib.util, os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))

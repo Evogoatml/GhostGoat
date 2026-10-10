@@ -1,4 +1,5 @@
 #!/bin/bash
+# COMPATIBILITY-ONLY: legacy wrapper. The supported entry point is `python main.py`.
 
 clear
 echo "════════════════════════════════════════════════════════════"
