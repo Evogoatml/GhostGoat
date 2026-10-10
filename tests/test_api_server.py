@@ -142,6 +142,16 @@ class TestAgentsEndpoint:
         names = [a["name"] for a in data["agents"]]
         assert "Brain Core" in names
 
+    def test_default_agent_network_is_visible(self, client, monkeypatch):
+        import config.api.server as srv
+
+        monkeypatch.setattr(srv, "orchestrator_instance", None)
+        srv._load_orchestrator()
+        agents = client.get("/api/agents").json()["agents"]
+        analyst = next(agent for agent in agents if agent["id"] == "analyst-1")
+        assert analyst["source"] == "agent_network"
+        assert analyst["status"] == "idle"
+
     def test_agents_have_required_fields(self, client):
         data = client.get("/api/agents").json()
         for agent in data["agents"]:

@@ -170,21 +170,21 @@ def list_agents():
                 "source": "service_registry",
             })
 
-    # From orchestrator agent profiles
-    if orchestrator_instance and hasattr(orchestrator_instance, "agent_profiles"):
-        for name, profile in orchestrator_instance.agent_profiles.items():
-            agents.append({
-                "id": f"orch-{name}",
-                "name": profile.name,
-                "type": "orchestrator_agent",
-                "status": profile.status,
-                "host": profile.host,
-                "port": profile.port,
-                "capabilities": [c.value for c in profile.capabilities],
-                "current_tasks": profile.current_tasks,
-                "max_tasks": profile.max_concurrent_tasks,
-                "source": "orchestrator",
-            })
+    # From the active agent network
+    profiles = getattr(orchestrator_instance, "agent_profiles", None)
+    if profiles is None:
+        profiles = getattr(orchestrator_instance, "profiles", {})
+    for name, profile in profiles.items():
+        agents.append({
+            "id": name,
+            "name": profile.name,
+            "type": "agent",
+            "status": profile.status,
+            "capabilities": [getattr(c, "value", c) for c in profile.capabilities],
+            "current_tasks": 1 if profile.status == "busy" else 0,
+            "max_tasks": 1,
+            "source": "agent_network",
+        })
 
     # Built-in modules that are loaded
     builtins = [
@@ -200,7 +200,7 @@ def list_agents():
             "task_handler" if task_handler_mod else "",
             "efficiency_engine" if efficiency_engine else "",
             "knowledge_tank" if knowledge_tank_mod else "",
-        ] or (name == "Brain Core" and orchestrator_instance is not None)
+        ]
 
         agents.append({
             "id": f"mod-{module}",
