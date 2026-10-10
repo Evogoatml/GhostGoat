@@ -7,8 +7,8 @@ echo "=================================================="
 echo ""
 
 # Check if we're in the right directory
-if [ ! -f "requirements.txt" ]; then
-    echo "❌ Error: requirements.txt not found"
+if [ ! -f "pyproject.toml" ]; then
+    echo "❌ Error: pyproject.toml not found"
     echo "Please run this from your project root directory"
     exit 1
 fi
@@ -28,7 +28,7 @@ echo "[3/6] 📦 Installing Python packages..."
 cd ~/GhostGoat
 source venv/bin/activate
 
-pip install -r requirements.txt
+pip install -e ".[full]"
 
 # Install additional GhostGoat-specific packages
 echo "Installing GhostGoat frameworks..."
