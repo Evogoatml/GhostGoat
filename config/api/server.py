@@ -7,6 +7,8 @@ Start: python -m api.server
 """
 
 import asyncio
+import importlib
+import inspect
 import os
 import sys
 import time
@@ -17,10 +19,12 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 from dataclasses import dataclass, asdict
 
-# Add project root to path
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if ROOT not in sys.path:
-    sys.path.insert(0, ROOT)
+# Add project and Agent Byte roots to the import path.
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ABM_ROOT = os.path.join(ROOT, "agent_byte-master")
+for path in (ROOT, ABM_ROOT):
+    if path not in sys.path:
+        sys.path.insert(0, path)
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -58,17 +62,19 @@ efficiency_engine = _try_import("EfficiencyEngine",
 knowledge_tank_mod = _try_import("KnowledgeTank",
     lambda: __import__("core.reasoning.brain.knowledge.knowledge_tank", fromlist=["KnowledgeTank"]))
 
-# Try the orchestrator (heavy — may fail if deps missing)
+# Load the supported orchestrator implementation. It provides a lightweight
+# fallback when its optional integrations are unavailable.
 orchestrator_instance = None
 def _load_orchestrator():
     global orchestrator_instance
     try:
-        # FIXME: orchestrator import disabled - module path unknown
-        orchestrator_instance = LLMOrchestrator(
+        module = importlib.import_module("core.ghostgoat_core")
+        orchestrator_instance = module.create_orchestrator(
             llm_provider=os.getenv("LLM_PROVIDER", "mock"),
-            base_path=ROOT
+            llm_api_key=os.getenv("LLM_API_KEY"),
         )
-        logger.info("  [+] LLMOrchestrator (provider=%s)", os.getenv("LLM_PROVIDER", "mock"))
+        logger.info("  [+] %s (provider=%s)", type(orchestrator_instance).__name__,
+                    os.getenv("LLM_PROVIDER", "mock"))
     except Exception as e:
         logger.warning(f"  [-] LLMOrchestrator: {e}")
 
@@ -245,10 +251,14 @@ async def create_task(req: TaskRequest):
     # Try orchestrator first (full decompose + multi-agent)
     if orchestrator_instance:
         try:
-            result = await orchestrator_instance.orchestrate(req.description, req.context)
+            result = await asyncio.to_thread(
+                orchestrator_instance.orchestrate, req.description, req.context
+            )
+            if inspect.isawaitable(result):
+                result = await result
             entry["status"] = "completed"
             entry["result"] = result
-            entry["agent"] = "LLMOrchestrator"
+            entry["agent"] = type(orchestrator_instance).__name__
             return {"task": entry}
         except Exception as e:
             logger.error(f"Orchestrator failed: {e}")
