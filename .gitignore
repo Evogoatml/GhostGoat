@@ -17,3 +17,24 @@ dist/
 /ACS_SYSTEM/adap_dia_sys/manifest.sig
 /.package-lock.json
 /.ghostgoat
+
+# Frontend / build artifacts
+node_modules/
+dashboard/node_modules/
+dashboard/dist/
+dashboard/build/
+.vite/
+vendor/node_modules/
+
+# Coverage
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+tests/coverage/.coverage.json
+
+# Local environments
+.venv/
+venv/
+.env.*
+!.env.example

@@ -51,21 +51,28 @@ GhostGoat is a production-grade AI operating system that coordinates heterogeneo
 
 ## Installation
 
+Supported install flow (Python 3.11+):
+
 ```bash
 git clone <repo-url> GhostGoat
 cd GhostGoat
-./setup.sh        # or: make install
+pip install -e .            # core runtime
+pip install -e ".[full]"    # core + all optional extras (ml, crypto, agents, pentest, dev)
 ```
 
-One script. No steps to remember. It chains through everything:
+See [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md) for individual extras. Legacy shell
+wrappers (`setup.sh`-style scripts, `.goat.sh`, `.install_ghostgoat.sh`,
+`ghostgoat_shim.py`, `run_cognitive_system.py`) are compatibility-only and not part of
+the supported path.
 
-1. **System packages** — apt/brew (Python 3, Node, build tools)
-2. **Python venv** — isolated environment in `./venv`
-3. **Python packages** — core deps, then optional ML/embedding packages
-4. **Editable install** — `import ghostgoat` works from anywhere in the project
-5. **Dashboard** — `npm install` (skipped if Node not found)
-6. **Rust backend** — `cargo build --release` (skipped if Rust not found)
-7. **.env template** — created on first run; edit to add your API keys
+## Maturity: core vs. experimental
+
+| Area | Status |
+|------|--------|
+| `main.py` entry point, FastAPI server, `config/`, `pyproject.toml` install | **Core / supported** — validated in CI |
+| `dashboard/` (React) | Optional — requires Node.js 18+ |
+| Extras `ml`, `crypto`, `agents`, `pentest` | Optional — not required by the core runtime |
+| `ACS_SYSTEM/`, `agent_byte-master/`, `backend/` (Rust), `vendor/`, custom agents | **Experimental** — not covered by CI, no stability guarantees |
 
 ---
 
@@ -169,7 +176,7 @@ GhostGoat/
 
 | Requirement | Version | Notes |
 |-------------|---------|-------|
-| Python | 3.8+ | Required |
+| Python | 3.11+ | Required |
 | Node.js | 18+ | Dashboard only |
 | Rust / cargo | stable | Backend scanner — optional |
 | Docker | 20+ | Production stack — optional |
