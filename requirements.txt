@@ -1,4 +1,5 @@
-fastapi
-uvicorn[standard]
-pydantic
-python-dotenv
+# Canonical dependency definition lives in pyproject.toml.
+# See docs/DEPENDENCIES.md for the migration guide.
+#   core only:   pip install -e .
+#   everything:  pip install -e ".[full]"
+-e .[full]

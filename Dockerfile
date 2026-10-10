@@ -8,9 +8,8 @@ USER ghostgoat
 WORKDIR /app
 
 # Copy only needed files (Docker uses .dockerignore)
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
+RUN pip install --no-cache-dir .
 
 # Ensure the virtual‑env guard works without a venv
 ENV PYTHONPATH=/app

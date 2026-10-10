@@ -1,6 +1,0 @@
-torch
-torchvision
-torchaudio
-numpy
-peft
-# Add your existing GhostGoat requirements here
