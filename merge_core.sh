@@ -1,4 +1,6 @@
 #!/bin/bash
+# COMPATIBILITY-ONLY / LEGACY: one-off maintainer migration script with machine-specific paths.
+# Not part of the supported flow: install with `pip install -e ".[full]"`, run `python main.py`.
 set -e
 
 cd /home/popic/GhostGoat
