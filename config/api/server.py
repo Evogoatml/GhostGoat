@@ -3,24 +3,29 @@
 GhostGoat API Server — exposes real modules over HTTP.
 Dashboard connects here. Falls back to simulation when this isn't running.
 
-Start: python -m api.server
+Start: python config/api/server.py
 """
 
-import asyncio
+import importlib
 import os
 import sys
 import time
 import json
 import logging
-import psutil
+try:
+    import psutil
+except ImportError:
+    psutil = None
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 from dataclasses import dataclass, asdict
 
-# Add project root to path
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if ROOT not in sys.path:
-    sys.path.insert(0, ROOT)
+# Add project and Agent Byte roots to the import path.
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ABM_ROOT = os.path.join(ROOT, "agent_byte-master")
+for path in (ROOT, ABM_ROOT):
+    if path not in sys.path:
+        sys.path.insert(0, path)
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -58,17 +63,16 @@ efficiency_engine = _try_import("EfficiencyEngine",
 knowledge_tank_mod = _try_import("KnowledgeTank",
     lambda: __import__("core.reasoning.brain.knowledge.knowledge_tank", fromlist=["KnowledgeTank"]))
 
-# Try the orchestrator (heavy — may fail if deps missing)
+# Use the existing AgentNetwork as the task dispatcher. The analyst executor
+# is the safe general-purpose route; its provider integration remains optional.
 orchestrator_instance = None
 def _load_orchestrator():
     global orchestrator_instance
     try:
-        # FIXME: orchestrator import disabled - module path unknown
-        orchestrator_instance = LLMOrchestrator(
-            llm_provider=os.getenv("LLM_PROVIDER", "mock"),
-            base_path=ROOT
-        )
-        logger.info("  [+] LLMOrchestrator (provider=%s)", os.getenv("LLM_PROVIDER", "mock"))
+        module = importlib.import_module("agents.agent_network")
+        orchestrator_instance = module.AgentNetwork()
+        orchestrator_instance.spawn_default_fleet()
+        logger.info("  [+] AgentNetwork task dispatcher")
     except Exception as e:
         logger.warning(f"  [-] LLMOrchestrator: {e}")
 
@@ -134,6 +138,8 @@ def health():
 
 @app.get("/api/system/metrics")
 def system_metrics():
+    if psutil is None:
+        raise HTTPException(status_code=503, detail="System metrics dependency is unavailable")
     cpu = psutil.cpu_percent(interval=0.5)
     mem = psutil.virtual_memory()
     disk = psutil.disk_usage("/")
@@ -164,21 +170,21 @@ def list_agents():
                 "source": "service_registry",
             })
 
-    # From orchestrator agent profiles
-    if orchestrator_instance and hasattr(orchestrator_instance, "agent_profiles"):
-        for name, profile in orchestrator_instance.agent_profiles.items():
-            agents.append({
-                "id": f"orch-{name}",
-                "name": profile.name,
-                "type": "orchestrator_agent",
-                "status": profile.status,
-                "host": profile.host,
-                "port": profile.port,
-                "capabilities": [c.value for c in profile.capabilities],
-                "current_tasks": profile.current_tasks,
-                "max_tasks": profile.max_concurrent_tasks,
-                "source": "orchestrator",
-            })
+    # From the active agent network
+    profiles = getattr(orchestrator_instance, "agent_profiles", None)
+    if profiles is None:
+        profiles = getattr(orchestrator_instance, "profiles", {})
+    for name, profile in profiles.items():
+        agents.append({
+            "id": name,
+            "name": profile.name,
+            "type": "agent",
+            "status": profile.status,
+            "capabilities": [getattr(c, "value", c) for c in profile.capabilities],
+            "current_tasks": 1 if profile.status == "busy" else 0,
+            "max_tasks": 1,
+            "source": "agent_network",
+        })
 
     # Built-in modules that are loaded
     builtins = [
@@ -194,7 +200,7 @@ def list_agents():
             "task_handler" if task_handler_mod else "",
             "efficiency_engine" if efficiency_engine else "",
             "knowledge_tank" if knowledge_tank_mod else "",
-        ] or (name == "Brain Core" and orchestrator_instance is not None)
+        ]
 
         agents.append({
             "id": f"mod-{module}",
@@ -245,10 +251,17 @@ async def create_task(req: TaskRequest):
     # Try orchestrator first (full decompose + multi-agent)
     if orchestrator_instance:
         try:
-            result = await orchestrator_instance.orchestrate(req.description, req.context)
-            entry["status"] = "completed"
+            result = await orchestrator_instance.dispatch(
+                "analyst-1",
+                {
+                    "goal": req.description,
+                    "input": req.description,
+                    "context": req.context or {},
+                },
+            )
+            entry["status"] = "completed" if result.get("success") else "failed"
             entry["result"] = result
-            entry["agent"] = "LLMOrchestrator"
+            entry["agent"] = result.get("agent_id", "analyst-1")
             return {"task": entry}
         except Exception as e:
             logger.error(f"Orchestrator failed: {e}")

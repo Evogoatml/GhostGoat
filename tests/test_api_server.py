@@ -21,13 +21,9 @@ def _make_app():
         "uvicorn": MagicMock(),
     }
     with patch.dict("sys.modules", mocks):
-        # Patch module-level side-effectful calls
-        with patch("api.server._try_import", return_value=None), \
-             patch("api.server._load_orchestrator"):
-            import importlib
-            import api.server as srv
-            importlib.reload(srv)
-            return srv
+        import importlib
+        import config.api.server as srv
+        return importlib.reload(srv)
 
 
 # ---------------------------------------------------------------------------
@@ -51,24 +47,22 @@ def client():
     psutil_mock.pids.return_value = list(range(100))
 
     with patch.dict(sys.modules, {"psutil": psutil_mock, "uvicorn": MagicMock()}):
-        with patch("api.server._try_import", return_value=None), \
-             patch("api.server._load_orchestrator"):
-            import importlib
-            import api.server as srv
-            importlib.reload(srv)
-            # Reset module-level globals
-            srv.service_registry = None
-            srv.decision_governor = None
-            srv.task_handler_mod = None
-            srv.efficiency_engine = None
-            srv.knowledge_tank_mod = None
-            srv.orchestrator_instance = None
-            srv.nanoagent_spawner = None
-            srv.tool_registry = None
-            srv._task_log.clear()
-            srv._message_log.clear()
-            srv._governance_log.clear()
-            yield TestClient(srv.app)
+        import importlib
+        import config.api.server as srv
+        importlib.reload(srv)
+        # Reset module-level globals
+        srv.service_registry = None
+        srv.decision_governor = None
+        srv.task_handler_mod = None
+        srv.efficiency_engine = None
+        srv.knowledge_tank_mod = None
+        srv.orchestrator_instance = None
+        srv.nanoagent_spawner = None
+        srv.tool_registry = None
+        srv._task_log.clear()
+        srv._message_log.clear()
+        srv._governance_log.clear()
+        yield TestClient(srv.app)
 
 
 # ---------------------------------------------------------------------------
@@ -148,6 +142,16 @@ class TestAgentsEndpoint:
         names = [a["name"] for a in data["agents"]]
         assert "Brain Core" in names
 
+    def test_default_agent_network_is_visible(self, client, monkeypatch):
+        import config.api.server as srv
+
+        monkeypatch.setattr(srv, "orchestrator_instance", None)
+        srv._load_orchestrator()
+        agents = client.get("/api/agents").json()["agents"]
+        analyst = next(agent for agent in agents if agent["id"] == "analyst-1")
+        assert analyst["source"] == "agent_network"
+        assert analyst["status"] == "idle"
+
     def test_agents_have_required_fields(self, client):
         data = client.get("/api/agents").json()
         for agent in data["agents"]:
@@ -166,42 +170,103 @@ class TestTasksEndpoint:
         assert resp.status_code == 200
 
     def test_list_tasks_empty_initially(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv._task_log.clear()
         data = client.get("/api/tasks").json()
         assert data["tasks"] == []
         assert data["count"] == 0
 
     def test_create_task_no_handler(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv._task_log.clear()
         resp = client.post("/api/tasks", json={"description": "test task"})
         assert resp.status_code == 200
         data = resp.json()
         assert "task" in data
         assert data["task"]["description"] == "test task"
-        assert data["task"]["status"] in ("failed", "running", "completed")
+        assert data["task"]["status"] == "failed"
+        assert data["task"]["result"]["error"] == "No task handler available"
 
     def test_create_task_default_priority(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv._task_log.clear()
         resp = client.post("/api/tasks", json={"description": "priority test"})
         assert resp.status_code == 200
         assert resp.json()["task"]["priority"] == 5
 
     def test_create_task_custom_priority(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv._task_log.clear()
         resp = client.post("/api/tasks", json={"description": "urgent", "priority": 1})
         assert resp.status_code == 200
         assert resp.json()["task"]["priority"] == 1
 
     def test_created_task_appears_in_list(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv._task_log.clear()
         client.post("/api/tasks", json={"description": "list me"})
         data = client.get("/api/tasks").json()
         assert data["count"] >= 1
+
+    def test_task_uses_orchestrator(self, client):
+        import config.api.server as srv
+
+        class FakeOrchestrator:
+            async def dispatch(self, agent_id, payload):
+                return {
+                    "success": True,
+                    "agent_id": agent_id,
+                    "result": f"handled: {payload['goal']}",
+                    "context": payload["context"],
+                }
+
+        srv.orchestrator_instance = FakeOrchestrator()
+        srv.task_handler_mod = None
+        srv._task_log.clear()
+        resp = client.post(
+            "/api/tasks",
+            json={"description": "check canonical path", "context": {"source": "smoke"}},
+        )
+
+        assert resp.status_code == 200
+        task = resp.json()["task"]
+        assert task["status"] == "completed"
+        assert task["agent"] == "analyst-1"
+        assert task["result"]["result"] == "handled: check canonical path"
+        assert task["result"]["context"] == {"source": "smoke"}
+
+    def test_default_agent_network_smoke(self, client, monkeypatch):
+        import config.api.server as srv
+
+        monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+        srv._load_orchestrator()
+        srv._task_log.clear()
+
+        resp = client.post("/api/tasks", json={"description": "smoke-test agent dispatch"})
+
+        assert resp.status_code == 200
+        task = resp.json()["task"]
+        assert task["status"] == "completed"
+        assert task["agent"] == "analyst-1"
+        assert task["result"]["success"] is True
+        assert task["result"]["result"].startswith("[stub] analyst received:")
+
+    def test_orchestrator_failure_is_reported(self, client):
+        import config.api.server as srv
+
+        class FailingOrchestrator:
+            async def dispatch(self, agent_id, payload):
+                return {"success": False, "agent_id": agent_id, "error": "orchestrator unavailable"}
+
+        srv.orchestrator_instance = FailingOrchestrator()
+        srv.task_handler_mod = None
+        srv._task_log.clear()
+        resp = client.post("/api/tasks", json={"description": "fail safely"})
+
+        assert resp.status_code == 200
+        task = resp.json()["task"]
+        assert task["status"] == "failed"
+        assert task["result"]["error"] == "orchestrator unavailable"
 
 
 # ---------------------------------------------------------------------------
@@ -210,13 +275,13 @@ class TestTasksEndpoint:
 
 class TestMessagesEndpoint:
     def test_list_messages_empty(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv._message_log.clear()
         data = client.get("/api/messages").json()
         assert data["messages"] == []
 
     def test_send_message(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv._message_log.clear()
         payload = {
             "from_agent": "agent-a",
@@ -232,7 +297,7 @@ class TestMessagesEndpoint:
         assert data["status"] == "delivered"
 
     def test_sent_message_appears_in_list(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv._message_log.clear()
         client.post("/api/messages", json={
             "from_agent": "x", "to_agent": "y", "content": "hi"
@@ -253,20 +318,20 @@ class TestMessagesEndpoint:
 
 class TestGovernanceEndpoint:
     def test_get_policies_no_governor(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv.decision_governor = None
         srv._governance_log.clear()
         data = client.get("/api/governance/policies").json()
         assert data["policies"] == []
 
     def test_check_policy_no_governor_503(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv.decision_governor = None
         resp = client.post("/api/governance/check")
         assert resp.status_code == 503
 
     def test_check_policy_with_governor(self, client):
-        import api.server as srv
+        import config.api.server as srv
         mock_gov = MagicMock()
         mock_gov.allow_external_calls.return_value = True
         srv.decision_governor = mock_gov
@@ -284,13 +349,13 @@ class TestGovernanceEndpoint:
 
 class TestServicesEndpoint:
     def test_services_no_registry(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv.service_registry = None
         data = client.get("/api/services").json()
         assert "error" in data
 
     def test_services_with_registry(self, client):
-        import api.server as srv
+        import config.api.server as srv
         mock_reg = MagicMock()
         mock_reg.list_services.return_value = {"svc1": True, "svc2": False}
         srv.service_registry = mock_reg
@@ -306,7 +371,7 @@ class TestServicesEndpoint:
 
 class TestKnowledgeEndpoint:
     def test_search_no_tank(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv.knowledge_tank_mod = None
         data = client.get("/api/knowledge/search", params={"q": "test"}).json()
         assert data["results"] == []
@@ -319,19 +384,19 @@ class TestKnowledgeEndpoint:
 
 class TestToolsEndpoint:
     def test_list_tools_no_registry(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv.tool_registry = None
         data = client.get("/api/tools").json()
         assert "error" in data
 
     def test_execute_tool_no_registry_503(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv.tool_registry = None
         resp = client.post("/api/tools/execute", params={"name": "mytool"})
         assert resp.status_code == 503
 
     def test_execute_tool_with_registry(self, client):
-        import api.server as srv
+        import config.api.server as srv
         mock_reg = MagicMock()
         mock_result = MagicMock()
         mock_result.success = True
@@ -353,19 +418,19 @@ class TestToolsEndpoint:
 
 class TestNanoagentsEndpoint:
     def test_list_nanoagents_no_spawner(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv.nanoagent_spawner = None
         data = client.get("/api/nanoagents").json()
         assert "error" in data
 
     def test_execute_nanoagent_no_spawner_503(self, client):
-        import api.server as srv
+        import config.api.server as srv
         srv.nanoagent_spawner = None
         resp = client.post("/api/nanoagents/execute", json={"task_type": "system_info"})
         assert resp.status_code == 503
 
     def test_execute_nanoagent_with_spawner(self, client):
-        import api.server as srv
+        import config.api.server as srv
         mock_spawner = MagicMock()
         mock_spawner.execute.return_value = {"result": "ok"}
         srv.nanoagent_spawner = mock_spawner
