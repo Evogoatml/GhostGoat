@@ -19,8 +19,8 @@ export default function AgentRegistry() {
     .filter(a => filterStatus === 'all' || a.status === filterStatus)
     .sort((a, b) => {
       if (sortBy === 'name') return a.name.localeCompare(b.name);
-      if (sortBy === 'health') return b.health - a.health;
-      if (sortBy === 'cpu') return b.cpu - a.cpu;
+      if (sortBy === 'health') return (b.health ?? -1) - (a.health ?? -1);
+      if (sortBy === 'cpu') return (b.cpu ?? -1) - (a.cpu ?? -1);
       if (sortBy === 'tasks') return b.tasks_completed - a.tasks_completed;
       return 0;
     });
@@ -35,7 +35,7 @@ export default function AgentRegistry() {
     <div className="p-6 space-y-6">
       <div>
         <h1 className="text-2xl font-bold">Agent Registry</h1>
-        <p className="text-sm text-slate-400 mt-1">{agents.length} agents registered across {Object.keys(AGENT_TYPES).length} types</p>
+        <p className="text-sm text-slate-400 mt-1">{agents.length} agents in the live runtime fleet</p>
       </div>
 
       {/* Filters */}
@@ -87,23 +87,23 @@ export default function AgentRegistry() {
                 <div className="mb-3">
                   <div className="flex justify-between text-[10px] text-slate-500 mb-1">
                     <span>Health</span>
-                    <span>{agent.health}%</span>
+                    <span>{agent.health == null ? 'n/a' : `${agent.health}%`}</span>
                   </div>
                   <div className="h-1.5 bg-[#252836] rounded-full overflow-hidden">
                     <div
                       className={`h-full rounded-full transition-all duration-500 ${
-                        agent.health > 80 ? 'bg-emerald-500' : agent.health > 50 ? 'bg-amber-500' : 'bg-red-500'
+                        agent.health == null ? 'bg-slate-600' : agent.health > 80 ? 'bg-emerald-500' : agent.health > 50 ? 'bg-amber-500' : 'bg-red-500'
                       }`}
-                      style={{ width: `${agent.health}%` }}
+                      style={{ width: `${agent.health ?? 0}%` }}
                     />
                   </div>
                 </div>
 
                 {/* Stats row */}
                 <div className="flex items-center gap-4 text-[10px] text-slate-500">
-                  <span>CPU: {agent.cpu}%</span>
-                  <span>Mem: {agent.memory}MB</span>
-                  <span>Tasks: {agent.tasks_completed.toLocaleString()}</span>
+                  <span>CPU: {agent.cpu == null ? 'n/a' : `${agent.cpu}%`}</span>
+                  <span>Mem: {agent.memory == null ? 'n/a' : `${agent.memory}MB`}</span>
+                  <span>Tasks: {(agent.tasks_completed ?? 0).toLocaleString()}</span>
                 </div>
 
                 {/* Capabilities */}
@@ -134,10 +134,10 @@ export default function AgentRegistry() {
                     ['Type', selectedAgent.type],
                     ['Status', selectedAgent.status],
                     ['Uptime', selectedAgent.uptime],
-                    ['Health', `${selectedAgent.health}%`],
-                    ['CPU', `${selectedAgent.cpu}%`],
-                    ['Memory', `${selectedAgent.memory}MB`],
-                    ['Tasks Done', selectedAgent.tasks_completed.toLocaleString()],
+                    ['Health', selectedAgent.health == null ? 'n/a' : `${selectedAgent.health}%`],
+                    ['CPU', selectedAgent.cpu == null ? 'n/a' : `${selectedAgent.cpu}%`],
+                    ['Memory', selectedAgent.memory == null ? 'n/a' : `${selectedAgent.memory}MB`],
+                    ['Tasks Done', (selectedAgent.tasks_completed ?? 0).toLocaleString()],
                   ].map(([k, v]) => (
                     <div key={k}>
                       <div className="text-[10px] text-slate-500 uppercase tracking-wider">{k}</div>

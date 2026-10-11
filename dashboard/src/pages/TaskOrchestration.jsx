@@ -29,7 +29,9 @@ export default function TaskOrchestration() {
     <div className="p-6 space-y-6">
       <div>
         <h1 className="text-2xl font-bold">Task Orchestration</h1>
-        <p className="text-sm text-slate-400 mt-1">Manage task queue, workflows, and agent assignments</p>
+        <p className="text-sm text-slate-400 mt-1">
+          {backendOnline ? 'Tasks run through the live API dispatcher; mock results are identified separately.' : 'Simulated queue — connect the API to submit live tasks.'}
+        </p>
       </div>
 
       {/* Submit new task */}
@@ -41,7 +43,7 @@ export default function TaskOrchestration() {
               value={newTask}
               onChange={e => setNewTask(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && handleSubmit()}
-              placeholder="Submit a task to the real orchestrator..."
+              placeholder="Submit a task to the live dispatcher..."
               disabled={submitting}
               className="flex-1 bg-[#0f1117] border border-[#252836] rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
             />
@@ -58,20 +60,17 @@ export default function TaskOrchestration() {
       )}
 
       {/* KPIs */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <KPICard icon={ListTodo} label="Total Tasks" value={stats.totalTasks} color="indigo" />
         <KPICard icon={Play} label="Running" value={stats.runningTasks} color="amber" />
         <KPICard icon={CheckCircle} label="Completed" value={stats.completedTasks} color="emerald" />
         <KPICard icon={XCircle} label="Failed" value={stats.failedTasks} color="red" />
+        <KPICard icon={Clock} label="Mocked" value={stats.mockedTasks} color="amber" />
       </div>
 
       {/* Task Table */}
       <Card>
-        <CardHeader icon={ListTodo} title="Task Queue" iconColor="text-amber-400">
-          <button className="px-3 py-1.5 text-xs font-medium bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors">
-            + New Task
-          </button>
-        </CardHeader>
+        <CardHeader icon={ListTodo} title="Task Queue" iconColor="text-amber-400" />
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -106,10 +105,10 @@ export default function TaskOrchestration() {
                             task.status === 'failed' ? 'bg-red-500' :
                             task.status === 'running' ? 'bg-amber-500' : 'bg-slate-600'
                           }`}
-                          style={{ width: `${task.progress}%` }}
+                          style={{ width: `${task.progress ?? (task.status === 'completed' ? 100 : 0)}%` }}
                         />
                       </div>
-                      <span className="text-[10px] text-slate-500 w-8">{task.progress}%</span>
+                      <span className="text-[10px] text-slate-500 w-8">{task.progress ?? (task.status === 'completed' ? 100 : 0)}%</span>
                     </div>
                   </td>
                   <td className="px-5 py-3 text-xs text-slate-500">{task.created}</td>

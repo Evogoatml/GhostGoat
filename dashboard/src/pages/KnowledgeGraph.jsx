@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { Network, ZoomIn, ZoomOut, Maximize } from 'lucide-react';
 import Card, { CardHeader } from '../components/Card';
 import { knowledgeNodes, knowledgeEdges } from '../data/agentData';
+import { useGhostGoat } from '../HybridContext';
 
 const groupColors = {
   reasoning: { fill: '#6366f1', stroke: '#818cf8', bg: 'rgba(99,102,241,0.15)' },
@@ -15,13 +16,18 @@ const groupColors = {
 };
 
 export default function KnowledgeGraph() {
+  const { backendOnline, knowledgeGraph } = useGhostGoat();
   const canvasRef = useRef(null);
   const [zoom, setZoom] = useState(1);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(null);
   const [hoveredNode, setHoveredNode] = useState(null);
-  const [nodes, setNodes] = useState(knowledgeNodes);
+  const graphNodes = backendOnline ? knowledgeGraph.nodes : knowledgeNodes;
+  const graphEdges = backendOnline ? knowledgeGraph.edges : knowledgeEdges;
+  const [nodes, setNodes] = useState(graphNodes);
   const animFrame = useRef(null);
+
+  useEffect(() => setNodes(graphNodes), [graphNodes]);
 
   const draw = useCallback(() => {
     const canvas = canvasRef.current;
@@ -36,7 +42,7 @@ export default function KnowledgeGraph() {
     ctx.scale(zoom, zoom);
 
     // Draw edges
-    knowledgeEdges.forEach(edge => {
+    graphEdges.forEach(edge => {
       const from = nodes.find(n => n.id === edge.from);
       const to = nodes.find(n => n.id === edge.to);
       if (!from || !to) return;
@@ -89,7 +95,7 @@ export default function KnowledgeGraph() {
 
     ctx.restore();
     animFrame.current = requestAnimationFrame(draw);
-  }, [nodes, zoom, offset, hoveredNode]);
+  }, [nodes, zoom, offset, hoveredNode, graphEdges]);
 
   useEffect(() => {
     animFrame.current = requestAnimationFrame(draw);
@@ -127,7 +133,9 @@ export default function KnowledgeGraph() {
     <div className="p-6 space-y-6">
       <div>
         <h1 className="text-2xl font-bold">Knowledge Graph</h1>
-        <p className="text-sm text-slate-400 mt-1">Interactive visualization of GhostGoat's component relationships</p>
+        <p className="text-sm text-slate-400 mt-1">
+          {backendOnline ? 'Live graph derived from stored knowledge and shared tags/categories' : 'Simulated architecture sample — connect the API for the live knowledge graph'}
+        </p>
       </div>
 
       <Card>
@@ -145,6 +153,9 @@ export default function KnowledgeGraph() {
           </div>
         </CardHeader>
         <div className="p-2">
+          {backendOnline && nodes.length === 0 && (
+            <p className="p-4 text-sm text-slate-500">The live knowledge store has no graph entries yet.</p>
+          )}
           <canvas
             ref={canvasRef}
             width={900}

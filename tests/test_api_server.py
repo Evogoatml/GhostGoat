@@ -1,439 +1,192 @@
-"""
-Tests for api/server.py — FastAPI endpoints.
-Uses TestClient so no real server is needed.
-"""
+"""End-to-end API tests for the canonical FastAPI runtime."""
+
+import sys
+from types import SimpleNamespace
+from unittest.mock import MagicMock
 
 import pytest
-from unittest.mock import MagicMock, patch
 
-fastapi = pytest.importorskip("fastapi", reason="fastapi not installed")
-from fastapi.testclient import TestClient  # noqa: E402
+pytest.importorskip("fastapi", reason="fastapi not installed")
+from fastapi.testclient import TestClient
 
-
-# ---------------------------------------------------------------------------
-# Helpers — mock heavy module-level imports before importing the app
-# ---------------------------------------------------------------------------
-
-def _make_app():
-    """Import the app with all heavy deps mocked out."""
-    mocks = {
-        "psutil": MagicMock(),
-        "uvicorn": MagicMock(),
-    }
-    with patch.dict("sys.modules", mocks):
-        import importlib
-        import config.api.server as srv
-        return importlib.reload(srv)
+from config.api.state_store import RuntimeState
+import config.api.server as server
 
 
-# ---------------------------------------------------------------------------
-# Fixtures
-# ---------------------------------------------------------------------------
-
-@pytest.fixture(scope="module")
-def client():
-    """Return a TestClient bound to the FastAPI app."""
-    import sys
-    psutil_mock = MagicMock()
-    psutil_mock.cpu_percent.return_value = 10.0
-    mem = MagicMock()
-    mem.percent = 40.0
-    mem.used = 2 * 1024 ** 3
-    mem.total = 8 * 1024 ** 3
-    psutil_mock.virtual_memory.return_value = mem
-    disk = MagicMock()
-    disk.percent = 55.0
-    psutil_mock.disk_usage.return_value = disk
-    psutil_mock.pids.return_value = list(range(100))
-
-    with patch.dict(sys.modules, {"psutil": psutil_mock, "uvicorn": MagicMock()}):
-        import importlib
-        import config.api.server as srv
-        importlib.reload(srv)
-        # Reset module-level globals
-        srv.service_registry = None
-        srv.decision_governor = None
-        srv.task_handler_mod = None
-        srv.efficiency_engine = None
-        srv.knowledge_tank_mod = None
-        srv.orchestrator_instance = None
-        srv.nanoagent_spawner = None
-        srv.tool_registry = None
-        srv._task_log.clear()
-        srv._message_log.clear()
-        srv._governance_log.clear()
-        yield TestClient(srv.app)
-
-
-# ---------------------------------------------------------------------------
-# Health endpoint
-# ---------------------------------------------------------------------------
-
-class TestHealthEndpoint:
-    def test_health_returns_200(self, client):
-        resp = client.get("/api/health")
-        assert resp.status_code == 200
-
-    def test_health_has_status_online(self, client):
-        data = client.get("/api/health").json()
-        assert data["status"] == "online"
-
-    def test_health_has_uptime(self, client):
-        data = client.get("/api/health").json()
-        assert "uptime" in data
-        assert isinstance(data["uptime"], float)
-
-    def test_health_has_modules(self, client):
-        data = client.get("/api/health").json()
-        assert "modules" in data
-        modules = data["modules"]
-        expected_keys = {
-            "service_registry", "decision_governor", "task_handler",
-            "efficiency_engine", "knowledge_tank", "orchestrator"
+class FakeKnowledgeTank:
+    def __init__(self):
+        self.entries = {
+            "knowledge-1": SimpleNamespace(
+                id="knowledge-1",
+                category="task_result",
+                content="Stored task result",
+                tags=["analyst-1"],
+                source="task-1",
+                confidence=1.0,
+                usage_count=0,
+            )
         }
-        assert expected_keys.issubset(modules.keys())
+        self.ingested = []
 
-    def test_health_modules_false_when_not_loaded(self, client):
-        data = client.get("/api/health").json()
-        for v in data["modules"].values():
-            assert v is False
+    def search(self, query, limit=10):
+        if not query or query.lower() in "stored task result":
+            return [{
+                "id": "knowledge-1",
+                "category": "task_result",
+                "content": "Stored task result",
+                "tags": ["analyst-1"],
+                "source": "task-1",
+                "confidence": 1.0,
+                "usage": 0,
+            }][:limit]
+        return []
 
+    def ingest_bulk(self, records):
+        self.ingested.extend(records)
 
-# ---------------------------------------------------------------------------
-# System metrics endpoint
-# ---------------------------------------------------------------------------
-
-class TestSystemMetrics:
-    def test_metrics_returns_200(self, client):
-        resp = client.get("/api/system/metrics")
-        assert resp.status_code == 200
-
-    def test_metrics_has_required_fields(self, client):
-        data = client.get("/api/system/metrics").json()
-        for field in ("cpu_percent", "memory_percent", "memory_used_mb",
-                      "memory_total_mb", "disk_percent", "process_count", "timestamp"):
-            assert field in data, f"Missing field: {field}"
-
-    def test_metrics_cpu_is_number(self, client):
-        data = client.get("/api/system/metrics").json()
-        assert isinstance(data["cpu_percent"], (int, float))
-
-
-# ---------------------------------------------------------------------------
-# Agents endpoint
-# ---------------------------------------------------------------------------
-
-class TestAgentsEndpoint:
-    def test_list_agents_returns_200(self, client):
-        resp = client.get("/api/agents")
-        assert resp.status_code == 200
-
-    def test_list_agents_has_agents_key(self, client):
-        data = client.get("/api/agents").json()
-        assert "agents" in data
-        assert "count" in data
-
-    def test_list_agents_count_matches_list(self, client):
-        data = client.get("/api/agents").json()
-        assert data["count"] == len(data["agents"])
-
-    def test_builtin_agents_included(self, client):
-        data = client.get("/api/agents").json()
-        names = [a["name"] for a in data["agents"]]
-        assert "Brain Core" in names
-
-    def test_default_agent_network_is_visible(self, client, monkeypatch):
-        import config.api.server as srv
-
-        monkeypatch.setattr(srv, "orchestrator_instance", None)
-        srv._load_orchestrator()
-        agents = client.get("/api/agents").json()["agents"]
-        analyst = next(agent for agent in agents if agent["id"] == "analyst-1")
-        assert analyst["source"] == "agent_network"
-        assert analyst["status"] == "idle"
-
-    def test_agents_have_required_fields(self, client):
-        data = client.get("/api/agents").json()
-        for agent in data["agents"]:
-            assert "id" in agent
-            assert "name" in agent
-            assert "status" in agent
-
-
-# ---------------------------------------------------------------------------
-# Tasks endpoint
-# ---------------------------------------------------------------------------
-
-class TestTasksEndpoint:
-    def test_list_tasks_returns_200(self, client):
-        resp = client.get("/api/tasks")
-        assert resp.status_code == 200
-
-    def test_list_tasks_empty_initially(self, client):
-        import config.api.server as srv
-        srv._task_log.clear()
-        data = client.get("/api/tasks").json()
-        assert data["tasks"] == []
-        assert data["count"] == 0
-
-    def test_create_task_no_handler(self, client):
-        import config.api.server as srv
-        srv._task_log.clear()
-        resp = client.post("/api/tasks", json={"description": "test task"})
-        assert resp.status_code == 200
-        data = resp.json()
-        assert "task" in data
-        assert data["task"]["description"] == "test task"
-        assert data["task"]["status"] == "failed"
-        assert data["task"]["result"]["error"] == "No task handler available"
-
-    def test_create_task_default_priority(self, client):
-        import config.api.server as srv
-        srv._task_log.clear()
-        resp = client.post("/api/tasks", json={"description": "priority test"})
-        assert resp.status_code == 200
-        assert resp.json()["task"]["priority"] == 5
-
-    def test_create_task_custom_priority(self, client):
-        import config.api.server as srv
-        srv._task_log.clear()
-        resp = client.post("/api/tasks", json={"description": "urgent", "priority": 1})
-        assert resp.status_code == 200
-        assert resp.json()["task"]["priority"] == 1
-
-    def test_created_task_appears_in_list(self, client):
-        import config.api.server as srv
-        srv._task_log.clear()
-        client.post("/api/tasks", json={"description": "list me"})
-        data = client.get("/api/tasks").json()
-        assert data["count"] >= 1
-
-    def test_task_uses_orchestrator(self, client):
-        import config.api.server as srv
-
-        class FakeOrchestrator:
-            async def dispatch(self, agent_id, payload):
-                return {
-                    "success": True,
-                    "agent_id": agent_id,
-                    "result": f"handled: {payload['goal']}",
-                    "context": payload["context"],
-                }
-
-        srv.orchestrator_instance = FakeOrchestrator()
-        srv.task_handler_mod = None
-        srv._task_log.clear()
-        resp = client.post(
-            "/api/tasks",
-            json={"description": "check canonical path", "context": {"source": "smoke"}},
-        )
-
-        assert resp.status_code == 200
-        task = resp.json()["task"]
-        assert task["status"] == "completed"
-        assert task["agent"] == "analyst-1"
-        assert task["result"]["result"] == "handled: check canonical path"
-        assert task["result"]["context"] == {"source": "smoke"}
-
-    def test_default_agent_network_smoke(self, client, monkeypatch):
-        import config.api.server as srv
-
-        monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
-        srv._load_orchestrator()
-        srv._task_log.clear()
-
-        resp = client.post("/api/tasks", json={"description": "smoke-test agent dispatch"})
-
-        assert resp.status_code == 200
-        task = resp.json()["task"]
-        assert task["status"] == "completed"
-        assert task["agent"] == "analyst-1"
-        assert task["result"]["success"] is True
-        assert task["result"]["result"].startswith("[stub] analyst received:")
-
-    def test_orchestrator_failure_is_reported(self, client):
-        import config.api.server as srv
-
-        class FailingOrchestrator:
-            async def dispatch(self, agent_id, payload):
-                return {"success": False, "agent_id": agent_id, "error": "orchestrator unavailable"}
-
-        srv.orchestrator_instance = FailingOrchestrator()
-        srv.task_handler_mod = None
-        srv._task_log.clear()
-        resp = client.post("/api/tasks", json={"description": "fail safely"})
-
-        assert resp.status_code == 200
-        task = resp.json()["task"]
-        assert task["status"] == "failed"
-        assert task["result"]["error"] == "orchestrator unavailable"
-
-
-# ---------------------------------------------------------------------------
-# Messages endpoint
-# ---------------------------------------------------------------------------
-
-class TestMessagesEndpoint:
-    def test_list_messages_empty(self, client):
-        import config.api.server as srv
-        srv._message_log.clear()
-        data = client.get("/api/messages").json()
-        assert data["messages"] == []
-
-    def test_send_message(self, client):
-        import config.api.server as srv
-        srv._message_log.clear()
-        payload = {
-            "from_agent": "agent-a",
-            "to_agent": "agent-b",
-            "content": "hello",
-            "type": "task_assign",
+    def get_stats(self):
+        return {
+            "total_entries": len(self.entries),
+            "total_algorithms": 0,
+            "storage_path": "test",
         }
-        resp = client.post("/api/messages", json=payload)
-        assert resp.status_code == 200
-        data = resp.json()
-        assert data["from"] == "agent-a"
-        assert data["to"] == "agent-b"
-        assert data["status"] == "delivered"
-
-    def test_sent_message_appears_in_list(self, client):
-        import config.api.server as srv
-        srv._message_log.clear()
-        client.post("/api/messages", json={
-            "from_agent": "x", "to_agent": "y", "content": "hi"
-        })
-        data = client.get("/api/messages").json()
-        assert data["count"] >= 1
-
-    def test_message_has_id(self, client):
-        resp = client.post("/api/messages", json={
-            "from_agent": "x", "to_agent": "y", "content": "test"
-        })
-        assert "id" in resp.json()
 
 
-# ---------------------------------------------------------------------------
-# Governance endpoints
-# ---------------------------------------------------------------------------
+class FakeNetwork:
+    def __init__(self, *, mode="live", success=True):
+        self.mode = mode
+        self.success = success
+        self.selected_agent = None
+        self.profiles = {
+            "analyst-1": SimpleNamespace(
+                agent_id="analyst-1",
+                name="analyst",
+                role="analysis",
+                status="idle",
+                capabilities=["analyze"],
+                total_tasks=0,
+            ),
+            "research-1": SimpleNamespace(
+                agent_id="research-1",
+                name="researcher",
+                role="research",
+                status="idle",
+                capabilities=["search"],
+                total_tasks=0,
+            ),
+        }
 
-class TestGovernanceEndpoint:
-    def test_get_policies_no_governor(self, client):
-        import config.api.server as srv
-        srv.decision_governor = None
-        srv._governance_log.clear()
-        data = client.get("/api/governance/policies").json()
-        assert data["policies"] == []
+    def select_agent(self, goal):
+        return "research-1" if "research" in goal.lower() or "search" in goal.lower() else "analyst-1"
 
-    def test_check_policy_no_governor_503(self, client):
-        import config.api.server as srv
-        srv.decision_governor = None
-        resp = client.post("/api/governance/check")
-        assert resp.status_code == 503
-
-    def test_check_policy_with_governor(self, client):
-        import config.api.server as srv
-        mock_gov = MagicMock()
-        mock_gov.allow_external_calls.return_value = True
-        srv.decision_governor = mock_gov
-        srv._governance_log.clear()
-        resp = client.post("/api/governance/check", params={"context": "test"})
-        assert resp.status_code == 200
-        data = resp.json()
-        assert data["result"] in ("allowed", "blocked")
-        srv.decision_governor = None
-
-
-# ---------------------------------------------------------------------------
-# Services endpoint
-# ---------------------------------------------------------------------------
-
-class TestServicesEndpoint:
-    def test_services_no_registry(self, client):
-        import config.api.server as srv
-        srv.service_registry = None
-        data = client.get("/api/services").json()
-        assert "error" in data
-
-    def test_services_with_registry(self, client):
-        import config.api.server as srv
-        mock_reg = MagicMock()
-        mock_reg.list_services.return_value = {"svc1": True, "svc2": False}
-        srv.service_registry = mock_reg
-        data = client.get("/api/services").json()
-        assert "services" in data
-        assert "svc1" in data["services"]
-        srv.service_registry = None
+    async def dispatch(self, agent_id, payload):
+        self.selected_agent = agent_id
+        return {
+            "success": self.success,
+            "result": f"handled: {payload['goal']}",
+            "agent_id": agent_id,
+            "execution_mode": self.mode,
+        }
 
 
-# ---------------------------------------------------------------------------
-# Knowledge endpoint
-# ---------------------------------------------------------------------------
-
-class TestKnowledgeEndpoint:
-    def test_search_no_tank(self, client):
-        import config.api.server as srv
-        srv.knowledge_tank_mod = None
-        data = client.get("/api/knowledge/search", params={"q": "test"}).json()
-        assert data["results"] == []
-        assert "error" in data
-
-
-# ---------------------------------------------------------------------------
-# Tools endpoint
-# ---------------------------------------------------------------------------
-
-class TestToolsEndpoint:
-    def test_list_tools_no_registry(self, client):
-        import config.api.server as srv
-        srv.tool_registry = None
-        data = client.get("/api/tools").json()
-        assert "error" in data
-
-    def test_execute_tool_no_registry_503(self, client):
-        import config.api.server as srv
-        srv.tool_registry = None
-        resp = client.post("/api/tools/execute", params={"name": "mytool"})
-        assert resp.status_code == 503
-
-    def test_execute_tool_with_registry(self, client):
-        import config.api.server as srv
-        mock_reg = MagicMock()
-        mock_result = MagicMock()
-        mock_result.success = True
-        mock_result.output = "done"
-        mock_result.error = None
-        mock_reg.execute_tool.return_value = mock_result
-        srv.tool_registry = mock_reg
-        resp = client.post("/api/tools/execute", params={"name": "mytool"})
-        assert resp.status_code == 200
-        data = resp.json()
-        assert data["tool"] == "mytool"
-        assert data["success"] is True
-        srv.tool_registry = None
+@pytest.fixture
+def client(tmp_path, monkeypatch):
+    monkeypatch.setattr(server, "state_store", RuntimeState(tmp_path / "api.sqlite3"))
+    monkeypatch.setattr(server, "knowledge_tank", FakeKnowledgeTank())
+    monkeypatch.setattr(server, "orchestrator_instance", FakeNetwork())
+    monkeypatch.setattr(server, "service_registry", None)
+    monkeypatch.setattr(server, "decision_governor", lambda context: True)
+    server._governance_log.clear()
+    with TestClient(server.app) as test_client:
+        yield test_client
 
 
-# ---------------------------------------------------------------------------
-# Nanoagents endpoint
-# ---------------------------------------------------------------------------
+def test_health_reports_initialized_runtime(client):
+    response = client.get("/api/health")
+    assert response.status_code == 200
+    body = response.json()
+    assert body["status"] == "online"
+    assert body["modules"]["orchestrator"] is True
+    assert body["modules"]["knowledge_tank"] is True
 
-class TestNanoagentsEndpoint:
-    def test_list_nanoagents_no_spawner(self, client):
-        import config.api.server as srv
-        srv.nanoagent_spawner = None
-        data = client.get("/api/nanoagents").json()
-        assert "error" in data
 
-    def test_execute_nanoagent_no_spawner_503(self, client):
-        import config.api.server as srv
-        srv.nanoagent_spawner = None
-        resp = client.post("/api/nanoagents/execute", json={"task_type": "system_info"})
-        assert resp.status_code == 503
+def test_api_agent_schema_matches_dashboard(client):
+    body = client.get("/api/agents").json()
+    assert body["count"] == 2
+    agent = body["agents"][0]
+    assert {"id", "name", "type", "status", "health", "cpu", "memory",
+            "capabilities", "tasks_completed", "uptime"} <= agent.keys()
+    assert agent["health"] is None
 
-    def test_execute_nanoagent_with_spawner(self, client):
-        import config.api.server as srv
-        mock_spawner = MagicMock()
-        mock_spawner.execute.return_value = {"result": "ok"}
-        srv.nanoagent_spawner = mock_spawner
-        resp = client.post("/api/nanoagents/execute", json={"task_type": "system_info"})
-        assert resp.status_code == 200
-        srv.nanoagent_spawner = None
+
+def test_task_dispatch_routes_research_and_persists(client):
+    response = client.post("/api/tasks", json={"description": "Research the knowledge store"})
+    task = response.json()["task"]
+    assert task["status"] == "completed"
+    assert task["agent"] == "research-1"
+    assert task["execution_mode"] == "live"
+    assert task["progress"] == 100
+    assert client.get("/api/tasks").json()["tasks"][0]["id"] == task["id"]
+
+
+def test_mock_execution_is_not_reported_as_completed(client, monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.setattr(server, "orchestrator_instance", FakeNetwork(mode="mock", success=False))
+    task = client.post("/api/tasks", json={"description": "Summarize this request"}).json()["task"]
+    assert task["status"] == "failed"
+    assert task["execution_mode"] == "mock"
+    assert task["result"]["success"] is False
+
+
+def test_policy_blocks_external_execution(client, monkeypatch):
+    monkeypatch.setattr(server, "decision_governor", lambda context: False)
+    task = client.post("/api/tasks", json={"description": "Analyze this request"}).json()["task"]
+    assert task["status"] == "failed"
+    assert task["execution_mode"] == "blocked"
+    assert client.get("/api/governance/policies").json()["audit_log"][0]["result"] == "blocked"
+
+
+def test_successful_task_result_is_ingested(client):
+    tank = server.knowledge_tank
+    client.post("/api/tasks", json={"description": "Analyze this request"})
+    assert tank.ingested[0]["category"] == "task_result"
+    assert tank.ingested[0]["source"].startswith("task-")
+
+
+def test_message_is_persisted_as_log_not_delivered(client, tmp_path):
+    message = client.post("/api/messages", json={
+        "from_agent": "agent-a",
+        "to_agent": "agent-b",
+        "content": "hello",
+    }).json()
+    assert message["status"] == "logged"
+    assert message["delivery"] == "log_only"
+    assert client.get("/api/messages").json()["messages"][0]["id"] == message["id"]
+    reopened = RuntimeState(tmp_path / "api.sqlite3")
+    assert reopened.list_messages()[0]["id"] == message["id"]
+    reopened.close()
+
+
+def test_knowledge_and_memory_are_backed_by_store(client):
+    assert client.get("/api/knowledge/search", params={"q": "stored"}).json()["count"] == 1
+    assert client.get("/api/memory/search").json()["entries"][0]["id"] == "knowledge-1"
+    graph = client.get("/api/knowledge/graph").json()
+    assert graph["nodes"][0]["id"] == "knowledge-1"
+    assert client.get("/api/memory/stats").json()["total_entries"] == 1
+
+
+def test_unsupported_optional_integrations_are_not_exposed(client):
+    paths = client.get("/openapi.json").json()["paths"]
+    assert not any(path.startswith("/api/tools") for path in paths)
+    assert not any(path.startswith("/api/nanoagents") for path in paths)
+    assert not any(path.startswith("/api/posters") for path in paths)
+
+
+def test_api_only_dependency_check_does_not_require_node(monkeypatch):
+    import main
+
+    def unexpected_node_check(*args, **kwargs):
+        raise AssertionError("Node must not be checked for API-only startup")
+
+    monkeypatch.setattr(main.subprocess, "run", unexpected_node_check)
+    assert main.check_dependencies(require_dashboard=False) is True

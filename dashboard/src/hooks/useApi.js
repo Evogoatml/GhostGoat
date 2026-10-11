@@ -37,6 +37,9 @@ export function useHybridData() {
   const [messages, setMessages] = useState([]);
   const [policies, setPolicies] = useState({ policies: [], audit_log: [] });
   const [services, setServices] = useState({});
+  const [memoryEntries, setMemoryEntries] = useState([]);
+  const [memoryStats, setMemoryStats] = useState(null);
+  const [knowledgeGraph, setKnowledgeGraph] = useState({ nodes: [], edges: [] });
   const [error, setError] = useState(null);
   const tickRef = useRef(0);
 
@@ -57,13 +60,16 @@ export function useHybridData() {
   // Fetch all real data
   const fetchAll = useCallback(async () => {
     try {
-      const [agentRes, taskRes, metricRes, msgRes, polRes, svcRes] = await Promise.allSettled([
+      const [agentRes, taskRes, metricRes, msgRes, polRes, svcRes, memRes, memStatsRes, graphRes] = await Promise.allSettled([
         apiFetch('/agents'),
         apiFetch('/tasks'),
         apiFetch('/system/metrics'),
         apiFetch('/messages'),
         apiFetch('/governance/policies'),
         apiFetch('/services'),
+        apiFetch('/memory/search'),
+        apiFetch('/memory/stats'),
+        apiFetch('/knowledge/graph'),
       ]);
 
       if (agentRes.status === 'fulfilled') setAgents(agentRes.value.agents || []);
@@ -72,6 +78,9 @@ export function useHybridData() {
       if (msgRes.status === 'fulfilled') setMessages(msgRes.value.messages || []);
       if (polRes.status === 'fulfilled') setPolicies(polRes.value);
       if (svcRes.status === 'fulfilled') setServices(svcRes.value.services || {});
+      if (memRes.status === 'fulfilled') setMemoryEntries(memRes.value.entries || []);
+      if (memStatsRes.status === 'fulfilled') setMemoryStats(memStatsRes.value);
+      if (graphRes.status === 'fulfilled') setKnowledgeGraph(graphRes.value);
     } catch (e) {
       setError(e.message);
     }
@@ -131,6 +140,28 @@ export function useHybridData() {
     }
   }, [backendOnline]);
 
+  const searchMemory = useCallback(async (query = '', limit = 50) => {
+    if (!backendOnline) return { entries: [], error: 'Backend offline' };
+    try {
+      return await apiFetch(`/memory/search?q=${encodeURIComponent(query)}&limit=${limit}`);
+    } catch (e) {
+      return { entries: [], error: e.message };
+    }
+  }, [backendOnline]);
+
+  const checkPolicy = useCallback(async (context = 'task_execution') => {
+    if (!backendOnline) return { error: 'Backend offline' };
+    try {
+      const result = await apiFetch(`/governance/check?context=${encodeURIComponent(context)}`, {
+        method: 'POST',
+      });
+      await fetchAll();
+      return result;
+    } catch (e) {
+      return { error: e.message };
+    }
+  }, [backendOnline, fetchAll]);
+
   return {
     backendOnline,
     health,
@@ -140,11 +171,16 @@ export function useHybridData() {
     messages,
     policies,
     services,
+    memoryEntries,
+    memoryStats,
+    knowledgeGraph,
     error,
     tick: tickRef.current,
     // Actions
     submitTask,
     sendMessage,
     searchKnowledge,
+    searchMemory,
+    checkPolicy,
   };
 }

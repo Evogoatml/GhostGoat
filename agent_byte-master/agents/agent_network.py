@@ -52,11 +52,27 @@ class TaskExecutor:
                 with urllib.request.urlopen(req, timeout=30) as resp:
                     data = _json.loads(resp.read())
                     text = data["content"][0]["text"]
-                    return {"success": True, "result": text, "agent_id": self.name}
+                    return {
+                        "success": True,
+                        "result": text,
+                        "agent_id": self.name,
+                        "execution_mode": "live",
+                    }
             except Exception as e:
-                return {"error": str(e), "success": False, "agent_id": self.name}
+                return {
+                    "error": str(e),
+                    "success": False,
+                    "agent_id": self.name,
+                    "execution_mode": "error",
+                }
         else:
-            return {"success": True, "result": f"[stub] {self.name} received: {prompt[:100]}", "agent_id": self.name}
+            return {
+                "success": False,
+                "result": f"[mock] {self.name} did not execute: {prompt[:100]}",
+                "agent_id": self.name,
+                "execution_mode": "mock",
+                "error": "ANTHROPIC_API_KEY is not configured",
+            }
 
 class ShellExecutor(TaskExecutor):
     async def execute(self, payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -67,7 +83,8 @@ class ShellExecutor(TaskExecutor):
             proc = await asyncio.create_subprocess_exec(*cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=timeout)
             return {"success": proc.returncode == 0, "stdout": stdout.decode(errors="replace"),
-                    "stderr": stderr.decode(errors="replace"), "returncode": proc.returncode}
+                    "stderr": stderr.decode(errors="replace"), "returncode": proc.returncode,
+                    "execution_mode": "local"}
         except asyncio.TimeoutError:
             proc.kill(); await proc.wait()
             return {"error": "Timeout", "success": False}
@@ -81,7 +98,7 @@ class PythonExecutor(TaskExecutor):
         try:
             local_ns = {}
             exec(code, {"__builtins__": __builtins__}, local_ns)
-            return {"success": True, "result": local_ns.get("result")}
+            return {"success": True, "result": local_ns.get("result"), "execution_mode": "local"}
         except Exception as e:
             return {"error": str(e), "success": False}
 
@@ -90,7 +107,20 @@ class ResearchExecutor(TaskExecutor):
         super().__init__("researcher", "research", ["search", "synthesize", "retrieve"])
         self.knowledge_source = knowledge_source
     async def execute(self, payload: Dict[str, Any]) -> Dict[str, Any]:
-        return {"success": True, "result": f"Research: {payload.get('query', '')[:100]}"}
+        query = payload.get("query", "")
+        if self.knowledge_source is None:
+            return {
+                "success": False,
+                "error": "Knowledge store is unavailable",
+                "execution_mode": "error",
+            }
+        results = self.knowledge_source.search(query, limit=10)
+        return {
+            "success": True,
+            "result": results,
+            "execution_mode": "local",
+            "source": "knowledge_tank",
+        }
 
 class AgentNetwork:
     def __init__(self, max_agents: int = 50):
@@ -111,13 +141,21 @@ class AgentNetwork:
         self.logger.info("Registered: %s (%s)", agent_id, executor.role)
         return profile
 
-    def spawn_default_fleet(self):
+    def spawn_default_fleet(self, knowledge_source: Optional[Any] = None):
         for aid, ex in [("shell-1", ShellExecutor("shell-runner", "execution", ["shell", "bash"])),
                         ("python-1", PythonExecutor("py-runner", "execution", ["python", "code"])),
-                        ("research-1", ResearchExecutor()),
+                        ("research-1", ResearchExecutor(knowledge_source)),
                         ("analyst-1", TaskExecutor("analyst", "analysis", ["analyze", "summarize"])),
                         ("supervisor-1", TaskExecutor("supervisor", "oversight", ["recover", "delegate"]))]:
             self.register(aid, ex)
+
+    def select_agent(self, goal: str) -> str:
+        """Route knowledge lookup requests locally and general requests to the analyst."""
+        normalized = goal.lower()
+        if any(term in normalized for term in ("search", "research", "look up", "find in knowledge")):
+            if "research-1" in self.executors:
+                return "research-1"
+        return "analyst-1"
 
     def spawn_legacy_fleet(self):
         """Register legacy AgentK/GPT/CrewAI/SuperAGI/SwarmsAI agents."""
@@ -149,7 +187,9 @@ class AgentNetwork:
             result = {"error": str(e), "success": False}
         finally:
             profile.status = "idle"; profile.current_task = None; profile.last_heartbeat = time.time()
-        result["agent_id"] = agent_id; result["latency_ms"] = (time.time() - start) * 1000
+        result["agent_id"] = agent_id
+        result.setdefault("execution_mode", "mock")
+        result["latency_ms"] = (time.time() - start) * 1000
         return result
 
     async def dispatch_swarm(self, payload: Dict[str, Any], role_filter: Optional[str] = None, max_parallel: int = 5) -> List[Dict[str, Any]]:
@@ -167,6 +207,5 @@ class AgentNetwork:
 
     def get_agent(self, agent_id: str) -> Optional[AgentProfile]:
         return self.profiles.get(agent_id)
-
 
 

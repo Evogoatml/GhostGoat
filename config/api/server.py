@@ -155,10 +155,16 @@ def list_agents():
     agents = []
     if network:
         for profile in network.profiles.values():
+            agent_type = {
+                "execution": "worker",
+                "research": "specialist",
+                "analysis": "coordinator",
+                "oversight": "monitor",
+            }.get(profile.role, profile.role)
             agents.append({
                 "id": profile.agent_id,
                 "name": profile.name,
-                "type": profile.role,
+                "type": agent_type,
                 "status": profile.status,
                 "health": None,
                 "cpu": None,

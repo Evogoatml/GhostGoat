@@ -20,12 +20,19 @@ export default function CommunicationHub() {
   const [newMessage, setNewMessage] = useState('');
   const [fromAgent, setFromAgent] = useState('');
   const [toAgent, setToAgent] = useState('');
+  const [sendStatus, setSendStatus] = useState('');
 
   const filtered = filterType === 'all'
     ? messages
     : messages.filter(m => m.type === filterType);
 
   const activeAgents = agents.filter(a => a.status !== 'offline');
+
+  const submitMessage = async () => {
+    const result = await apiSendMessage(fromAgent, toAgent, newMessage);
+    setSendStatus(result.error || 'Message recorded in the API log (not delivered to the recipient).');
+    if (!result.error) setNewMessage('');
+  };
 
   // Build adjacency for the flow diagram
   const flows = {};
@@ -38,7 +45,9 @@ export default function CommunicationHub() {
     <div className="p-6 space-y-6">
       <div>
         <h1 className="text-2xl font-bold">Communication Hub</h1>
-        <p className="text-sm text-slate-400 mt-1">Inter-agent message flows and communication channels</p>
+        <p className="text-sm text-slate-400 mt-1">
+          {backendOnline ? 'Message log only; entries are not delivered to agents.' : 'Simulated message examples — connect the API to use the message log.'}
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -115,10 +124,15 @@ export default function CommunicationHub() {
                   value={newMessage} onChange={e => setNewMessage(e.target.value)}
                   className="flex-1 bg-[#0f1117] border border-[#252836] rounded-lg px-4 py-2 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
                 />
-                <button className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors flex items-center gap-2 text-sm font-medium">
+                <button
+                  onClick={submitMessage}
+                  disabled={!backendOnline || !fromAgent || !toAgent || !newMessage.trim()}
+                  className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-700 rounded-lg transition-colors flex items-center gap-2 text-sm font-medium"
+                >
                   <Send className="w-4 h-4" /> Send
                 </button>
               </div>
+              {sendStatus && <p className="mt-2 text-xs text-slate-400">{sendStatus}</p>}
             </div>
           </Card>
         </div>
