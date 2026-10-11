@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-GhostGoat Main Entry Point
-Autonomous multi-agent orchestration platform with self-assembly, self-healing, and post-quantum security.
+GhostGoat supervisor for the supported FastAPI and optional dashboard runtime.
 """
 
 import argparse

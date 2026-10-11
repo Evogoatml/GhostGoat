@@ -17,26 +17,6 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Callable, Dict, List, Optional, Set, Tuple
-# from core.init_dual_brain import initialize_dual_brain  # moved
-from services.startup import initialize_ghostgoat_brain
-from brain.trainer.agentic_trainer import AgenticTrainer
-
-# NOTE: Initialization of the GhostGoat brain should happen at runtime,
-# not at import time.  The original code attempted to call
-# `initialize_ghostgoat_brain(orchestrator=self)` at module load, which
-# raises a NameError because `self` does not exist.  Instead we expose a
-# helper that can be called by the orchestrator when it is instantiated.
-
-def init_brain(orchestrator):
-    """Initialize the dual‑brain for a given orchestrator.
-    
-    This function is deliberately lightweight and can be imported safely
-    without side‑effects.
-    """
-    return initialize_ghostgoat_brain(orchestrator=orchestrator)
-
-# Placeholder – will be set by the orchestrator via `init_brain(self)`.
-dual_brain = None
 
 logger = logging.getLogger(__name__)
 _EXECUTOR = ThreadPoolExecutor(thread_name_prefix="pmmago")

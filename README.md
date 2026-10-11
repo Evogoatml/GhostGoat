@@ -15,7 +15,7 @@ main.py
   └── config/api/server.py (FastAPI, port 8420)
         ├── AgentNetwork (agent_byte-master/agents/agent_network.py)
         │     ├── ResearchExecutor → KnowledgeTank search
-        │     └── AnalystExecutor → configured LLM or explicit mock result
+        │     └── analysis TaskExecutor → Anthropic or explicit mock result
         ├── DecisionGovernor (policy checks)
         └── SQLite task/message state (.backend/runtime.sqlite3)
 
@@ -93,15 +93,12 @@ python main.py --dash-only
 
 ## Configuration
 
-Create a `.env` file in the repo root and configure a supported LLM provider if
-real analysis is desired:
+Create a `.env` file in the repo root. The current analyst executor uses
+Anthropic directly; other provider variables are not wired into this runtime.
 
 ```bash
-# Optional LLM credentials; without a usable provider, analysis returns a mock result
+# Optional Anthropic credential; without it, analysis returns a mock result
 ANTHROPIC_API_KEY=sk-ant-...
-OPENAI_API_KEY=sk-...
-
-LLM_PROVIDER=anthropic          # anthropic | openai | gemini | mock
 GHOSTGOAT_STATE_DB=.backend/runtime.sqlite3
 GHOSTGOAT_KNOWLEDGE_PATH=.backend/knowledge_tank
 ```
@@ -136,4 +133,4 @@ GhostGoat/
 | Node.js | 18+ | Dashboard only |
 | Rust / cargo | stable | Backend scanner — optional |
 | Docker | 20+ | Production stack — optional |
-| API key | — | Anthropic or OpenAI; `mock` works without one |
+| Anthropic API key | — | Optional; analysis is reported as mock/failed without one |

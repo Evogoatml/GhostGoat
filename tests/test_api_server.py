@@ -1,8 +1,6 @@
 """End-to-end API tests for the canonical FastAPI runtime."""
 
-import sys
 from types import SimpleNamespace
-from unittest.mock import MagicMock
 
 import pytest
 
