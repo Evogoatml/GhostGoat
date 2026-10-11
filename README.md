@@ -101,7 +101,7 @@ python main.py --dash-only
 
 ## Configuration
 
-Copy `.env.example` to `.env` (if present) or create `.env`, then add your keys:
+Create a `.env` file in the repo root and add your keys:
 
 ```bash
 # LLM — at least one key required (or leave blank to use mock)

@@ -21,7 +21,7 @@ read -p "Choose: " choice
 case $choice in
     1)
         clear
-        python demo_claude_ghostgoat.py
+        echo "Claude demo script was removed (see README for the supported flow: python main.py)"
         ;;
     2)
         echo ""
