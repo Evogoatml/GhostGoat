@@ -11,7 +11,7 @@
 #   make start-prod   → Docker: production stack
 #
 # =============================================================================
-.PHONY: help install install-core run run-api run-dash \
+.PHONY: help install install-core run \
         start start-full start-prod \
         build build-prod build-all \
         up up-full down restart logs logs-ghost status \
@@ -42,14 +42,8 @@ install-core: ## Install core runtime only (pip install -e .)
 # ---------------------------------------------------------------------------
 # Local run (no Docker required) — canonical entry point is main.py
 # ---------------------------------------------------------------------------
-run: ## Start API server + dashboard
+run: ## Start the full runtime (orchestrator, API, Telegram, dashboard)
 	$(PYTHON) main.py
-
-run-api: ## Start API server only
-	$(PYTHON) main.py --api-only
-
-run-dash: ## Start dashboard only
-	$(PYTHON) main.py --dash-only
 
 # ---------------------------------------------------------------------------
 # Default target — unified start

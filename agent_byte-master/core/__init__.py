@@ -1,19 +1,4 @@
+"""Core runtime packages (governance, graphrag, memory, workflows, service registry).
 
-# ===== agent_byte/core/__init__.py =====
-"""Core agent functionality."""
-
-from .agent import AgentByte
-from .config import AgentConfig, NetworkConfig, StorageConfig, EnvironmentMetadata
-from .interfaces import Environment, Storage
-from .checkpoint_manager import CheckpointManager
-
-__all__ = [
-    "AgentByte",
-    "AgentConfig",
-    "NetworkConfig",
-    "StorageConfig",
-    "EnvironmentMetadata",
-    "Environment",
-    "Storage",
-    "checkpoint_manager",
-]
+Subpackages are imported explicitly; nothing heavy is loaded by this package.
+"""

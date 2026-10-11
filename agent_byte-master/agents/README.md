@@ -1,5 +1,5 @@
 # Agent Byte agents
 
-This directory contains Agent Byte agent implementations and examples.
-`creative_module.py` and `custom_analyzer.py` are experimental examples and are
-not registered with or loaded by the supported GhostGoat runtime.
+`agent_network.py` is the fleet manager used by the orchestrator.
+`creative_module.py` (`creative-1`) and `custom_analyzer.py` (`analyzer-1`) are
+registered in the fleet at startup and call the runtime LLM gateway.

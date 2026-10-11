@@ -1,5 +1,4 @@
-# Experimental code
+# Experimental code (archive only)
 
-This directory contains compatibility and prototype code that is not part of
-the supported GhostGoat runtime. The contents are retained for reference and
-must not be treated as core runtime dependencies.
+Compatibility shims and prototypes kept for reference. Nothing here is imported
+by the runtime (`main.py`, `run_cognitive_system.py`, `config/api/server.py`).
