@@ -207,6 +207,56 @@ class IntelligenceConfig:
 
 
 @dataclass
+class TelegramConfig:
+    """Telegram bot configuration (the service always joins the runtime; the network transport connects when a token is set)"""
+    bot_token: str = ""
+    chat_ids: list = field(default_factory=list)
+    webhook_url: str = ""
+    webhook_secret: str = ""
+
+    @property
+    def enabled(self) -> bool:
+        return bool(self.bot_token)
+
+    @staticmethod
+    def parse_chat_ids(raw: str) -> list:
+        """Parse a comma-separated list of chat/group IDs"""
+        return [part.strip() for part in (raw or "").split(",") if part.strip()]
+
+    @classmethod
+    def from_env(cls) -> 'TelegramConfig':
+        """Load TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID (comma-separated for several chats)"""
+        return cls(
+            bot_token=os.getenv("TELEGRAM_BOT_TOKEN", "").strip(),
+            chat_ids=cls.parse_chat_ids(os.getenv("TELEGRAM_CHAT_ID", "")),
+            webhook_url=os.getenv("TELEGRAM_WEBHOOK_URL", "").strip(),
+            webhook_secret=os.getenv("TELEGRAM_WEBHOOK_SECRET", "").strip(),
+        )
+
+
+@dataclass
+class RuntimeConfig:
+    """Runtime flags and locations for the single full-runtime boot path"""
+    host: str = "127.0.0.1"
+    port: int = 8420
+    dashboard_port: int = 3000
+    data_dir: str = str(Path(__file__).resolve().parent.parent / ".backend")
+    cors_origins: list = field(default_factory=lambda: ["http://localhost:3000", "http://127.0.0.1:3000"])
+
+    @classmethod
+    def from_env(cls) -> 'RuntimeConfig':
+        defaults = cls()
+        origins = os.getenv("GHOSTGOAT_CORS_ORIGINS")
+        return cls(
+            host=os.getenv("GHOSTGOAT_HOST", defaults.host),
+            port=int(os.getenv("GHOSTGOAT_PORT", str(defaults.port))),
+            dashboard_port=int(os.getenv("GHOSTGOAT_DASHBOARD_PORT", str(defaults.dashboard_port))),
+            data_dir=os.getenv("GHOSTGOAT_DATA_DIR", defaults.data_dir),
+            cors_origins=[o.strip() for o in origins.split(",") if o.strip()] if origins else defaults.cors_origins,
+        )
+
+
+@dataclass
 class UnifiedConfig:
     """Unified configuration for all systems"""
     llm: LLMConfig = field(default_factory=LLMConfig.from_env)
@@ -214,6 +264,8 @@ class UnifiedConfig:
     agent: AgentConfig = field(default_factory=AgentConfig.from_env)
     network: NetworkConfig = field(default_factory=NetworkConfig.from_env)
     intelligence: IntelligenceConfig = field(default_factory=IntelligenceConfig.from_env)
+    telegram: TelegramConfig = field(default_factory=TelegramConfig.from_env)
+    runtime: RuntimeConfig = field(default_factory=RuntimeConfig.from_env)
     
     # System paths — resolve from this file's location so it works regardless of $HOME
     base_path: str = field(default_factory=lambda: str(Path(__file__).resolve().parent.parent))
@@ -221,16 +273,9 @@ class UnifiedConfig:
     bots_path: str = field(default_factory=lambda: str(Path.home() / "BOTS"))
     adap_path: str = field(default_factory=lambda: str(Path.home() / "adap_lab"))
     
-    # Feature flags
-    enable_orchestrator: bool = True
-    enable_knowledge_tank: bool = True
-    enable_smart_moe: bool = True
-    enable_intelligence: bool = True
-    
     # API configuration
     api_port: int = 5000
     api_host: str = "0.0.0.0"
-    enable_api: bool = True
     
     def __post_init__(self):
         """Post-initialization setup"""
@@ -263,17 +308,14 @@ class UnifiedConfig:
             agent=AgentConfig.from_env(),
             network=NetworkConfig.from_env(),
             intelligence=IntelligenceConfig.from_env(),
+            telegram=TelegramConfig.from_env(),
+            runtime=RuntimeConfig.from_env(),
             base_path=os.getenv("GHOSTGOAT_BASE_PATH", str(Path(__file__).resolve().parent.parent)),
             agents_path=os.getenv("AGENTS_PATH", str(Path.home() / "AGENTS")),
             bots_path=os.getenv("BOTS_PATH", str(Path.home() / "BOTS")),
             adap_path=os.getenv("ADAP_PATH", str(Path.home() / "adap_lab")),
-            enable_orchestrator=os.getenv("ENABLE_ORCHESTRATOR", "true").lower() == "true",
-            enable_knowledge_tank=os.getenv("ENABLE_KNOWLEDGE_TANK", "true").lower() == "true",
-            enable_smart_moe=os.getenv("ENABLE_SMART_MOE", "true").lower() == "true",
-            enable_intelligence=os.getenv("ENABLE_INTELLIGENCE", "true").lower() == "true",
             api_port=int(os.getenv("API_PORT", "5000")),
-            api_host=os.getenv("API_HOST", "0.0.0.0"),
-            enable_api=os.getenv("ENABLE_API", "true").lower() == "true"
+            api_host=os.getenv("API_HOST", "0.0.0.0")
         )
     
     @classmethod
@@ -313,9 +355,15 @@ class UnifiedConfig:
             intelligence_data = data["intelligence"]
             config.intelligence = IntelligenceConfig(**intelligence_data)
         
+        if "telegram" in data:
+            config.telegram = TelegramConfig(**data["telegram"])
+
+        if "runtime" in data:
+            config.runtime = RuntimeConfig(**data["runtime"])
+
         # Update other fields
         for key, value in data.items():
-            if key not in ["llm", "memory", "agent", "network", "intelligence"]:
+            if key not in ["llm", "memory", "agent", "network", "intelligence", "telegram", "runtime"]:
                 if hasattr(config, key):
                     setattr(config, key, value)
         
@@ -340,17 +388,14 @@ class UnifiedConfig:
             "agent": asdict(self.agent),
             "network": asdict(self.network),
             "intelligence": asdict(self.intelligence),
+            "telegram": asdict(self.telegram),
+            "runtime": asdict(self.runtime),
             "base_path": self.base_path,
             "agents_path": self.agents_path,
             "bots_path": self.bots_path,
             "adap_path": self.adap_path,
-            "enable_orchestrator": self.enable_orchestrator,
-            "enable_knowledge_tank": self.enable_knowledge_tank,
-            "enable_smart_moe": self.enable_smart_moe,
-            "enable_intelligence": self.enable_intelligence,
             "api_port": self.api_port,
-            "api_host": self.api_host,
-            "enable_api": self.enable_api
+            "api_host": self.api_host
         }
         return self._convert_enum_to_value(data)
     
@@ -360,6 +405,9 @@ class UnifiedConfig:
         config_dict = self.to_dict()
         if config_dict["llm"].get("api_key"):
             config_dict["llm"]["api_key"] = "***REDACTED***"
+        for secret in ("bot_token", "webhook_secret"):
+            if config_dict["telegram"].get(secret):
+                config_dict["telegram"][secret] = "***REDACTED***"
 
         os.makedirs(os.path.dirname(config_path), exist_ok=True)
         with open(config_path, 'w') as f:

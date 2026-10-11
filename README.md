@@ -1,31 +1,30 @@
 # GhostGoat
 
-GhostGoat currently supports one runtime: `main.py` starts the FastAPI service in
-`config/api/server.py`, which uses the Agent Byte `AgentNetwork` for task
-execution and the KnowledgeTank for knowledge search. The React dashboard is
-optional and runs separately. This is an early-stage project, not a
-production-grade autonomous or security platform.
+GhostGoat is a single full runtime. `python main.py` boots one orchestrator
+(`run_cognitive_system.py`) and serves the REST API, the Telegram service and
+the dashboard from that same instance. There are no optional or fallback
+startup paths: a missing LLM key, Node.js or dependency stops boot with an error.
 
 ---
 
 ## Supported Runtime
 
 ```
-main.py
-  └── config/api/server.py (FastAPI, port 8420)
-        ├── AgentNetwork (agent_byte-master/agents/agent_network.py)
-        │     ├── ResearchExecutor → KnowledgeTank search
-        │     └── analysis TaskExecutor → Anthropic or explicit mock result
-        ├── DecisionGovernor (policy checks)
+main.py (single entry point, one process)
+  └── run_cognitive_system.py  Orchestrator (source of truth, service registry)
+        ├── LLM gateway (config/unified_config.py provider; no mock provider)
+        ├── DualBrain, KnowledgeTank, GraphRAG, NetworkedMemory, WorkflowEngine
+        ├── AgentNetwork: shell, python, research, analyst, supervisor,
+        │                 creative, analyzer, sentiment agents
+        ├── Telegram service (agent_byte-master/services/telegram_bot.py)
         └── SQLite task/message state (.backend/runtime.sqlite3)
-
-dashboard/ (optional Vite/React app, port 3000)
-  └── reads the FastAPI endpoints; some monitoring charts remain simulated
+  ├── config/api/server.py  REST front end (port 8420), same orchestrator
+  └── dashboard/ (port 3000), started in the same runtime loop
 ```
 
-Tasks without a configured provider may return a mock result; mock execution is
-reported as unsuccessful and is not real completed work. Messages are recorded
-as log-only and are not delivered to recipients.
+API: `GET /api/health`, `/api/agents`, `/api/graph`, `/api/memory`,
+`POST /api/tasks` (`orchestrator.process_goal()`), `POST /api/telegram/webhook`.
+Messages are recorded as log-only and are not delivered to recipients.
 
 ### Runtime components
 
@@ -51,20 +50,17 @@ pip install -e ".[full]"    # core + all optional extras (ml, crypto, agents, pe
 ```
 
 See [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md) for individual extras. Legacy shell
-wrappers (`.goat.sh`, `.install_ghostgoat.sh`, `install_upgrades.sh`, `merge_core.sh`,
-`ghostgoat_shim.py`, `run_cognitive_system.py`) are compatibility-only and not part of
+wrappers (`.goat.sh`, `.install_ghostgoat.sh`) are compatibility-only and not part of
 the supported path.
 
 ## Maturity and boundaries
 
 | Area | Status |
 |------|--------|
-| `main.py` → `config/api/server.py` | **Supported runtime path** |
-| `agent_byte-master/agents/agent_network.py` and `brain/knowledge/knowledge_tank.py` | **Used by the API**; other Agent Byte modules are not implied to be integrated |
-| `dashboard/` | Optional UI; live views use API endpoints, while simulated charts/fallback records are labeled |
-| `ACS_SYSTEM/` and `GFS/` | **Standalone experiments**; they do not protect, secure, or power the supported API runtime |
-| `backend/` (Rust) and alternate launchers under `docs/scripts/`, `run_cognitive_system.py`, and `ghostgoat` | **Experimental/legacy**; not part of the supported runtime and not an API fallback |
-| `vendor/`, custom agents, optional dependency extras | Not loaded by the supported API unless explicitly integrated |
+| `main.py`, `run_cognitive_system.py`, `config/api/server.py`, `config/unified_config.py` | **Canonical runtime** |
+| `agent_byte-master/` (agents, brain, core, services) | **Active subsystem layer**, registered by the orchestrator |
+| `dashboard/` | UI started by `main.py` |
+| `experimental/`, `ACS_SYSTEM/`, `GFS/`, `backend/` (Rust), `vendor/` | **Archive only**; never imported by the runtime |
 
 ---
 
@@ -73,43 +69,34 @@ the supported path.
 `make` targets use the active Python (`PYTHON=... make run` to override); they wrap `python main.py`.
 
 ```bash
-make run          # API (port 8420) + dashboard (port 3000)
-make run-api      # API server only
-make run-dash     # dashboard only
+make run          # full runtime: orchestrator, API (8420), Telegram, dashboard (3000)
 make test         # full pytest suite
 make start        # full Docker stack (API + Redis + ChromaDB)
 make start-full   # Docker stack + Neo4j + Ollama
 ```
 
-Direct Python:
-
-```bash
-python main.py
-python main.py --api-only
-python main.py --dash-only
-```
+Direct Python: `python main.py`
 
 ---
 
 ## Configuration
 
-Create a `.env` file in the repo root. The current analyst executor uses
-Anthropic directly; other provider variables are not wired into this runtime.
+All settings load through `config/unified_config.py`. Create a `.env` file in the repo root:
 
 ```bash
-# Optional Anthropic credential; without it, analysis returns a mock result
-ANTHROPIC_API_KEY=sk-ant-...
-GHOSTGOAT_STATE_DB=.backend/runtime.sqlite3
-GHOSTGOAT_KNOWLEDGE_PATH=.backend/knowledge_tank
+LLM_PROVIDER=anthropic            # openai | anthropic | gemini | deepseek | ollama | local
+ANTHROPIC_API_KEY=sk-ant-...      # key for the selected provider (required except ollama/local)
+TELEGRAM_BOT_TOKEN=               # connects the Telegram transport
+TELEGRAM_CHAT_ID=                 # allowed chat IDs, comma-separated
+TELEGRAM_WEBHOOK_URL=             # optional; long polling when unset
+TELEGRAM_WEBHOOK_SECRET=
+GHOSTGOAT_HOST=127.0.0.1
+GHOSTGOAT_PORT=8420
+GHOSTGOAT_DATA_DIR=.backend
 ```
 
-API-only startup does not require Node.js. The dashboard requires Node.js 18+
-and its dependencies.
-
-The API binds to `127.0.0.1` by default and allows the local Vite origins
-`http://localhost:3000` and `http://127.0.0.1:3000`. Set `GHOSTGOAT_HOST` and
-`GHOSTGOAT_CORS_ORIGINS` explicitly when a different deployment topology is
-required.
+Boot requires Node.js 18+ for the dashboard. See
+`agent_byte-master/services/README.md` for the Telegram flow.
 
 ---
 
@@ -117,12 +104,12 @@ required.
 
 ```
 GhostGoat/
-├── main.py                     # Supported supervisor entry point
+├── main.py                     # Single startup entry point
 ├── config/api/server.py        # Supported FastAPI application
 ├── config/api/state_store.py   # SQLite persistence for API records
 ├── agent_byte-master/agents/   # AgentNetwork used by the API
 ├── agent_byte-master/brain/    # KnowledgeTank used by the API
-├── dashboard/                  # Optional React/Vite client
+├── dashboard/                  # React/Vite dashboard started by main.py
 ├── ACS_SYSTEM/, GFS/            # Standalone experiments, not API security
 ├── backend/                     # Optional experimental Rust code
 └── tests/                       # Python tests
@@ -138,4 +125,4 @@ GhostGoat/
 | Node.js | 18+ | Dashboard only |
 | Rust / cargo | stable | Backend scanner — optional |
 | Docker | 20+ | Production stack — optional |
-| Anthropic API key | — | Optional; analysis is reported as mock/failed without one |
+| LLM provider API key | — | Required (not needed for ollama/local) |

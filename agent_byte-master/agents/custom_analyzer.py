@@ -1,19 +1,23 @@
 """Example of a dynamically loaded custom agent"""
 
 from abc import ABC, abstractmethod
+from typing import Awaitable, Callable
+
+LLMCall = Callable[..., Awaitable[str]]
 
 class AgentBase(ABC):
     """Base class for all agents"""
     
     @abstractmethod
-    def run(self, task: str) -> str:
+    async def run(self, task: str) -> str:
         """Execute the agent on a task"""
         pass
 
 class CustomAnalyzerAgent(AgentBase):
     """A custom agent for specialized analysis tasks"""
     
-    def __init__(self):
+    def __init__(self, llm: LLMCall):
+        self.llm = llm
         self.analysis_tools = [
             "trend_analysis",
             "pattern_recognition", 
@@ -21,7 +25,7 @@ class CustomAnalyzerAgent(AgentBase):
             "opportunity_identification"
         ]
     
-    def run(self, task: str) -> str:
+    async def run(self, task: str) -> str:
         """Run specialized analysis on the task"""
         # Determine what type of analysis to perform based on the task
         task_lower = task.lower()
@@ -48,7 +52,7 @@ Provide:
 """
         
         # Use AI to perform the analysis
-        result = ai_call(
+        result = await self.llm(
             prompt,
             system=f"You are an expert analyst specializing in {analysis_type.replace('_', ' ')}. "
                   f"Provide clear, actionable insights based on the task."

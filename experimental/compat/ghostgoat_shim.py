@@ -3,7 +3,7 @@
 # DEPRECATED: compatibility-only. Use `python main.py`.
 import sys, types, importlib, importlib.util, os
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 ABM  = os.path.join(ROOT, "agent_byte-master")
 for p in [ROOT, ABM]:
     if p not in sys.path:

@@ -7,10 +7,15 @@ import os
 import sys
 from pathlib import Path
 
+import pytest
+
 # Add the project root to Python path
-repo_root = Path(__file__).parent
+repo_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(repo_root))
 
+
+@pytest.mark.integration
+@pytest.mark.skipif(not os.getenv("DEEPSEEK_API_KEY"), reason="DEEPSEEK_API_KEY is not set")
 def test_deepseek_direct():
     """Test DeepSeek API directly"""
     print("Testing DeepSeek API directly...")
@@ -24,7 +29,7 @@ def test_deepseek_direct():
             print("❌ DEEPSEEK_API_KEY not found in environment")
             return False
             
-        print(f"✓ Found DEEPSEEK_API_KEY: {api_key[:10]}...")
+        print("✓ Found DEEPSEEK_API_KEY")
         
         # Initialize DeepSeek client
         client = OpenAI(
@@ -53,6 +58,8 @@ def test_deepseek_direct():
         traceback.print_exc()
         return False
 
+@pytest.mark.integration
+@pytest.mark.skipif(not os.getenv("DEEPSEEK_API_KEY"), reason="DEEPSEEK_API_KEY is not set")
 def test_with_gorilla_style_thinking():
     """Test a simplified version of GhostGoat's thinking with DeepSeek"""
     print("\nTesting GhostGoat-style thinking with DeepSeek...")

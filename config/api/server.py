@@ -1,22 +1,17 @@
 #!/usr/bin/env python3
-"""Canonical GhostGoat API for the supported root runtime."""
+"""Canonical GhostGoat REST front end; every route delegates to the shared orchestrator."""
 
-import importlib
+import contextlib
 import itertools
 import logging
 import math
-import os
 import sys
-import time
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
 
-try:
-    import psutil
-except ImportError:
-    psutil = None
+import psutil
 
 ROOT = Path(__file__).resolve().parents[2]
 ABM_ROOT = ROOT / "agent_byte-master"
@@ -24,70 +19,30 @@ for path in (str(ROOT), str(ABM_ROOT)):
     if path not in sys.path:
         sys.path.insert(0, path)
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
-import uvicorn
 
-from config.api.state_store import RuntimeState
+from config.unified_config import get_config
+from run_cognitive_system import get_orchestrator
 
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("ghostgoat.api")
 
 
-def _try_import(label: str, fn):
+@contextlib.asynccontextmanager
+async def lifespan(_app: FastAPI):
+    orchestrator = get_orchestrator()
+    await orchestrator.start()
     try:
-        result = fn()
-        logger.info("Loaded %s", label)
-        return result
-    except Exception as exc:
-        logger.warning("Unavailable %s: %s", label, exc)
-        return None
+        yield
+    finally:
+        await orchestrator.stop()
 
 
-service_registry = _try_import(
-    "service registry",
-    lambda: importlib.import_module("core.service_registry").registry,
-)
-decision_governor = _try_import(
-    "decision governor",
-    lambda: importlib.import_module(
-        "core.governance.decision_governor"
-    ).allow_external_calls,
-)
-knowledge_tank = _try_import(
-    "knowledge store",
-    lambda: importlib.import_module("brain.knowledge.knowledge_tank").KnowledgeTank(
-        storage_path=os.getenv(
-            "GHOSTGOAT_KNOWLEDGE_PATH", str(ROOT / ".backend" / "knowledge_tank")
-        )
-    ),
-)
-orchestrator_instance = None
-try:
-    agent_network_module = importlib.import_module("agents.agent_network")
-    orchestrator_instance = agent_network_module.AgentNetwork()
-    orchestrator_instance.spawn_default_fleet(knowledge_source=knowledge_tank)
-    logger.info("Loaded task dispatcher and default agent fleet")
-except Exception as exc:
-    logger.warning("Unavailable task dispatcher: %s", exc)
-
-state_store = RuntimeState()
-_start_time = time.time()
-_governance_log: list[dict[str, Any]] = []
-
-app = FastAPI(title="GhostGoat API", version="2.0.0")
-cors_origins = [
-    origin.strip()
-    for origin in os.getenv(
-        "GHOSTGOAT_CORS_ORIGINS",
-        "http://localhost:3000,http://127.0.0.1:3000",
-    ).split(",")
-    if origin.strip()
-]
+app = FastAPI(title="GhostGoat API", version="2.0.0", lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=cors_origins,
+    allow_origins=get_config().runtime.cors_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -110,39 +65,13 @@ def _timestamp() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def _load_orchestrator():
-    """Load the supported in-process task dispatcher and default fleet."""
-    global orchestrator_instance
-    if orchestrator_instance is None:
-        try:
-            module = importlib.import_module("agents.agent_network")
-            orchestrator_instance = module.AgentNetwork()
-            orchestrator_instance.spawn_default_fleet(knowledge_source=knowledge_tank)
-        except Exception:
-            logger.exception("Could not initialize task dispatcher")
-            return None
-    return orchestrator_instance
-
-
 @app.get("/api/health")
 def health():
-    return {
-        "status": "online",
-        "uptime": round(time.time() - _start_time, 1),
-        "timestamp": _timestamp(),
-        "modules": {
-            "service_registry": service_registry is not None,
-            "decision_governor": decision_governor is not None,
-            "knowledge_tank": knowledge_tank is not None,
-            "orchestrator": orchestrator_instance is not None,
-        },
-    }
+    return get_orchestrator().health()
 
 
 @app.get("/api/system/metrics")
 def system_metrics():
-    if psutil is None:
-        raise HTTPException(status_code=503, detail="psutil is unavailable")
     memory = psutil.virtual_memory()
     disk = psutil.disk_usage(str(ROOT))
     return {
@@ -158,182 +87,65 @@ def system_metrics():
 
 @app.get("/api/agents")
 def list_agents():
-    network = _load_orchestrator()
-    agents = []
-    if network:
-        for profile in network.profiles.values():
-            agent_type = {
-                "execution": "worker",
-                "research": "specialist",
-                "analysis": "coordinator",
-                "oversight": "monitor",
-            }.get(profile.role, profile.role)
-            agents.append({
-                "id": profile.agent_id,
-                "name": profile.name,
-                "type": agent_type,
-                "status": profile.status,
-                "health": None,
-                "cpu": None,
-                "memory": None,
-                "capabilities": profile.capabilities,
-                "tasks_completed": profile.total_tasks,
-                "uptime": None,
-                "current_tasks": 1 if profile.status == "busy" else 0,
-                "source": "agent_network",
-            })
-    return {"agents": agents, "count": len(agents)}
+    return get_orchestrator().agents()
+
+
+@app.get("/api/graph")
+def graph():
+    return get_orchestrator().graph_state()
+
+
+@app.get("/api/memory")
+def memory():
+    return get_orchestrator().memory_state()
 
 
 @app.get("/api/tasks")
 def list_tasks():
-    tasks = state_store.list_tasks()
+    tasks = get_orchestrator().state_store.list_tasks()
     return {"tasks": tasks, "count": len(tasks)}
 
 
 @app.post("/api/tasks")
 async def create_task(req: TaskRequest):
-    network = _load_orchestrator()
-    task_id = f"task-{uuid.uuid4().hex}"
-    entry: dict[str, Any] = {
-        "id": task_id,
-        "description": req.description,
-        "priority": req.priority,
-        "status": "running",
-        "progress": 0,
-        "agent": None,
-        "created": _timestamp(),
-        "result": None,
-        "execution_mode": None,
-    }
-    state_store.save_task(entry)
-
-    if network is None:
-        entry.update(status="failed", result={"error": "No task dispatcher available"})
-        state_store.save_task(entry)
-        return {"task": entry}
-
-    agent_id = network.select_agent(req.description)
-    if agent_id != "research-1" and (
-        decision_governor is None or not decision_governor("task_execution")
-    ):
-        _record_policy_event("task_execution", "blocked")
-        reason = (
-            "Decision governor is unavailable"
-            if decision_governor is None
-            else "External task execution is blocked by policy"
-        )
-        entry.update(
-            status="failed",
-            agent=agent_id,
-            result={"error": reason},
-            execution_mode="blocked",
-        )
-        state_store.save_task(entry)
-        return {"task": entry}
-
-    try:
-        result = await network.dispatch(
-            agent_id,
-            {
-                "goal": req.description,
-                "input": req.description,
-                "query": req.description,
-                "context": req.context or {},
-            },
-        )
-        mode = result.get("execution_mode", "mock")
-        status = (
-            "mocked" if mode == "mock"
-            else "completed" if result.get("success")
-            else "failed"
-        )
-        entry.update(
-            status=status,
-            progress=100 if status == "completed" else 0,
-            agent=agent_id,
-            result=result,
-            execution_mode=mode,
-        )
-        if (
-            status == "completed"
-            and mode == "live"
-            and agent_id == "analyst-1"
-            and knowledge_tank is not None
-        ):
-            knowledge_tank.ingest_bulk([{
-                "category": "task_result",
-                "content": str(result.get("result", "")),
-                "tags": [agent_id],
-                "source": task_id,
-                "metadata": {"task_id": task_id, "description": req.description},
-            }])
-    except Exception as exc:
-        logger.exception("Task execution failed")
-        entry.update(
-            status="failed",
-            agent=agent_id,
-            result={"error": str(exc)},
-            execution_mode="error",
-        )
-
-    state_store.save_task(entry)
+    entry = await get_orchestrator().process_goal(req.description, req.priority, req.context)
     return {"task": entry}
 
 
 @app.get("/api/governance/policies")
 def get_policies():
-    policies = []
-    if decision_governor:
-        allowed = decision_governor("task_execution")
-        policies.append({
-            "id": "pol-external",
-            "name": "External Task Execution",
-            "scope": "task_execution",
-            "action": "allow_external_calls",
-            "status": "enforced",
-            "allowed": allowed,
-            "violations": sum(e["result"] == "blocked" for e in _governance_log),
-        })
-    return {"policies": policies, "audit_log": list(reversed(_governance_log[-50:]))}
-
-
-def _record_policy_event(context: str, result: str) -> dict[str, str]:
-    entry = {
-        "time": _timestamp(),
-        "event": "policy_check",
-        "context": context,
-        "result": result,
-        "agent": "task_dispatcher",
-        "policy": "External Task Execution",
-        "detail": f"Task execution {result}",
+    orchestrator = get_orchestrator()
+    log = orchestrator.governance_log
+    policy = {
+        "id": "pol-external",
+        "name": "External Task Execution",
+        "scope": "task_execution",
+        "action": "allow_external_calls",
+        "status": "enforced",
+        "allowed": orchestrator.decision_governor("task_execution"),
+        "violations": sum(e["result"] == "blocked" for e in log),
     }
-    _governance_log.append(entry)
-    return entry
+    return {"policies": [policy], "audit_log": list(reversed(log[-50:]))}
 
 
 @app.post("/api/governance/check")
 def check_policy(context: str = "task_execution"):
-    if not decision_governor:
-        raise HTTPException(status_code=503, detail="Decision governor unavailable")
-    allowed = decision_governor(context)
-    return _record_policy_event(context, "allowed" if allowed else "blocked")
+    orchestrator = get_orchestrator()
+    allowed = orchestrator.decision_governor(context)
+    return orchestrator.record_policy_event(context, "allowed" if allowed else "blocked")
 
 
 @app.get("/api/knowledge/search")
 def search_knowledge(q: str, limit: int = 10):
-    if knowledge_tank is None:
-        raise HTTPException(status_code=503, detail="Knowledge store unavailable")
     if not 1 <= limit <= 100:
         raise HTTPException(status_code=422, detail="limit must be between 1 and 100")
-    results = knowledge_tank.search(q, limit=limit)
+    results = get_orchestrator().knowledge_tank.search(q, limit=limit)
     return {"query": q, "results": results, "count": len(results)}
 
 
 @app.get("/api/knowledge/graph")
 def knowledge_graph():
-    if knowledge_tank is None:
-        raise HTTPException(status_code=503, detail="Knowledge store unavailable")
+    knowledge_tank = get_orchestrator().knowledge_tank
     entries = list(itertools.islice(reversed(knowledge_tank.entries.values()), 100))
     count = len(entries)
     nodes = []
@@ -362,8 +174,7 @@ def knowledge_graph():
 
 @app.get("/api/memory/search")
 def search_memory(q: str = "", limit: int = 50):
-    if knowledge_tank is None:
-        raise HTTPException(status_code=503, detail="Memory store unavailable")
+    knowledge_tank = get_orchestrator().knowledge_tank
     if not 1 <= limit <= 100:
         raise HTTPException(status_code=422, detail="limit must be between 1 and 100")
     entries = knowledge_tank.search(q, limit=limit) if q else [
@@ -383,14 +194,12 @@ def search_memory(q: str = "", limit: int = 50):
 
 @app.get("/api/memory/stats")
 def memory_stats():
-    if knowledge_tank is None:
-        raise HTTPException(status_code=503, detail="Memory store unavailable")
-    return knowledge_tank.get_stats()
+    return get_orchestrator().knowledge_tank.get_stats()
 
 
 @app.get("/api/messages")
 def list_messages():
-    messages = state_store.list_messages()
+    messages = get_orchestrator().state_store.list_messages()
     return {"messages": messages, "count": len(messages), "delivery": "log_only"}
 
 
@@ -406,21 +215,34 @@ def send_message(req: MessageRequest):
         "status": "logged",
         "delivery": "log_only",
     }
-    state_store.save_message(message)
+    get_orchestrator().state_store.save_message(message)
     return message
+
+
+@app.post("/api/telegram/webhook")
+async def telegram_webhook(
+    request: Request,
+    x_telegram_bot_api_secret_token: Optional[str] = Header(default=None),
+):
+    telegram = get_orchestrator().telegram
+    if not telegram.verify_secret(x_telegram_bot_api_secret_token):
+        raise HTTPException(status_code=403, detail="Invalid webhook secret")
+    try:
+        update = await request.json()
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid JSON")
+    if not isinstance(update, dict):
+        raise HTTPException(status_code=400, detail="Invalid update")
+    reply = await telegram.handle_update(update)
+    return {"ok": True, "reply": reply}
 
 
 @app.get("/api/services")
 def list_services():
-    if service_registry is None:
-        return {"services": {}, "error": "Service registry unavailable"}
-    return {"services": service_registry.list_services()}
+    return {"services": get_orchestrator().registry.list_services()}
 
 
 if __name__ == "__main__":
-    uvicorn.run(
-        app,
-        host=os.getenv("GHOSTGOAT_HOST", "127.0.0.1"),
-        port=8420,
-        log_level="info",
-    )
+    from main import main
+
+    main()
