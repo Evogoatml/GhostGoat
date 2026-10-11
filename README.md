@@ -1,51 +1,41 @@
 # GhostGoat
 
-> **Autonomous multi-agent orchestration platform with self-assembly, self-healing, and post-quantum security.**
-
-GhostGoat is a production-grade AI operating system that coordinates heterogeneous agent fleets across any domain — code generation, research synthesis, financial analysis, creative work, and more. It reasons, repairs, and evolves itself without operator intervention, while enforcing cryptographic governance at every boundary.
+GhostGoat currently supports one runtime: `main.py` starts the FastAPI service in
+`config/api/server.py`, which uses the Agent Byte `AgentNetwork` for task
+execution and the KnowledgeTank for knowledge search. The React dashboard is
+optional and runs separately. This is an early-stage project, not a
+production-grade autonomous or security platform.
 
 ---
 
-## Architecture at a Glance
+## Supported Runtime
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                        GhostGoat                            │
-│                                                             │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐  │
-│  │  LLM Layer   │  │  Agent Fleet │  │   Memory Core    │  │
-│  │  Claude      │  │  Specialist  │  │  Semantic search │  │
-│  │  OpenAI      │──│  pools per   │──│  Graph reasoning │  │
-│  │  Gemini      │  │  domain      │  │  KnowledgeTank   │  │
-│  │  Mock (dev)  │  │              │  │                  │  │
-│  └──────────────┘  └──────────────┘  └──────────────────┘  │
-│           │                │                   │            │
-│  ┌────────▼────────────────▼───────────────────▼─────────┐  │
-│  │                  Orchestrator                          │  │
-│  │   BuildLoop (self-assembly) · SelfAwareLoop (healing)  │  │
-│  │   DecisionGovernor (policy) · Sandbox (isolation)      │  │
-│  └────────────────────────┬───────────────────────────────┘  │
-│                           │                                 │
-│  ┌────────────────────────▼───────────────────────────────┐  │
-│  │              ACS Security Layer                        │  │
-│  │   CRYSTALS-Kyber KEM · Dilithium signatures            │  │
-│  │   Adaptive cipher pipeline · Audit log signing         │  │
-│  └────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-         │ FastAPI (port 8420)       │ React dashboard (port 3000)
+main.py
+  └── config/api/server.py (FastAPI, port 8420)
+        ├── AgentNetwork (agent_byte-master/agents/agent_network.py)
+        │     ├── ResearchExecutor → KnowledgeTank search
+        │     └── AnalystExecutor → configured LLM or explicit mock result
+        ├── DecisionGovernor (policy checks)
+        └── SQLite task/message state (.backend/runtime.sqlite3)
+
+dashboard/ (optional Vite/React app, port 3000)
+  └── reads the FastAPI endpoints; some monitoring charts remain simulated
 ```
 
-### Core subsystems
+Tasks without a configured provider may return a mock result; mock execution is
+reported as unsuccessful and is not real completed work. Messages are recorded
+as log-only and are not delivered to recipients.
+
+### Runtime components
 
 | Subsystem | What it does |
 |-----------|-------------|
-| **LLM Orchestrator** | Unified adapter for Claude, OpenAI, Gemini, or mock; failover and retry built in |
-| **BuildLoop** | Reads the architectural gap table, generates wiring code, sandboxes it, and promotes it on pass |
-| **SelfAwareLoop** | Continuous health monitor — detects memory pressure, GC anomalies, graph inconsistencies, missing files; heals autonomously |
-| **KnowledgeTank** | Vector store + graph knowledge base; ingests new code as it is written |
-| **DecisionGovernor** | Policy engine that approves or blocks actions based on configurable rules |
-| **Sandbox** | Isolated subprocess execution with timeout and resource limits — all generated code runs here first |
-| **ACS_SYSTEM** | Post-quantum cryptography pipeline: CRYSTALS-Kyber key exchange, Dilithium signing, adaptive cipher selection based on CPU load |
+| **FastAPI server** | Supported HTTP runtime; API routes are limited to initialized components |
+| **AgentNetwork** | Routes supported tasks to local knowledge research or analysis |
+| **KnowledgeTank** | Existing knowledge store used for search and knowledge endpoints; it is not an autonomous ingestion pipeline |
+| **DecisionGovernor** | Policy check used by the API for analyst task execution |
+| **SQLite state** | Persists API task and message records across restarts |
 
 ---
 
@@ -65,14 +55,16 @@ wrappers (`.goat.sh`, `.install_ghostgoat.sh`, `install_upgrades.sh`, `merge_cor
 `ghostgoat_shim.py`, `run_cognitive_system.py`) are compatibility-only and not part of
 the supported path.
 
-## Maturity: core vs. experimental
+## Maturity and boundaries
 
 | Area | Status |
 |------|--------|
-| `main.py` entry point, FastAPI server, `config/`, `pyproject.toml` install | **Core / supported** — validated in CI |
-| `dashboard/` (React) | Optional — requires Node.js 18+ |
-| Extras `ml`, `crypto`, `agents`, `pentest` | Optional — not required by the core runtime |
-| `ACS_SYSTEM/`, `agent_byte-master/`, `backend/` (Rust), `vendor/`, custom agents | **Experimental** — not covered by CI, no stability guarantees |
+| `main.py` → `config/api/server.py` | **Supported runtime path** |
+| `agent_byte-master/agents/agent_network.py` and `brain/knowledge/knowledge_tank.py` | **Used by the API**; other Agent Byte modules are not implied to be integrated |
+| `dashboard/` | Optional UI; live views use API endpoints, while simulated charts/fallback records are labeled |
+| `ACS_SYSTEM/` and `GFS/` | **Standalone experiments**; they do not protect, secure, or power the supported API runtime |
+| `backend/` (Rust) and alternate launchers under `docs/scripts/`, `run_cognitive_system.py`, and `ghostgoat` | **Experimental/legacy**; not part of the supported runtime and not an API fallback |
+| `vendor/`, custom agents, optional dependency extras | Not loaded by the supported API unless explicitly integrated |
 
 ---
 
@@ -101,34 +93,21 @@ python main.py --dash-only
 
 ## Configuration
 
-Create a `.env` file in the repo root and add your keys:
+Create a `.env` file in the repo root and configure a supported LLM provider if
+real analysis is desired:
 
 ```bash
-# LLM — at least one key required (or leave blank to use mock)
+# Optional LLM credentials; without a usable provider, analysis returns a mock result
 ANTHROPIC_API_KEY=sk-ant-...
 OPENAI_API_KEY=sk-...
 
 LLM_PROVIDER=anthropic          # anthropic | openai | gemini | mock
-MEMORY_BACKEND=chromadb         # memory | chromadb | knowledge_tank
-REDIS_URL=redis://localhost:6379
-CHROMADB_PATH=./data/chromadb
+GHOSTGOAT_STATE_DB=.backend/runtime.sqlite3
+GHOSTGOAT_KNOWLEDGE_PATH=.backend/knowledge_tank
 ```
 
-> **No API key?** Set `LLM_PROVIDER=mock` — the system runs fully with a local mock LLM.
-
----
-
-## Key Design Principles
-
-**Self-assembling** — `BuildLoop` scans `SYSTEM_MAP.md` for architectural gaps, generates the bridging code using the LLM, runs it in the sandbox, and only writes it to disk if the tests pass. Gaps close themselves.
-
-**Self-healing** — `SelfAwareLoop` runs a background monitor that detects anomalies (memory leaks, GC pressure, unhealthy knowledge graphs, missing required files) and applies targeted remediations without restarting the process. The check interval adapts: it tightens under stress and relaxes when the system is healthy.
-
-**Zero-trust crypto** — every inter-component call that crosses a trust boundary is encrypted. The ACS pipeline selects between AES-GCM and ChaCha20-Poly1305 based on real-time CPU load. All audit log entries are signed with Ed25519. Post-quantum key exchange (CRYSTALS-Kyber) is available for forward-secrecy requirements.
-
-**Graceful degradation** — every optional subsystem (ChromaDB, Redis, sentence-transformers, Neo4j) fails softly. The system starts and runs with zero external services using in-memory fallbacks.
-
-**Policy-governed** — `DecisionGovernor` sits between the orchestrator and external systems. No outbound call, code execution, or resource mutation happens without passing the policy layer.
+API-only startup does not require Node.js. The dashboard requires Node.js 18+
+and its dependencies.
 
 ---
 
@@ -136,37 +115,15 @@ CHROMADB_PATH=./data/chromadb
 
 ```
 GhostGoat/
-├── main.py                    # Entry point
-├── Makefile                   # make install / run / test / start (wraps pip install -e + main.py)
-├── .env                       # Runtime config (create manually)
-│
-├── api/server.py              # FastAPI backend  →  :8420
-├── dashboard/                 # React + Vite frontend  →  :3000
-│
-├── core/
-│   ├── build_loop.py          # Self-assembly engine
-│   ├── self_aware_loop.py     # Self-healing monitor
-│   ├── sandbox.py             # Isolated code execution
-│   ├── orchestrator/          # LLM orchestrator + routing
-│   ├── memory/                # Memory backends
-│   ├── agents/                # Agent pool + cognitive engine
-│   ├── reasoning/             # Brain + knowledge graph
-│   ├── diagnostics/           # Health checks
-│   └── governance/            # Policy engine
-│
-├── ACS_SYSTEM/
-│   ├── adap_pipeline/         # Adaptive encryption (crypto.py, policy.py)
-│   ├── crystal_crypto/        # CRYSTALS-Kyber + Dilithium
-│   ├── cipherdsl/             # Cipher chain DSL
-│   └── core/                  # Metrics collector, anomaly detector, ASI engine
-│
-├── agents/                    # Domain agent definitions
-├── frameworks/                # LLM adapters, monitoring, API gateway
-├── integrations/              # External service connectors
-├── security/                  # Security tools (MISP, STIX, scanning)
-├── tools/                     # Tool registry and utilities
-├── backend/                   # Rust scanner (optional)
-└── tests/                     # pytest suite
+├── main.py                     # Supported supervisor entry point
+├── config/api/server.py        # Supported FastAPI application
+├── config/api/state_store.py   # SQLite persistence for API records
+├── agent_byte-master/agents/   # AgentNetwork used by the API
+├── agent_byte-master/brain/    # KnowledgeTank used by the API
+├── dashboard/                  # Optional React/Vite client
+├── ACS_SYSTEM/, GFS/            # Standalone experiments, not API security
+├── backend/                     # Optional experimental Rust code
+└── tests/                       # Python tests
 ```
 
 ---
@@ -180,4 +137,3 @@ GhostGoat/
 | Rust / cargo | stable | Backend scanner — optional |
 | Docker | 20+ | Production stack — optional |
 | API key | — | Anthropic or OpenAI; `mock` works without one |
-

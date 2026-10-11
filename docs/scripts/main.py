@@ -1,8 +1,15 @@
-from dotenv import load_dotenv
-load_dotenv('/home/popic/GhostGoat/.env')
-
+"""Standalone PMMAGO experiment; not used by the supported API runtime."""
 import asyncio, requests, time, os
-from core.brain.agents.pmmago import build_enterprise_pmmago
+import sys
+from pathlib import Path
+from dotenv import load_dotenv
+
+ROOT = Path(__file__).resolve().parents[2]
+AGENT_BYTE = ROOT / "agent_byte-master"
+sys.path.insert(0, str(AGENT_BYTE))
+load_dotenv(ROOT / ".env")
+
+from brain.orchestrator.pmmago import build_enterprise_pmmago
 
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
