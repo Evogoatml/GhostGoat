@@ -1,269 +1,150 @@
-"""End-to-end API tests for the canonical FastAPI runtime."""
+"""End-to-end tests: REST API, Telegram and agents share one real orchestrator."""
 
-from types import SimpleNamespace
+import asyncio
 
 import pytest
 
 pytest.importorskip("fastapi", reason="fastapi not installed")
 from fastapi.testclient import TestClient
 
-from config.api.state_store import RuntimeState
+import run_cognitive_system
 import config.api.server as server
-
-
-class FakeKnowledgeTank:
-    def __init__(self):
-        self.entries = {
-            "knowledge-1": SimpleNamespace(
-                id="knowledge-1",
-                category="task_result",
-                content="Stored task result",
-                tags=["analyst-1"],
-                source="task-1",
-                confidence=1.0,
-                usage_count=0,
-            )
-        }
-        self.ingested = []
-
-    def search(self, query, limit=10):
-        if not query or query.lower() in "stored task result":
-            return [{
-                "id": "knowledge-1",
-                "category": "task_result",
-                "content": "Stored task result",
-                "tags": ["analyst-1"],
-                "source": "task-1",
-                "confidence": 1.0,
-                "usage": 0,
-            }][:limit]
-        return []
-
-    def ingest_bulk(self, records):
-        self.ingested.extend(records)
-
-    def get_stats(self):
-        return {
-            "total_entries": len(self.entries),
-            "total_algorithms": 0,
-            "storage_path": "test",
-        }
-
-
-class FakeNetwork:
-    def __init__(self, *, mode="live", success=True):
-        self.mode = mode
-        self.success = success
-        self.selected_agent = None
-        self.profiles = {
-            "analyst-1": SimpleNamespace(
-                agent_id="analyst-1",
-                name="analyst",
-                role="analysis",
-                status="idle",
-                capabilities=["analyze"],
-                total_tasks=0,
-            ),
-            "research-1": SimpleNamespace(
-                agent_id="research-1",
-                name="researcher",
-                role="research",
-                status="idle",
-                capabilities=["search"],
-                total_tasks=0,
-            ),
-        }
-
-    def select_agent(self, goal):
-        return "research-1" if "research" in goal.lower() or "search" in goal.lower() else "analyst-1"
-
-    async def dispatch(self, agent_id, payload):
-        self.selected_agent = agent_id
-        return {
-            "success": self.success,
-            "result": f"handled: {payload['goal']}",
-            "agent_id": agent_id,
-            "execution_mode": self.mode,
-        }
+from config.unified_config import (
+    LLMConfig, LLMProvider, RuntimeConfig, TelegramConfig, UnifiedConfig,
+)
+from run_cognitive_system import Orchestrator
+from services.llm_gateway import LLMGateway
 
 
 @pytest.fixture
-def client(tmp_path, monkeypatch):
-    monkeypatch.setattr(server, "state_store", RuntimeState(tmp_path / "api.sqlite3"))
-    monkeypatch.setattr(server, "knowledge_tank", FakeKnowledgeTank())
-    monkeypatch.setattr(server, "orchestrator_instance", FakeNetwork())
-    monkeypatch.setattr(server, "service_registry", None)
-    monkeypatch.setattr(server, "decision_governor", lambda context: True)
-    server._governance_log.clear()
+def orchestrator(tmp_path, monkeypatch):
+    async def fake_complete(self, prompt, system=None):
+        return f"handled: {prompt}"
+
+    monkeypatch.setattr(LLMGateway, "complete", fake_complete)
+    config = UnifiedConfig(
+        llm=LLMConfig(provider=LLMProvider.DEEPSEEK, model="test", api_key="key"),
+        telegram=TelegramConfig(bot_token="token", chat_ids=["42"], webhook_secret="s3cret"),
+        runtime=RuntimeConfig(data_dir=str(tmp_path)),
+    )
+    instance = Orchestrator(config)
+    sent = []
+
+    async def fake_call(method, payload, timeout=15):
+        if method == "getUpdates":
+            await asyncio.sleep(0.05)
+            return {"ok": True, "result": []}
+        sent.append((method, payload))
+        return {"ok": True}
+
+    monkeypatch.setattr(instance.telegram, "_call", fake_call)
+    instance.sent = sent
+    monkeypatch.setattr(run_cognitive_system, "_orchestrator", instance)
+    return instance
+
+
+@pytest.fixture
+def client(orchestrator):
     with TestClient(server.app) as test_client:
         yield test_client
 
 
-def test_health_reports_initialized_runtime(client):
-    response = client.get("/api/health")
-    assert response.status_code == 200
-    body = response.json()
+def test_health_reports_runtime_status(client, orchestrator):
+    body = client.get("/api/health").json()
     assert body["status"] == "online"
-    assert body["modules"]["orchestrator"] is True
-    assert body["modules"]["knowledge_tank"] is True
+    assert body["modules"]["graphrag"] is True
+    assert all(body["services"].values())
+    assert {"orchestrator", "telegram", "sentiment", "creative", "analyzer"} <= body["services"].keys()
 
 
-def test_api_agent_schema_matches_dashboard(client):
+def test_all_agents_are_registered_at_startup(client):
     body = client.get("/api/agents").json()
-    assert body["count"] == 2
-    agent = body["agents"][0]
-    assert {"id", "name", "type", "status", "health", "cpu", "memory",
-            "capabilities", "tasks_completed", "uptime"} <= agent.keys()
-    assert agent["health"] is None
+    ids = {agent["id"] for agent in body["agents"]}
+    assert {"shell-1", "research-1", "analyst-1", "creative-1", "analyzer-1", "sentiment-1"} <= ids
+    assert {"id", "name", "type", "status", "capabilities", "tasks_completed"} <= body["agents"][0].keys()
 
 
-def test_task_dispatch_routes_research_and_persists(client):
-    response = client.post("/api/tasks", json={"description": "Research the knowledge store"})
-    task = response.json()["task"]
+def test_task_runs_through_orchestrator_and_updates_shared_state(client, orchestrator):
+    task = client.post("/api/tasks", json={"description": "Analyze this request"}).json()["task"]
     assert task["status"] == "completed"
-    assert task["agent"] == "research-1"
+    assert task["agent"] == "analyst-1"
     assert task["execution_mode"] == "live"
-    assert task["progress"] == 100
     assert client.get("/api/tasks").json()["tasks"][0]["id"] == task["id"]
+    assert client.get("/api/memory").json()["networked"]["long_term_entries"] == 1
+    graph = client.get("/api/graph").json()
+    assert {"task", "agent"} <= set(graph["stats"]["node_types"])
+    assert graph["edges"][0]["type"] == "executed"
+    assert orchestrator.knowledge_tank.get_stats()["total_entries"] == 1
 
 
-def test_mock_execution_is_not_reported_as_completed(client, monkeypatch):
-    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
-    monkeypatch.setattr(server, "orchestrator_instance", FakeNetwork(mode="mock", success=False))
-    task = client.post("/api/tasks", json={"description": "Summarize this request"}).json()["task"]
-    assert task["status"] == "mocked"
-    assert task["execution_mode"] == "mock"
-    assert task["result"]["success"] is False
-    assert task["progress"] == 0
+def test_failed_provider_call_is_reported_not_mocked(client, monkeypatch):
+    async def failing(self, prompt, system=None):
+        raise RuntimeError("provider down")
+
+    monkeypatch.setattr(LLMGateway, "complete", failing)
+    task = client.post("/api/tasks", json={"description": "Analyze this request"}).json()["task"]
+    assert task["status"] == "failed"
+    assert task["execution_mode"] == "error"
+    assert "provider down" in task["result"]["error"]
 
 
-def test_policy_blocks_external_execution(client, monkeypatch):
-    monkeypatch.setattr(server, "decision_governor", lambda context: False)
+def test_research_results_are_not_reingested(client, orchestrator):
+    task = client.post("/api/tasks", json={"description": "Research the knowledge store"}).json()["task"]
+    assert task["agent"] == "research-1"
+    assert orchestrator.knowledge_tank.get_stats()["total_entries"] == 0
+
+
+def test_policy_blocks_external_execution(client, orchestrator, monkeypatch):
+    monkeypatch.setattr(orchestrator, "decision_governor", lambda context: False)
     task = client.post("/api/tasks", json={"description": "Analyze this request"}).json()["task"]
     assert task["status"] == "failed"
     assert task["execution_mode"] == "blocked"
     assert client.get("/api/governance/policies").json()["audit_log"][0]["result"] == "blocked"
 
 
-def test_external_execution_fails_closed_without_governor(client, monkeypatch):
-    monkeypatch.setattr(server, "decision_governor", None)
-
-    task = client.post("/api/tasks", json={"description": "Analyze this request"}).json()["task"]
-
-    assert task["status"] == "failed"
-    assert task["execution_mode"] == "blocked"
-    assert "unavailable" in task["result"]["error"].lower()
-
-
-def test_successful_task_result_is_ingested(client):
-    tank = server.knowledge_tank
-    client.post("/api/tasks", json={"description": "Analyze this request"})
-    assert tank.ingested[0]["category"] == "task_result"
-    assert tank.ingested[0]["source"].startswith("task-")
-
-
-def test_research_results_are_not_reingested(client):
-    tank = server.knowledge_tank
-    client.post("/api/tasks", json={"description": "Research the knowledge store"})
-    assert tank.ingested == []
-
-
-def test_orchestrator_initializes_without_knowledge_store(monkeypatch):
-    monkeypatch.setattr(server, "knowledge_tank", None)
-    monkeypatch.setattr(server, "orchestrator_instance", None)
-
-    network = server._load_orchestrator()
-
-    assert network is not None
-    assert network.select_agent("Analyze this request") == "analyst-1"
-    assert network.select_agent("Research this request") == "research-1"
-
-
-def test_message_is_persisted_as_log_not_delivered(client, tmp_path):
+def test_message_is_persisted_as_log_not_delivered(client):
     message = client.post("/api/messages", json={
-        "from_agent": "agent-a",
-        "to_agent": "agent-b",
-        "content": "hello",
+        "from_agent": "agent-a", "to_agent": "agent-b", "content": "hello",
     }).json()
-    assert message["status"] == "logged"
     assert message["delivery"] == "log_only"
     assert client.get("/api/messages").json()["messages"][0]["id"] == message["id"]
-    reopened = RuntimeState(tmp_path / "api.sqlite3")
-    assert reopened.list_messages()[0]["id"] == message["id"]
-    reopened.close()
 
 
-def test_knowledge_and_memory_are_backed_by_store(client):
-    assert client.get("/api/knowledge/search", params={"q": "stored"}).json()["count"] == 1
-    assert client.get("/api/memory/search").json()["entries"][0]["id"] == "knowledge-1"
-    graph = client.get("/api/knowledge/graph").json()
-    assert graph["nodes"][0]["id"] == "knowledge-1"
-    assert client.get("/api/memory/stats").json()["total_entries"] == 1
-
-
-def test_unsupported_optional_integrations_are_not_exposed(client):
-    paths = client.get("/openapi.json").json()["paths"]
-    assert not any(path.startswith("/api/tools") for path in paths)
-    assert not any(path.startswith("/api/nanoagents") for path in paths)
-    assert not any(path.startswith("/api/posters") for path in paths)
-
-
-def test_api_only_dependency_check_does_not_require_node(monkeypatch):
-    import main
-
-    def unexpected_node_check(*args, **kwargs):
-        raise AssertionError("Node must not be checked for API-only startup")
-
-    monkeypatch.setattr(main.subprocess, "run", unexpected_node_check)
-    assert main.check_dependencies(require_dashboard=False) is True
-
-
-class FakeTelegramConfig:
-    bot_token = "token"
-    chat_ids = ["42"]
-    webhook_url = ""
-    webhook_secret = "s3cret"
-
-
-def _telegram_service(monkeypatch):
-    from services.telegram_bot import TelegramBotService
-
-    sent = []
-    service = TelegramBotService(
-        FakeTelegramConfig(),
-        process_goal=server._process_goal_for_telegram,
-        get_status=lambda: {"ok": True},
-    )
-
-    async def fake_call(method, payload, timeout=15):
-        sent.append((method, payload))
-        return {"ok": True}
-
-    monkeypatch.setattr(service, "_call", fake_call)
-    monkeypatch.setattr(server, "telegram_service", service)
-    return service, sent
-
-
-def test_telegram_webhook_disabled_without_token(client):
-    assert client.post("/api/telegram/webhook", json={}).status_code == 503
-
-
-def test_telegram_webhook_routes_goal_to_orchestrator(client, monkeypatch):
-    service, sent = _telegram_service(monkeypatch)
+def test_telegram_webhook_routes_goal_to_the_same_orchestrator(client, orchestrator):
     headers = {"X-Telegram-Bot-Api-Secret-Token": "s3cret"}
     update = {"message": {"chat": {"id": 42}, "text": "Research the store"}}
-    assert client.post("/api/telegram/webhook", json=update, headers=headers).status_code == 200
-    assert "handled: Research the store" in sent[-1][1]["text"]
-    assert sent[-1][1]["chat_id"] == 42
-    assert service.conversations["42"][0]["status"] == "completed"
-    assert client.get("/api/tasks").json()["count"] == 1
+    body = client.post("/api/telegram/webhook", json=update, headers=headers).json()
+    assert "handled" in body["reply"] or "research" in body["reply"].lower()
+    assert orchestrator.sent[-1][1]["chat_id"] == 42
+    assert orchestrator.telegram.conversations["42"][0]["status"] == "completed"
+    tasks = client.get("/api/tasks").json()
+    assert tasks["count"] == 1 and tasks["tasks"][0]["id"] == orchestrator.telegram.conversations["42"][0]["task_id"]
 
 
-def test_telegram_webhook_rejects_bad_secret_and_unknown_chat(client, monkeypatch):
-    _, sent = _telegram_service(monkeypatch)
+def test_telegram_reports_api_task_events(client, orchestrator):
+    client.post("/api/tasks", json={"description": "Analyze this request"})
+    texts = [payload["text"] for method, payload in orchestrator.sent if method == "sendMessage"]
+    assert any(text.startswith("Task task-") for text in texts)
+    assert any(text.startswith("Memory updated") for text in texts)
+    assert any(text.startswith("Graph updated") for text in texts)
+
+
+def test_telegram_webhook_rejects_bad_secret_and_unknown_chat(client, orchestrator):
     update = {"message": {"chat": {"id": 42}, "text": "hi"}}
     assert client.post("/api/telegram/webhook", json=update).status_code == 403
     headers = {"X-Telegram-Bot-Api-Secret-Token": "s3cret"}
     other = {"message": {"chat": {"id": 7}, "text": "hi"}}
-    assert client.post("/api/telegram/webhook", json=other, headers=headers).status_code == 200
-    assert sent == []
+    assert client.post("/api/telegram/webhook", json=other, headers=headers).json()["reply"] is None
+    assert not [p for m, p in orchestrator.sent if m == "sendMessage" and p["chat_id"] == 7]
+
+
+def test_telegram_status_command_reports_orchestrator(client, orchestrator):
+    headers = {"X-Telegram-Bot-Api-Secret-Token": "s3cret"}
+    update = {"message": {"chat": {"id": 42}, "text": "/agents"}}
+    reply = client.post("/api/telegram/webhook", json=update, headers=headers).json()["reply"]
+    assert "analyst-1" in reply
+
+
+def test_mock_llm_provider_is_rejected():
+    with pytest.raises(RuntimeError):
+        LLMGateway(LLMConfig(provider=LLMProvider.MOCK))

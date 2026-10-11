@@ -3,14 +3,34 @@ Enhanced Sentiment Service with Fine-Tuning Support
 Drop-in replacement for original sentiment_service.py
 """
 
-import torch
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
-import numpy as np
-from typing import Dict, List
-from datetime import datetime
+import logging
+import time
+from datetime import datetime, timezone
+from typing import Dict, List, Optional, Tuple
 
-from ..core.cache import cache
-from ..core.logging import logger
+logger = logging.getLogger("ghostgoat.sentiment")
+
+
+class _TTLCache:
+    """Small in-process TTL cache for symbol analyses."""
+
+    def __init__(self):
+        self._items: Dict[str, Tuple[float, Dict]] = {}
+
+    async def get(self, key: str) -> Optional[Dict]:
+        item = self._items.get(key)
+        if item and item[0] > time.time():
+            return item[1]
+        self._items.pop(key, None)
+        return None
+
+    async def set(self, key: str, value: Dict, expire: int = 300) -> None:
+        now = time.time()
+        self._items = {k: v for k, v in self._items.items() if v[0] > now}
+        self._items[key] = (now + expire, value)
+
+
+cache = _TTLCache()
 
 
 class SentimentService:
@@ -20,10 +40,20 @@ class SentimentService:
     
     def __init__(self, model_path: str = "ElKulako/cryptobert"):
         self.model_path = model_path
-        self.load_model(model_path)
-    
+        self.tokenizer = None
+        self.model = None
+        self.device = None
+
+    def ensure_model(self):
+        """Load model weights on first use so runtime boot never waits on a download."""
+        if self.model is None:
+            self.load_model(self.model_path)
+
     def load_model(self, model_path: str):
         """Load model (generic or fine-tuned)"""
+        import torch
+        from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
         logger.info(f"Loading model from {model_path}...")
         
         self.tokenizer = AutoTokenizer.from_pretrained(model_path)
@@ -52,9 +82,10 @@ class SentimentService:
         """Get information about currently loaded model"""
         return {
             'model_path': self.model_path,
-            'device': str(self.device),
+            'device': str(self.device) if self.device is not None else None,
             'is_custom': 'cryptobert-arbitrage' in self.model_path,
-            'parameters': sum(p.numel() for p in self.model.parameters())
+            'loaded': self.model is not None,
+            'parameters': sum(p.numel() for p in self.model.parameters()) if self.model is not None else None
         }
     
     def analyze_text(self, text: str) -> Dict:
@@ -67,6 +98,9 @@ class SentimentService:
         Returns:
             Dict with sentiment, confidence, and scores
         """
+        import torch
+
+        self.ensure_model()
         # Tokenize
         inputs = self.tokenizer(
             text,
@@ -102,6 +136,11 @@ class SentimentService:
             'model': 'custom' if 'arbitrage' in self.model_path else 'generic'
         }
     
+    async def analyze_goal(self, text: str) -> Dict:
+        """Agent entry point: analyze free text without blocking the event loop"""
+        import asyncio
+        return await asyncio.to_thread(self.analyze_text, text)
+
     async def analyze_symbol(self, symbol: str) -> Dict:
         """
         Comprehensive sentiment analysis for a cryptocurrency
@@ -136,7 +175,7 @@ class SentimentService:
             'confidence': result['confidence'],
             'recommendation': recommendation,
             'model_used': result['model'],
-            'timestamp': datetime.utcnow().isoformat()
+            'timestamp': datetime.now(timezone.utc).isoformat()
         }
         
         # Cache for 5 minutes

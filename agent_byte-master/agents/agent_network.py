@@ -18,6 +18,15 @@ class AgentProfile:
     success_rate: float = 1.0
     metadata: Dict[str, Any] = field(default_factory=dict)
 
+_llm_gateway: Optional[Any] = None
+
+
+def set_llm_gateway(gateway: Any) -> None:
+    """Attach the runtime LLM gateway used by every LLM-backed executor."""
+    global _llm_gateway
+    _llm_gateway = gateway
+
+
 class TaskExecutor:
     def __init__(self, name: str, role: str, capabilities: Optional[List[str]] = None, model: str = "llama3.2"):
         self.name = name; self.role = role; self.capabilities = capabilities or []
@@ -25,54 +34,37 @@ class TaskExecutor:
         self.model = model
 
     async def execute(self, payload: Dict[str, Any]) -> Dict[str, Any]:
-        """Route to Anthropic API if key available, else stub."""
-        import os
+        """Complete the goal through the runtime LLM gateway."""
+        if _llm_gateway is None:
+            return {"success": False, "error": "LLM gateway is not attached",
+                    "agent_id": self.name, "execution_mode": "error"}
         goal = payload.get("goal", "")
         prompt = payload.get("input", goal)
         system = f"You are {self.name}, a {self.role} agent. Complete the task directly and concisely."
-        api_key = os.getenv("ANTHROPIC_API_KEY", "")
-        if api_key:
-            try:
-                import urllib.request, json as _json
-                body = _json.dumps({
-                    "model": "claude-haiku-4-5-20251001",
-                    "max_tokens": 512,
-                    "system": system,
-                    "messages": [{"role": "user", "content": prompt}]
-                }).encode()
-                req = urllib.request.Request(
-                    "https://api.anthropic.com/v1/messages",
-                    data=body,
-                    headers={
-                        "x-api-key": api_key,
-                        "anthropic-version": "2023-06-01",
-                        "content-type": "application/json"
-                    }
-                )
-                with urllib.request.urlopen(req, timeout=30) as resp:
-                    data = _json.loads(resp.read())
-                    text = data["content"][0]["text"]
-                    return {
-                        "success": True,
-                        "result": text,
-                        "agent_id": self.name,
-                        "execution_mode": "live",
-                    }
-            except Exception as e:
-                return {
-                    "error": str(e),
-                    "success": False,
-                    "agent_id": self.name,
-                    "execution_mode": "error",
-                }
-        else:
-            return {
-                "success": False,
-                "result": f"[mock] {self.name} did not execute: {prompt[:100]}",
-                "agent_id": self.name,
-                "execution_mode": "mock",
-                "error": "ANTHROPIC_API_KEY is not configured",
-            }
+        try:
+            text = await _llm_gateway.complete(prompt, system)
+        except Exception as e:
+            return {"success": False, "error": str(e), "agent_id": self.name, "execution_mode": "error"}
+        return {"success": True, "result": text, "agent_id": self.name, "execution_mode": "live"}
+
+
+class ModuleExecutor(TaskExecutor):
+    """Registers an async module method (creative, analyzer, sentiment...) as a fleet agent."""
+
+    def __init__(self, name: str, role: str, capabilities: List[str], handler: Callable[[str], Any]):
+        super().__init__(name, role, capabilities)
+        self.handler = handler
+
+    async def execute(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        goal = payload.get("goal", "")
+        try:
+            result = await self.handler(goal)
+        except Exception as e:
+            return {"success": False, "error": str(e), "agent_id": self.name, "execution_mode": "error"}
+        if not isinstance(result, str):
+            result = json.dumps(result, default=str)
+        return {"success": True, "result": result, "agent_id": self.name, "execution_mode": "live"}
+
 
 class ShellExecutor(TaskExecutor):
     async def execute(self, payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -188,7 +180,7 @@ class AgentNetwork:
         finally:
             profile.status = "idle"; profile.current_task = None; profile.last_heartbeat = time.time()
         result["agent_id"] = agent_id
-        result.setdefault("execution_mode", "mock")
+        result.setdefault("execution_mode", "live" if result.get("success") else "error")
         result["latency_ms"] = (time.time() - start) * 1000
         return result
 

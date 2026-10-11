@@ -38,3 +38,6 @@ tests/coverage/.coverage.json
 venv/
 .env.*
 !.env.example
+
+# runtime state
+.backend/

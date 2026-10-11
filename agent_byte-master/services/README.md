@@ -1,36 +1,25 @@
-# Optional services
+# Runtime services
 
-This directory contains specialized Agent Byte services outside the supported
-GhostGoat runtime. `sentiment_service.py` provides optional crypto sentiment
-analysis and is not imported by the core API.
+Every module here is registered by the orchestrator (`run_cognitive_system.py`) at
+startup and shares its state.
 
-## Telegram bot (`telegram_bot.py`)
+| Service | Registry name | Purpose |
+|---|---|---|
+| `llm_gateway.py` | `llm` | Single provider-backed completion path (Anthropic, Gemini, OpenAI, DeepSeek, Ollama) configured from `config/unified_config.py`. A missing key or `LLM_PROVIDER=mock` fails boot. |
+| `sentiment_service.py` | `sentiment` | CryptoBERT sentiment; also the `sentiment-1` agent. Weights load on first use. |
+| `telegram_bot.py` | `telegram` | Telegram transport for the orchestrator. |
 
-Optional service that lets you drive the real orchestrator from Telegram. It
-only starts when `TELEGRAM_BOT_TOKEN` is set.
+## Telegram (`telegram_bot.py`)
 
-### Setup
+Environment (see `TelegramConfig` in `config/unified_config.py`):
 
-1. Create a bot with [@BotFather](https://t.me/BotFather) and copy the token.
-2. Set the environment (see `config/unified_config.py`, `TelegramConfig`):
-   - `TELEGRAM_BOT_TOKEN` – bot token (required to enable the bot).
-   - `TELEGRAM_CHAT_ID` – allowed chat/group IDs, comma-separated
-     (e.g. `12345,-100987654`). Messages from other chats are ignored, and if
-     empty nobody can send goals.
-   - `TELEGRAM_WEBHOOK_URL` – optional public URL of `/api/telegram/webhook`.
-     If unset the bot uses long polling.
-   - `TELEGRAM_WEBHOOK_SECRET` – optional secret checked against the
-     `X-Telegram-Bot-Api-Secret-Token` header.
-3. Run `python main.py`. The bot runs inside the API process and shuts down
-   with it.
+- `TELEGRAM_BOT_TOKEN` - bot token; the transport (long polling, or webhook when
+  `TELEGRAM_WEBHOOK_URL` is set) connects with it. Without a token the service is
+  still registered and `POST /api/telegram/webhook` still answers through the
+  orchestrator, but nothing is sent to Telegram.
+- `TELEGRAM_CHAT_ID` - allowed chat IDs, comma-separated. Other chats are ignored.
+- `TELEGRAM_WEBHOOK_SECRET` - checked against `X-Telegram-Bot-Api-Secret-Token`.
 
-### Message flow
-
-```
-Telegram → /api/telegram/webhook (or polling) → TelegramBotService
-        → orchestrator process_goal() (agent network) → response → Telegram sendMessage
-```
-
-Any plain text is a goal. Commands: `/status`, `/agents`, `/memory`,
-`/history`, `/help`. Tasks submitted through `POST /api/tasks` are also
-broadcast to the configured chats. Conversation history is tracked per chat.
+Flow: Telegram -> `TelegramBotService` -> `orchestrator.process_goal()` -> reply.
+Commands: `/status`, `/agents`, `/memory`, `/history`, `/help`. Task, memory and
+graph events from the orchestrator (including API tasks) are pushed to the chats.

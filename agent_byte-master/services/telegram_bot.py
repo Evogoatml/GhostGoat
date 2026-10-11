@@ -3,8 +3,11 @@
 Flow: Telegram -> /api/telegram/webhook (or long polling) -> orchestrator
 ``process_goal`` -> response -> Telegram ``sendMessage``.
 
-The service is transport only. The orchestrator behind it is injected, so the
-bot, the API and the dashboard all share one orchestrator instance.
+The service is registered under the orchestrator and is transport only. The
+orchestrator behind it is injected, so the bot, the API and the dashboard all
+share one orchestrator instance. Without a token the Telegram network transport
+stays idle, but inbound webhook updates are still dispatched to the orchestrator
+and answered in the HTTP response.
 """
 
 import asyncio
@@ -44,9 +47,9 @@ class TelegramBotService:
         self,
         config: Any,
         process_goal: ProcessGoal,
-        get_status: Optional[StatusProvider] = None,
-        get_agents: Optional[StatusProvider] = None,
-        get_memory: Optional[StatusProvider] = None,
+        get_status: StatusProvider,
+        get_agents: StatusProvider,
+        get_memory: StatusProvider,
         api_base: str = TELEGRAM_API,
     ):
         self.config = config
@@ -104,6 +107,26 @@ class TelegramBotService:
         for chat_id in self.config.chat_ids:
             await self.send_message(chat_id, text)
 
+    async def on_orchestrator_event(self, event: Dict[str, Any]) -> None:
+        """Report orchestrator task, agent, memory and graph events to the chats."""
+        if (event.get("data") or {}).get("source") == "telegram":
+            return
+        await self.notify(self.format_event(event))
+
+    @staticmethod
+    def format_event(event: Dict[str, Any]) -> str:
+        kind = event.get("type")
+        data = event.get("data") or {}
+        if kind == "task":
+            return TelegramBotService.format_task(data)
+        if kind == "memory":
+            return f"Memory updated: {data.get('stats')}"
+        if kind == "graph":
+            return f"Graph updated: {data.get('nodes')} nodes, {data.get('edges')} edges"
+        if kind == "agent":
+            return f"Agent {data.get('agent_id')} is {data.get('status')}"
+        return f"{kind}: {json.dumps(data, default=str)}"
+
     # -- Message handling ---------------------------------------------------
 
     async def handle_update(self, update: Dict[str, Any]) -> Optional[str]:
@@ -120,7 +143,8 @@ class TelegramBotService:
             return None
 
         reply = await self._route(str(chat_id), text)
-        await self.send_message(chat_id, reply)
+        if self.enabled:
+            await self.send_message(chat_id, reply)
         return reply
 
     async def _route(self, chat_id: str, text: str) -> str:
@@ -170,9 +194,7 @@ class TelegramBotService:
         return "\n".join(lines)
 
     @staticmethod
-    def _format(title: str, provider: Optional[StatusProvider]) -> str:
-        if provider is None:
-            return f"{title}: unavailable"
+    def _format(title: str, provider: StatusProvider) -> str:
         try:
             return f"{title}\n{json.dumps(provider(), indent=2, default=str)}"
         except Exception as exc:
@@ -187,9 +209,9 @@ class TelegramBotService:
     # -- Lifecycle ----------------------------------------------------------
 
     async def start(self) -> bool:
-        """Start the bot if a token is configured. Uses webhook or polling."""
+        """Connect the Telegram transport (webhook or polling) for the configured token."""
         if not self.enabled:
-            logger.info("Telegram bot disabled (no TELEGRAM_BOT_TOKEN)")
+            logger.warning("TELEGRAM_BOT_TOKEN not set: transport idle, webhook dispatch only")
             return False
         if self.config.webhook_url:
             payload: Dict[str, Any] = {"url": self.config.webhook_url}
