@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Canonical GhostGoat API for the supported root runtime."""
 
+import contextlib
 import importlib
 import itertools
 import logging
@@ -24,12 +25,13 @@ for path in (str(ROOT), str(ABM_ROOT)):
     if path not in sys.path:
         sys.path.insert(0, path)
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import uvicorn
 
 from config.api.state_store import RuntimeState
+from config.unified_config import TelegramConfig
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("ghostgoat.api")
@@ -76,7 +78,43 @@ state_store = RuntimeState()
 _start_time = time.time()
 _governance_log: list[dict[str, Any]] = []
 
-app = FastAPI(title="GhostGoat API", version="2.0.0")
+telegram_service = None
+
+
+def _build_telegram_service():
+    """Create the Telegram service only when TELEGRAM_BOT_TOKEN is configured."""
+    config = TelegramConfig.from_env()
+    if not config.enabled:
+        return None
+    try:
+        module = importlib.import_module("services.telegram_bot")
+    except Exception as exc:
+        logger.warning("Unavailable telegram service: %s", exc)
+        return None
+    return module.TelegramBotService(
+        config,
+        process_goal=_process_goal_for_telegram,
+        get_status=lambda: health(),
+        get_agents=lambda: list_agents(),
+        get_memory=lambda: memory_stats(),
+    )
+
+
+@contextlib.asynccontextmanager
+async def lifespan(_app: FastAPI):
+    global telegram_service
+    if telegram_service is None:
+        telegram_service = _build_telegram_service()
+    if telegram_service is not None:
+        await telegram_service.start()
+    try:
+        yield
+    finally:
+        if telegram_service is not None:
+            await telegram_service.stop()
+
+
+app = FastAPI(title="GhostGoat API", version="2.0.0", lifespan=lifespan)
 cors_origins = [
     origin.strip()
     for origin in os.getenv(
@@ -193,12 +231,26 @@ def list_tasks():
 
 @app.post("/api/tasks")
 async def create_task(req: TaskRequest):
+    entry = await process_goal(req.description, req.priority, req.context)
+    if telegram_service is not None and (req.context or {}).get("source") != "telegram":
+        await telegram_service.notify(telegram_service.format_task(entry))
+    return {"task": entry}
+
+
+async def _process_goal_for_telegram(description: str, context: dict[str, Any]) -> dict[str, Any]:
+    return await process_goal(description, 5, context)
+
+
+async def process_goal(
+    description: str, priority: int = 5, context: Optional[dict[str, Any]] = None
+) -> dict[str, Any]:
+    """Run a goal through the orchestrator and persist the task."""
     network = _load_orchestrator()
     task_id = f"task-{uuid.uuid4().hex}"
     entry: dict[str, Any] = {
         "id": task_id,
-        "description": req.description,
-        "priority": req.priority,
+        "description": description,
+        "priority": priority,
         "status": "running",
         "progress": 0,
         "agent": None,
@@ -211,9 +263,9 @@ async def create_task(req: TaskRequest):
     if network is None:
         entry.update(status="failed", result={"error": "No task dispatcher available"})
         state_store.save_task(entry)
-        return {"task": entry}
+        return entry
 
-    agent_id = network.select_agent(req.description)
+    agent_id = network.select_agent(description)
     if agent_id != "research-1" and (
         decision_governor is None or not decision_governor("task_execution")
     ):
@@ -230,16 +282,16 @@ async def create_task(req: TaskRequest):
             execution_mode="blocked",
         )
         state_store.save_task(entry)
-        return {"task": entry}
+        return entry
 
     try:
         result = await network.dispatch(
             agent_id,
             {
-                "goal": req.description,
-                "input": req.description,
-                "query": req.description,
-                "context": req.context or {},
+                "goal": description,
+                "input": description,
+                "query": description,
+                "context": context or {},
             },
         )
         mode = result.get("execution_mode", "mock")
@@ -266,7 +318,7 @@ async def create_task(req: TaskRequest):
                 "content": str(result.get("result", "")),
                 "tags": [agent_id],
                 "source": task_id,
-                "metadata": {"task_id": task_id, "description": req.description},
+                "metadata": {"task_id": task_id, "description": description},
             }])
     except Exception as exc:
         logger.exception("Task execution failed")
@@ -278,7 +330,7 @@ async def create_task(req: TaskRequest):
         )
 
     state_store.save_task(entry)
-    return {"task": entry}
+    return entry
 
 
 @app.get("/api/governance/policies")
@@ -408,6 +460,25 @@ def send_message(req: MessageRequest):
     }
     state_store.save_message(message)
     return message
+
+
+@app.post("/api/telegram/webhook")
+async def telegram_webhook(
+    request: Request,
+    x_telegram_bot_api_secret_token: Optional[str] = Header(default=None),
+):
+    if telegram_service is None:
+        raise HTTPException(status_code=503, detail="Telegram bot is not configured")
+    if not telegram_service.verify_secret(x_telegram_bot_api_secret_token):
+        raise HTTPException(status_code=403, detail="Invalid webhook secret")
+    try:
+        update = await request.json()
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid JSON")
+    if not isinstance(update, dict):
+        raise HTTPException(status_code=400, detail="Invalid update")
+    await telegram_service.handle_update(update)
+    return {"ok": True}
 
 
 @app.get("/api/services")

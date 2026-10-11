@@ -75,6 +75,11 @@ def start_api_server():
     global api_process
     
     logger.info("Starting GhostGoat API server on port 8420...")
+    if os.getenv("TELEGRAM_BOT_TOKEN", "").strip():
+        logger.info("Telegram bot configured; it will run inside the API process "
+                    "and share its orchestrator (stopped with the API on shutdown)")
+    else:
+        logger.info("Telegram bot not configured (set TELEGRAM_BOT_TOKEN to enable)")
     
     # Change to the config/api directory where the server module is
     api_dir = ROOT / "config" / "api"
