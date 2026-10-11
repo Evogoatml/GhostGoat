@@ -1,4 +1,11 @@
-from core.ghostgoat_dual_brain import GhostGoatDualBrain
+"""Standalone dual-brain experiment; not used by the supported API runtime."""
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "agent_byte-master"))
+
+from brain.orchestrator.ghostgoat_dual_brain import GhostGoatDualBrain
 
 if __name__ == "__main__":
     brain = GhostGoatDualBrain(input_size=4)  # adjust to your feature count

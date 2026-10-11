@@ -14,10 +14,10 @@ export function useHybrid() {
   const online = api.backendOnline;
 
   // Merge agents: real if available, simulated fallback
-  const agents = online && api.agents.length > 0 ? api.agents : sim.agents;
-  const tasks = online && api.tasks.length > 0 ? api.tasks : sim.tasks;
-  const messages = online && api.messages.length > 0 ? api.messages : sim.messages;
-  const policies = online && api.policies.policies?.length > 0 ? api.policies : {
+  const agents = online ? api.agents : sim.agents;
+  const tasks = online ? api.tasks : sim.tasks;
+  const messages = online ? api.messages : sim.messages;
+  const policies = online ? api.policies : {
     policies: [
       { id: 'pol-001', name: 'External API Access', scope: 'diagnostic', status: 'enforced', violations: 0 },
       { id: 'pol-002', name: 'Google API Gate', scope: 'google_api', status: 'enforced', violations: 2 },
@@ -35,6 +35,7 @@ export function useHybrid() {
   const runningTasks = tasks.filter(t => t.status === 'running').length;
   const completedTasks = tasks.filter(t => t.status === 'completed').length;
   const failedTasks = tasks.filter(t => t.status === 'failed').length;
+  const mockedTasks = tasks.filter(t => t.status === 'mocked').length;
 
   return {
     // Connection state
@@ -49,6 +50,10 @@ export function useHybrid() {
     systemMetrics,
     chartMetrics,
     services: api.services,
+    memoryEntries: api.memoryEntries,
+    memoryStats: api.memoryStats,
+    knowledgeGraph: api.knowledgeGraph,
+    dataMode: online ? 'live' : 'simulated',
 
     // Computed stats
     stats: {
@@ -57,10 +62,9 @@ export function useHybrid() {
       runningTasks,
       completedTasks,
       failedTasks,
+      mockedTasks,
       totalTasks: tasks.length,
-      avgHealth: online && api.health
-        ? 100 // real = healthy if connected
-        : sim.stats.avgHealth,
+      avgHealth: online ? 'n/a' : sim.stats.avgHealth,
       totalCpu: systemMetrics?.cpu_percent ?? sim.stats.totalCpu,
     },
 
@@ -68,5 +72,7 @@ export function useHybrid() {
     submitTask: api.submitTask,
     sendMessage: api.sendMessage,
     searchKnowledge: api.searchKnowledge,
+    searchMemory: api.searchMemory,
+    checkPolicy: api.checkPolicy,
   };
 }

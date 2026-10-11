@@ -6,6 +6,7 @@ services:
       - "8420:8420"
     environment:
       - GHOSTGOAT_WORKERS=${GHOSTGOAT_WORKERS:-8}
+      - GHOSTGOAT_HOST=0.0.0.0
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8420/api/health"]
       interval: 5s

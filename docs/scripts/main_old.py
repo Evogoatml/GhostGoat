@@ -1,7 +1,12 @@
-from dotenv import load_dotenv
-load_dotenv('/home/popic/GhostGoat/.env')
-
+"""Legacy standalone PMMAGO experiment; not part of the supported API runtime."""
 import asyncio, signal, sys, time, os, subprocess, requests, json
+from pathlib import Path
+from dotenv import load_dotenv
+
+ROOT = Path(__file__).resolve().parents[2]
+AGENT_BYTE = ROOT / "agent_byte-master"
+sys.path.insert(0, str(AGENT_BYTE))
+load_dotenv(ROOT / ".env")
 
 def get_hardware_strategy():
     """Dynamically resolves hardware without crashing on import."""
@@ -17,12 +22,12 @@ def get_hardware_strategy():
             print("\033[91m[Error]\033[0m PyTorch not found. Run: pip install torch")
             sys.exit(1)
 
-from core.brain.agents.pmmago import build_enterprise_pmmago
+from brain.orchestrator.pmmago import build_enterprise_pmmago
 
 CFG = {
     "n_workers": 1,  # Reduced workers to minimize LLM calls
     "auto_patch": True,
-    "path": "/home/popic/GhostGoat/",
+    "path": str(ROOT),
     "services": [],  # Disable services to avoid import errors; can re-enable after fixing missing modules
     "evolution_goal": "Self-optimize PMMAGO core logic for 8t TPU matrix units",
     "telegram_token": os.getenv("TELEGRAM_BOT_TOKEN", ""),

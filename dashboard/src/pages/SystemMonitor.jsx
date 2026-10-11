@@ -21,7 +21,7 @@ export default function SystemMonitor() {
     <div className="p-6 space-y-6">
       <div>
         <h1 className="text-2xl font-bold">System Monitor</h1>
-        <p className="text-sm text-slate-400 mt-1">Real-time performance metrics and resource utilization</p>
+        <p className="text-sm text-slate-400 mt-1">Current CPU/memory/disk are live host metrics; time-series and agent resources are simulated or unavailable.</p>
       </div>
 
       {/* Live KPIs */}
@@ -35,7 +35,7 @@ export default function SystemMonitor() {
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
-          <CardHeader icon={Cpu} title="CPU Utilization (60m)" iconColor="text-indigo-400" />
+          <CardHeader icon={Cpu} title="CPU Utilization (60m, simulated)" iconColor="text-indigo-400" />
           <div className="p-4 h-72">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={metrics}>
@@ -56,7 +56,7 @@ export default function SystemMonitor() {
         </Card>
 
         <Card>
-          <CardHeader icon={HardDrive} title="Memory Utilization (60m)" iconColor="text-emerald-400" />
+          <CardHeader icon={HardDrive} title="Memory Utilization (60m, simulated)" iconColor="text-emerald-400" />
           <div className="p-4 h-72">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={metrics}>
@@ -77,7 +77,7 @@ export default function SystemMonitor() {
         </Card>
 
         <Card>
-          <CardHeader icon={Timer} title="Latency Distribution (60m)" iconColor="text-amber-400" />
+          <CardHeader icon={Timer} title="Latency Distribution (60m, simulated)" iconColor="text-amber-400" />
           <div className="p-4 h-72">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={metrics}>
@@ -92,7 +92,7 @@ export default function SystemMonitor() {
         </Card>
 
         <Card>
-          <CardHeader icon={Gauge} title="Task Throughput (60m)" iconColor="text-purple-400" />
+          <CardHeader icon={Gauge} title="Task Throughput (60m, simulated)" iconColor="text-purple-400" />
           <div className="p-4 h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={metrics.slice(-20)}>
@@ -130,18 +130,18 @@ export default function SystemMonitor() {
                   <td className="px-5 py-2.5">
                     <div className="flex items-center gap-2 w-28">
                       <div className="flex-1 h-1.5 bg-[#252836] rounded-full">
-                        <div className="h-full bg-indigo-500 rounded-full" style={{ width: `${a.cpu}%` }} />
+                        {a.cpu != null && <div className="h-full bg-indigo-500 rounded-full" style={{ width: `${a.cpu}%` }} />}
                       </div>
-                      <span className="text-[10px] text-slate-500 w-8">{a.cpu}%</span>
+                      <span className="text-[10px] text-slate-500 w-8">{a.cpu == null ? 'n/a' : `${a.cpu}%`}</span>
                     </div>
                   </td>
-                  <td className="px-5 py-2.5 text-xs text-slate-400">{a.memory}MB</td>
+                  <td className="px-5 py-2.5 text-xs text-slate-400">{a.memory == null ? 'n/a' : `${a.memory}MB`}</td>
                   <td className="px-5 py-2.5">
-                    <span className={`text-xs font-semibold ${a.health > 80 ? 'text-emerald-400' : a.health > 50 ? 'text-amber-400' : 'text-red-400'}`}>
-                      {a.health}%
+                    <span className={`text-xs font-semibold ${a.health == null ? 'text-slate-500' : a.health > 80 ? 'text-emerald-400' : a.health > 50 ? 'text-amber-400' : 'text-red-400'}`}>
+                      {a.health == null ? 'n/a' : `${a.health}%`}
                     </span>
                   </td>
-                  <td className="px-5 py-2.5 text-xs text-slate-500">{a.uptime}</td>
+                  <td className="px-5 py-2.5 text-xs text-slate-500">{a.uptime ?? 'n/a'}</td>
                 </tr>
               ))}
             </tbody>

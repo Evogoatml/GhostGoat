@@ -95,7 +95,7 @@ function Shell() {
         {!backendOnline && (
           <div className="bg-amber-600/10 border-b border-amber-500/20 px-6 py-2 text-xs text-amber-300 flex items-center gap-2">
             <WifiOff className="w-3.5 h-3.5" />
-            Backend offline — showing simulated data. Start with: <code className="bg-black/30 px-1.5 py-0.5 rounded font-mono">python -m api.server</code>
+            Backend offline — dashboard data is simulated. Start the API with: <code className="bg-black/30 px-1.5 py-0.5 rounded font-mono">python main.py --api-only</code>
           </div>
         )}
         <Routes>

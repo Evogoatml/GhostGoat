@@ -8,6 +8,7 @@ const colors = {
   completed: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
   queued: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
   failed: 'bg-red-500/20 text-red-400 border-red-500/30',
+  mocked: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
   pending: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
   online: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
   degraded: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
@@ -20,7 +21,7 @@ const colors = {
 const dotColors = {
   active: 'bg-emerald-400', running: 'bg-amber-400', idle: 'bg-slate-400',
   offline: 'bg-red-400', completed: 'bg-emerald-400', queued: 'bg-blue-400',
-  failed: 'bg-red-400', pending: 'bg-amber-400', online: 'bg-emerald-400',
+  failed: 'bg-red-400', mocked: 'bg-amber-400', pending: 'bg-amber-400', online: 'bg-emerald-400',
   degraded: 'bg-amber-400', enforced: 'bg-emerald-400', permissive: 'bg-blue-400',
   delivered: 'bg-emerald-400', read: 'bg-slate-400',
 };

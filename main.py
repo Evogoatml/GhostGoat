@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-GhostGoat Main Entry Point
-Autonomous multi-agent orchestration platform with self-assembly, self-healing, and post-quantum security.
+GhostGoat supervisor for the supported FastAPI and optional dashboard runtime.
 """
 
 import argparse
@@ -46,22 +45,22 @@ def setup_signal_handlers():
     signal.signal(signal.SIGTERM, signal_handler)
 
 
-def check_dependencies():
+def check_dependencies(require_api=True, require_dashboard=True):
     """Check if required dependencies are available."""
     missing_deps = []
     
-    # Check for Python dependencies
-    try:
-        import fastapi
-        import uvicorn
-    except ImportError:
-        missing_deps.append("fastapi/uvicorn")
+    if require_api:
+        try:
+            import fastapi
+            import uvicorn
+        except ImportError:
+            missing_deps.append("fastapi/uvicorn")
     
-    # Check for Node.js (for dashboard)
-    try:
-        subprocess.run(["node", "--version"], capture_output=True, check=True)
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        missing_deps.append("nodejs")
+    if require_dashboard:
+        try:
+            subprocess.run(["node", "--version"], capture_output=True, check=True)
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            missing_deps.append("nodejs")
     
     if missing_deps:
         logger.warning(f"Missing dependencies: {', '.join(missing_deps)}")
@@ -173,7 +172,7 @@ def run_api_only():
     """Run API server only."""
     logger.info("Starting GhostGoat in API-only mode...")
     
-    if not check_dependencies():
+    if not check_dependencies(require_dashboard=False):
         logger.error("Dependency check failed")
         return False
     
@@ -204,7 +203,7 @@ def run_dashboard_only():
     """Run dashboard only."""
     logger.info("Starting GhostGoat in dashboard-only mode...")
     
-    if not check_dependencies():
+    if not check_dependencies(require_api=False):
         logger.error("Dependency check failed")
         return False
     
