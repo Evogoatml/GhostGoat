@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ListTodo, Play, Clock, CheckCircle, XCircle, Pause, Send } from 'lucide-react';
+import { ListTodo, Clock, CheckCircle, XCircle, Send } from 'lucide-react';
 import Card, { CardHeader } from '../components/Card';
 import StatusBadge from '../components/StatusBadge';
 import KPICard from '../components/KPICard';
@@ -81,7 +81,6 @@ export default function TaskOrchestration() {
                 <th className="text-center px-5 py-3">Priority</th>
                 <th className="text-left px-5 py-3">Progress</th>
                 <th className="text-left px-5 py-3">Created</th>
-                <th className="text-right px-5 py-3">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#252836]">
@@ -91,7 +90,14 @@ export default function TaskOrchestration() {
                     <div className="font-medium text-white">{task.description}</div>
                     <div className="text-[10px] text-slate-500">{task.id}</div>
                   </td>
-                  <td className="px-5 py-3"><StatusBadge status={task.status} /></td>
+                  <td className="px-5 py-3">
+                    <StatusBadge status={task.status} />
+                    {task.execution_mode && (
+                      <div className="mt-1 text-[10px] text-slate-500">
+                        {task.execution_mode} execution
+                      </div>
+                    )}
+                  </td>
                   <td className="px-5 py-3 text-xs text-slate-400">{task.agent || <span className="italic text-slate-600">unassigned</span>}</td>
                   <td className="px-5 py-3 text-center">
                     <span className={`font-bold ${priorityColor(task.priority)}`}>{task.priority}</span>
@@ -112,25 +118,6 @@ export default function TaskOrchestration() {
                     </div>
                   </td>
                   <td className="px-5 py-3 text-xs text-slate-500">{task.created}</td>
-                  <td className="px-5 py-3 text-right">
-                    <div className="flex items-center justify-end gap-1">
-                      {task.status === 'running' && (
-                        <button className="p-1 hover:bg-white/10 rounded" title="Pause">
-                          <Pause className="w-3.5 h-3.5 text-slate-400" />
-                        </button>
-                      )}
-                      {task.status === 'queued' && (
-                        <button className="p-1 hover:bg-white/10 rounded" title="Start">
-                          <Play className="w-3.5 h-3.5 text-emerald-400" />
-                        </button>
-                      )}
-                      {task.status === 'failed' && (
-                        <button className="p-1 hover:bg-white/10 rounded" title="Retry">
-                          <Play className="w-3.5 h-3.5 text-amber-400" />
-                        </button>
-                      )}
-                    </div>
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -140,20 +127,16 @@ export default function TaskOrchestration() {
 
       {/* Workflow visualization */}
       <Card>
-        <CardHeader icon={Clock} title="Active Workflow" iconColor="text-purple-400" />
+        <CardHeader icon={Clock} title="Illustrative Workflow (not live status)" iconColor="text-purple-400" />
         <div className="p-6">
           <div className="flex items-center gap-2 overflow-x-auto pb-2">
             {['Decompose Task', 'Select Agents', 'Assign & Execute', 'Collect Results', 'Reflect & Store'].map((step, i) => (
               <React.Fragment key={step}>
-                <div className={`flex-shrink-0 px-4 py-3 rounded-lg border text-xs font-medium ${
-                  i < 3 ? 'bg-indigo-600/20 border-indigo-500/30 text-indigo-300' :
-                  i === 3 ? 'bg-amber-600/20 border-amber-500/30 text-amber-300 animate-pulse' :
-                  'bg-[#252836] border-[#353849] text-slate-500'
-                }`}>
+                <div className="flex-shrink-0 px-4 py-3 rounded-lg border bg-[#252836] border-[#353849] text-slate-400 text-xs font-medium">
                   {step}
                 </div>
                 {i < 4 && (
-                  <div className={`flex-shrink-0 w-8 h-0.5 ${i < 3 ? 'bg-indigo-500/50' : 'bg-[#353849]'}`} />
+                  <div className="flex-shrink-0 w-8 h-0.5 bg-[#353849]" />
                 )}
               </React.Fragment>
             ))}

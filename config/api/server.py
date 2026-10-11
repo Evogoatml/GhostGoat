@@ -7,6 +7,7 @@ import math
 import os
 import sys
 import time
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
@@ -187,7 +188,7 @@ def list_tasks():
 @app.post("/api/tasks")
 async def create_task(req: TaskRequest):
     network = _load_orchestrator()
-    task_id = f"task-{int(time.time() * 1000)}"
+    task_id = f"task-{uuid.uuid4().hex}"
     entry: dict[str, Any] = {
         "id": task_id,
         "description": req.description,
@@ -374,7 +375,7 @@ def list_messages():
 @app.post("/api/messages")
 def send_message(req: MessageRequest):
     message = {
-        "id": f"msg-{int(time.time() * 1000)}",
+        "id": f"msg-{uuid.uuid4().hex}",
         "from": req.from_agent,
         "to": req.to_agent,
         "content": req.content,
