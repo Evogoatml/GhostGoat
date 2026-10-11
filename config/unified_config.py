@@ -207,6 +207,34 @@ class IntelligenceConfig:
 
 
 @dataclass
+class TelegramConfig:
+    """Telegram bot configuration (optional; bot only starts with a token)"""
+    bot_token: str = ""
+    chat_ids: list = field(default_factory=list)
+    webhook_url: str = ""
+    webhook_secret: str = ""
+
+    @property
+    def enabled(self) -> bool:
+        return bool(self.bot_token)
+
+    @staticmethod
+    def parse_chat_ids(raw: str) -> list:
+        """Parse a comma-separated list of chat/group IDs"""
+        return [part.strip() for part in (raw or "").split(",") if part.strip()]
+
+    @classmethod
+    def from_env(cls) -> 'TelegramConfig':
+        """Load TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID (comma-separated for several chats)"""
+        return cls(
+            bot_token=os.getenv("TELEGRAM_BOT_TOKEN", "").strip(),
+            chat_ids=cls.parse_chat_ids(os.getenv("TELEGRAM_CHAT_ID", "")),
+            webhook_url=os.getenv("TELEGRAM_WEBHOOK_URL", "").strip(),
+            webhook_secret=os.getenv("TELEGRAM_WEBHOOK_SECRET", "").strip(),
+        )
+
+
+@dataclass
 class UnifiedConfig:
     """Unified configuration for all systems"""
     llm: LLMConfig = field(default_factory=LLMConfig.from_env)
@@ -214,6 +242,7 @@ class UnifiedConfig:
     agent: AgentConfig = field(default_factory=AgentConfig.from_env)
     network: NetworkConfig = field(default_factory=NetworkConfig.from_env)
     intelligence: IntelligenceConfig = field(default_factory=IntelligenceConfig.from_env)
+    telegram: TelegramConfig = field(default_factory=TelegramConfig.from_env)
     
     # System paths — resolve from this file's location so it works regardless of $HOME
     base_path: str = field(default_factory=lambda: str(Path(__file__).resolve().parent.parent))
@@ -263,6 +292,7 @@ class UnifiedConfig:
             agent=AgentConfig.from_env(),
             network=NetworkConfig.from_env(),
             intelligence=IntelligenceConfig.from_env(),
+            telegram=TelegramConfig.from_env(),
             base_path=os.getenv("GHOSTGOAT_BASE_PATH", str(Path(__file__).resolve().parent.parent)),
             agents_path=os.getenv("AGENTS_PATH", str(Path.home() / "AGENTS")),
             bots_path=os.getenv("BOTS_PATH", str(Path.home() / "BOTS")),
@@ -313,9 +343,12 @@ class UnifiedConfig:
             intelligence_data = data["intelligence"]
             config.intelligence = IntelligenceConfig(**intelligence_data)
         
+        if "telegram" in data:
+            config.telegram = TelegramConfig(**data["telegram"])
+
         # Update other fields
         for key, value in data.items():
-            if key not in ["llm", "memory", "agent", "network", "intelligence"]:
+            if key not in ["llm", "memory", "agent", "network", "intelligence", "telegram"]:
                 if hasattr(config, key):
                     setattr(config, key, value)
         
@@ -340,6 +373,7 @@ class UnifiedConfig:
             "agent": asdict(self.agent),
             "network": asdict(self.network),
             "intelligence": asdict(self.intelligence),
+            "telegram": asdict(self.telegram),
             "base_path": self.base_path,
             "agents_path": self.agents_path,
             "bots_path": self.bots_path,
@@ -360,6 +394,9 @@ class UnifiedConfig:
         config_dict = self.to_dict()
         if config_dict["llm"].get("api_key"):
             config_dict["llm"]["api_key"] = "***REDACTED***"
+        for secret in ("bot_token", "webhook_secret"):
+            if config_dict["telegram"].get(secret):
+                config_dict["telegram"][secret] = "***REDACTED***"
 
         os.makedirs(os.path.dirname(config_path), exist_ok=True)
         with open(config_path, 'w') as f:

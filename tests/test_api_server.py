@@ -216,3 +216,54 @@ def test_api_only_dependency_check_does_not_require_node(monkeypatch):
 
     monkeypatch.setattr(main.subprocess, "run", unexpected_node_check)
     assert main.check_dependencies(require_dashboard=False) is True
+
+
+class FakeTelegramConfig:
+    bot_token = "token"
+    chat_ids = ["42"]
+    webhook_url = ""
+    webhook_secret = "s3cret"
+
+
+def _telegram_service(monkeypatch):
+    from services.telegram_bot import TelegramBotService
+
+    sent = []
+    service = TelegramBotService(
+        FakeTelegramConfig(),
+        process_goal=server._process_goal_for_telegram,
+        get_status=lambda: {"ok": True},
+    )
+
+    async def fake_call(method, payload, timeout=15):
+        sent.append((method, payload))
+        return {"ok": True}
+
+    monkeypatch.setattr(service, "_call", fake_call)
+    monkeypatch.setattr(server, "telegram_service", service)
+    return service, sent
+
+
+def test_telegram_webhook_disabled_without_token(client):
+    assert client.post("/api/telegram/webhook", json={}).status_code == 503
+
+
+def test_telegram_webhook_routes_goal_to_orchestrator(client, monkeypatch):
+    service, sent = _telegram_service(monkeypatch)
+    headers = {"X-Telegram-Bot-Api-Secret-Token": "s3cret"}
+    update = {"message": {"chat": {"id": 42}, "text": "Research the store"}}
+    assert client.post("/api/telegram/webhook", json=update, headers=headers).status_code == 200
+    assert "handled: Research the store" in sent[-1][1]["text"]
+    assert sent[-1][1]["chat_id"] == 42
+    assert service.conversations["42"][0]["status"] == "completed"
+    assert client.get("/api/tasks").json()["count"] == 1
+
+
+def test_telegram_webhook_rejects_bad_secret_and_unknown_chat(client, monkeypatch):
+    _, sent = _telegram_service(monkeypatch)
+    update = {"message": {"chat": {"id": 42}, "text": "hi"}}
+    assert client.post("/api/telegram/webhook", json=update).status_code == 403
+    headers = {"X-Telegram-Bot-Api-Secret-Token": "s3cret"}
+    other = {"message": {"chat": {"id": 7}, "text": "hi"}}
+    assert client.post("/api/telegram/webhook", json=other, headers=headers).status_code == 200
+    assert sent == []
