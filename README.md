@@ -61,7 +61,7 @@ pip install -e ".[full]"    # core + all optional extras (ml, crypto, agents, pe
 ```
 
 See [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md) for individual extras. Legacy shell
-wrappers (`setup.sh`-style scripts, `.goat.sh`, `.install_ghostgoat.sh`,
+wrappers (`.goat.sh`, `.install_ghostgoat.sh`, `install_upgrades.sh`, `merge_core.sh`,
 `ghostgoat_shim.py`, `run_cognitive_system.py`) are compatibility-only and not part of
 the supported path.
 
@@ -78,7 +78,7 @@ the supported path.
 
 ## Running
 
-After install, no venv activation needed — `make` handles it automatically.
+`make` targets use the active Python (`PYTHON=... make run` to override); they wrap `python main.py`.
 
 ```bash
 make run          # API (port 8420) + dashboard (port 3000)
@@ -101,7 +101,7 @@ python main.py --dash-only
 
 ## Configuration
 
-`setup.sh` creates `.env` on first run. Edit it to add your keys:
+Create a `.env` file in the repo root and add your keys:
 
 ```bash
 # LLM — at least one key required (or leave blank to use mock)
@@ -137,9 +137,8 @@ CHROMADB_PATH=./data/chromadb
 ```
 GhostGoat/
 ├── main.py                    # Entry point
-├── setup.sh                   # Installer
-├── Makefile                   # make install / run / test / start
-├── .env                       # Runtime config (created by setup.sh)
+├── Makefile                   # make install / run / test / start (wraps pip install -e + main.py)
+├── .env                       # Runtime config (create manually)
 │
 ├── api/server.py              # FastAPI backend  →  :8420
 ├── dashboard/                 # React + Vite frontend  →  :3000

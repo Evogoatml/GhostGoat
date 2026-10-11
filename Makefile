@@ -2,65 +2,54 @@
 # GhostGoat - Unified Build & Orchestration
 # =============================================================================
 #
-#   make install      → bootstrap everything (first-time setup)
-#   make run          → start API + dashboard locally (no Docker)
+#   make install      → pip install -e ".[full]" (supported install route)
+#   make install-core → pip install -e . (core runtime only)
+#   make run          → python main.py (canonical entry point)
 #   make test         → run test suite locally
 #   make start        → Docker: build + start + health check
 #   make start-full   → Docker: includes neo4j + ollama
 #   make start-prod   → Docker: production stack
 #
 # =============================================================================
-.PHONY: help install run run-api run-dash agents _check_venv \
+.PHONY: help install install-core run run-api run-dash \
         start start-full start-prod \
         build build-prod build-all \
         up up-full down restart logs logs-ghost status \
         prod-up shell redis-cli \
         test test-docker smoke \
         clean clean-data \
-        health-wait debug
+        health-wait
 
 COMPOSE := docker compose
 IMAGE   := ghostgoat
 HEALTH_URL := http://localhost:8420/api/health
 HEALTH_TIMEOUT := 60
 
-# Always use the venv Python — no manual activation needed
-PYTHON  := ./venv/bin/python
-PIP     := ./venv/bin/pip
-PYTEST  := ./venv/bin/pytest
-
-# Guard: abort with a clear message if venv doesn't exist yet
-_check_venv:
-	@test -f $(PYTHON) || { \
-		echo ""; \
-		echo "  venv not found. Run:  make install"; \
-		echo ""; \
-		exit 1; \
-	}
+# Uses whichever Python is active (venv, conda, system). Override: make PYTHON=python3.11
+PYTHON  ?= python
+PIP     ?= $(PYTHON) -m pip
+PYTEST  ?= $(PYTHON) -m pytest
 
 # ---------------------------------------------------------------------------
 # First-time install (no Docker required)
 # ---------------------------------------------------------------------------
-install: ## Bootstrap everything: system deps → venv → Python packages → dashboard → .env
-	bash setup.sh
+install: ## Install core + all extras (pip install -e ".[full]")
+	$(PIP) install -e ".[full]"
+
+install-core: ## Install core runtime only (pip install -e .)
+	$(PIP) install -e .
 
 # ---------------------------------------------------------------------------
-# Local run (no Docker required) — venv is used automatically
+# Local run (no Docker required) — canonical entry point is main.py
 # ---------------------------------------------------------------------------
-run: _check_venv ## Start API server + dashboard
+run: ## Start API server + dashboard
 	$(PYTHON) main.py
 
-run-api: _check_venv ## Start API server only
+run-api: ## Start API server only
 	$(PYTHON) main.py --api-only
 
-run-dash: _check_venv ## Start dashboard only
+run-dash: ## Start dashboard only
 	$(PYTHON) main.py --dash-only
-
-# ---------------------------------------------------------------------------
-# Agent system — generate AGENT.md in every folder
-# ---------------------------------------------------------------------------
-agents: _check_venv ## Scan codebase and regenerate all AGENT.md files
-	$(PYTHON) core/distributed_agent_system.py
 
 # ---------------------------------------------------------------------------
 # Default target — unified start
@@ -154,10 +143,7 @@ redis-cli: ## Open redis-cli
 # ---------------------------------------------------------------------------
 # Testing
 # ---------------------------------------------------------------------------
-debug: ## Run debug bootstrap: validate full system end-to-end and report failures
-	python3 debug_bootstrap.py
-
-test: _check_venv ## Run full test suite locally (no Docker)
+test: ## Run full test suite locally (no Docker)
 	$(PYTEST) tests/ -v
 
 smoke: ## Run smoke tests inside running container
