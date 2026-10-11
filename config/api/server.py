@@ -2,6 +2,7 @@
 """Canonical GhostGoat API for the supported root runtime."""
 
 import importlib
+import itertools
 import logging
 import math
 import os
@@ -63,14 +64,13 @@ knowledge_tank = _try_import(
     ),
 )
 orchestrator_instance = None
-if knowledge_tank is not None:
-    try:
-        agent_network_module = importlib.import_module("agents.agent_network")
-        orchestrator_instance = agent_network_module.AgentNetwork()
-        orchestrator_instance.spawn_default_fleet(knowledge_source=knowledge_tank)
-        logger.info("Loaded task dispatcher and default agent fleet")
-    except Exception as exc:
-        logger.warning("Unavailable task dispatcher: %s", exc)
+try:
+    agent_network_module = importlib.import_module("agents.agent_network")
+    orchestrator_instance = agent_network_module.AgentNetwork()
+    orchestrator_instance.spawn_default_fleet(knowledge_source=knowledge_tank)
+    logger.info("Loaded task dispatcher and default agent fleet")
+except Exception as exc:
+    logger.warning("Unavailable task dispatcher: %s", exc)
 
 state_store = RuntimeState()
 _start_time = time.time()
@@ -106,8 +106,6 @@ def _load_orchestrator():
     """Load the supported in-process task dispatcher and default fleet."""
     global orchestrator_instance
     if orchestrator_instance is None:
-        if knowledge_tank is None:
-            return None
         try:
             module = importlib.import_module("agents.agent_network")
             orchestrator_instance = module.AgentNetwork()
@@ -232,17 +230,24 @@ async def create_task(req: TaskRequest):
             },
         )
         mode = result.get("execution_mode", "mock")
-        status = "failed" if not result.get("success") else (
-            "mocked" if mode == "mock" else "completed"
+        status = (
+            "mocked" if mode == "mock"
+            else "completed" if result.get("success")
+            else "failed"
         )
         entry.update(
             status=status,
-            progress=100 if status in {"completed", "mocked"} else 0,
+            progress=100 if status == "completed" else 0,
             agent=agent_id,
             result=result,
             execution_mode=mode,
         )
-        if status == "completed" and knowledge_tank is not None:
+        if (
+            status == "completed"
+            and mode == "live"
+            and agent_id == "analyst-1"
+            and knowledge_tank is not None
+        ):
             knowledge_tank.ingest_bulk([{
                 "category": "task_result",
                 "content": str(result.get("result", "")),
@@ -316,7 +321,7 @@ def search_knowledge(q: str, limit: int = 10):
 def knowledge_graph():
     if knowledge_tank is None:
         raise HTTPException(status_code=503, detail="Knowledge store unavailable")
-    entries = list(knowledge_tank.entries.values())
+    entries = list(itertools.islice(reversed(knowledge_tank.entries.values()), 100))
     count = len(entries)
     nodes = []
     for index, entry in enumerate(entries):
@@ -354,7 +359,7 @@ def search_memory(q: str = "", limit: int = 50):
             "confidence": entry.confidence,
             "usage": entry.usage_count,
         }
-        for entry in list(knowledge_tank.entries.values())[-limit:][::-1]
+        for entry in itertools.islice(reversed(knowledge_tank.entries.values()), limit)
     ]
     return {"entries": entries, "count": len(entries), "source": "knowledge_tank"}
 

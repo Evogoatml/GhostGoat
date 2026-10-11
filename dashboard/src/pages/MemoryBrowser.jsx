@@ -86,7 +86,7 @@ export default function MemoryBrowser() {
           {[
             ['Total Entries', memoryStats?.total_entries ?? '—'],
             ['Algorithms', memoryStats?.total_algorithms ?? '—'],
-            ['Storage', memoryStats?.storage_path ? 'SQLite-free JSONL' : '—'],
+            ['Storage path', memoryStats?.storage_path ?? '—'],
             ['Domains', domains.length],
           ].map(([k, v]) => (
             <div key={k}>

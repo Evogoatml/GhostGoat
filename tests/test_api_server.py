@@ -131,9 +131,10 @@ def test_mock_execution_is_not_reported_as_completed(client, monkeypatch):
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     monkeypatch.setattr(server, "orchestrator_instance", FakeNetwork(mode="mock", success=False))
     task = client.post("/api/tasks", json={"description": "Summarize this request"}).json()["task"]
-    assert task["status"] == "failed"
+    assert task["status"] == "mocked"
     assert task["execution_mode"] == "mock"
     assert task["result"]["success"] is False
+    assert task["progress"] == 0
 
 
 def test_policy_blocks_external_execution(client, monkeypatch):
@@ -149,6 +150,23 @@ def test_successful_task_result_is_ingested(client):
     client.post("/api/tasks", json={"description": "Analyze this request"})
     assert tank.ingested[0]["category"] == "task_result"
     assert tank.ingested[0]["source"].startswith("task-")
+
+
+def test_research_results_are_not_reingested(client):
+    tank = server.knowledge_tank
+    client.post("/api/tasks", json={"description": "Research the knowledge store"})
+    assert tank.ingested == []
+
+
+def test_orchestrator_initializes_without_knowledge_store(monkeypatch):
+    monkeypatch.setattr(server, "knowledge_tank", None)
+    monkeypatch.setattr(server, "orchestrator_instance", None)
+
+    network = server._load_orchestrator()
+
+    assert network is not None
+    assert network.select_agent("Analyze this request") == "analyst-1"
+    assert network.select_agent("Research this request") == "research-1"
 
 
 def test_message_is_persisted_as_log_not_delivered(client, tmp_path):
