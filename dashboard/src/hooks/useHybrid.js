@@ -64,9 +64,7 @@ export function useHybrid() {
       failedTasks,
       mockedTasks,
       totalTasks: tasks.length,
-      avgHealth: online && api.health
-        ? 100 // real = healthy if connected
-        : sim.stats.avgHealth,
+      avgHealth: online ? 'n/a' : sim.stats.avgHealth,
       totalCpu: systemMetrics?.cpu_percent ?? sim.stats.totalCpu,
     },
 

@@ -106,6 +106,11 @@ GHOSTGOAT_KNOWLEDGE_PATH=.backend/knowledge_tank
 API-only startup does not require Node.js. The dashboard requires Node.js 18+
 and its dependencies.
 
+The API binds to `127.0.0.1` by default and allows the local Vite origins
+`http://localhost:3000` and `http://127.0.0.1:3000`. Set `GHOSTGOAT_HOST` and
+`GHOSTGOAT_CORS_ORIGINS` explicitly when a different deployment topology is
+required.
+
 ---
 
 ## Project Structure

@@ -27,7 +27,15 @@ export default function KnowledgeGraph() {
   const [nodes, setNodes] = useState(graphNodes);
   const animFrame = useRef(null);
 
-  useEffect(() => setNodes(graphNodes), [graphNodes]);
+  useEffect(() => {
+    setNodes(current => {
+      const previousById = new Map(current.map(node => [node.id, node]));
+      return graphNodes.map(node => {
+        const previous = previousById.get(node.id);
+        return previous ? { ...node, x: previous.x, y: previous.y } : node;
+      });
+    });
+  }, [graphNodes]);
 
   const draw = useCallback(() => {
     const canvas = canvasRef.current;

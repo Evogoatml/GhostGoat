@@ -29,7 +29,12 @@ export default function Overview() {
         <KPICard icon={ListTodo} label="Running Tasks" value={stats.runningTasks} sub={`${stats.totalTasks} total`} color="amber" />
         <KPICard icon={CheckCircle} label="Completed" value={stats.completedTasks} color="emerald" />
         <KPICard icon={XCircle} label="Failed" value={stats.failedTasks} color="red" />
-        <KPICard icon={Heart} label="Avg Health" value={`${stats.avgHealth}%`} color="purple" />
+        <KPICard
+          icon={Heart}
+          label="Avg Health"
+          value={typeof stats.avgHealth === 'number' ? `${stats.avgHealth}%` : stats.avgHealth}
+          color="purple"
+        />
         <KPICard icon={Cpu} label="CPU" value={systemMetrics ? `${systemMetrics.cpu_percent}%` : `${stats.totalCpu}%`} sub={systemMetrics ? 'real' : 'sim'} color="blue" />
       </div>
 

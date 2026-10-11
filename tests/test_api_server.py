@@ -145,6 +145,16 @@ def test_policy_blocks_external_execution(client, monkeypatch):
     assert client.get("/api/governance/policies").json()["audit_log"][0]["result"] == "blocked"
 
 
+def test_external_execution_fails_closed_without_governor(client, monkeypatch):
+    monkeypatch.setattr(server, "decision_governor", None)
+
+    task = client.post("/api/tasks", json={"description": "Analyze this request"}).json()["task"]
+
+    assert task["status"] == "failed"
+    assert task["execution_mode"] == "blocked"
+    assert "unavailable" in task["result"]["error"].lower()
+
+
 def test_successful_task_result_is_ingested(client):
     tank = server.knowledge_tank
     client.post("/api/tasks", json={"description": "Analyze this request"})

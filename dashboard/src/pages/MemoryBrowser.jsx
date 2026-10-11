@@ -9,22 +9,29 @@ export default function MemoryBrowser() {
   const { backendOnline, memoryEntries, memoryStats, searchMemory } = useGhostGoat();
 
   useEffect(() => {
-    if (!search.trim()) {
-      setEntries(memoryEntries);
+    if (!search.trim()) setEntries(memoryEntries);
+  }, [search, memoryEntries]);
+
+  useEffect(() => {
+    const query = search.trim();
+    if (!query) return;
+    if (!backendOnline) {
+      setEntries([]);
       return;
     }
-    if (backendOnline) {
-      let active = true;
-      searchMemory(search).then(result => {
+    let active = true;
+    const timeout = setTimeout(() => {
+      searchMemory(query).then(result => {
         if (active) setEntries(result.entries || []);
       });
-      return () => { active = false; };
-    }
-    setEntries([]);
-  }, [search, backendOnline, memoryEntries, searchMemory]);
+    }, 300);
+    return () => {
+      active = false;
+      clearTimeout(timeout);
+    };
+  }, [search, backendOnline, searchMemory]);
 
-  const domains = [...new Set(entries.map(entry => entry.category || 'uncategorized'))];
-  const filtered = entries;
+  const domainCount = Object.keys(memoryStats?.categories || {}).length;
 
   return (
     <div className="p-6 space-y-6">
@@ -49,7 +56,7 @@ export default function MemoryBrowser() {
 
       {/* Memory entries */}
       <div className="space-y-3">
-        {filtered.map(entry => (
+        {entries.map(entry => (
           <Card key={entry.id}>
             <div className="p-5">
               <div className="flex items-start justify-between gap-4 mb-3">
@@ -72,7 +79,7 @@ export default function MemoryBrowser() {
         ))}
       </div>
 
-      {filtered.length === 0 && (
+      {entries.length === 0 && (
         <div className="text-center py-16 text-slate-500">
           <Database className="w-10 h-10 mx-auto mb-3 opacity-30" />
           <p>{backendOnline ? 'No stored entries match your search' : 'Connect the API to browse live memory'}</p>
@@ -87,7 +94,7 @@ export default function MemoryBrowser() {
             ['Total Entries', memoryStats?.total_entries ?? '—'],
             ['Algorithms', memoryStats?.total_algorithms ?? '—'],
             ['Storage path', memoryStats?.storage_path ?? '—'],
-            ['Domains', domains.length],
+            ['Domains', domainCount],
           ].map(([k, v]) => (
             <div key={k}>
               <div className="text-[10px] text-slate-500 uppercase tracking-wider">{k}</div>

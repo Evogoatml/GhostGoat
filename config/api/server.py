@@ -77,9 +77,17 @@ _start_time = time.time()
 _governance_log: list[dict[str, Any]] = []
 
 app = FastAPI(title="GhostGoat API", version="2.0.0")
+cors_origins = [
+    origin.strip()
+    for origin in os.getenv(
+        "GHOSTGOAT_CORS_ORIGINS",
+        "http://localhost:3000,http://127.0.0.1:3000",
+    ).split(",")
+    if origin.strip()
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=cors_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -206,14 +214,19 @@ async def create_task(req: TaskRequest):
         return {"task": entry}
 
     agent_id = network.select_agent(req.description)
-    if agent_id == "analyst-1" and decision_governor and not decision_governor(
-        "task_execution"
+    if agent_id != "research-1" and (
+        decision_governor is None or not decision_governor("task_execution")
     ):
         _record_policy_event("task_execution", "blocked")
+        reason = (
+            "Decision governor is unavailable"
+            if decision_governor is None
+            else "External task execution is blocked by policy"
+        )
         entry.update(
             status="failed",
             agent=agent_id,
-            result={"error": "External task execution is blocked by policy"},
+            result={"error": reason},
             execution_mode="blocked",
         )
         state_store.save_task(entry)
@@ -336,10 +349,14 @@ def knowledge_graph():
         })
     edges = []
     for index, first in enumerate(entries):
+        if len(edges) >= 500:
+            break
         for second in entries[index + 1:]:
             shared_tags = set(first.tags) & set(second.tags)
             if shared_tags or first.category == second.category:
                 edges.append({"from": first.id, "to": second.id})
+                if len(edges) >= 500:
+                    break
     return {"nodes": nodes, "edges": edges, "count": len(nodes)}
 
 
@@ -401,4 +418,9 @@ def list_services():
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8420, log_level="info")
+    uvicorn.run(
+        app,
+        host=os.getenv("GHOSTGOAT_HOST", "127.0.0.1"),
+        port=8420,
+        log_level="info",
+    )
