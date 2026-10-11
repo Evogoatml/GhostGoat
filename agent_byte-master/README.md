@@ -195,3 +195,10 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 MIT License
+
+## Repository-local modules
+
+`constants.py` holds shared Agent Byte defaults. `agents/` contains agent
+implementations, including optional examples that are not automatically loaded
+by the supported GhostGoat runtime. `services/` contains optional subsystem
+services; these are not part of the core API runtime.

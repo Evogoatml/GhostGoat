@@ -51,8 +51,7 @@ pip install -e ".[full]"    # core + all optional extras (ml, crypto, agents, pe
 ```
 
 See [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md) for individual extras. Legacy shell
-wrappers (`.goat.sh`, `.install_ghostgoat.sh`, `install_upgrades.sh`, `merge_core.sh`,
-`ghostgoat_shim.py`, `run_cognitive_system.py`) are compatibility-only and not part of
+wrappers (`.goat.sh`, `.install_ghostgoat.sh`) are compatibility-only and not part of
 the supported path.
 
 ## Maturity and boundaries
@@ -63,7 +62,8 @@ the supported path.
 | `agent_byte-master/agents/agent_network.py` and `brain/knowledge/knowledge_tank.py` | **Used by the API**; other Agent Byte modules are not implied to be integrated |
 | `dashboard/` | Optional UI; live views use API endpoints, while simulated charts/fallback records are labeled |
 | `ACS_SYSTEM/` and `GFS/` | **Standalone experiments**; they do not protect, secure, or power the supported API runtime |
-| `backend/` (Rust) and alternate launchers under `docs/scripts/`, `run_cognitive_system.py`, and `ghostgoat` | **Experimental/legacy**; not part of the supported runtime and not an API fallback |
+| `run_cognitive_system.py` | Cognitive subsystem bootstrap used by `config/api/cognitive_api.py`; `main.py` remains the supported CLI entry point |
+| `backend/` (Rust) and alternate launchers under `docs/scripts/` and `ghostgoat` | **Experimental/legacy**; not part of the supported runtime and not an API fallback |
 | `vendor/`, custom agents, optional dependency extras | Not loaded by the supported API unless explicitly integrated |
 
 ---

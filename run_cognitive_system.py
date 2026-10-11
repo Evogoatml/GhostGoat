@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""GhostGoat Cognitive System — Main Bootstrap."""
-# DEPRECATED: compatibility-only. Use `python main.py`.
+"""Cognitive subsystem bootstrap used by the optional cognitive API."""
 import asyncio, json, logging, os, sys
 from functools import partial
 from pathlib import Path
@@ -91,6 +90,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-
 
