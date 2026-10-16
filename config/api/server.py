@@ -24,6 +24,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from config.unified_config import get_config
+from config.api.memory_router import router as memory_router
 from run_cognitive_system import get_orchestrator
 
 logger = logging.getLogger("ghostgoat.api")
@@ -46,6 +47,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(memory_router)
 
 
 class TaskRequest(BaseModel):
