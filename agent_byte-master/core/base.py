@@ -77,6 +77,7 @@ class BaseAgent(ABC, KernelClient):
         super().__init__()
         self.agent_id = agent_id or self.name
         self.memory: list = []
+        self.thoughts = None  # optional ThoughtMemory adapter
 
     def register(self) -> Dict[str, Any]:
         return self.register_with_kernel(
@@ -90,7 +91,19 @@ class BaseAgent(ABC, KernelClient):
         Main entrypoint. Agents parse task, build command,
         request kernel execution, and return formatted result.
         """
-        command = self._build_command(task, context or {})
+        context = context or {}
+        start_id = self._record_thought("agent_start", task, context.get("thought_id"))
+        output = self._execute(task, context)
+        self._record_thought("agent_result", output[:2000], start_id or context.get("thought_id"))
+        return output
+
+    def _record_thought(self, kind: str, content: str, parent_id: Optional[str] = None):
+        if self.thoughts is None:
+            return None
+        return self.thoughts.record(kind, content, parent_id=parent_id, agent_id=self.agent_id)
+
+    def _execute(self, task: str, context: Dict[str, Any]) -> str:
+        command = self._build_command(task, context)
         target = context.get("target") if context else None
 
         result = self.request_execution(self.agent_id, command, target)

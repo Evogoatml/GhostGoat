@@ -34,6 +34,8 @@ from core.memory.networked_memory import NetworkedMemory
 from core.service_registry import registry
 from core.workflows.engine import WorkflowEngine
 from services.llm_gateway import LLMGateway
+from src.memory.thought_adapter import ThoughtMemory
+from src.memory.thought_store import ThoughtStore
 from services.sentiment_service import SentimentService
 from services.telegram_bot import TelegramBotService
 
@@ -66,6 +68,7 @@ class Orchestrator:
         self.knowledge_tank = KnowledgeTank(storage_path=str(data_dir / "knowledge_tank"))
         self.graphrag = GraphRAGEngine(storage_path=str(data_dir / "graphrag"))
         self.memory = NetworkedMemory(storage_path=str(data_dir / "memory"))
+        self.thoughts = ThoughtMemory(ThoughtStore(str(data_dir / "thoughts.sqlite3")))
         self.workflows = WorkflowEngine(workflows_dir=str(ABM_ROOT / "core" / "workflows" / "definitions"))
         self.decision_governor = allow_external_calls
 
@@ -103,6 +106,7 @@ class Orchestrator:
             "knowledge_tank": self.knowledge_tank,
             "graphrag": self.graphrag,
             "memory": self.memory,
+            "thoughts": self.thoughts,
             "workflows": self.workflows,
             "agent_network": self.network,
             "decision_governor": self.decision_governor,
@@ -181,6 +185,12 @@ class Orchestrator:
         }
         self.state_store.save_task(entry)
 
+        root_id = self.thoughts.record("root", description, task_id=task_id,
+                                       metadata={"priority": priority, "source": source})
+        created_id = self.thoughts.record("task_created", description, parent_id=root_id,
+                                          task_id=task_id, metadata={"priority": priority})
+        entry["thought_root_id"] = root_id
+
         agent_id = self.network.select_agent(description)
         if agent_id != "research-1" and not self.decision_governor("task_execution"):
             self.record_policy_event("task_execution", "blocked")
@@ -197,6 +207,7 @@ class Orchestrator:
                     "input": description,
                     "query": description,
                     "context": context,
+                    "thought_id": created_id,
                 })
                 status = "completed" if result.get("success") else "failed"
                 entry.update(
@@ -211,6 +222,10 @@ class Orchestrator:
                 entry.update(status="failed", agent=agent_id, result={"error": str(exc)},
                              execution_mode="error")
 
+        self.thoughts.record("task_completed", str(entry["status"]), parent_id=created_id,
+                             task_id=task_id, agent_id=entry["agent"],
+                             metadata={"status": entry["status"],
+                                       "execution_mode": entry["execution_mode"]})
         self.state_store.save_task(entry)
         await self._record_outcome(entry, source)
         await self.emit("task", {**entry, "source": source})
