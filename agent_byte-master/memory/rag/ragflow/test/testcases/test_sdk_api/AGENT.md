@@ -4,10 +4,10 @@
 
 | Field | Value |
 |---|---|
-| **Folder** | `core/memory/rag/ragflow/test/testcases/test_sdk_api` |
-| **Agent ID** | `0d5db261` |
-| **Last Updated** | `2026-04-30 03:40:26` |
-| **Files Tracked** | `31` |
+| **Folder** | `agent_byte-master/memory/rag/ragflow/test/testcases/test_sdk_api` |
+| **Agent ID** | `d225e9af` |
+| **Last Updated** | `2026-10-17 01:51:58` |
+| **Files Tracked** | `37` |
 | **Total Size** | `233.0 KB` |
 | **Neural Backend** | `../../../../../../../.backend/` |
 
@@ -15,39 +15,45 @@
 
 ## Files in this Folder
 
-#### `.py` (31 files)
+#### `.py` (37 files)
 
-- **`common.py`** — 1.9 KB, modified 2026-04-23
-- **`conftest.py`** — 5.2 KB, modified 2026-04-23
-- **`test_chat_assistant_management/conftest.py`** — 1.5 KB, modified 2026-04-23
-- **`test_chat_assistant_management/test_create_chat_assistant.py`** — 11.2 KB, modified 2026-04-23
-- **`test_chat_assistant_management/test_delete_chat_assistants.py`** — 4.3 KB, modified 2026-04-23
-- **`test_chat_assistant_management/test_list_chat_assistants.py`** — 8.4 KB, modified 2026-04-23
-- **`test_chat_assistant_management/test_update_chat_assistant.py`** — 10.6 KB, modified 2026-04-23
-- **`test_chunk_management_within_dataset/conftest.py`** — 1.6 KB, modified 2026-04-23
-- **`test_chunk_management_within_dataset/test_add_chunk.py`** — 6.6 KB, modified 2026-04-23
-- **`test_chunk_management_within_dataset/test_delete_chunks.py`** — 4.5 KB, modified 2026-04-23
-- **`test_chunk_management_within_dataset/test_list_chunks.py`** — 5.6 KB, modified 2026-04-23
-- **`test_chunk_management_within_dataset/test_retrieval_chunks.py`** — 9.9 KB, modified 2026-04-23
-- **`test_chunk_management_within_dataset/test_update_chunk.py`** — 5.9 KB, modified 2026-04-23
-- **`test_dataset_mangement/conftest.py`** — 1.1 KB, modified 2026-04-23
-- **`test_dataset_mangement/test_create_dataset.py`** — 33.8 KB, modified 2026-04-23
-- **`test_dataset_mangement/test_delete_datasets.py`** — 6.5 KB, modified 2026-04-23
-- **`test_dataset_mangement/test_list_datasets.py`** — 10.8 KB, modified 2026-04-23
-- **`test_dataset_mangement/test_update_dataset.py`** — 32.2 KB, modified 2026-04-23
-- **`test_file_management_within_dataset/conftest.py`** — 1.8 KB, modified 2026-04-23
-- **`test_file_management_within_dataset/test_delete_documents.py`** — 4.2 KB, modified 2026-04-23
-- **`test_file_management_within_dataset/test_download_document.py`** — 2.9 KB, modified 2026-04-23
-- **`test_file_management_within_dataset/test_list_documents.py`** — 9.6 KB, modified 2026-04-23
-- **`test_file_management_within_dataset/test_parse_documents.py`** — 6.2 KB, modified 2026-04-23
-- **`test_file_management_within_dataset/test_stop_parse_documents.py`** — 1.4 KB, modified 2026-04-23
-- **`test_file_management_within_dataset/test_update_document.py`** — 15.1 KB, modified 2026-04-23
-- **`test_file_management_within_dataset/test_upload_documents.py`** — 7.9 KB, modified 2026-04-23
-- **`test_session_management/conftest.py`** — 1.9 KB, modified 2026-04-23
-- **`test_session_management/test_create_session_with_chat_assistant.py`** — 3.1 KB, modified 2026-04-23
-- **`test_session_management/test_delete_sessions_with_chat_assistant.py`** — 4.7 KB, modified 2026-04-23
-- **`test_session_management/test_list_sessions_with_chat_assistant.py`** — 8.8 KB, modified 2026-04-23
-- **`test_session_management/test_update_session_with_chat_assistant.py`** — 4.0 KB, modified 2026-04-23
+- **`__init__.py`** — 0 B, modified 2026-10-10
+- **`common.py`** — 1.9 KB, modified 2026-10-10
+- **`conftest.py`** — 5.2 KB, modified 2026-10-10
+- **`test_chat_assistant_management/__init__.py`** — 0 B, modified 2026-10-10
+- **`test_chat_assistant_management/conftest.py`** — 1.5 KB, modified 2026-10-10
+- **`test_chat_assistant_management/test_create_chat_assistant.py`** — 11.2 KB, modified 2026-10-10
+- **`test_chat_assistant_management/test_delete_chat_assistants.py`** — 4.3 KB, modified 2026-10-10
+- **`test_chat_assistant_management/test_list_chat_assistants.py`** — 8.4 KB, modified 2026-10-10
+- **`test_chat_assistant_management/test_update_chat_assistant.py`** — 10.6 KB, modified 2026-10-10
+- **`test_chunk_management_within_dataset/__init__.py`** — 0 B, modified 2026-10-10
+- **`test_chunk_management_within_dataset/conftest.py`** — 1.6 KB, modified 2026-10-10
+- **`test_chunk_management_within_dataset/test_add_chunk.py`** — 6.6 KB, modified 2026-10-10
+- **`test_chunk_management_within_dataset/test_delete_chunks.py`** — 4.5 KB, modified 2026-10-10
+- **`test_chunk_management_within_dataset/test_list_chunks.py`** — 5.6 KB, modified 2026-10-10
+- **`test_chunk_management_within_dataset/test_retrieval_chunks.py`** — 9.9 KB, modified 2026-10-10
+- **`test_chunk_management_within_dataset/test_update_chunk.py`** — 5.9 KB, modified 2026-10-10
+- **`test_dataset_mangement/__init__.py`** — 0 B, modified 2026-10-10
+- **`test_dataset_mangement/conftest.py`** — 1.1 KB, modified 2026-10-10
+- **`test_dataset_mangement/test_create_dataset.py`** — 33.8 KB, modified 2026-10-10
+- **`test_dataset_mangement/test_delete_datasets.py`** — 6.5 KB, modified 2026-10-10
+- **`test_dataset_mangement/test_list_datasets.py`** — 10.8 KB, modified 2026-10-10
+- **`test_dataset_mangement/test_update_dataset.py`** — 32.2 KB, modified 2026-10-10
+- **`test_file_management_within_dataset/__init__.py`** — 0 B, modified 2026-10-10
+- **`test_file_management_within_dataset/conftest.py`** — 1.8 KB, modified 2026-10-10
+- **`test_file_management_within_dataset/test_delete_documents.py`** — 4.2 KB, modified 2026-10-10
+- **`test_file_management_within_dataset/test_download_document.py`** — 2.9 KB, modified 2026-10-10
+- **`test_file_management_within_dataset/test_list_documents.py`** — 9.6 KB, modified 2026-10-10
+- **`test_file_management_within_dataset/test_parse_documents.py`** — 6.2 KB, modified 2026-10-10
+- **`test_file_management_within_dataset/test_stop_parse_documents.py`** — 1.4 KB, modified 2026-10-10
+- **`test_file_management_within_dataset/test_update_document.py`** — 15.1 KB, modified 2026-10-10
+- **`test_file_management_within_dataset/test_upload_documents.py`** — 7.9 KB, modified 2026-10-10
+- **`test_session_management/__init__.py`** — 0 B, modified 2026-10-10
+- **`test_session_management/conftest.py`** — 1.9 KB, modified 2026-10-10
+- **`test_session_management/test_create_session_with_chat_assistant.py`** — 3.1 KB, modified 2026-10-10
+- **`test_session_management/test_delete_sessions_with_chat_assistant.py`** — 4.7 KB, modified 2026-10-10
+- **`test_session_management/test_list_sessions_with_chat_assistant.py`** — 8.8 KB, modified 2026-10-10
+- **`test_session_management/test_update_session_with_chat_assistant.py`** — 4.0 KB, modified 2026-10-10
 
 ---
 
@@ -55,7 +61,7 @@
 
 | Metric | Value |
 |---|---|
-| Files | 31 |
+| Files | 37 |
 | Size | 233.0 KB |
 | Types | 1 |
 
@@ -74,16 +80,16 @@ from core.ordinance.ordinance_client import OrdinanceClient
 client = OrdinanceClient()
 
 # All files in this folder
-ctx = client.get_folder_context("/home/popic/GhostGoat/core/memory/rag/ragflow/test/testcases/test_sdk_api")
+ctx = client.get_folder_context("./agent_byte-master/memory/rag/ragflow/test/testcases/test_sdk_api")
 
 # Full-text search across all folders
 results = client.search("your query")
 
 # This agent's neighbours in the knowledge graph
-neighbours = client.get_neighbours("0d5db261")
+neighbours = client.get_neighbours("d225e9af")
 ```
 
 ---
 
 *Generated by GhostGoat Ordinance System — Central Neural Backend*
-*Scan time: 2026-04-30 03:40:26*
+*Scan time: 2026-10-17 01:51:58*

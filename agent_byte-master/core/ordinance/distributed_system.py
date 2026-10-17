@@ -57,9 +57,12 @@ class DistributedAgentSystem:
     def scan(self,
              exclude_dirs:  Optional[Set[str]] = None,
              extensions:    Optional[Set[str]] = None,
-             skip_unchanged: bool = True) -> dict:
+             skip_unchanged: bool = True,
+             existing_only: bool = False) -> dict:
         """
         Scan root_dir, index all matching files, generate/update AGENT.md files.
+        With existing_only=True, only refresh AGENT.md files that already exist
+        (never create new ones — keeps vendored subprojects clean).
         Returns a stats dict.
         """
         excl = exclude_dirs or EXCLUDE_DIRS
@@ -91,11 +94,24 @@ class DistributedAgentSystem:
                 if Path(filepath).suffix in exts:
                     folders_with_files.add(root)
 
+        # ── prune registry entries whose files no longer exist ───────────────
+        # (deleted files would otherwise haunt every future AGENT.md build)
+        missing = [p for p in self.backend.file_registry
+                   if not os.path.exists(p)]
+        for p in missing:
+            del self.backend.file_registry[p]
+        if missing:
+            logger.info("[Ordinance] pruned %d deleted file(s) from registry",
+                        len(missing))
+
         self.backend._save_state()
 
         # ── pass 2: generate AGENT.md per folder ─────────────────────────────
         self._agents = []
         for folder in sorted(folders_with_files):
+            if existing_only and not os.path.exists(
+                    os.path.join(folder, "AGENT.md")):
+                continue
             agent = FolderAgent(folder, self.backend)
             agent.generate()
             self._agents.append(agent)

@@ -4,9 +4,9 @@
 
 | Field | Value |
 |---|---|
-| **Folder** | `core/memory/rag/ragflow/common/data_source` |
-| **Agent ID** | `2949ad6c` |
-| **Last Updated** | `2026-04-30 03:39:34` |
+| **Folder** | `agent_byte-master/memory/rag/ragflow/common/data_source` |
+| **Agent ID** | `f14f784d` |
+| **Last Updated** | `2026-10-17 01:51:50` |
 | **Files Tracked** | `36` |
 | **Total Size** | `475.2 KB` |
 | **Neural Backend** | `../../../../../../.backend/` |
@@ -17,42 +17,42 @@
 
 #### `.py` (36 files)
 
-- **`__init__.py`** — 1.6 KB, modified 2026-04-23
-- **`blob_connector.py`** — 10.5 KB, modified 2026-04-23
-- **`config.py`** — 7.7 KB, modified 2026-04-23
-- **`confluence_connector.py`** — 79.2 KB, modified 2026-04-23
-- **`discord_connector.py`** — 12.0 KB, modified 2026-04-23
-- **`dropbox_connector.py`** — 6.8 KB, modified 2026-04-23
-- **`exceptions.py`** — 686 B, modified 2026-04-23
-- **`file_types.py`** — 1.1 KB, modified 2026-04-23
-- **`gmail_connector.py`** — 13.5 KB, modified 2026-04-23
-- **`google_drive/__init__.py`** — 0 B, modified 2026-04-23
-- **`google_drive/connector.py`** — 57.7 KB, modified 2026-04-23
-- **`google_drive/constant.py`** — 228 B, modified 2026-04-23
-- **`google_drive/doc_conversion.py`** — 22.2 KB, modified 2026-04-23
-- **`google_drive/file_retrieval.py`** — 13.5 KB, modified 2026-04-23
-- **`google_drive/model.py`** — 5.2 KB, modified 2026-04-23
-- **`google_drive/section_extraction.py`** — 6.5 KB, modified 2026-04-23
-- **`google_util/__init__.py`** — 0 B, modified 2026-04-23
-- **`google_util/auth.py`** — 6.8 KB, modified 2026-04-23
-- **`google_util/constant.py`** — 2.7 KB, modified 2026-04-23
-- **`google_util/oauth_flow.py`** — 4.8 KB, modified 2026-04-23
-- **`google_util/resource.py`** — 3.9 KB, modified 2026-04-23
-- **`google_util/util.py`** — 8.8 KB, modified 2026-04-23
-- **`google_util/util_threadpool_concurrency.py`** — 4.7 KB, modified 2026-04-23
-- **`html_utils.py`** — 7.7 KB, modified 2026-04-23
-- **`interfaces.py`** — 12.7 KB, modified 2026-04-23
-- **`jira/__init__.py`** — 0 B, modified 2026-04-23
-- **`jira/connector.py`** — 39.0 KB, modified 2026-04-23
-- **`jira/utils.py`** — 4.7 KB, modified 2026-04-23
-- **`models.py`** — 8.0 KB, modified 2026-04-23
-- **`moodle_connector.py`** — 22.2 KB, modified 2026-04-23
-- **`notion_connector.py`** — 25.1 KB, modified 2026-04-23
-- **`sharepoint_connector.py`** — 4.6 KB, modified 2026-04-23
-- **`slack_connector.py`** — 22.1 KB, modified 2026-04-23
-- **`teams_connector.py`** — 4.2 KB, modified 2026-04-23
-- **`utils.py`** — 39.8 KB, modified 2026-04-23
-- **`webdav_connector.py`** — 14.8 KB, modified 2026-04-23
+- **`__init__.py`** — 1.6 KB, modified 2026-10-10
+- **`blob_connector.py`** — 10.5 KB, modified 2026-10-10
+- **`config.py`** — 7.7 KB, modified 2026-10-10
+- **`confluence_connector.py`** — 79.2 KB, modified 2026-10-10
+- **`discord_connector.py`** — 12.0 KB, modified 2026-10-10
+- **`dropbox_connector.py`** — 6.8 KB, modified 2026-10-10
+- **`exceptions.py`** — 686 B, modified 2026-10-10
+- **`file_types.py`** — 1.1 KB, modified 2026-10-10
+- **`gmail_connector.py`** — 13.5 KB, modified 2026-10-10
+- **`google_drive/__init__.py`** — 0 B, modified 2026-10-10
+- **`google_drive/connector.py`** — 57.7 KB, modified 2026-10-10
+- **`google_drive/constant.py`** — 228 B, modified 2026-10-10
+- **`google_drive/doc_conversion.py`** — 22.2 KB, modified 2026-10-10
+- **`google_drive/file_retrieval.py`** — 13.5 KB, modified 2026-10-10
+- **`google_drive/model.py`** — 5.2 KB, modified 2026-10-10
+- **`google_drive/section_extraction.py`** — 6.5 KB, modified 2026-10-10
+- **`google_util/__init__.py`** — 0 B, modified 2026-10-10
+- **`google_util/auth.py`** — 6.8 KB, modified 2026-10-10
+- **`google_util/constant.py`** — 2.7 KB, modified 2026-10-10
+- **`google_util/oauth_flow.py`** — 4.8 KB, modified 2026-10-10
+- **`google_util/resource.py`** — 3.9 KB, modified 2026-10-10
+- **`google_util/util.py`** — 8.8 KB, modified 2026-10-10
+- **`google_util/util_threadpool_concurrency.py`** — 4.7 KB, modified 2026-10-10
+- **`html_utils.py`** — 7.7 KB, modified 2026-10-10
+- **`interfaces.py`** — 12.7 KB, modified 2026-10-10
+- **`jira/__init__.py`** — 0 B, modified 2026-10-10
+- **`jira/connector.py`** — 39.0 KB, modified 2026-10-10
+- **`jira/utils.py`** — 4.7 KB, modified 2026-10-10
+- **`models.py`** — 8.0 KB, modified 2026-10-10
+- **`moodle_connector.py`** — 22.2 KB, modified 2026-10-10
+- **`notion_connector.py`** — 25.1 KB, modified 2026-10-10
+- **`sharepoint_connector.py`** — 4.6 KB, modified 2026-10-10
+- **`slack_connector.py`** — 22.1 KB, modified 2026-10-10
+- **`teams_connector.py`** — 4.2 KB, modified 2026-10-10
+- **`utils.py`** — 39.8 KB, modified 2026-10-10
+- **`webdav_connector.py`** — 14.8 KB, modified 2026-10-10
 
 ---
 
@@ -79,16 +79,16 @@ from core.ordinance.ordinance_client import OrdinanceClient
 client = OrdinanceClient()
 
 # All files in this folder
-ctx = client.get_folder_context("/home/popic/GhostGoat/core/memory/rag/ragflow/common/data_source")
+ctx = client.get_folder_context("./agent_byte-master/memory/rag/ragflow/common/data_source")
 
 # Full-text search across all folders
 results = client.search("your query")
 
 # This agent's neighbours in the knowledge graph
-neighbours = client.get_neighbours("2949ad6c")
+neighbours = client.get_neighbours("f14f784d")
 ```
 
 ---
 
 *Generated by GhostGoat Ordinance System — Central Neural Backend*
-*Scan time: 2026-04-30 03:39:34*
+*Scan time: 2026-10-17 01:51:50*

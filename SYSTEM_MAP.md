@@ -208,9 +208,6 @@ sorting, searching, graphs, data structures, cryptography, ML, image processing,
 | `efficiency_engine.py` | Performance optimisation |
 | `context_memory.py` | Agent context tracking |
 
-#### frameworks/agent_frameworks/
-508 files covering: marketing automation, security/pentesting, web scraping, business intelligence, social media, lead generation, AWS advertising stack
-
 ---
 
 ### memory/

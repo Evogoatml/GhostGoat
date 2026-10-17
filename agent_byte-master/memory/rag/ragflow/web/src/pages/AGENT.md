@@ -1,1368 +1,244 @@
-# AGENT - pages
-**Auto-generated folder agent**
-**Last Updated:** 2026-03-06 03:56:30
-**Folder Path:** `/home/user/GhostGoat/core/reasoning/brain/rag/ragflow/web/src/pages`
-**Agent ID:** `pending`
+# AGENT — `pages`
+
+> Auto-generated folder agent. **Do not edit manually** — regenerated on every scan.
+
+| Field | Value |
+|---|---|
+| **Folder** | `agent_byte-master/memory/rag/ragflow/web/src/pages` |
+| **Agent ID** | `afdee05d` |
+| **Last Updated** | `2026-10-17 01:52:02` |
+| **Files Tracked** | `183` |
+| **Total Size** | `1.0 KB` |
+| **Neural Backend** | `../../../../../../../.backend/` |
 
 ---
 
-## Folder Context
+## Files in this Folder
 
-This agent maintains awareness of all files in this folder and connects to the central neural network at `.backend/`
+#### `.css` (1 files)
 
-### Files Tracked (434)
+- **`agent/form/components/prompt-editor/index.css`** — 1.0 KB, modified 2026-10-10
 
-#### .css Files (1)
+#### `.py` (182 files)
 
-- `agent/form/components/prompt-editor/index.css`
-  - Size: 1.0KB
-  - Modified: 2026-03-03
-
-#### .jsx Files (1)
-
-- `404.jsx`
-  - Size: 621B
-  - Modified: 2026-03-03
-
-#### .tsx Files (432)
-
-- `admin/components/enterprise-feature.tsx`
-  - Size: 274B
-  - Modified: 2026-03-03
-- `admin/components/theme-switch.tsx`
-  - Size: 2.0KB
-  - Modified: 2026-03-03
-- `admin/forms/change-password-form.tsx`
-  - Size: 3.8KB
-  - Modified: 2026-03-03
-- `admin/forms/email-form.tsx`
-  - Size: 2.3KB
-  - Modified: 2026-03-03
-- `admin/forms/import-excel-form.tsx`
-  - Size: 3.3KB
-  - Modified: 2026-03-03
-- `admin/forms/role-form.tsx`
-  - Size: 6.1KB
-  - Modified: 2026-03-03
-- `admin/forms/user-form.tsx`
-  - Size: 6.1KB
-  - Modified: 2026-03-03
-- `admin/layouts/navigation-layout.tsx`
-  - Size: 4.1KB
-  - Modified: 2026-03-03
-- `admin/layouts/root-layout.tsx`
-  - Size: 120B
-  - Modified: 2026-03-03
-- `admin/login.tsx`
-  - Size: 7.7KB
-  - Modified: 2026-03-03
-- `admin/monitoring.tsx`
-  - Size: 563B
-  - Modified: 2026-03-03
-- `admin/roles.tsx`
-  - Size: 14.6KB
-  - Modified: 2026-03-03
-- `admin/service-detail.tsx`
-  - Size: 2.3KB
-  - Modified: 2026-03-03
-- `admin/service-status.tsx`
-  - Size: 15.2KB
-  - Modified: 2026-03-03
-- `admin/task-executor-detail.tsx`
-  - Size: 4.5KB
-  - Modified: 2026-03-03
-- `admin/user-detail.tsx`
-  - Size: 13.0KB
-  - Modified: 2026-03-03
-- `admin/users.tsx`
-  - Size: 21.9KB
-  - Modified: 2026-03-03
-- `admin/utils.tsx`
-  - Size: 2.1KB
-  - Modified: 2026-03-03
-- `admin/whitelist.tsx`
-  - Size: 16.7KB
-  - Modified: 2026-03-03
-- `admin/wrappers/authorized.tsx`
-  - Size: 312B
-  - Modified: 2026-03-03
-- `agent/canvas/context-menu/index.tsx`
-  - Size: 2.8KB
-  - Modified: 2026-03-03
-- `agent/canvas/context.tsx`
-  - Size: 1.3KB
-  - Modified: 2026-03-03
-- `agent/canvas/edge/index.tsx`
-  - Size: 3.8KB
-  - Modified: 2026-03-03
-- `agent/canvas/index.tsx`
-  - Size: 12.9KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/agent-node.tsx`
-  - Size: 4.0KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/begin-node.tsx`
-  - Size: 2.2KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/card.tsx`
-  - Size: 2.4KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/categorize-node.tsx`
-  - Size: 1.8KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/data-operations-node.tsx`
-  - Size: 710B
-  - Modified: 2026-03-03
-- `agent/canvas/node/dropdown/accordion-operators.tsx`
-  - Size: 6.9KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/dropdown/next-step-dropdown.tsx`
-  - Size: 3.3KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/dropdown/operator-item-list.tsx`
-  - Size: 3.1KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/exit-loop-node.tsx`
-  - Size: 695B
-  - Modified: 2026-03-03
-- `agent/canvas/node/extractor-node.tsx`
-  - Size: 425B
-  - Modified: 2026-03-03
-- `agent/canvas/node/file-node.tsx`
-  - Size: 2.1KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/handle-icon.tsx`
-  - Size: 404B
-  - Modified: 2026-03-03
-- `agent/canvas/node/handle.tsx`
-  - Size: 2.6KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/index.tsx`
-  - Size: 1.4KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/iteration-node.tsx`
-  - Size: 2.4KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/keyword-node.tsx`
-  - Size: 1.5KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/labeled-group-node.tsx`
-  - Size: 1.8KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/list-operations-node.tsx`
-  - Size: 667B
-  - Modified: 2026-03-03
-- `agent/canvas/node/loop-node.tsx`
-  - Size: 602B
-  - Modified: 2026-03-03
-- `agent/canvas/node/message-node.tsx`
-  - Size: 1.4KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/node-header.tsx`
-  - Size: 821B
-  - Modified: 2026-03-03
-- `agent/canvas/node/node-wrapper.tsx`
-  - Size: 1006B
-  - Modified: 2026-03-03
-- `agent/canvas/node/note-node/index.tsx`
-  - Size: 3.5KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/parser-node.tsx`
-  - Size: 1.7KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/placeholder-node.tsx`
-  - Size: 863B
-  - Modified: 2026-03-03
-- `agent/canvas/node/popover.tsx`
-  - Size: 3.6KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/resize-icon.tsx`
-  - Size: 744B
-  - Modified: 2026-03-03
-- `agent/canvas/node/retrieval-node.tsx`
-  - Size: 2.4KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/rewrite-node.tsx`
-  - Size: 1.5KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/splitter-node.tsx`
-  - Size: 1.7KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/switch-node.tsx`
-  - Size: 4.0KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/tokenizer-node.tsx`
-  - Size: 1.6KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/tool-node.tsx`
-  - Size: 2.8KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/toolbar.tsx`
-  - Size: 2.6KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/variable-aggregator-node.tsx`
-  - Size: 1.3KB
-  - Modified: 2026-03-03
-- `agent/canvas/node/variable-assigner-node.tsx`
-  - Size: 1.1KB
-  - Modified: 2026-03-03
-- `agent/chat/box.tsx`
-  - Size: 4.9KB
-  - Modified: 2026-03-03
-- `agent/chat/chat-sheet.tsx`
-  - Size: 891B
-  - Modified: 2026-03-03
-- `agent/chat/use-get-file-icon.tsx`
-  - Size: 378B
-  - Modified: 2026-03-03
-- `agent/constant/index.tsx`
-  - Size: 20.8KB
-  - Modified: 2026-03-03
-- `agent/constant/pipeline.tsx`
-  - Size: 5.7KB
-  - Modified: 2026-03-03
-- `agent/debug-content/index.tsx`
-  - Size: 7.4KB
-  - Modified: 2026-03-03
-- `agent/debug-content/popover-form.tsx`
-  - Size: 2.6KB
-  - Modified: 2026-03-03
-- `agent/debug-content/uploader.tsx`
-  - Size: 3.5KB
-  - Modified: 2026-03-03
-- `agent/flow-tooltip.tsx`
-  - Size: 461B
-  - Modified: 2026-03-03
-- `agent/form-sheet/form-config-map.tsx`
-  - Size: 4.8KB
-  - Modified: 2026-03-03
-- `agent/form-sheet/next.tsx`
-  - Size: 3.4KB
-  - Modified: 2026-03-03
-- `agent/form-sheet/single-debug-sheet/index.tsx`
-  - Size: 2.8KB
-  - Modified: 2026-03-03
-- `agent/form-sheet/title-input.tsx`
-  - Size: 1.7KB
-  - Modified: 2026-03-03
-- `agent/form/agent-form/agent-tools.tsx`
-  - Size: 5.7KB
-  - Modified: 2026-03-03
-- `agent/form/agent-form/dynamic-prompt.tsx`
-  - Size: 2.6KB
-  - Modified: 2026-03-03
-- `agent/form/agent-form/dynamic-tool.tsx`
-  - Size: 1.7KB
-  - Modified: 2026-03-03
-- `agent/form/agent-form/index.tsx`
-  - Size: 11.7KB
-  - Modified: 2026-03-03
-- `agent/form/agent-form/structured-output-dialog.tsx`
-  - Size: 1.6KB
-  - Modified: 2026-03-03
-- `agent/form/agent-form/structured-output-panel.tsx`
-  - Size: 346B
-  - Modified: 2026-03-03
-- `agent/form/agent-form/tool-popover/index.tsx`
-  - Size: 2.6KB
-  - Modified: 2026-03-03
-- `agent/form/agent-form/tool-popover/tool-command.tsx`
-  - Size: 4.1KB
-  - Modified: 2026-03-03
-- `agent/form/arxiv-form/index.tsx`
-  - Size: 2.6KB
-  - Modified: 2026-03-03
-- `agent/form/begin-form/begin-dynamic-options.tsx`
-  - Size: 1.6KB
-  - Modified: 2026-03-03
-- `agent/form/begin-form/index.tsx`
-  - Size: 5.7KB
-  - Modified: 2026-03-03
-- `agent/form/begin-form/parameter-dialog.tsx`
-  - Size: 5.9KB
-  - Modified: 2026-03-03
-- `agent/form/begin-form/query-table.tsx`
-  - Size: 5.2KB
-  - Modified: 2026-03-03
-- `agent/form/bing-form/index.tsx`
-  - Size: 3.5KB
-  - Modified: 2026-03-03
-- `agent/form/categorize-form/dynamic-categorize.tsx`
-  - Size: 6.7KB
-  - Modified: 2026-03-03
-- `agent/form/categorize-form/dynamic-example.tsx`
-  - Size: 1.8KB
-  - Modified: 2026-03-03
-- `agent/form/categorize-form/index.tsx`
-  - Size: 1.7KB
-  - Modified: 2026-03-03
-- `agent/form/code-form/index.tsx`
-  - Size: 5.1KB
-  - Modified: 2026-03-03
-- `agent/form/code-form/next-variable.tsx`
-  - Size: 3.8KB
-  - Modified: 2026-03-03
-- `agent/form/components/api-key-field.tsx`
-  - Size: 767B
-  - Modified: 2026-03-03
-- `agent/form/components/description-field.tsx`
-  - Size: 641B
-  - Modified: 2026-03-03
-- `agent/form/components/dynamic-fom-header.tsx`
-  - Size: 708B
-  - Modified: 2026-03-03
-- `agent/form/components/form-wrapper.tsx`
-  - Size: 312B
-  - Modified: 2026-03-03
-- `agent/form/components/output.tsx`
-  - Size: 1.3KB
-  - Modified: 2026-03-03
-- `agent/form/components/prompt-editor/index.tsx`
-  - Size: 5.2KB
-  - Modified: 2026-03-03
-- `agent/form/components/prompt-editor/paste-handler-plugin.tsx`
-  - Size: 2.3KB
-  - Modified: 2026-03-03
-- `agent/form/components/prompt-editor/variable-node.tsx`
-  - Size: 1.9KB
-  - Modified: 2026-03-03
-- `agent/form/components/prompt-editor/variable-on-change-plugin.tsx`
-  - Size: 1.2KB
-  - Modified: 2026-03-03
-- `agent/form/components/prompt-editor/variable-picker-plugin.tsx`
-  - Size: 11.0KB
-  - Modified: 2026-03-03
-- `agent/form/components/query-variable-list.tsx`
-  - Size: 1.7KB
-  - Modified: 2026-03-03
-- `agent/form/components/query-variable.tsx`
-  - Size: 2.0KB
-  - Modified: 2026-03-03
-- `agent/form/components/select-with-secondary-menu.tsx`
-  - Size: 7.1KB
-  - Modified: 2026-03-03
-- `agent/form/components/structured-output-secondary-menu.tsx`
-  - Size: 4.7KB
-  - Modified: 2026-03-03
-- `agent/form/crawler-form/index.tsx`
-  - Size: 2.7KB
-  - Modified: 2026-03-03
-- `agent/form/data-operations-form/filter-values.tsx`
-  - Size: 2.6KB
-  - Modified: 2026-03-03
-- `agent/form/data-operations-form/index.tsx`
-  - Size: 4.4KB
-  - Modified: 2026-03-03
-- `agent/form/data-operations-form/select-keys.tsx`
-  - Size: 1.4KB
-  - Modified: 2026-03-03
-- `agent/form/data-operations-form/updates.tsx`
-  - Size: 1.9KB
-  - Modified: 2026-03-03
-- `agent/form/duckduckgo-form/index.tsx`
-  - Size: 2.5KB
-  - Modified: 2026-03-03
-- `agent/form/email-form/index.tsx`
-  - Size: 4.0KB
-  - Modified: 2026-03-03
-- `agent/form/exesql-form/index.tsx`
-  - Size: 5.0KB
-  - Modified: 2026-03-03
-- `agent/form/extractor-form/index.tsx`
-  - Size: 3.6KB
-  - Modified: 2026-03-03
-- `agent/form/github-form/index.tsx`
-  - Size: 1.6KB
-  - Modified: 2026-03-03
-- `agent/form/google-form/index.tsx`
-  - Size: 4.0KB
-  - Modified: 2026-03-03
-- `agent/form/google-scholar-form/index.tsx`
-  - Size: 4.7KB
-  - Modified: 2026-03-03
-- `agent/form/hierarchical-merger-form/index.tsx`
-  - Size: 5.5KB
-  - Modified: 2026-03-03
-- `agent/form/invoke-form/index.tsx`
-  - Size: 6.8KB
-  - Modified: 2026-03-03
-- `agent/form/invoke-form/variable-dialog.tsx`
-  - Size: 3.4KB
-  - Modified: 2026-03-03
-- `agent/form/invoke-form/variable-table.tsx`
-  - Size: 5.4KB
-  - Modified: 2026-03-03
-- `agent/form/iteration-form/dynamic-output.tsx`
-  - Size: 3.4KB
-  - Modified: 2026-03-03
-- `agent/form/iteration-form/index.tsx`
-  - Size: 1.8KB
-  - Modified: 2026-03-03
-- `agent/form/iteration-start-from/index.tsx`
-  - Size: 582B
-  - Modified: 2026-03-03
-- `agent/form/list-operations-form/index.tsx`
-  - Size: 6.3KB
-  - Modified: 2026-03-03
-- `agent/form/loop-form/dynamic-variables.tsx`
-  - Size: 7.2KB
-  - Modified: 2026-03-03
-- `agent/form/loop-form/index.tsx`
-  - Size: 1.7KB
-  - Modified: 2026-03-03
-- `agent/form/loop-form/loop-termination-condition.tsx`
-  - Size: 9.9KB
-  - Modified: 2026-03-03
-- `agent/form/message-form/index.tsx`
-  - Size: 5.0KB
-  - Modified: 2026-03-03
-- `agent/form/parser-form/common-form-fields.tsx`
-  - Size: 2.8KB
-  - Modified: 2026-03-03
-- `agent/form/parser-form/email-form-fields.tsx`
-  - Size: 909B
-  - Modified: 2026-03-03
-- `agent/form/parser-form/image-form-fields.tsx`
-  - Size: 1.9KB
-  - Modified: 2026-03-03
-- `agent/form/parser-form/index.tsx`
-  - Size: 6.7KB
-  - Modified: 2026-03-03
-- `agent/form/parser-form/pdf-form-fields.tsx`
-  - Size: 3.9KB
-  - Modified: 2026-03-03
-- `agent/form/parser-form/ppt-form-fields.tsx`
-  - Size: 3.7KB
-  - Modified: 2026-03-03
-- `agent/form/parser-form/spreadsheet-form-fields.tsx`
-  - Size: 3.7KB
-  - Modified: 2026-03-03
-- `agent/form/parser-form/video-form-fields.tsx`
-  - Size: 914B
-  - Modified: 2026-03-03
-- `agent/form/pubmed-form/index.tsx`
-  - Size: 2.4KB
-  - Modified: 2026-03-03
-- `agent/form/retrieval-form/next.tsx`
-  - Size: 4.4KB
-  - Modified: 2026-03-03
-- `agent/form/rewrite-question-form/index.tsx`
-  - Size: 1.8KB
-  - Modified: 2026-03-03
-- `agent/form/searxng-form/index.tsx`
-  - Size: 2.2KB
-  - Modified: 2026-03-03
-- `agent/form/splitter-form/index.tsx`
-  - Size: 3.3KB
-  - Modified: 2026-03-03
-- `agent/form/string-transform-form/index.tsx`
-  - Size: 5.1KB
-  - Modified: 2026-03-03
-- `agent/form/switch-form/index.tsx`
-  - Size: 8.8KB
-  - Modified: 2026-03-03
-- `agent/form/tavily-extract-form/index.tsx`
-  - Size: 3.6KB
-  - Modified: 2026-03-03
-- `agent/form/tavily-form/dynamic-domain.tsx`
-  - Size: 1.6KB
-  - Modified: 2026-03-03
-- `agent/form/tavily-form/index.tsx`
-  - Size: 6.7KB
-  - Modified: 2026-03-03
-- `agent/form/tokenizer-form/index.tsx`
-  - Size: 2.8KB
-  - Modified: 2026-03-03
-- `agent/form/tool-form/arxiv-form/index.tsx`
-  - Size: 986B
-  - Modified: 2026-03-03
-- `agent/form/tool-form/bing-form/index.tsx`
-  - Size: 856B
-  - Modified: 2026-03-03
-- `agent/form/tool-form/constant.tsx`
-  - Size: 1.4KB
-  - Modified: 2026-03-03
-- `agent/form/tool-form/crawler-form/index.tsx`
-  - Size: 980B
-  - Modified: 2026-03-03
-- `agent/form/tool-form/duckduckgo-form/index.tsx`
-  - Size: 1019B
-  - Modified: 2026-03-03
-- `agent/form/tool-form/email-form/index.tsx`
-  - Size: 986B
-  - Modified: 2026-03-03
-- `agent/form/tool-form/exesql-form/index.tsx`
-  - Size: 1.1KB
-  - Modified: 2026-03-03
-- `agent/form/tool-form/github-form/index.tsx`
-  - Size: 983B
-  - Modified: 2026-03-03
-- `agent/form/tool-form/google-form/index.tsx`
-  - Size: 1.1KB
-  - Modified: 2026-03-03
-- `agent/form/tool-form/google-scholar-form/index.tsx`
-  - Size: 1.0KB
-  - Modified: 2026-03-03
-- `agent/form/tool-form/index.tsx`
-  - Size: 543B
-  - Modified: 2026-03-03
-- `agent/form/tool-form/mcp-form/index.tsx`
-  - Size: 3.3KB
-  - Modified: 2026-03-03
-- `agent/form/tool-form/mcp-form/mcp-card.tsx`
-  - Size: 562B
-  - Modified: 2026-03-03
-- `agent/form/tool-form/pubmed-form/index.tsx`
-  - Size: 1016B
-  - Modified: 2026-03-03
-- `agent/form/tool-form/retrieval-form/index.tsx`
-  - Size: 2.5KB
-  - Modified: 2026-03-03
-- `agent/form/tool-form/searxng-form/index.tsx`
-  - Size: 1.5KB
-  - Modified: 2026-03-03
-- `agent/form/tool-form/tavily-form/index.tsx`
-  - Size: 1011B
-  - Modified: 2026-03-03
-- `agent/form/tool-form/wencai-form/index.tsx`
-  - Size: 986B
-  - Modified: 2026-03-03
-- `agent/form/tool-form/wikipedia-form/index.tsx`
-  - Size: 1023B
-  - Modified: 2026-03-03
-- `agent/form/tool-form/yahoo-finance-form/index.tsx`
-  - Size: 1.0KB
-  - Modified: 2026-03-03
-- `agent/form/user-fill-up-form/index.tsx`
-  - Size: 4.3KB
-  - Modified: 2026-03-03
-- `agent/form/variable-aggregator-form/dynamic-group-variable.tsx`
-  - Size: 3.2KB
-  - Modified: 2026-03-03
-- `agent/form/variable-aggregator-form/index.tsx`
-  - Size: 2.3KB
-  - Modified: 2026-03-03
-- `agent/form/variable-aggregator-form/name-input.tsx`
-  - Size: 1.6KB
-  - Modified: 2026-03-03
-- `agent/form/variable-assigner-form/dynamic-variables.tsx`
-  - Size: 8.3KB
-  - Modified: 2026-03-03
-- `agent/form/variable-assigner-form/index.tsx`
-  - Size: 1.7KB
-  - Modified: 2026-03-03
-- `agent/form/wencai-form/index.tsx`
-  - Size: 2.7KB
-  - Modified: 2026-03-03
-- `agent/form/wikipedia-form/index.tsx`
-  - Size: 2.5KB
-  - Modified: 2026-03-03
-- `agent/form/yahoo-finance-form/index.tsx`
-  - Size: 3.3KB
-  - Modified: 2026-03-03
-- `agent/gobal-variable-sheet/component/add-variable-modal.tsx`
-  - Size: 3.8KB
-  - Modified: 2026-03-03
-- `agent/gobal-variable-sheet/hooks/use-form.tsx`
-  - Size: 1.3KB
-  - Modified: 2026-03-03
-- `agent/gobal-variable-sheet/hooks/use-object-fields.tsx`
-  - Size: 9.1KB
-  - Modified: 2026-03-03
-- `agent/gobal-variable-sheet/index.tsx`
-  - Size: 5.9KB
-  - Modified: 2026-03-03
-- `agent/hooks.tsx`
-  - Size: 7.9KB
-  - Modified: 2026-03-03
-- `agent/hooks/use-before-delete.tsx`
-  - Size: 2.7KB
-  - Modified: 2026-03-03
-- `agent/hooks/use-build-options.tsx`
-  - Size: 629B
-  - Modified: 2026-03-03
-- `agent/hooks/use-get-begin-query.tsx`
-  - Size: 12.9KB
-  - Modified: 2026-03-03
-- `agent/hooks/use-show-drawer.tsx`
-  - Size: 4.8KB
-  - Modified: 2026-03-03
-- `agent/index.tsx`
-  - Size: 9.6KB
-  - Modified: 2026-03-03
-- `agent/log-sheet/index.tsx`
-  - Size: 1.4KB
-  - Modified: 2026-03-03
-- `agent/log-sheet/tool-timeline-item.tsx`
-  - Size: 7.9KB
-  - Modified: 2026-03-03
-- `agent/log-sheet/workflow-timeline.tsx`
-  - Size: 12.5KB
-  - Modified: 2026-03-03
-- `agent/operator-icon.tsx`
-  - Size: 3.5KB
-  - Modified: 2026-03-03
-- `agent/pipeline-log-sheet/dataflow-timeline.tsx`
-  - Size: 5.1KB
-  - Modified: 2026-03-03
-- `agent/pipeline-log-sheet/index.tsx`
-  - Size: 3.8KB
-  - Modified: 2026-03-03
-- `agent/pipeline-run-sheet/index.tsx`
-  - Size: 889B
-  - Modified: 2026-03-03
-- `agent/pipeline-run-sheet/uploader.tsx`
-  - Size: 1.5KB
-  - Modified: 2026-03-03
-- `agent/run-sheet/index.tsx`
-  - Size: 1.9KB
-  - Modified: 2026-03-03
-- `agent/setting-dialog/index.tsx`
-  - Size: 1.3KB
-  - Modified: 2026-03-03
-- `agent/setting-dialog/setting-form.tsx`
-  - Size: 3.2KB
-  - Modified: 2026-03-03
-- `agent/share/index.tsx`
-  - Size: 7.3KB
-  - Modified: 2026-03-03
-- `agent/share/parameter-dialog.tsx`
-  - Size: 862B
-  - Modified: 2026-03-03
-- `agent/version-dialog/index.tsx`
-  - Size: 5.0KB
-  - Modified: 2026-03-03
-- `agents/agent-card.tsx`
-  - Size: 1.5KB
-  - Modified: 2026-03-03
-- `agents/agent-dropdown.tsx`
-  - Size: 2.2KB
-  - Modified: 2026-03-03
-- `agents/agent-log-detail-modal.tsx`
-  - Size: 2.3KB
-  - Modified: 2026-03-03
-- `agents/agent-log-page.tsx`
-  - Size: 10.7KB
-  - Modified: 2026-03-03
-- `agents/agent-templates.tsx`
-  - Size: 4.2KB
-  - Modified: 2026-03-03
-- `agents/create-agent-dialog.tsx`
-  - Size: 1.1KB
-  - Modified: 2026-03-03
-- `agents/create-agent-form.tsx`
-  - Size: 3.4KB
-  - Modified: 2026-03-03
-- `agents/index.tsx`
-  - Size: 6.7KB
-  - Modified: 2026-03-03
-- `agents/name-form-field.tsx`
-  - Size: 616B
-  - Modified: 2026-03-03
-- `agents/template-card.tsx`
-  - Size: 1.9KB
-  - Modified: 2026-03-03
-- `agents/template-sidebar.tsx`
-  - Size: 3.2KB
-  - Modified: 2026-03-03
-- `agents/upload-agent-dialog/index.tsx`
-  - Size: 1.0KB
-  - Modified: 2026-03-03
-- `agents/upload-agent-dialog/upload-agent-form.tsx`
-  - Size: 1.9KB
-  - Modified: 2026-03-03
-- `chunk/chunk-card.tsx`
-  - Size: 1.3KB
-  - Modified: 2026-03-03
-- `chunk/chunk-result/index.tsx`
-  - Size: 359B
-  - Modified: 2026-03-03
-- `chunk/chunk-toolbar.tsx`
-  - Size: 608B
-  - Modified: 2026-03-03
-- `chunk/chunked-result-panel.tsx`
-  - Size: 1.2KB
-  - Modified: 2026-03-03
-- `chunk/index.tsx`
-  - Size: 2.2KB
-  - Modified: 2026-03-03
-- `chunk/parsed-result-panel.tsx`
-  - Size: 1.2KB
-  - Modified: 2026-03-03
-- `chunk/parsed-result/add-knowledge/components/knowledge-chunk/components/chunk-card/index.tsx`
-  - Size: 3.5KB
-  - Modified: 2026-03-03
-- `chunk/parsed-result/add-knowledge/components/knowledge-chunk/components/chunk-creating-modal/index.tsx`
-  - Size: 5.9KB
-  - Modified: 2026-03-03
-- `chunk/parsed-result/add-knowledge/components/knowledge-chunk/components/chunk-creating-modal/tag-feature-item.tsx`
-  - Size: 4.6KB
-  - Modified: 2026-03-03
-- `chunk/parsed-result/add-knowledge/components/knowledge-chunk/components/chunk-result-bar/checkbox-sets.tsx`
-  - Size: 2.7KB
-  - Modified: 2026-03-03
-- `chunk/parsed-result/add-knowledge/components/knowledge-chunk/components/chunk-result-bar/index.tsx`
-  - Size: 3.2KB
-  - Modified: 2026-03-03
-- `chunk/parsed-result/add-knowledge/components/knowledge-chunk/components/chunk-toolbar/index.tsx`
-  - Size: 5.4KB
-  - Modified: 2026-03-03
-- `chunk/parsed-result/add-knowledge/components/knowledge-chunk/index.tsx`
-  - Size: 10.0KB
-  - Modified: 2026-03-03
-- `chunk/parsed-result/add-knowledge/index.tsx`
-  - Size: 2.0KB
-  - Modified: 2026-03-03
-- `chunk/parsed-result/index.tsx`
-  - Size: 245B
-  - Modified: 2026-03-03
-- `chunk/result-view/index.tsx`
-  - Size: 296B
-  - Modified: 2026-03-03
-- `dataflow-result/chunker.tsx`
-  - Size: 7.5KB
-  - Modified: 2026-03-03
-- `dataflow-result/components/chunk-card/index.tsx`
-  - Size: 3.5KB
-  - Modified: 2026-03-03
-- `dataflow-result/components/chunk-creating-modal/index.tsx`
-  - Size: 5.9KB
-  - Modified: 2026-03-03
-- `dataflow-result/components/chunk-creating-modal/tag-feature-item.tsx`
-  - Size: 4.6KB
-  - Modified: 2026-03-03
-- `dataflow-result/components/chunk-result-bar/checkbox-sets.tsx`
-  - Size: 1.8KB
-  - Modified: 2026-03-03
-- `dataflow-result/components/chunk-result-bar/index.tsx`
-  - Size: 1.9KB
-  - Modified: 2026-03-03
-- `dataflow-result/components/chunk-toolbar/index.tsx`
-  - Size: 5.4KB
-  - Modified: 2026-03-03
-- `dataflow-result/components/parse-editer/index.tsx`
-  - Size: 1.8KB
-  - Modified: 2026-03-03
-- `dataflow-result/components/parse-editer/json-parser.tsx`
-  - Size: 4.3KB
-  - Modified: 2026-03-03
-- `dataflow-result/components/parse-editer/object-parser.tsx`
-  - Size: 2.5KB
-  - Modified: 2026-03-03
-- `dataflow-result/components/rerun-button/index.tsx`
-  - Size: 1.7KB
-  - Modified: 2026-03-03
-- `dataflow-result/components/time-line/index.tsx`
-  - Size: 2.4KB
-  - Modified: 2026-03-03
-- `dataflow-result/index.tsx`
-  - Size: 8.6KB
-  - Modified: 2026-03-03
-- `dataflow-result/parser.tsx`
-  - Size: 7.1KB
-  - Modified: 2026-03-03
-- `dataset/dataset-overview/dataset-filter.tsx`
-  - Size: 2.7KB
-  - Modified: 2026-03-03
-- `dataset/dataset-overview/index.tsx`
-  - Size: 9.6KB
-  - Modified: 2026-03-03
-- `dataset/dataset-overview/overview-table.tsx`
-  - Size: 14.8KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/category-panel.tsx`
-  - Size: 2.3KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/chunk-method-form.tsx`
-  - Size: 2.4KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/chunk-method-learn-more.tsx`
-  - Size: 1.1KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/components/added-source-card.tsx`
-  - Size: 3.0KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/components/link-data-pipeline.tsx`
-  - Size: 5.8KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/components/link-data-pipline-modal.tsx`
-  - Size: 5.4KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/components/link-data-source-modal.tsx`
-  - Size: 2.5KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/components/link-data-source.tsx`
-  - Size: 6.9KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/components/tag-item.tsx`
-  - Size: 3.6KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration-form-container.tsx`
-  - Size: 508B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/audio.tsx`
-  - Size: 481B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/book.tsx`
-  - Size: 817B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/common-item.tsx`
-  - Size: 8.2KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/email.tsx`
-  - Size: 480B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/knowledge-graph.tsx`
-  - Size: 513B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/laws.tsx`
-  - Size: 818B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/manual.tsx`
-  - Size: 747B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/naive.tsx`
-  - Size: 1.2KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/one.tsx`
-  - Size: 624B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/paper.tsx`
-  - Size: 818B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/picture.tsx`
-  - Size: 482B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/presentation.tsx`
-  - Size: 826B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/qa.tsx`
-  - Size: 168B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/resume.tsx`
-  - Size: 172B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/table.tsx`
-  - Size: 348B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/configuration/tag.tsx`
-  - Size: 186B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/general-form.tsx`
-  - Size: 3.0KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/index.tsx`
-  - Size: 11.0KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/permission-form-field.tsx`
-  - Size: 864B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/saving-button.tsx`
-  - Size: 2.2KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/tag-table/index.tsx`
-  - Size: 8.7KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/tag-table/rename-dialog/index.tsx`
-  - Size: 1.1KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/tag-table/rename-dialog/rename-form.tsx`
-  - Size: 1.9KB
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/tag-tabs.tsx`
-  - Size: 1010B
-  - Modified: 2026-03-03
-- `dataset/dataset-setting/tag-word-cloud.tsx`
-  - Size: 1.6KB
-  - Modified: 2026-03-03
-- `dataset/dataset-title.tsx`
-  - Size: 355B
-  - Modified: 2026-03-03
-- `dataset/dataset/dataset-action-cell.tsx`
-  - Size: 3.5KB
-  - Modified: 2026-03-03
-- `dataset/dataset/dataset-table.tsx`
-  - Size: 6.7KB
-  - Modified: 2026-03-03
-- `dataset/dataset/generate-button/generate.tsx`
-  - Size: 10.3KB
-  - Modified: 2026-03-03
-- `dataset/dataset/index.tsx`
-  - Size: 4.5KB
-  - Modified: 2026-03-03
-- `dataset/dataset/parsing-card.tsx`
-  - Size: 2.4KB
-  - Modified: 2026-03-03
-- `dataset/dataset/parsing-status-cell.tsx`
-  - Size: 5.7KB
-  - Modified: 2026-03-03
-- `dataset/dataset/set-meta-dialog.tsx`
-  - Size: 3.3KB
-  - Modified: 2026-03-03
-- `dataset/dataset/use-bulk-operate-dataset.tsx`
-  - Size: 3.3KB
-  - Modified: 2026-03-03
-- `dataset/dataset/use-dataset-table-columns.tsx`
-  - Size: 5.8KB
-  - Modified: 2026-03-03
-- `dataset/index.tsx`
-  - Size: 1.5KB
-  - Modified: 2026-03-03
-- `dataset/knowledge-graph/force-graph.tsx`
-  - Size: 3.9KB
-  - Modified: 2026-03-03
-- `dataset/knowledge-graph/index.tsx`
-  - Size: 1.0KB
-  - Modified: 2026-03-03
-- `dataset/process-log-modal.tsx`
-  - Size: 4.3KB
-  - Modified: 2026-03-03
-- `dataset/sidebar/hooks.tsx`
-  - Size: 413B
-  - Modified: 2026-03-03
-- `dataset/sidebar/index.tsx`
-  - Size: 3.5KB
-  - Modified: 2026-03-03
-- `dataset/testing/index.tsx`
-  - Size: 3.0KB
-  - Modified: 2026-03-03
-- `dataset/testing/testing-form.tsx`
-  - Size: 3.3KB
-  - Modified: 2026-03-03
-- `dataset/testing/testing-result.tsx`
-  - Size: 3.8KB
-  - Modified: 2026-03-03
-- `datasets/dataset-card.tsx`
-  - Size: 1.7KB
-  - Modified: 2026-03-03
-- `datasets/dataset-creating-dialog.tsx`
-  - Size: 4.4KB
-  - Modified: 2026-03-03
-- `datasets/dataset-dataflow-creating-dialog.tsx`
-  - Size: 2.9KB
-  - Modified: 2026-03-03
-- `datasets/dataset-dropdown.tsx`
-  - Size: 2.3KB
-  - Modified: 2026-03-03
-- `datasets/index.tsx`
-  - Size: 5.0KB
-  - Modified: 2026-03-03
-- `document-viewer/file-error/index.tsx`
-  - Size: 579B
-  - Modified: 2026-03-03
-- `document-viewer/image/index.tsx`
-  - Size: 1.0KB
-  - Modified: 2026-03-03
-- `document-viewer/index.tsx`
-  - Size: 2.0KB
-  - Modified: 2026-03-03
-- `files/action-cell.tsx`
-  - Size: 5.8KB
-  - Modified: 2026-03-03
-- `files/create-folder-dialog/create-folder-form.tsx`
-  - Size: 1.6KB
-  - Modified: 2026-03-03
-- `files/create-folder-dialog/index.tsx`
-  - Size: 1.0KB
-  - Modified: 2026-03-03
-- `files/file-breadcrumb.tsx`
-  - Size: 1014B
-  - Modified: 2026-03-03
-- `files/files-table.tsx`
-  - Size: 10.1KB
-  - Modified: 2026-03-03
-- `files/index.tsx`
-  - Size: 4.2KB
-  - Modified: 2026-03-03
-- `files/knowledge-cell.tsx`
-  - Size: 1.1KB
-  - Modified: 2026-03-03
-- `files/link-to-dataset-dialog.tsx`
-  - Size: 3.3KB
-  - Modified: 2026-03-03
-- `files/move-dialog.tsx`
-  - Size: 2.3KB
-  - Modified: 2026-03-03
-- `files/use-bulk-operate-file.tsx`
-  - Size: 1.3KB
-  - Modified: 2026-03-03
-- `home/agent-list.tsx`
-  - Size: 1.7KB
-  - Modified: 2026-03-03
-- `home/application-card.tsx`
-  - Size: 1.6KB
-  - Modified: 2026-03-03
-- `home/applications.tsx`
-  - Size: 3.6KB
-  - Modified: 2026-03-03
-- `home/banner.tsx`
-  - Size: 1.6KB
-  - Modified: 2026-03-03
-- `home/chat-list.tsx`
-  - Size: 1.8KB
-  - Modified: 2026-03-03
-- `home/datasets.tsx`
-  - Size: 2.7KB
-  - Modified: 2026-03-03
-- `home/index.tsx`
-  - Size: 405B
-  - Modified: 2026-03-03
-- `home/search-list.tsx`
-  - Size: 1.9KB
-  - Modified: 2026-03-03
-- `login-next/bg.tsx`
-  - Size: 5.3KB
-  - Modified: 2026-03-03
-- `login-next/card.tsx`
-  - Size: 1.5KB
-  - Modified: 2026-03-03
-- `login-next/index.tsx`
-  - Size: 13.3KB
-  - Modified: 2026-03-03
-- `memories/add-or-edit-modal.tsx`
-  - Size: 2.3KB
-  - Modified: 2026-03-03
-- `memories/constants/index.tsx`
-  - Size: 1.2KB
-  - Modified: 2026-03-03
-- `memories/index.tsx`
-  - Size: 5.2KB
-  - Modified: 2026-03-03
-- `memories/memory-card.tsx`
-  - Size: 884B
-  - Modified: 2026-03-03
-- `memories/memory-dropdown.tsx`
-  - Size: 2.1KB
-  - Modified: 2026-03-03
-- `memory/constant.tsx`
-  - Size: 75B
-  - Modified: 2026-03-03
-- `memory/index.tsx`
-  - Size: 509B
-  - Modified: 2026-03-03
-- `memory/memory-message/index.tsx`
-  - Size: 1.4KB
-  - Modified: 2026-03-03
-- `memory/memory-message/message-table.tsx`
-  - Size: 6.5KB
-  - Modified: 2026-03-03
-- `memory/memory-setting/index.tsx`
-  - Size: 450B
-  - Modified: 2026-03-03
-- `memory/sidebar/hooks.tsx`
-  - Size: 408B
-  - Modified: 2026-03-03
-- `memory/sidebar/index.tsx`
-  - Size: 2.8KB
-  - Modified: 2026-03-03
-- `next-chats/chat-card.tsx`
-  - Size: 958B
-  - Modified: 2026-03-03
-- `next-chats/chat-dropdown.tsx`
-  - Size: 2.2KB
-  - Modified: 2026-03-03
-- `next-chats/chat/app-settings/chat-basic-settings.tsx`
-  - Size: 3.5KB
-  - Modified: 2026-03-03
-- `next-chats/chat/app-settings/chat-model-settings.tsx`
-  - Size: 287B
-  - Modified: 2026-03-03
-- `next-chats/chat/app-settings/chat-prompt-engine.tsx`
-  - Size: 2.1KB
-  - Modified: 2026-03-03
-- `next-chats/chat/app-settings/chat-settings.tsx`
-  - Size: 3.6KB
-  - Modified: 2026-03-03
-- `next-chats/chat/app-settings/dynamic-variable.tsx`
-  - Size: 3.0KB
-  - Modified: 2026-03-03
-- `next-chats/chat/app-settings/saving-button.tsx`
-  - Size: 366B
-  - Modified: 2026-03-03
-- `next-chats/chat/app-settings/use-chat-setting-schema.tsx`
-  - Size: 1.7KB
-  - Modified: 2026-03-03
-- `next-chats/chat/chat-box/multiple-chat-box.tsx`
-  - Size: 8.7KB
-  - Modified: 2026-03-03
-- `next-chats/chat/chat-box/single-chat-box.tsx`
-  - Size: 4.2KB
-  - Modified: 2026-03-03
-- `next-chats/chat/conversation-dropdown.tsx`
-  - Size: 2.0KB
-  - Modified: 2026-03-03
-- `next-chats/chat/index.tsx`
-  - Size: 6.4KB
-  - Modified: 2026-03-03
-- `next-chats/chat/llm-select-form.tsx`
-  - Size: 1.1KB
-  - Modified: 2026-03-03
-- `next-chats/chat/sessions.tsx`
-  - Size: 4.0KB
-  - Modified: 2026-03-03
-- `next-chats/hooks/use-button-disabled.tsx`
-  - Size: 274B
-  - Modified: 2026-03-03
-- `next-chats/index.tsx`
-  - Size: 4.2KB
-  - Modified: 2026-03-03
-- `next-chats/share/index.tsx`
-  - Size: 4.4KB
-  - Modified: 2026-03-03
-- `next-chats/widget/index.tsx`
-  - Size: 525B
-  - Modified: 2026-03-03
-- `next-search/document-preview-modal/index.tsx`
-  - Size: 2.0KB
-  - Modified: 2026-03-03
-- `next-search/embed-app-modal.tsx`
-  - Size: 4.5KB
-  - Modified: 2026-03-03
-- `next-search/index.tsx`
-  - Size: 5.0KB
-  - Modified: 2026-03-03
-- `next-search/markdown-content/index.tsx`
-  - Size: 9.1KB
-  - Modified: 2026-03-03
-- `next-search/mindmap-drawer.tsx`
-  - Size: 1.4KB
-  - Modified: 2026-03-03
-- `next-search/retrieval-documents/index.tsx`
-  - Size: 8.3KB
-  - Modified: 2026-03-03
-- `next-search/search-home.tsx`
-  - Size: 3.4KB
-  - Modified: 2026-03-03
-- `next-search/search-setting.tsx`
-  - Size: 20.3KB
-  - Modified: 2026-03-03
-- `next-search/search-view.tsx`
-  - Size: 12.4KB
-  - Modified: 2026-03-03
-- `next-search/searching.tsx`
-  - Size: 757B
-  - Modified: 2026-03-03
-- `next-search/share/index.tsx`
-  - Size: 2.1KB
-  - Modified: 2026-03-03
-- `next-searches/index.tsx`
-  - Size: 5.0KB
-  - Modified: 2026-03-03
-- `next-searches/search-card.tsx`
-  - Size: 803B
-  - Modified: 2026-03-03
-- `next-searches/search-dropdown.tsx`
-  - Size: 2.1KB
-  - Modified: 2026-03-03
-- `user-setting/components/setting-title/index.tsx`
-  - Size: 929B
-  - Modified: 2026-03-03
-- `user-setting/components/user-setting-header/index.tsx`
-  - Size: 1.2KB
-  - Modified: 2026-03-03
-- `user-setting/constants.tsx`
-  - Size: 1.3KB
-  - Modified: 2026-03-03
-- `user-setting/data-source/add-datasource-modal.tsx`
-  - Size: 2.5KB
-  - Modified: 2026-03-03
-- `user-setting/data-source/component/added-source-card.tsx`
-  - Size: 2.6KB
-  - Modified: 2026-03-03
-- `user-setting/data-source/component/confluence-token-field.tsx`
-  - Size: 5.9KB
-  - Modified: 2026-03-03
-- `user-setting/data-source/component/delete-source-modal.tsx`
-  - Size: 2.6KB
-  - Modified: 2026-03-03
-- `user-setting/data-source/component/gmail-token-field.tsx`
-  - Size: 12.0KB
-  - Modified: 2026-03-03
-- `user-setting/data-source/component/google-drive-token-field.tsx`
-  - Size: 12.0KB
-  - Modified: 2026-03-03
-- `user-setting/data-source/contant.tsx`
-  - Size: 18.1KB
-  - Modified: 2026-03-03
-- `user-setting/data-source/data-source-detail-page/index.tsx`
-  - Size: 6.2KB
-  - Modified: 2026-03-03
-- `user-setting/data-source/data-source-detail-page/log-table.tsx`
-  - Size: 7.3KB
-  - Modified: 2026-03-03
-- `user-setting/data-source/index.tsx`
-  - Size: 4.3KB
-  - Modified: 2026-03-03
-- `user-setting/index.tsx`
-  - Size: 1.5KB
-  - Modified: 2026-03-03
-- `user-setting/mcp/edit-mcp-dialog.tsx`
-  - Size: 7.1KB
-  - Modified: 2026-03-03
-- `user-setting/mcp/edit-mcp-form.tsx`
-  - Size: 4.3KB
-  - Modified: 2026-03-03
-- `user-setting/mcp/import-mcp-dialog/import-mcp-form.tsx`
-  - Size: 1.8KB
-  - Modified: 2026-03-03
-- `user-setting/mcp/import-mcp-dialog/index.tsx`
-  - Size: 986B
-  - Modified: 2026-03-03
-- `user-setting/mcp/index.tsx`
-  - Size: 6.4KB
-  - Modified: 2026-03-03
-- `user-setting/mcp/mcp-card.tsx`
-  - Size: 2.3KB
-  - Modified: 2026-03-03
-- `user-setting/mcp/mcp-operation.tsx`
-  - Size: 1.9KB
-  - Modified: 2026-03-03
-- `user-setting/mcp/tool-card.tsx`
-  - Size: 423B
-  - Modified: 2026-03-03
-- `user-setting/mcp/use-bulk-operate-mcp.tsx`
-  - Size: 1.6KB
-  - Modified: 2026-03-03
-- `user-setting/profile/index.tsx`
-  - Size: 14.0KB
-  - Modified: 2026-03-03
-- `user-setting/setting-api/index.tsx`
-  - Size: 308B
-  - Modified: 2026-03-03
-- `user-setting/setting-locale/index.tsx`
-  - Size: 441B
-  - Modified: 2026-03-03
-- `user-setting/setting-locale/translation-table.tsx`
-  - Size: 1.6KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/components/llm-header.tsx`
-  - Size: 1.2KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/components/modal-card.tsx`
-  - Size: 6.1KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/components/system-setting.tsx`
-  - Size: 5.5KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/components/un-add-model.tsx`
-  - Size: 5.7KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/components/used-model.tsx`
-  - Size: 858B
-  - Modified: 2026-03-03
-- `user-setting/setting-model/hooks.tsx`
-  - Size: 11.4KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/index.tsx`
-  - Size: 8.7KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/langfuse/index.tsx`
-  - Size: 2.2KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/langfuse/langfuse-configuration-dialog.tsx`
-  - Size: 2.3KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/langfuse/langfuse-configuration-form.tsx`
-  - Size: 3.1KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/langfuse/use-save-langfuse-configuration.tsx`
-  - Size: 1.0KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/modal/api-key-modal/index.tsx`
-  - Size: 5.4KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/modal/azure-openai-modal/index.tsx`
-  - Size: 4.6KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/modal/bedrock-modal/index.tsx`
-  - Size: 4.0KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/modal/fish-audio-modal/index.tsx`
-  - Size: 3.5KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/modal/google-modal/index.tsx`
-  - Size: 3.7KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/modal/hunyuan-modal/index.tsx`
-  - Size: 2.1KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/modal/next-tencent-modal/index.tsx`
-  - Size: 4.2KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/modal/ollama-modal/index.tsx`
-  - Size: 8.2KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/modal/spark-modal/index.tsx`
-  - Size: 4.8KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/modal/system-model-setting-modal/index.tsx`
-  - Size: 3.4KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/modal/volcengine-modal/index.tsx`
-  - Size: 3.8KB
-  - Modified: 2026-03-03
-- `user-setting/setting-model/modal/yiyan-modal/index.tsx`
-  - Size: 3.6KB
-  - Modified: 2026-03-03
-- `user-setting/setting-team/add-user-modal.tsx`
-  - Size: 1.8KB
-  - Modified: 2026-03-03
-- `user-setting/setting-team/index.tsx`
-  - Size: 3.4KB
-  - Modified: 2026-03-03
-- `user-setting/setting-team/tenant-table.tsx`
-  - Size: 5.7KB
-  - Modified: 2026-03-03
-- `user-setting/setting-team/user-table.tsx`
-  - Size: 6.6KB
-  - Modified: 2026-03-03
-- `user-setting/sidebar/hooks.tsx`
-  - Size: 869B
-  - Modified: 2026-03-03
-- `user-setting/sidebar/index.tsx`
-  - Size: 4.3KB
-  - Modified: 2026-03-03
+- **`__init__.py`** — 0 B, modified 2026-10-10
+- **`admin/__init__.py`** — 0 B, modified 2026-10-10
+- **`admin/components/__init__.py`** — 0 B, modified 2026-10-10
+- **`admin/forms/__init__.py`** — 0 B, modified 2026-10-10
+- **`admin/layouts/__init__.py`** — 0 B, modified 2026-10-10
+- **`admin/wrappers/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/canvas/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/canvas/context-menu/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/canvas/edge/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/canvas/node/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/canvas/node/dropdown/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/canvas/node/note-node/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/chat/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/constant/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/debug-content/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form-sheet/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form-sheet/single-debug-sheet/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/agent-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/agent-form/tool-popover/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/arxiv-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/begin-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/bing-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/categorize-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/code-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/components/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/components/prompt-editor/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/crawler-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/data-operations-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/duckduckgo-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/email-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/exesql-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/extractor-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/github-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/google-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/google-scholar-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/hierarchical-merger-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/invoke-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/iteration-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/iteration-start-from/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/list-operations-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/loop-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/message-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/parser-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/pubmed-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/retrieval-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/rewrite-question-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/searxng-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/splitter-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/string-transform-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/switch-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tavily-extract-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tavily-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tokenizer-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/arxiv-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/bing-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/crawler-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/duckduckgo-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/email-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/exesql-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/github-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/google-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/google-scholar-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/mcp-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/pubmed-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/retrieval-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/searxng-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/tavily-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/wencai-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/wikipedia-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/tool-form/yahoo-finance-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/user-fill-up-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/variable-aggregator-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/variable-assigner-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/wencai-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/wikipedia-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/form/yahoo-finance-form/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/gobal-variable-sheet/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/gobal-variable-sheet/component/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/gobal-variable-sheet/hooks/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/hooks/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/log-sheet/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/pipeline-log-sheet/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/pipeline-run-sheet/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/run-sheet/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/setting-dialog/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/share/__init__.py`** — 0 B, modified 2026-10-10
+- **`agent/version-dialog/__init__.py`** — 0 B, modified 2026-10-10
+- **`agents/__init__.py`** — 0 B, modified 2026-10-10
+- **`agents/upload-agent-dialog/__init__.py`** — 0 B, modified 2026-10-10
+- **`chunk/__init__.py`** — 0 B, modified 2026-10-10
+- **`chunk/chunk-result/__init__.py`** — 0 B, modified 2026-10-10
+- **`chunk/parsed-result/__init__.py`** — 0 B, modified 2026-10-10
+- **`chunk/parsed-result/add-knowledge/__init__.py`** — 0 B, modified 2026-10-10
+- **`chunk/parsed-result/add-knowledge/components/__init__.py`** — 0 B, modified 2026-10-10
+- **`chunk/parsed-result/add-knowledge/components/knowledge-chunk/__init__.py`** — 0 B, modified 2026-10-10
+- **`chunk/parsed-result/add-knowledge/components/knowledge-chunk/components/__init__.py`** — 0 B, modified 2026-10-10
+- **`chunk/parsed-result/add-knowledge/components/knowledge-chunk/components/chunk-card/__init__.py`** — 0 B, modified 2026-10-10
+- **`chunk/parsed-result/add-knowledge/components/knowledge-chunk/components/chunk-creating-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`chunk/parsed-result/add-knowledge/components/knowledge-chunk/components/chunk-result-bar/__init__.py`** — 0 B, modified 2026-10-10
+- **`chunk/parsed-result/add-knowledge/components/knowledge-chunk/components/chunk-toolbar/__init__.py`** — 0 B, modified 2026-10-10
+- **`chunk/result-view/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataflow-result/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataflow-result/components/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataflow-result/components/chunk-card/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataflow-result/components/chunk-creating-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataflow-result/components/chunk-result-bar/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataflow-result/components/chunk-toolbar/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataflow-result/components/parse-editer/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataflow-result/components/rerun-button/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataflow-result/components/time-line/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataset/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataset/dataset-overview/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataset/dataset-setting/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataset/dataset-setting/components/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataset/dataset-setting/configuration/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataset/dataset-setting/tag-table/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataset/dataset-setting/tag-table/rename-dialog/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataset/dataset/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataset/dataset/generate-button/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataset/knowledge-graph/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataset/sidebar/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataset/testing/__init__.py`** — 0 B, modified 2026-10-10
+- **`datasets/__init__.py`** — 0 B, modified 2026-10-10
+- **`document-viewer/__init__.py`** — 0 B, modified 2026-10-10
+- **`document-viewer/file-error/__init__.py`** — 0 B, modified 2026-10-10
+- **`document-viewer/image/__init__.py`** — 0 B, modified 2026-10-10
+- **`files/__init__.py`** — 0 B, modified 2026-10-10
+- **`files/create-folder-dialog/__init__.py`** — 0 B, modified 2026-10-10
+- **`home/__init__.py`** — 0 B, modified 2026-10-10
+- **`login-next/__init__.py`** — 0 B, modified 2026-10-10
+- **`memories/__init__.py`** — 0 B, modified 2026-10-10
+- **`memories/constants/__init__.py`** — 0 B, modified 2026-10-10
+- **`memory/__init__.py`** — 0 B, modified 2026-10-10
+- **`memory/memory-message/__init__.py`** — 0 B, modified 2026-10-10
+- **`memory/memory-setting/__init__.py`** — 0 B, modified 2026-10-10
+- **`memory/sidebar/__init__.py`** — 0 B, modified 2026-10-10
+- **`next-chats/__init__.py`** — 0 B, modified 2026-10-10
+- **`next-chats/chat/__init__.py`** — 0 B, modified 2026-10-10
+- **`next-chats/chat/app-settings/__init__.py`** — 0 B, modified 2026-10-10
+- **`next-chats/chat/chat-box/__init__.py`** — 0 B, modified 2026-10-10
+- **`next-chats/hooks/__init__.py`** — 0 B, modified 2026-10-10
+- **`next-chats/share/__init__.py`** — 0 B, modified 2026-10-10
+- **`next-chats/widget/__init__.py`** — 0 B, modified 2026-10-10
+- **`next-search/__init__.py`** — 0 B, modified 2026-10-10
+- **`next-search/document-preview-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`next-search/markdown-content/__init__.py`** — 0 B, modified 2026-10-10
+- **`next-search/retrieval-documents/__init__.py`** — 0 B, modified 2026-10-10
+- **`next-search/share/__init__.py`** — 0 B, modified 2026-10-10
+- **`next-searches/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/components/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/components/setting-title/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/components/user-setting-header/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/data-source/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/data-source/component/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/data-source/data-source-detail-page/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/mcp/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/mcp/import-mcp-dialog/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/profile/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-api/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-locale/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/components/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/langfuse/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/modal/api-key-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/modal/azure-openai-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/modal/bedrock-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/modal/fish-audio-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/modal/google-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/modal/hunyuan-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/modal/next-tencent-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/modal/ollama-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/modal/spark-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/modal/system-model-setting-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/modal/volcengine-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-model/modal/yiyan-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/setting-team/__init__.py`** — 0 B, modified 2026-10-10
+- **`user-setting/sidebar/__init__.py`** — 0 B, modified 2026-10-10
 
 ---
 
 ## Statistics
 
-- **Total Files:** 434
-- **Total Size:** 1.50MB
-- **File Types:** 3
+| Metric | Value |
+|---|---|
+| Files | 183 |
+| Size | 1.0 KB |
+| Types | 2 |
 
 ---
 
 ## Neural Network Connection
 
-This agent is connected to the central neural backend:
+This agent is part of GhostGoat's **Central Ordinance System**.
+All agents share one neural backend at `.backend/`.
 
-- **Backend Path:** `.backend/`
-- **Knowledge Graph:** Shared across all agents
-- **Agent Registry:** `.backend/agents.json`
-
-### Query This Agent
+### Query this folder's context
 
 ```python
-from core.distributed_agent_system import DistributedAgentSystem
-system = DistributedAgentSystem()
-context = system.backend.get_folder_context('/home/user/GhostGoat/core/reasoning/brain/rag/ragflow/web/src/pages')
+from core.ordinance.ordinance_client import OrdinanceClient
+
+client = OrdinanceClient()
+
+# All files in this folder
+ctx = client.get_folder_context("./agent_byte-master/memory/rag/ragflow/web/src/pages")
+
+# Full-text search across all folders
+results = client.search("your query")
+
+# This agent's neighbours in the knowledge graph
+neighbours = client.get_neighbours("afdee05d")
 ```
 
 ---
 
-## Purpose
-
-This AGENT.md file provides:
-
-1. **Folder Awareness** — Know what files exist here
-2. **Context for AI** — Help AI understand this folder's purpose
-3. **Navigation** — Quick reference for developers
-4. **Neural Link** — Connection to central knowledge graph
-
-**Note:** This file is auto-generated. Regenerate with `make agents` or `python -m core.distributed_agent_system`.
-
----
-
-*Generated by GhostGoat Distributed Agent System*
-*Last scan: 2026-03-06 03:56:30*
+*Generated by GhostGoat Ordinance System — Central Neural Backend*
+*Scan time: 2026-10-17 01:52:02*

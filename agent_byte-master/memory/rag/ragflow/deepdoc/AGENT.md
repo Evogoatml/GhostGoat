@@ -4,10 +4,10 @@
 
 | Field | Value |
 |---|---|
-| **Folder** | `core/memory/rag/ragflow/deepdoc` |
-| **Agent ID** | `0c3dcbea` |
-| **Last Updated** | `2026-04-30 03:39:37` |
-| **Files Tracked** | `40` |
+| **Folder** | `agent_byte-master/memory/rag/ragflow/deepdoc` |
+| **Agent ID** | `9278fe7f` |
+| **Last Updated** | `2026-10-17 01:51:50` |
+| **Files Tracked** | `41` |
 | **Total Size** | `751.2 KB` |
 | **Neural Backend** | `../../../../../.backend/` |
 
@@ -17,52 +17,53 @@
 
 #### `.json` (4 files)
 
-- **`parser/resume/entities/res/corp.tks.freq.json`** — 1.2 KB, modified 2026-04-23
-- **`parser/resume/entities/res/corp_tag.json`** — 281.4 KB, modified 2026-04-23
-- **`parser/resume/entities/res/good_corp.json`** — 17.9 KB, modified 2026-04-23
-- **`parser/resume/entities/res/good_sch.json`** — 10.8 KB, modified 2026-04-23
+- **`parser/resume/entities/res/corp.tks.freq.json`** — 1.2 KB, modified 2026-10-10
+- **`parser/resume/entities/res/corp_tag.json`** — 281.4 KB, modified 2026-10-10
+- **`parser/resume/entities/res/good_corp.json`** — 17.9 KB, modified 2026-10-10
+- **`parser/resume/entities/res/good_sch.json`** — 10.8 KB, modified 2026-10-10
 
 #### `.md` (2 files)
 
-- **`README.md`** — 5.7 KB, modified 2026-04-23
-- **`README_zh.md`** — 5.6 KB, modified 2026-04-23
+- **`README.md`** — 5.7 KB, modified 2026-10-10
+- **`README_zh.md`** — 5.6 KB, modified 2026-10-10
 
-#### `.py` (34 files)
+#### `.py` (35 files)
 
-- **`__init__.py`** — 695 B, modified 2026-04-23
-- **`parser/__init__.py`** — 1.4 KB, modified 2026-04-23
-- **`parser/docling_parser.py`** — 13.4 KB, modified 2026-04-23
-- **`parser/docx_parser.py`** — 5.0 KB, modified 2026-04-23
-- **`parser/excel_parser.py`** — 8.0 KB, modified 2026-04-23
-- **`parser/figure_parser.py`** — 5.9 KB, modified 2026-04-23
-- **`parser/html_parser.py`** — 8.1 KB, modified 2026-04-23
-- **`parser/json_parser.py`** — 6.2 KB, modified 2026-04-23
-- **`parser/markdown_parser.py`** — 11.9 KB, modified 2026-04-23
-- **`parser/mineru_parser.py`** — 26.8 KB, modified 2026-04-23
-- **`parser/pdf_parser.py`** — 58.5 KB, modified 2026-04-23
-- **`parser/ppt_parser.py`** — 3.5 KB, modified 2026-04-23
-- **`parser/resume/__init__.py`** — 3.1 KB, modified 2026-04-23
-- **`parser/resume/entities/__init__.py`** — 621 B, modified 2026-04-23
-- **`parser/resume/entities/corporations.py`** — 3.8 KB, modified 2026-04-23
-- **`parser/resume/entities/degrees.py`** — 1.1 KB, modified 2026-04-23
-- **`parser/resume/entities/industries.py`** — 36.8 KB, modified 2026-04-23
-- **`parser/resume/entities/regions.py`** — 39.2 KB, modified 2026-04-23
-- **`parser/resume/entities/schools.py`** — 2.8 KB, modified 2026-04-23
-- **`parser/resume/step_one.py`** — 6.1 KB, modified 2026-04-23
-- **`parser/resume/step_two.py`** — 25.3 KB, modified 2026-04-23
-- **`parser/tcadp_parser.py`** — 23.2 KB, modified 2026-04-23
-- **`parser/txt_parser.py`** — 2.2 KB, modified 2026-04-23
-- **`parser/utils.py`** — 1023 B, modified 2026-04-23
-- **`vision/__init__.py`** — 2.5 KB, modified 2026-04-23
-- **`vision/layout_recognizer.py`** — 17.5 KB, modified 2026-04-23
-- **`vision/ocr.py`** — 27.1 KB, modified 2026-04-23
-- **`vision/operators.py`** — 23.4 KB, modified 2026-04-23
-- **`vision/postprocess.py`** — 12.9 KB, modified 2026-04-23
-- **`vision/recognizer.py`** — 15.9 KB, modified 2026-04-23
-- **`vision/seeit.py`** — 2.8 KB, modified 2026-04-23
-- **`vision/t_ocr.py`** — 3.1 KB, modified 2026-04-23
-- **`vision/t_recognizer.py`** — 5.7 KB, modified 2026-04-23
-- **`vision/table_structure_recognizer.py`** — 23.1 KB, modified 2026-04-23
+- **`__init__.py`** — 695 B, modified 2026-10-10
+- **`parser/__init__.py`** — 1.4 KB, modified 2026-10-10
+- **`parser/docling_parser.py`** — 13.4 KB, modified 2026-10-10
+- **`parser/docx_parser.py`** — 5.0 KB, modified 2026-10-10
+- **`parser/excel_parser.py`** — 8.0 KB, modified 2026-10-10
+- **`parser/figure_parser.py`** — 5.9 KB, modified 2026-10-10
+- **`parser/html_parser.py`** — 8.1 KB, modified 2026-10-10
+- **`parser/json_parser.py`** — 6.2 KB, modified 2026-10-10
+- **`parser/markdown_parser.py`** — 11.9 KB, modified 2026-10-10
+- **`parser/mineru_parser.py`** — 26.8 KB, modified 2026-10-10
+- **`parser/pdf_parser.py`** — 58.5 KB, modified 2026-10-10
+- **`parser/ppt_parser.py`** — 3.5 KB, modified 2026-10-10
+- **`parser/resume/__init__.py`** — 3.1 KB, modified 2026-10-10
+- **`parser/resume/entities/__init__.py`** — 621 B, modified 2026-10-10
+- **`parser/resume/entities/corporations.py`** — 3.8 KB, modified 2026-10-10
+- **`parser/resume/entities/degrees.py`** — 1.1 KB, modified 2026-10-10
+- **`parser/resume/entities/industries.py`** — 36.8 KB, modified 2026-10-10
+- **`parser/resume/entities/regions.py`** — 39.2 KB, modified 2026-10-10
+- **`parser/resume/entities/res/__init__.py`** — 0 B, modified 2026-10-10
+- **`parser/resume/entities/schools.py`** — 2.8 KB, modified 2026-10-10
+- **`parser/resume/step_one.py`** — 6.1 KB, modified 2026-10-10
+- **`parser/resume/step_two.py`** — 25.3 KB, modified 2026-10-10
+- **`parser/tcadp_parser.py`** — 23.2 KB, modified 2026-10-10
+- **`parser/txt_parser.py`** — 2.2 KB, modified 2026-10-10
+- **`parser/utils.py`** — 1023 B, modified 2026-10-10
+- **`vision/__init__.py`** — 2.5 KB, modified 2026-10-10
+- **`vision/layout_recognizer.py`** — 17.5 KB, modified 2026-10-10
+- **`vision/ocr.py`** — 27.1 KB, modified 2026-10-10
+- **`vision/operators.py`** — 23.4 KB, modified 2026-10-10
+- **`vision/postprocess.py`** — 12.9 KB, modified 2026-10-10
+- **`vision/recognizer.py`** — 15.9 KB, modified 2026-10-10
+- **`vision/seeit.py`** — 2.8 KB, modified 2026-10-10
+- **`vision/t_ocr.py`** — 3.1 KB, modified 2026-10-10
+- **`vision/t_recognizer.py`** — 5.7 KB, modified 2026-10-10
+- **`vision/table_structure_recognizer.py`** — 23.1 KB, modified 2026-10-10
 
 ---
 
@@ -70,7 +71,7 @@
 
 | Metric | Value |
 |---|---|
-| Files | 40 |
+| Files | 41 |
 | Size | 751.2 KB |
 | Types | 3 |
 
@@ -89,16 +90,16 @@ from core.ordinance.ordinance_client import OrdinanceClient
 client = OrdinanceClient()
 
 # All files in this folder
-ctx = client.get_folder_context("/home/popic/GhostGoat/core/memory/rag/ragflow/deepdoc")
+ctx = client.get_folder_context("./agent_byte-master/memory/rag/ragflow/deepdoc")
 
 # Full-text search across all folders
 results = client.search("your query")
 
 # This agent's neighbours in the knowledge graph
-neighbours = client.get_neighbours("0c3dcbea")
+neighbours = client.get_neighbours("9278fe7f")
 ```
 
 ---
 
 *Generated by GhostGoat Ordinance System — Central Neural Backend*
-*Scan time: 2026-04-30 03:39:37*
+*Scan time: 2026-10-17 01:51:50*

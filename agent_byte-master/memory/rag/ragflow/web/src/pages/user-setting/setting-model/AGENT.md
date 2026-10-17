@@ -1,129 +1,74 @@
-# AGENT - setting-model
-**Auto-generated folder agent**
-**Last Updated:** 2026-03-06 03:56:36
-**Folder Path:** `/home/user/GhostGoat/core/reasoning/brain/rag/ragflow/web/src/pages/user-setting/setting-model`
-**Agent ID:** `pending`
+# AGENT — `setting-model`
+
+> Auto-generated folder agent. **Do not edit manually** — regenerated on every scan.
+
+| Field | Value |
+|---|---|
+| **Folder** | `agent_byte-master/memory/rag/ragflow/web/src/pages/user-setting/setting-model` |
+| **Agent ID** | `af9d76bc` |
+| **Last Updated** | `2026-10-17 01:52:12` |
+| **Files Tracked** | `16` |
+| **Total Size** | `0.0 KB` |
+| **Neural Backend** | `../../../../../../../../../.backend/` |
 
 ---
 
-## Folder Context
+## Files in this Folder
 
-This agent maintains awareness of all files in this folder and connects to the central neural network at `.backend/`
+#### `.py` (16 files)
 
-### Files Tracked (23)
-
-#### .tsx Files (23)
-
-- `components/llm-header.tsx`
-  - Size: 1.2KB
-  - Modified: 2026-03-03
-- `components/modal-card.tsx`
-  - Size: 6.1KB
-  - Modified: 2026-03-03
-- `components/system-setting.tsx`
-  - Size: 5.5KB
-  - Modified: 2026-03-03
-- `components/un-add-model.tsx`
-  - Size: 5.7KB
-  - Modified: 2026-03-03
-- `components/used-model.tsx`
-  - Size: 858B
-  - Modified: 2026-03-03
-- `hooks.tsx`
-  - Size: 11.4KB
-  - Modified: 2026-03-03
-- `index.tsx`
-  - Size: 8.7KB
-  - Modified: 2026-03-03
-- `langfuse/index.tsx`
-  - Size: 2.2KB
-  - Modified: 2026-03-03
-- `langfuse/langfuse-configuration-dialog.tsx`
-  - Size: 2.3KB
-  - Modified: 2026-03-03
-- `langfuse/langfuse-configuration-form.tsx`
-  - Size: 3.1KB
-  - Modified: 2026-03-03
-- `langfuse/use-save-langfuse-configuration.tsx`
-  - Size: 1.0KB
-  - Modified: 2026-03-03
-- `modal/api-key-modal/index.tsx`
-  - Size: 5.4KB
-  - Modified: 2026-03-03
-- `modal/azure-openai-modal/index.tsx`
-  - Size: 4.6KB
-  - Modified: 2026-03-03
-- `modal/bedrock-modal/index.tsx`
-  - Size: 4.0KB
-  - Modified: 2026-03-03
-- `modal/fish-audio-modal/index.tsx`
-  - Size: 3.5KB
-  - Modified: 2026-03-03
-- `modal/google-modal/index.tsx`
-  - Size: 3.7KB
-  - Modified: 2026-03-03
-- `modal/hunyuan-modal/index.tsx`
-  - Size: 2.1KB
-  - Modified: 2026-03-03
-- `modal/next-tencent-modal/index.tsx`
-  - Size: 4.2KB
-  - Modified: 2026-03-03
-- `modal/ollama-modal/index.tsx`
-  - Size: 8.2KB
-  - Modified: 2026-03-03
-- `modal/spark-modal/index.tsx`
-  - Size: 4.8KB
-  - Modified: 2026-03-03
-- `modal/system-model-setting-modal/index.tsx`
-  - Size: 3.4KB
-  - Modified: 2026-03-03
-- `modal/volcengine-modal/index.tsx`
-  - Size: 3.8KB
-  - Modified: 2026-03-03
-- `modal/yiyan-modal/index.tsx`
-  - Size: 3.6KB
-  - Modified: 2026-03-03
+- **`__init__.py`** — 0 B, modified 2026-10-10
+- **`components/__init__.py`** — 0 B, modified 2026-10-10
+- **`langfuse/__init__.py`** — 0 B, modified 2026-10-10
+- **`modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`modal/api-key-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`modal/azure-openai-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`modal/bedrock-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`modal/fish-audio-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`modal/google-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`modal/hunyuan-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`modal/next-tencent-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`modal/ollama-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`modal/spark-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`modal/system-model-setting-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`modal/volcengine-modal/__init__.py`** — 0 B, modified 2026-10-10
+- **`modal/yiyan-modal/__init__.py`** — 0 B, modified 2026-10-10
 
 ---
 
 ## Statistics
 
-- **Total Files:** 23
-- **Total Size:** 99.4KB
-- **File Types:** 1
+| Metric | Value |
+|---|---|
+| Files | 16 |
+| Size | 0.0 KB |
+| Types | 1 |
 
 ---
 
 ## Neural Network Connection
 
-This agent is connected to the central neural backend:
+This agent is part of GhostGoat's **Central Ordinance System**.
+All agents share one neural backend at `.backend/`.
 
-- **Backend Path:** `.backend/`
-- **Knowledge Graph:** Shared across all agents
-- **Agent Registry:** `.backend/agents.json`
-
-### Query This Agent
+### Query this folder's context
 
 ```python
-from core.distributed_agent_system import DistributedAgentSystem
-system = DistributedAgentSystem()
-context = system.backend.get_folder_context('/home/user/GhostGoat/core/reasoning/brain/rag/ragflow/web/src/pages/user-setting/setting-model')
+from core.ordinance.ordinance_client import OrdinanceClient
+
+client = OrdinanceClient()
+
+# All files in this folder
+ctx = client.get_folder_context("./agent_byte-master/memory/rag/ragflow/web/src/pages/user-setting/setting-model")
+
+# Full-text search across all folders
+results = client.search("your query")
+
+# This agent's neighbours in the knowledge graph
+neighbours = client.get_neighbours("af9d76bc")
 ```
 
 ---
 
-## Purpose
-
-This AGENT.md file provides:
-
-1. **Folder Awareness** — Know what files exist here
-2. **Context for AI** — Help AI understand this folder's purpose
-3. **Navigation** — Quick reference for developers
-4. **Neural Link** — Connection to central knowledge graph
-
-**Note:** This file is auto-generated. Regenerate with `make agents` or `python -m core.distributed_agent_system`.
-
----
-
-*Generated by GhostGoat Distributed Agent System*
-*Last scan: 2026-03-06 03:56:36*
+*Generated by GhostGoat Ordinance System — Central Neural Backend*
+*Scan time: 2026-10-17 01:52:12*

@@ -4,38 +4,66 @@
 
 | Field | Value |
 |---|---|
-| **Folder** | `core/agents/agent_byte/storage/knowledge` |
-| **Agent ID** | `758f8625` |
-| **Last Updated** | `2026-04-25 05:46:42` |
-| **Files Tracked** | `16` |
-| **Total Size** | `225.8 KB` |
-| **Neural Backend** | `../../../../../.backend/` |
+| **Folder** | `agent_byte-master/brain/knowledge` |
+| **Agent ID** | `ca772011` |
+| **Last Updated** | `2026-10-17 01:51:43` |
+| **Files Tracked** | `38` |
+| **Total Size** | `1.44 MB` |
+| **Neural Backend** | `../../../.backend/` |
 
 ---
 
 ## Files in this Folder
 
-#### `.json` (1 files)
+#### `.json` (2 files)
 
-- **`dataset/pentesting_train.json`** — 47.8 KB, modified 2026-04-24
+- **`dataset/pentesting_train.json`** — 47.8 KB, modified 2026-10-10
+- **`graphrag/graph.json`** — 1287.1 KB, modified 2026-10-10
 
-#### `.py` (15 files)
+#### `.md` (1 files)
 
-- **`__init__.py`** — 570 B, modified 2026-04-24
-- **`crdt_knowledge.py`** — 12.4 KB, modified 2026-04-24
-- **`dataset/builder.py`** — 5.6 KB, modified 2026-04-24
-- **`dataset/dataset_builder.py`** — 15.7 KB, modified 2026-04-24
-- **`dataset/dataset_client.py`** — 1.7 KB, modified 2026-04-24
-- **`dataset/dataset_ws.py`** — 1.8 KB, modified 2026-04-24
-- **`dataset/load_datasets.py`** — 1.0 KB, modified 2026-04-24
-- **`decision_maker.py`** — 18.5 KB, modified 2026-04-24
-- **`elite_knowledge.py`** — 5.2 KB, modified 2026-04-24
-- **`knowledge_system.py`** — 21.8 KB, modified 2026-04-24
-- **`pattern_interpreter.py`** — 18.8 KB, modified 2026-04-24
-- **`skill_classifier.py`** — 16.7 KB, modified 2026-04-24
-- **`skill_discovery.py`** — 30.9 KB, modified 2026-04-24
-- **`trainer.py`** — 2.9 KB, modified 2026-04-24
-- **`transfer_mapper.py`** — 24.4 KB, modified 2026-04-24
+- **`synthetic/Web Scraping Best Animes/README.md`** — 1.3 KB, modified 2026-10-10
+
+#### `.py` (34 files)
+
+- **`__init__.py`** — 74 B, modified 2026-10-11
+- **`dataset/__init__.py`** — 0 B, modified 2026-10-10
+- **`dataset/builder.py`** — 5.6 KB, modified 2026-10-10
+- **`dataset/dataset_builder.py`** — 15.7 KB, modified 2026-10-10
+- **`dataset/dataset_client.py`** — 1.7 KB, modified 2026-10-10
+- **`dataset/dataset_ws.py`** — 1.8 KB, modified 2026-10-10
+- **`dataset/load_datasets.py`** — 1.0 KB, modified 2026-10-10
+- **`holographic_node_graph_rag.py`** — 4.5 KB, modified 2026-10-10
+- **`knowledge_tank.py`** — 6.2 KB, modified 2026-10-10
+- **`learning/__init__.py`** — 0 B, modified 2026-10-10
+- **`learning/experience_learner.py`** — 1.9 KB, modified 2026-10-10
+- **`learning/learning_core.py`** — 1.3 KB, modified 2026-10-10
+- **`learning/loop_guardian.py`** — 14.1 KB, modified 2026-10-10
+- **`learning/neural_core.py`** — 2.8 KB, modified 2026-10-10
+- **`learning/neural_plasticity.py`** — 16.6 KB, modified 2026-10-10
+- **`learning/user_behavior.py`** — 2.2 KB, modified 2026-10-10
+- **`metadata/__init__.py`** — 0 B, modified 2026-10-10
+- **`processed/__init__.py`** — 0 B, modified 2026-10-10
+- **`processed/knowledge/__init__.py`** — 0 B, modified 2026-10-10
+- **`processed/knowledge/decision_maker.py`** — 382 B, modified 2026-10-10
+- **`processed/knowledge/pattern_interpreter.py`** — 338 B, modified 2026-10-10
+- **`processed/knowledge/skill_discovery.py`** — 340 B, modified 2026-10-10
+- **`processed/test/__init__.py`** — 0 B, modified 2026-10-10
+- **`processed/train/__init__.py`** — 0 B, modified 2026-10-10
+- **`processed/train/train_agentic.py`** — 109 B, modified 2026-10-10
+- **`processed/val/__init__.py`** — 0 B, modified 2026-10-10
+- **`promoted/__init__.py`** — 0 B, modified 2026-10-10
+- **`raw/__init__.py`** — 0 B, modified 2026-10-10
+- **`replay_buffer/__init__.py`** — 0 B, modified 2026-10-10
+- **`synthetic/Fetch Tweets By User/__init__.py`** — 0 B, modified 2026-10-10
+- **`synthetic/Fetch Tweets By User/fetch_users_tweet.py`** — 2.5 KB, modified 2026-10-10
+- **`synthetic/Web Scraping Best Animes/__init__.py`** — 0 B, modified 2026-10-10
+- **`synthetic/Web Scraping Best Animes/main.py`** — 1.5 KB, modified 2026-10-10
+- **`synthetic/__init__.py`** — 0 B, modified 2026-10-10
+
+#### `.txt` (1 files)
+
+- **`know.txt`** — 59.9 KB, modified 2026-10-10
 
 ---
 
@@ -43,9 +71,9 @@
 
 | Metric | Value |
 |---|---|
-| Files | 16 |
-| Size | 225.8 KB |
-| Types | 2 |
+| Files | 38 |
+| Size | 1.44 MB |
+| Types | 4 |
 
 ---
 
@@ -57,21 +85,21 @@ All agents share one neural backend at `.backend/`.
 ### Query this folder's context
 
 ```python
-from core.ordinance import OrdinanceClient
+from core.ordinance.ordinance_client import OrdinanceClient
 
 client = OrdinanceClient()
 
 # All files in this folder
-ctx = client.get_folder_context("/home/popic/GhostGoat/core/agents/agent_byte/storage/knowledge")
+ctx = client.get_folder_context("./agent_byte-master/brain/knowledge")
 
 # Full-text search across all folders
 results = client.search("your query")
 
 # This agent's neighbours in the knowledge graph
-neighbours = client.get_neighbours("758f8625")
+neighbours = client.get_neighbours("ca772011")
 ```
 
 ---
 
 *Generated by GhostGoat Ordinance System — Central Neural Backend*
-*Scan time: 2026-04-25 05:46:42*
+*Scan time: 2026-10-17 01:51:43*

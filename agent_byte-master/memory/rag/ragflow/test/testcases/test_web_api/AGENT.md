@@ -4,10 +4,10 @@
 
 | Field | Value |
 |---|---|
-| **Folder** | `core/memory/rag/ragflow/test/testcases/test_web_api` |
-| **Agent ID** | `52e6be37` |
-| **Last Updated** | `2026-04-30 03:40:29` |
-| **Files Tracked** | `27` |
+| **Folder** | `agent_byte-master/memory/rag/ragflow/test/testcases/test_web_api` |
+| **Agent ID** | `6fb39469` |
+| **Last Updated** | `2026-10-17 01:51:58` |
+| **Files Tracked** | `32` |
 | **Total Size** | `175.6 KB` |
 | **Neural Backend** | `../../../../../../../.backend/` |
 
@@ -15,35 +15,40 @@
 
 ## Files in this Folder
 
-#### `.py` (27 files)
+#### `.py` (32 files)
 
-- **`common.py`** — 9.2 KB, modified 2026-04-23
-- **`conftest.py`** — 5.0 KB, modified 2026-04-23
-- **`test_chunk_app/conftest.py`** — 1.6 KB, modified 2026-04-23
-- **`test_chunk_app/test_create_chunk.py`** — 9.9 KB, modified 2026-04-23
-- **`test_chunk_app/test_list_chunks.py`** — 6.0 KB, modified 2026-04-23
-- **`test_chunk_app/test_retrieval_chunks.py`** — 12.3 KB, modified 2026-04-23
-- **`test_chunk_app/test_rm_chunks.py`** — 6.5 KB, modified 2026-04-23
-- **`test_chunk_app/test_update_chunk.py`** — 10.1 KB, modified 2026-04-23
-- **`test_dialog_app/conftest.py`** — 1.5 KB, modified 2026-04-23
-- **`test_dialog_app/test_create_dialog.py`** — 7.6 KB, modified 2026-04-23
-- **`test_dialog_app/test_delete_dialogs.py`** — 7.6 KB, modified 2026-04-23
-- **`test_dialog_app/test_dialog_edge_cases.py`** — 9.2 KB, modified 2026-04-23
-- **`test_dialog_app/test_get_dialog.py`** — 6.8 KB, modified 2026-04-23
-- **`test_dialog_app/test_list_dialogs.py`** — 7.9 KB, modified 2026-04-23
-- **`test_dialog_app/test_update_dialog.py`** — 8.0 KB, modified 2026-04-23
-- **`test_document_app/conftest.py`** — 2.0 KB, modified 2026-04-23
-- **`test_document_app/test_create_document.py`** — 3.7 KB, modified 2026-04-23
-- **`test_document_app/test_list_documents.py`** — 8.3 KB, modified 2026-04-23
-- **`test_document_app/test_paser_documents.py`** — 10.3 KB, modified 2026-04-23
-- **`test_document_app/test_rm_documents.py`** — 4.1 KB, modified 2026-04-23
-- **`test_document_app/test_upload_documents.py`** — 7.7 KB, modified 2026-04-23
-- **`test_kb_app/conftest.py`** — 1.3 KB, modified 2026-04-23
-- **`test_kb_app/test_create_kb.py`** — 4.0 KB, modified 2026-04-23
-- **`test_kb_app/test_detail_kb.py`** — 1.9 KB, modified 2026-04-23
-- **`test_kb_app/test_list_kbs.py`** — 6.6 KB, modified 2026-04-23
-- **`test_kb_app/test_rm_kb.py`** — 2.0 KB, modified 2026-04-23
-- **`test_kb_app/test_update_kb.py`** — 14.9 KB, modified 2026-04-23
+- **`__init__.py`** — 0 B, modified 2026-10-10
+- **`common.py`** — 9.2 KB, modified 2026-10-10
+- **`conftest.py`** — 5.0 KB, modified 2026-10-10
+- **`test_chunk_app/__init__.py`** — 0 B, modified 2026-10-10
+- **`test_chunk_app/conftest.py`** — 1.6 KB, modified 2026-10-10
+- **`test_chunk_app/test_create_chunk.py`** — 9.9 KB, modified 2026-10-10
+- **`test_chunk_app/test_list_chunks.py`** — 6.0 KB, modified 2026-10-10
+- **`test_chunk_app/test_retrieval_chunks.py`** — 12.3 KB, modified 2026-10-10
+- **`test_chunk_app/test_rm_chunks.py`** — 6.5 KB, modified 2026-10-10
+- **`test_chunk_app/test_update_chunk.py`** — 10.1 KB, modified 2026-10-10
+- **`test_dialog_app/__init__.py`** — 0 B, modified 2026-10-10
+- **`test_dialog_app/conftest.py`** — 1.5 KB, modified 2026-10-10
+- **`test_dialog_app/test_create_dialog.py`** — 7.6 KB, modified 2026-10-10
+- **`test_dialog_app/test_delete_dialogs.py`** — 7.6 KB, modified 2026-10-10
+- **`test_dialog_app/test_dialog_edge_cases.py`** — 9.2 KB, modified 2026-10-10
+- **`test_dialog_app/test_get_dialog.py`** — 6.8 KB, modified 2026-10-10
+- **`test_dialog_app/test_list_dialogs.py`** — 7.9 KB, modified 2026-10-10
+- **`test_dialog_app/test_update_dialog.py`** — 8.0 KB, modified 2026-10-10
+- **`test_document_app/__init__.py`** — 0 B, modified 2026-10-10
+- **`test_document_app/conftest.py`** — 2.0 KB, modified 2026-10-10
+- **`test_document_app/test_create_document.py`** — 3.7 KB, modified 2026-10-10
+- **`test_document_app/test_list_documents.py`** — 8.3 KB, modified 2026-10-10
+- **`test_document_app/test_paser_documents.py`** — 10.3 KB, modified 2026-10-10
+- **`test_document_app/test_rm_documents.py`** — 4.1 KB, modified 2026-10-10
+- **`test_document_app/test_upload_documents.py`** — 7.7 KB, modified 2026-10-10
+- **`test_kb_app/__init__.py`** — 0 B, modified 2026-10-10
+- **`test_kb_app/conftest.py`** — 1.3 KB, modified 2026-10-10
+- **`test_kb_app/test_create_kb.py`** — 4.0 KB, modified 2026-10-10
+- **`test_kb_app/test_detail_kb.py`** — 1.9 KB, modified 2026-10-10
+- **`test_kb_app/test_list_kbs.py`** — 6.6 KB, modified 2026-10-10
+- **`test_kb_app/test_rm_kb.py`** — 2.0 KB, modified 2026-10-10
+- **`test_kb_app/test_update_kb.py`** — 14.9 KB, modified 2026-10-10
 
 ---
 
@@ -51,7 +56,7 @@
 
 | Metric | Value |
 |---|---|
-| Files | 27 |
+| Files | 32 |
 | Size | 175.6 KB |
 | Types | 1 |
 
@@ -70,16 +75,16 @@ from core.ordinance.ordinance_client import OrdinanceClient
 client = OrdinanceClient()
 
 # All files in this folder
-ctx = client.get_folder_context("/home/popic/GhostGoat/core/memory/rag/ragflow/test/testcases/test_web_api")
+ctx = client.get_folder_context("./agent_byte-master/memory/rag/ragflow/test/testcases/test_web_api")
 
 # Full-text search across all folders
 results = client.search("your query")
 
 # This agent's neighbours in the knowledge graph
-neighbours = client.get_neighbours("52e6be37")
+neighbours = client.get_neighbours("6fb39469")
 ```
 
 ---
 
 *Generated by GhostGoat Ordinance System — Central Neural Backend*
-*Scan time: 2026-04-30 03:40:29*
+*Scan time: 2026-10-17 01:51:58*

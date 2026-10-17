@@ -360,15 +360,14 @@ Goal → Plan Creation → Autonomous Execution → Verification → Training
 - Result collection
 - Error handling
 
-#### 3.4 SkillManager (`core/skill_manager.py`)
-**Purpose**: Skill management
+#### 3.4 WorkflowSkillManager (`core/brain_modules/workflow_skill_manager.py`)
+**Purpose**: Workflow-based skill management
 
-**Available Skills**:
-- **avatar_skill**: Avatar creation
-- **content_skill**: Content generation
-- **marketing_skill**: Marketing strategy
-- **social_skill**: Social media operations
-- **automation_skill**: Automation setup
+**Capabilities**:
+- Skills are defined by workflows (workflow id → compiled skill)
+- Persistent skill cache (`.skill_cache.json`)
+- Skills expose ordered code-snippet cells executed by the workflow runtime
+- List / acquire / release skills by workflow id
 
 **Skill Interface**:
 ```python

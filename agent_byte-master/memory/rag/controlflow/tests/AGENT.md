@@ -4,10 +4,10 @@
 
 | Field | Value |
 |---|---|
-| **Folder** | `core/memory/rag/controlflow/tests` |
-| **Agent ID** | `087d2571` |
-| **Last Updated** | `2026-04-30 03:39:15` |
-| **Files Tracked** | `42` |
+| **Folder** | `agent_byte-master/memory/rag/controlflow/tests` |
+| **Agent ID** | `ef11832a` |
+| **Last Updated** | `2026-10-17 01:51:47` |
+| **Files Tracked** | `43` |
 | **Total Size** | `105.1 KB` |
 | **Neural Backend** | `../../../../../.backend/` |
 
@@ -15,50 +15,51 @@
 
 ## Files in this Folder
 
-#### `.py` (42 files)
+#### `.py` (43 files)
 
-- **`__init__.py`** — 0 B, modified 2026-04-23
-- **`agents/__init__.py`** — 0 B, modified 2026-04-23
-- **`agents/test_agents.py`** — 7.2 KB, modified 2026-04-23
-- **`ai_tests/__init__.py`** — 0 B, modified 2026-04-23
-- **`ai_tests/test_tasks.py`** — 549 B, modified 2026-04-23
-- **`cli/__init__.py`** — 0 B, modified 2026-04-23
-- **`cli/test_cli.py`** — 378 B, modified 2026-04-23
-- **`conftest.py`** — 288 B, modified 2026-04-23
-- **`deprecated/__init__.py`** — 0 B, modified 2026-04-23
-- **`deprecated/test_agent.py`** — 208 B, modified 2026-04-23
-- **`deprecated/test_task.py`** — 211 B, modified 2026-04-23
-- **`events/__init__.py`** — 0 B, modified 2026-04-23
-- **`events/test_history.py`** — 3.6 KB, modified 2026-04-23
-- **`fixtures/__init__.py`** — 55 B, modified 2026-04-23
-- **`fixtures/controlflow.py`** — 1.6 KB, modified 2026-04-23
-- **`fixtures/instructions.py`** — 250 B, modified 2026-04-23
-- **`flows/__init__.py`** — 0 B, modified 2026-04-23
-- **`flows/test_flows.py`** — 6.3 KB, modified 2026-04-23
-- **`flows/test_graph.py`** — 5.7 KB, modified 2026-04-23
-- **`flows/test_sign_guestbook.py`** — 866 B, modified 2026-04-23
-- **`llm/__init__.py`** — 0 B, modified 2026-04-23
-- **`llm/test_models.py`** — 2.5 KB, modified 2026-04-23
-- **`memory/__init__.py`** — 0 B, modified 2026-04-23
-- **`memory/test_memory.py`** — 1.5 KB, modified 2026-04-23
-- **`orchestration/__init__.py`** — 0 B, modified 2026-04-23
-- **`orchestration/test_orchestrator.py`** — 7.8 KB, modified 2026-04-23
-- **`orchestration/test_rules.py`** — 2.0 KB, modified 2026-04-23
-- **`orchestration/test_turn_strategies.py`** — 3.4 KB, modified 2026-04-23
-- **`tasks/__init__.py`** — 0 B, modified 2026-04-23
-- **`tasks/test_tasks.py`** — 19.8 KB, modified 2026-04-23
-- **`tasks/test_validators.py`** — 2.0 KB, modified 2026-04-23
-- **`test_decorator.py`** — 5.3 KB, modified 2026-04-23
-- **`test_defaults.py`** — 1.3 KB, modified 2026-04-23
-- **`test_instructions.py`** — 814 B, modified 2026-04-23
-- **`test_planning.py`** — 79 B, modified 2026-04-23
-- **`test_run.py`** — 9.5 KB, modified 2026-04-23
-- **`test_settings.py`** — 4.6 KB, modified 2026-04-23
-- **`tools/test_lc_tools.py`** — 1.8 KB, modified 2026-04-23
-- **`tools/test_tools.py`** — 12.6 KB, modified 2026-04-23
-- **`utilities/__init__.py`** — 0 B, modified 2026-04-23
-- **`utilities/test_general.py`** — 1.2 KB, modified 2026-04-23
-- **`utilities/test_testing.py`** — 1.6 KB, modified 2026-04-23
+- **`__init__.py`** — 0 B, modified 2026-10-10
+- **`agents/__init__.py`** — 0 B, modified 2026-10-10
+- **`agents/test_agents.py`** — 7.2 KB, modified 2026-10-10
+- **`ai_tests/__init__.py`** — 0 B, modified 2026-10-10
+- **`ai_tests/test_tasks.py`** — 549 B, modified 2026-10-10
+- **`cli/__init__.py`** — 0 B, modified 2026-10-10
+- **`cli/test_cli.py`** — 378 B, modified 2026-10-10
+- **`conftest.py`** — 288 B, modified 2026-10-10
+- **`deprecated/__init__.py`** — 0 B, modified 2026-10-10
+- **`deprecated/test_agent.py`** — 208 B, modified 2026-10-10
+- **`deprecated/test_task.py`** — 211 B, modified 2026-10-10
+- **`events/__init__.py`** — 0 B, modified 2026-10-10
+- **`events/test_history.py`** — 3.6 KB, modified 2026-10-10
+- **`fixtures/__init__.py`** — 55 B, modified 2026-10-10
+- **`fixtures/controlflow.py`** — 1.6 KB, modified 2026-10-10
+- **`fixtures/instructions.py`** — 250 B, modified 2026-10-10
+- **`flows/__init__.py`** — 0 B, modified 2026-10-10
+- **`flows/test_flows.py`** — 6.3 KB, modified 2026-10-10
+- **`flows/test_graph.py`** — 5.7 KB, modified 2026-10-10
+- **`flows/test_sign_guestbook.py`** — 866 B, modified 2026-10-10
+- **`llm/__init__.py`** — 0 B, modified 2026-10-10
+- **`llm/test_models.py`** — 2.5 KB, modified 2026-10-10
+- **`memory/__init__.py`** — 0 B, modified 2026-10-10
+- **`memory/test_memory.py`** — 1.5 KB, modified 2026-10-10
+- **`orchestration/__init__.py`** — 0 B, modified 2026-10-10
+- **`orchestration/test_orchestrator.py`** — 7.8 KB, modified 2026-10-10
+- **`orchestration/test_rules.py`** — 2.0 KB, modified 2026-10-10
+- **`orchestration/test_turn_strategies.py`** — 3.4 KB, modified 2026-10-10
+- **`tasks/__init__.py`** — 0 B, modified 2026-10-10
+- **`tasks/test_tasks.py`** — 19.8 KB, modified 2026-10-10
+- **`tasks/test_validators.py`** — 2.0 KB, modified 2026-10-10
+- **`test_decorator.py`** — 5.3 KB, modified 2026-10-10
+- **`test_defaults.py`** — 1.3 KB, modified 2026-10-10
+- **`test_instructions.py`** — 814 B, modified 2026-10-10
+- **`test_planning.py`** — 79 B, modified 2026-10-10
+- **`test_run.py`** — 9.5 KB, modified 2026-10-10
+- **`test_settings.py`** — 4.6 KB, modified 2026-10-10
+- **`tools/__init__.py`** — 0 B, modified 2026-10-10
+- **`tools/test_lc_tools.py`** — 1.8 KB, modified 2026-10-10
+- **`tools/test_tools.py`** — 12.6 KB, modified 2026-10-10
+- **`utilities/__init__.py`** — 0 B, modified 2026-10-10
+- **`utilities/test_general.py`** — 1.2 KB, modified 2026-10-10
+- **`utilities/test_testing.py`** — 1.6 KB, modified 2026-10-10
 
 ---
 
@@ -66,7 +67,7 @@
 
 | Metric | Value |
 |---|---|
-| Files | 42 |
+| Files | 43 |
 | Size | 105.1 KB |
 | Types | 1 |
 
@@ -85,16 +86,16 @@ from core.ordinance.ordinance_client import OrdinanceClient
 client = OrdinanceClient()
 
 # All files in this folder
-ctx = client.get_folder_context("/home/popic/GhostGoat/core/memory/rag/controlflow/tests")
+ctx = client.get_folder_context("./agent_byte-master/memory/rag/controlflow/tests")
 
 # Full-text search across all folders
 results = client.search("your query")
 
 # This agent's neighbours in the knowledge graph
-neighbours = client.get_neighbours("087d2571")
+neighbours = client.get_neighbours("ef11832a")
 ```
 
 ---
 
 *Generated by GhostGoat Ordinance System — Central Neural Backend*
-*Scan time: 2026-04-30 03:39:15*
+*Scan time: 2026-10-17 01:51:47*

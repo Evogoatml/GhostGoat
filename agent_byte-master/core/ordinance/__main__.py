@@ -21,6 +21,8 @@ def main():
                         help="Seconds between polls in watch mode (default: 30)")
     parser.add_argument("--list",  action="store_true",
                         help="List registered agents and exit")
+    parser.add_argument("--existing-only", action="store_true",
+                        help="Only refresh AGENT.md files that already exist")
     args = parser.parse_args()
 
     from core.ordinance.distributed_system import DistributedAgentSystem
@@ -37,7 +39,7 @@ def main():
             print(f"{a['agent_id']:10} {a['folder']:50} {a['updated']:20}")
         return
 
-    stats = system.scan()
+    stats = system.scan(existing_only=args.existing_only)
     print(f"\n{'='*55}")
     print("  ORDINANCE SCAN COMPLETE")
     print(f"{'='*55}")
