@@ -199,6 +199,12 @@ class TelegramBotService:
         if status == "rate_limited":
             return "⏳ The AI service is busy. Please wait a moment and try again."
         
+        if status == "busy":
+            return "🤖 All agents are busy right now. Please try again in a moment."
+
+        if status == "budget_exhausted":
+            return "🛑 Daily task budget reached. Please try again tomorrow."
+        
         if status == "failed":
             if isinstance(result, dict):
                 error = result.get("error", "Unknown error")

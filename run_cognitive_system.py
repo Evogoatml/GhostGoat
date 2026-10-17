@@ -6,6 +6,7 @@ by the REST API (``config/api/server.py``), the Telegram bot and the dashboard.
 ``main.py`` is the only startup entry point; this module only builds and holds
 the live state.
 """
+import asyncio
 import logging
 import sys
 import time
@@ -33,6 +34,7 @@ from agents.custom_analyzer import CustomAnalyzerAgent
 from brain.dual_brain import DualBrain
 from brain.knowledge.knowledge_tank import KnowledgeTank
 from core.governance.decision_governor import allow_external_calls
+from core.governance.task_governor import TaskGovernor
 from core.graphrag.engine import GraphRAGEngine
 from core.memory.networked_memory import NetworkedMemory
 from core.service_registry import registry
@@ -77,6 +79,7 @@ class Orchestrator:
         self.ctms = build_ctms_mapper(self.llm, data_dir / "ctms_map.json")
         self.workflows = WorkflowEngine(workflows_dir=str(ABM_ROOT / "core" / "workflows" / "definitions"))
         self.decision_governor = allow_external_calls
+        self.governor = TaskGovernor()
 
         self.creative = CreativeModule(self.llm.complete)
         self.analyzer = CustomAnalyzerAgent(self.llm.complete)
@@ -114,6 +117,7 @@ class Orchestrator:
             "memory": self.memory,
             "thoughts": self.thoughts,
             "ctms": self.ctms,
+            "task_governor": self.governor,
             "workflows": self.workflows,
             "agent_network": self.network,
             "decision_governor": self.decision_governor,
@@ -131,9 +135,23 @@ class Orchestrator:
         if self.running:
             return
         self.running = True
+        self._sweep_stale_tasks()
         await self.telegram.start()
         logger.info("Orchestrator online: %d agents, %d services",
                     len(self.network.profiles), len(self.registry.list_services()))
+
+    def _sweep_stale_tasks(self) -> None:
+        """Mark tasks left 'running' by a previous process as interrupted."""
+        stale = TaskGovernor.find_stale(self.state_store.list_tasks())
+        for task in stale:
+            task.update(
+                status="failed",
+                execution_mode="interrupted",
+                result={"error": "interrupted by orchestrator restart"},
+            )
+            self.state_store.save_task(task)
+        if stale:
+            logger.warning("Swept %d stale running task(s) from a previous run", len(stale))
 
     async def stop(self) -> None:
         if not self.running:
@@ -178,6 +196,32 @@ class Orchestrator:
         """Run a goal through the agent network, persist it and update shared state."""
         context = context or {}
         source = context.get("source", "api")
+        rate_key = f"chat:{context['chat_id']}" if context.get("chat_id") else source
+
+        allowed, reason = self.governor.try_acquire(rate_key)
+        if not allowed:
+            logger.info("Goal rejected by governor (%s) for %s", reason, rate_key)
+            return {
+                "id": None,
+                "description": description,
+                "priority": priority,
+                "status": reason,
+                "progress": 0,
+                "agent": None,
+                "created": _timestamp(),
+                "result": {"error": f"task governor: {reason}"},
+                "execution_mode": "governed",
+            }
+
+        try:
+            return await self._run_governed_goal(description, priority, context, source)
+        finally:
+            self.governor.release()
+            self.governor.record_outcome()
+
+    async def _run_governed_goal(
+        self, description: str, priority: int, context: Dict[str, Any], source: str
+    ) -> Dict[str, Any]:
         task_id = f"task-{uuid.uuid4().hex}"
         entry: Dict[str, Any] = {
             "id": task_id,
@@ -209,13 +253,16 @@ class Orchestrator:
             )
         else:
             try:
-                result = await self.network.dispatch(agent_id, {
-                    "goal": description,
-                    "input": description,
-                    "query": description,
-                    "context": context,
-                    "thought_id": created_id,
-                })
+                result = await asyncio.wait_for(
+                    self.network.dispatch(agent_id, {
+                        "goal": description,
+                        "input": description,
+                        "query": description,
+                        "context": context,
+                        "thought_id": created_id,
+                    }),
+                    timeout=self.governor.task_timeout or None,
+                )
                 status = "completed" if result.get("success") else "failed"
                 entry.update(
                     status=status,
@@ -223,6 +270,14 @@ class Orchestrator:
                     agent=agent_id,
                     result=result,
                     execution_mode=result.get("execution_mode", "error"),
+                )
+            except asyncio.TimeoutError:
+                logger.warning("Task %s timed out after %ss", task_id, self.governor.task_timeout)
+                entry.update(
+                    status="failed",
+                    agent=agent_id,
+                    result={"error": f"task timed out after {self.governor.task_timeout}s"},
+                    execution_mode="timeout",
                 )
             except Exception as exc:
                 logger.exception("Task execution failed")

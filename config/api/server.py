@@ -128,7 +128,8 @@ def get_policies():
         "allowed": orchestrator.decision_governor("task_execution"),
         "violations": sum(e["result"] == "blocked" for e in log),
     }
-    return {"policies": [policy], "audit_log": list(reversed(log[-50:]))}
+    return {"policies": [policy], "runtime_governor": orchestrator.governor.stats(),
+            "audit_log": list(reversed(log[-50:]))}
 
 
 @app.post("/api/governance/check")
