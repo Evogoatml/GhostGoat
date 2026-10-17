@@ -14,6 +14,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Awaitable, Callable, Dict, List, Optional
 
+# Load .env file from project root
+from dotenv import load_dotenv
+load_dotenv()
+
 ROOT = Path(__file__).resolve().parent
 ABM_ROOT = ROOT / "agent_byte-master"
 for _path in (str(ROOT), str(ABM_ROOT)):
@@ -34,6 +38,7 @@ from core.memory.networked_memory import NetworkedMemory
 from core.service_registry import registry
 from core.workflows.engine import WorkflowEngine
 from services.llm_gateway import LLMGateway
+from src.memory.ctms_wiring import build_ctms_mapper
 from src.memory.thought_adapter import ThoughtMemory
 from src.memory.thought_store import ThoughtStore
 from services.sentiment_service import SentimentService
@@ -69,6 +74,7 @@ class Orchestrator:
         self.graphrag = GraphRAGEngine(storage_path=str(data_dir / "graphrag"))
         self.memory = NetworkedMemory(storage_path=str(data_dir / "memory"))
         self.thoughts = ThoughtMemory(ThoughtStore(str(data_dir / "thoughts.sqlite3")))
+        self.ctms = build_ctms_mapper(self.llm, data_dir / "ctms_map.json")
         self.workflows = WorkflowEngine(workflows_dir=str(ABM_ROOT / "core" / "workflows" / "definitions"))
         self.decision_governor = allow_external_calls
 
@@ -107,6 +113,7 @@ class Orchestrator:
             "graphrag": self.graphrag,
             "memory": self.memory,
             "thoughts": self.thoughts,
+            "ctms": self.ctms,
             "workflows": self.workflows,
             "agent_network": self.network,
             "decision_governor": self.decision_governor,
