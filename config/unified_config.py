@@ -23,6 +23,17 @@ class LLMProvider(Enum):
     DEEPSEEK = "deepseek"
     LOCAL = "local"
     MOCK = "mock"
+    # Free-tier OpenAI-compatible presets (github.com/mnfst/awesome-free-llm-apis)
+    GROQ = "groq"
+    OPENROUTER = "openrouter"
+    MISTRAL = "mistral"
+    ZHIPU = "zhipu"
+    NIM = "nim"
+    OLLAMA_CLOUD = "ollama-cloud"
+    KILO = "kilo"
+    OVH = "ovh"
+    # Any OpenAI-compatible endpoint via LLM_BASE_URL
+    OPENAI_COMPATIBLE = "openai-compatible"
 
 
 class MemoryBackend(Enum):
@@ -95,8 +106,18 @@ class LLMConfig:
             LLMProvider.OLLAMA: os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
             LLMProvider.OPENAI: os.getenv("OPENAI_BASE_URL", None),
             LLMProvider.DEEPSEEK: os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
+            LLMProvider.GROQ: "https://api.groq.com/openai/v1",
+            LLMProvider.OPENROUTER: "https://openrouter.ai/api/v1",
+            LLMProvider.MISTRAL: "https://api.mistral.ai/v1",
+            LLMProvider.ZHIPU: "https://open.bigmodel.cn/api/paas/v4",
+            LLMProvider.NIM: "https://integrate.api.nvidia.com/v1",
+            LLMProvider.OLLAMA_CLOUD: "https://ollama.com/v1",
+            LLMProvider.KILO: "https://api.kilo.ai/api/gateway",
+            LLMProvider.OVH: "https://oai.endpoints.kepler.ai.cloud.ovh.net/v1",
         }
-        base_url = base_url_map.get(provider)
+        # LLM_BASE_URL is the generic override for any provider, and the only
+        # base URL source for provider "openai-compatible".
+        base_url = base_url_map.get(provider) or os.getenv("LLM_BASE_URL")
 
         default_models = {
             LLMProvider.OPENAI: "gpt-4",
@@ -104,6 +125,14 @@ class LLMConfig:
             LLMProvider.GEMINI: "gemini-2.0-flash",
             LLMProvider.OLLAMA: "gpt-oss:120b-cloud",
             LLMProvider.DEEPSEEK: "deepseek-chat",
+            LLMProvider.GROQ: "openai/gpt-oss-120b",
+            LLMProvider.OPENROUTER: "openrouter/free",
+            LLMProvider.MISTRAL: "mistral-small-latest",
+            LLMProvider.ZHIPU: "GLM-4.7-Flash",
+            LLMProvider.NIM: "nvidia/nemotron-3-super-120b-a12b",
+            LLMProvider.OLLAMA_CLOUD: "deepseek-v4-flash",
+            LLMProvider.KILO: "kilo-auto/free",
+            LLMProvider.OVH: "gpt-oss-20b",
         }
         default_model = default_models.get(provider, "gpt-4")
 
