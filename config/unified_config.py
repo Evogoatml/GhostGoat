@@ -448,9 +448,17 @@ class UnifiedConfig:
         """Validate configuration"""
         errors = []
 
-        # Validate LLM config - only require API key for non-local/mock providers
-        if hasattr(self.llm, 'provider') and self.llm.provider and self.llm.provider.value not in ['mock', 'local'] and not self.llm.api_key:
-            errors.append("LLM API key required for non-mock provider")
+        # Validate LLM config — keyless providers (local ollama, kilo, ovh) and
+        # anonymous openai-compatible endpoints authenticate by IP, not a key.
+        if hasattr(self.llm, 'provider') and self.llm.provider:
+            provider_value = self.llm.provider.value
+            try:
+                from services.llm_gateway import GENERIC_PROVIDER, KEYLESS_PROVIDERS
+                keyless = set(KEYLESS_PROVIDERS) | {GENERIC_PROVIDER}
+            except ImportError:  # services package not on sys.path in this context
+                keyless = {"mock", "local", "ollama", "kilo", "ovh"}
+            if provider_value != "mock" and provider_value not in keyless and not self.llm.api_key:
+                errors.append("LLM API key required for non-mock provider")
 
         # Validate paths
         if not os.path.exists(self.base_path):

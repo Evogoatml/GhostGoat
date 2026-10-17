@@ -113,3 +113,20 @@ def test_unknown_provider_still_rejected():
     cfg = LLMConfig(provider=LLMProvider.MOCK, model="m", api_key=None)
     with pytest.raises(RuntimeError, match="mock"):
         LLMGateway(cfg)
+
+
+def test_validate_accepts_keyless_but_requires_key_for_keyed_providers(monkeypatch):
+    from config.unified_config import UnifiedConfig
+
+    monkeypatch.setenv("LLM_PROVIDER", "ovh")
+    for var in ("LLM_API_KEY", "OPENAI_API_KEY"):
+        monkeypatch.delenv(var, raising=False)
+    cfg = UnifiedConfig.from_env()
+    is_valid, errors = cfg.validate()
+    assert is_valid, errors  # keyless provider needs no API key
+
+    monkeypatch.setenv("LLM_PROVIDER", "groq")
+    cfg = UnifiedConfig.from_env()
+    is_valid, errors = cfg.validate()
+    assert not is_valid
+    assert any("API key" in e for e in errors)
