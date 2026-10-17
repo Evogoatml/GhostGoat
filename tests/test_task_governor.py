@@ -141,3 +141,57 @@ def test_telegram_formats_governed_statuses():
 
     assert "busy" in TelegramBotService.format_task({"status": "busy"}).lower()
     assert "budget" in TelegramBotService.format_task({"status": "budget_exhausted"}).lower()
+
+
+def test_allow_chat_has_own_rate_window():
+    gov = TaskGovernor(max_concurrent=1, tasks_per_minute=1, daily_budget=0)
+    gov.chats_per_minute = 2
+    assert gov.allow_chat("chat:1")
+    assert gov.allow_chat("chat:1")
+    assert not gov.allow_chat("chat:1")          # window exhausted
+    assert gov.allow_chat("chat:2")              # separate per-chat window
+    # task admission unaffected by chat usage and vice versa
+    assert gov.try_acquire("chat:1")[0]
+
+
+def test_allow_chat_unlimited_when_zero():
+    gov = TaskGovernor(max_concurrent=1, tasks_per_minute=0, daily_budget=0)
+    gov.chats_per_minute = 0
+    assert all(gov.allow_chat("chat:x") for _ in range(50))
+
+
+def test_stats_report_chat_window():
+    gov = TaskGovernor()
+    gov.chats_per_minute = 7
+    assert gov.stats()["chats_per_minute"] == 7
+
+
+def test_chat_for_telegram_creates_no_task_records(orchestrator):
+    orch = orchestrator
+    captured = {}
+
+    async def fake_complete(prompt, system=None):
+        captured["prompt"] = prompt
+        captured["system"] = system
+        return "hi there"
+
+    orch.llm.complete = fake_complete
+    before = len(orch.state_store.list_tasks())
+    reply = asyncio.run(orch._chat_for_telegram("111", "hello", []))
+    assert reply == "hi there"
+    # no task record, no thought root, no governor slot taken
+    assert len(orch.state_store.list_tasks()) == before
+    assert orch.governor.stats()["running"] == 0
+    assert "hello" in captured["prompt"]
+
+
+def test_chat_for_telegram_rate_limited_returns_none(orchestrator):
+    orch = orchestrator
+    orch.governor.chats_per_minute = 1
+
+    async def fake_complete(prompt, system=None):
+        return "x"
+
+    orch.llm.complete = fake_complete
+    assert asyncio.run(orch._chat_for_telegram("7", "a", [])) == "x"
+    assert asyncio.run(orch._chat_for_telegram("7", "b", [])) is None

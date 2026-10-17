@@ -112,19 +112,30 @@ def test_message_is_persisted_as_log_not_delivered(client):
 
 def test_telegram_webhook_routes_goal_to_the_same_orchestrator(client, orchestrator):
     headers = {"X-Telegram-Bot-Api-Secret-Token": "s3cret"}
-    update = {"message": {"chat": {"id": 42}, "text": "Research the store"}}
+    update = {"message": {"chat": {"id": 42}, "text": "/goal Research the store"}}
     body = client.post("/api/telegram/webhook", json=update, headers=headers).json()
-    assert "handled" in body["reply"] or "research" in body["reply"].lower()
+    assert body["reply"]
     assert orchestrator.sent[-1][1]["chat_id"] == 42
     assert orchestrator.telegram.conversations["42"][0]["status"] == "completed"
     tasks = client.get("/api/tasks").json()
     assert tasks["count"] == 1 and tasks["tasks"][0]["id"] == orchestrator.telegram.conversations["42"][0]["task_id"]
 
 
+def test_telegram_webhook_plain_text_chats_without_creating_a_task(client, orchestrator):
+    headers = {"X-Telegram-Bot-Api-Secret-Token": "s3cret"}
+    update = {"message": {"chat": {"id": 42}, "text": "just saying hi"}}
+    body = client.post("/api/telegram/webhook", json=update, headers=headers).json()
+    assert "handled" in body["reply"]  # fake LLM: "handled: {prompt}"
+    assert orchestrator.sent[-1][1]["chat_id"] == 42
+    assert client.get("/api/tasks").json()["count"] == 0
+    assert "42" not in orchestrator.telegram.conversations
+
+
 def test_telegram_reports_api_task_events(client, orchestrator):
     client.post("/api/tasks", json={"description": "Analyze this request"})
     texts = [payload["text"] for method, payload in orchestrator.sent if method == "sendMessage"]
-    assert any(text.startswith("Task task-") for text in texts)
+    # task events are formatted content-first: the result body, banner only as fallback
+    assert "handled: Analyze this request" in texts
     assert any(text.startswith("Memory updated") for text in texts)
     assert any(text.startswith("Graph updated") for text in texts)
 

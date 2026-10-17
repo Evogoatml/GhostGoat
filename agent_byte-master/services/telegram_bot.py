@@ -17,7 +17,7 @@ import logging
 import urllib.request
 from collections import deque
 from datetime import datetime, timezone
-from typing import Any, Awaitable, Callable, Deque, Dict, Optional
+from typing import Any, Awaitable, Callable, Deque, Dict, List, Optional
 
 logger = logging.getLogger("ghostgoat.telegram")
 
@@ -28,7 +28,8 @@ POLL_TIMEOUT = 25
 
 HELP_TEXT = (
     "GhostGoat orchestrator bot\n"
-    "Send any text to run it as a goal.\n"
+    "Just send text to chat — casual messages get a plain reply, no task is created.\n"
+    "/goal <text> - run a full agent goal (creates a task)\n"
     "/status - orchestrator and agent status\n"
     "/agents - agent fleet\n"
     "/memory - knowledge and memory stats\n"
@@ -38,6 +39,8 @@ HELP_TEXT = (
 
 ProcessGoal = Callable[[str, Dict[str, Any]], Awaitable[Dict[str, Any]]]
 StatusProvider = Callable[[], Dict[str, Any]]
+# chat(chat_id, text, recent_history) -> reply, or None when rate-limited
+ChatFn = Callable[[str, str, List[Dict[str, Any]]], Awaitable[Optional[str]]]
 
 
 class TelegramBotService:
@@ -51,14 +54,17 @@ class TelegramBotService:
         get_agents: StatusProvider,
         get_memory: StatusProvider,
         api_base: str = TELEGRAM_API,
+        chat: Optional[ChatFn] = None,
     ):
         self.config = config
         self._process_goal = process_goal
+        self._chat_fn = chat
         self._get_status = get_status
         self._get_agents = get_agents
         self._get_memory = get_memory
         self.api_base = api_base.rstrip("/")
         self.conversations: Dict[str, Deque[Dict[str, Any]]] = {}
+        self.chat_history: Dict[str, Deque[Dict[str, str]]] = {}
         self._poll_task: Optional[asyncio.Task] = None
         self._offset = 0
 
@@ -159,9 +165,36 @@ class TelegramBotService:
             return self._format("Memory", self._get_memory)
         if command == "/history":
             return self._format_history(chat_id)
+        if command == "/goal":
+            parts = text.split(None, 1)
+            goal = parts[1].strip() if len(parts) > 1 else ""
+            if not goal:
+                return "Usage: /goal <what you want done>"
+            return await self._run_goal(chat_id, goal)
         if command:
             return HELP_TEXT
-        return await self._run_goal(chat_id, text)
+        # Plain text = casual chat: one LLM reply, no task, no thought records.
+        return await self._chat_reply(chat_id, text)
+
+    async def _chat_reply(self, chat_id: str, text: str) -> str:
+        """Casual conversational reply — never touches the task pipeline."""
+        if self._chat_fn is None:
+            return "Chat isn't wired — use /goal <description> to run a full goal."
+        history = self.chat_history.setdefault(chat_id, deque(maxlen=HISTORY_LIMIT))
+        try:
+            reply = await self._chat_fn(chat_id, text, list(history)[-5:])
+        except Exception as exc:
+            logger.exception("Telegram chat failed")
+            msg = str(exc)
+            if "429" in msg or "rate limit" in msg.lower() or "too many requests" in msg.lower():
+                return "⏳ The AI service is busy. Please try again in a moment."
+            return "❌ Chat failed — please try again."
+        if reply is None:
+            return "⏳ You're sending messages too fast — slow down a moment."
+        reply = (reply or "").strip() or "(empty)"
+        history.append({"role": "user", "content": text})
+        history.append({"role": "assistant", "content": reply})
+        return reply
 
     async def _run_goal(self, chat_id: str, goal: str) -> str:
         history = self.conversations.setdefault(chat_id, deque(maxlen=HISTORY_LIMIT))

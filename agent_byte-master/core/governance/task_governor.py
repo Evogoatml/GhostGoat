@@ -43,9 +43,11 @@ class TaskGovernor:
         self.tasks_per_minute = tasks_per_minute if tasks_per_minute is not None else _env_int("GHOSTGOAT_TASKS_PER_MINUTE", 5)
         self.daily_budget = daily_budget if daily_budget is not None else _env_int("GHOSTGOAT_DAILY_TASK_BUDGET", 200)
         self.task_timeout = task_timeout if task_timeout is not None else _env_int("GHOSTGOAT_TASK_TIMEOUT", 180)
+        self.chats_per_minute = _env_int("GHOSTGOAT_CHATS_PER_MINUTE", 20)
         self._lock = threading.Lock()
         self._running = 0
         self._windows: Dict[str, Deque[float]] = {}
+        self._chat_windows: Dict[str, Deque[float]] = {}
         self._budget_day = ""
         self._budget_used = 0
 
@@ -78,6 +80,25 @@ class TaskGovernor:
             self._running += 1
             return True, "allowed"
 
+    def allow_chat(self, source: str = "api") -> bool:
+        """Rate-window admission for casual chat replies.
+
+        Chat is one bounded LLM call — no concurrency slot, no budget charge,
+        but its own higher window (GHOSTGOAT_CHATS_PER_MINUTE, default 20/min).
+        """
+        if self.chats_per_minute <= 0:
+            return True
+        now = time.time()
+        with self._lock:
+            window = self._chat_windows.setdefault(source, deque())
+            cutoff = now - 60.0
+            while window and window[0] < cutoff:
+                window.popleft()
+            if len(window) >= self.chats_per_minute:
+                return False
+            window.append(now)
+            return True
+
     def release(self) -> None:
         with self._lock:
             self._running = max(0, self._running - 1)
@@ -100,6 +121,7 @@ class TaskGovernor:
                 "daily_budget": self.daily_budget,
                 "daily_used": self._budget_used,
                 "task_timeout": self.task_timeout,
+                "chats_per_minute": self.chats_per_minute,
             }
 
     @staticmethod

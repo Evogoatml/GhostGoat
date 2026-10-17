@@ -50,6 +50,13 @@ logger = logging.getLogger("ghostgoat.orchestrator")
 
 EventListener = Callable[[Dict[str, Any]], Awaitable[None]]
 
+CHAT_SYSTEM = (
+    "You are GhostGoat, a concise personal assistant in a Telegram chat. "
+    "Reply in plain text, short and direct. You are in casual conversation and "
+    "do not create tasks; if the user wants work run as a goal, tell them to "
+    "use /goal <description>."
+)
+
 
 def _timestamp() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -100,6 +107,7 @@ class Orchestrator:
             get_status=self.health,
             get_agents=self.agents,
             get_memory=self.memory_state,
+            chat=self._chat_for_telegram,
         )
         self.subscribe(self.telegram.on_orchestrator_event)
 
@@ -189,6 +197,19 @@ class Orchestrator:
 
     async def _process_goal_for_telegram(self, description: str, context: Dict[str, Any]) -> Dict[str, Any]:
         return await self.process_goal(description, 5, context)
+
+    async def _chat_for_telegram(
+        self, chat_id: str, text: str, history: List[Dict[str, Any]]
+    ) -> Optional[str]:
+        """Casual chat reply: one bounded LLM call — no task, no thought records.
+
+        Returns None when the per-chat rate window is exhausted.
+        """
+        if not self.governor.allow_chat(f"chat:{chat_id}"):
+            return None
+        lines = [f"{m.get('role', 'user')}: {m.get('content', '')}" for m in history]
+        prompt = "\n".join(lines + [f"user: {text}"]) if lines else text
+        return await self.llm.complete(prompt, system=CHAT_SYSTEM)
 
     async def process_goal(
         self, description: str, priority: int = 5, context: Optional[Dict[str, Any]] = None
