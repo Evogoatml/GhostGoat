@@ -8,7 +8,9 @@ the live state.
 """
 import asyncio
 import logging
+import os
 import sys
+import threading
 import time
 import uuid
 from datetime import datetime, timezone
@@ -33,6 +35,7 @@ from agents.creative_module import CreativeModule
 from agents.custom_analyzer import CustomAnalyzerAgent
 from brain.dual_brain import DualBrain
 from brain.knowledge.knowledge_tank import KnowledgeTank
+from brain.knowledge.repo_indexer import index_repo_async
 from core.governance.decision_governor import allow_external_calls
 from core.governance.task_governor import TaskGovernor
 from core.graphrag.engine import GraphRAGEngine
@@ -144,9 +147,27 @@ class Orchestrator:
             return
         self.running = True
         self._sweep_stale_tasks()
+        self._start_training_index()
         await self.telegram.start()
         logger.info("Orchestrator online: %d agents, %d services",
                     len(self.network.profiles), len(self.registry.list_services()))
+
+    def _start_training_index(self) -> None:
+        """Index the external knowledge repo (TRAINING_KNOWLEDGE_DIR) in the
+        background so goals, /api/knowledge/search and chat retrieve from it."""
+        root = (os.environ.get("TRAINING_KNOWLEDGE_DIR") or "").strip()
+        if not root:
+            return
+        path = Path(root).expanduser()
+        if not path.is_dir():
+            logger.warning("TRAINING_KNOWLEDGE_DIR is not a directory: %s", root)
+            return
+        threading.Thread(
+            target=index_repo_async,
+            args=(self.knowledge_tank, path),
+            daemon=True,
+            name="knowledge-index",
+        ).start()
 
     def _sweep_stale_tasks(self) -> None:
         """Mark tasks left 'running' by a previous process as interrupted."""
@@ -209,7 +230,20 @@ class Orchestrator:
             return None
         lines = [f"{m.get('role', 'user')}: {m.get('content', '')}" for m in history]
         prompt = "\n".join(lines + [f"user: {text}"]) if lines else text
-        return await self.llm.complete(prompt, system=CHAT_SYSTEM)
+        system = CHAT_SYSTEM
+        try:
+            hits = self.knowledge_tank.search(text, limit=3)
+        except Exception:
+            logger.exception("Knowledge search failed for chat")
+            hits = []
+        if hits:
+            excerpts = "\n---\n".join(f"[{h['source']}] {h['content'][:600]}" for h in hits)
+            system = (
+                CHAT_SYSTEM
+                + "\n\nExcerpts from the knowledge base (mention the file when you use one):\n"
+                + excerpts
+            )
+        return await self.llm.complete(prompt, system=system)
 
     async def process_goal(
         self, description: str, priority: int = 5, context: Optional[Dict[str, Any]] = None

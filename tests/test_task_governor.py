@@ -195,3 +195,23 @@ def test_chat_for_telegram_rate_limited_returns_none(orchestrator):
     orch.llm.complete = fake_complete
     assert asyncio.run(orch._chat_for_telegram("7", "a", [])) == "x"
     assert asyncio.run(orch._chat_for_telegram("7", "b", [])) is None
+
+
+def test_chat_for_telegram_includes_knowledge_excerpts(orchestrator):
+    orch = orchestrator
+    orch.knowledge_tank.ingest(
+        "def dijkstra(graph, start): pass  # single-source shortest paths",
+        category="training",
+        tags=["training", "algorithms", "dijkstra"],
+        source="training/Algorithms/dijkstra.py",
+    )
+    captured = {}
+
+    async def fake_complete(prompt, system=None):
+        captured["system"] = system
+        return "answer"
+
+    orch.llm.complete = fake_complete
+    reply = asyncio.run(orch._chat_for_telegram("5", "how does dijkstra work", []))
+    assert reply == "answer"
+    assert "training/Algorithms/dijkstra.py" in captured["system"]

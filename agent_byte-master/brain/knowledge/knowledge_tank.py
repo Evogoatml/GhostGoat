@@ -1,5 +1,5 @@
 """GhostGoat KnowledgeTank — Massive Knowledge Store with GraphRAG Integration."""
-import os, json, time, logging
+import os, json, re, time, logging
 from typing import Any, Dict, List, Optional, Set
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -21,6 +21,16 @@ class KnowledgeEntry:
     metadata: Dict[str, Any] = field(default_factory=dict)
 
 class KnowledgeTank:
+    _STOPWORDS = frozenset({
+        "the", "and", "for", "are", "but", "not", "you", "all", "can", "has",
+        "his", "her", "its", "our", "their", "this", "that", "with", "from",
+        "were", "been", "what", "when", "how", "why", "who", "does", "did",
+        "your", "any", "some", "get", "use", "used",
+        # code noise: single tokens that match nearly every source file
+        "self", "none", "null", "true", "false", "return", "import",
+        "print", "elif", "else",
+    })
+
     def __init__(self, storage_path: Optional[str] = None, max_entries: int = 100_000):
         self.storage_path = Path(storage_path or Path.home() / ".ghostgoat" / "knowledge_tank")
         self.storage_path.mkdir(parents=True, exist_ok=True)
@@ -51,18 +61,52 @@ class KnowledgeTank:
         self._persist()
         return ids
 
+    def delete_by_source(self, source: str) -> int:
+        """Drop every entry ingested from one source (e.g. a repo file path).
+
+        Does not persist — bulk callers should ``persist()`` once at the end.
+        """
+        doomed = [e for e in self.entries.values() if e.source == source]
+        for entry in doomed:
+            del self.entries[entry.id]
+            self.index_by_category.get(entry.category, set()).discard(entry.id)
+            for tag in entry.tags:
+                self.index_by_tag.get(tag, set()).discard(entry.id)
+            if entry.category == "algorithm" and self.total_algorithms > 0:
+                self.total_algorithms -= 1
+        return len(doomed)
+
+    def persist(self) -> None:
+        """Write the in-memory tank to disk (see ``_persist``)."""
+        self._persist()
+
     def search(self, query: str, category: Optional[str] = None, tags: Optional[List[str]] = None, limit: int = 10) -> List[Dict[str, Any]]:
+        """Score entries by exact phrase (strongest) plus token overlap, so
+        natural-language queries still retrieve when the full phrase is absent."""
         results = []
-        query_lower = query.lower()
+        query_lower = (query or "").lower().strip()
+        tokens = [t for t in re.split(r"[^a-z0-9+#]+", query_lower)
+                  if len(t) >= 3 and t not in self._STOPWORDS]
         for entry in self.entries.values():
             if category and entry.category != category:
                 continue
             if tags and not any(t in entry.tags for t in tags):
                 continue
             score = 0.0
-            if query_lower in entry.content.lower(): score += 2.0
-            if query_lower in " ".join(entry.tags).lower(): score += 1.5
+            content_lower = entry.content.lower()
+            tags_lower = " ".join(entry.tags).lower()
+            if query_lower and query_lower in content_lower: score += 2.0
+            if query_lower and query_lower in tags_lower: score += 1.5
             if entry.category in query_lower: score += 0.5
+            if tokens:
+                # token bonus only when the entry covers at least half the query
+                # tokens — one common token must not rank an entry for a whole phrase
+                matched = sum(1 for t in tokens if t in content_lower)
+                if matched * 2 >= len(tokens):
+                    score += 1.5 * matched / len(tokens)
+                tag_matched = sum(1 for t in tokens if t in tags_lower)
+                if tag_matched * 2 >= len(tokens):
+                    score += 1.0 * tag_matched / len(tokens)
             if score > 0:
                 entry.usage_count += 1
                 entry.last_accessed = time.time()
