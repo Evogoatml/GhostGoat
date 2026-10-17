@@ -170,7 +170,19 @@ class TelegramBotService:
             task = await self._process_goal(goal, context)
         except Exception as exc:
             logger.exception("Orchestrator failed for telegram goal")
-            task = {"id": None, "status": "failed", "result": {"error": str(exc)}}
+            error_msg = str(exc)
+            if "429" in error_msg or "rate limit" in error_msg.lower() or "too many requests" in error_msg.lower():
+                task = {"id": None, "status": "rate_limited", "result": {"error": "The AI service is currently busy. Please try again in a moment."}}
+            else:
+                task = {"id": None, "status": "failed", "result": {"error": error_msg}}
+        
+        # Also check task result for rate limit errors (orchestrator returns failed tasks, not exceptions)
+        if task.get("status") == "failed":
+            result = task.get("result", {})
+            error_msg = str(result.get("error", "")) if isinstance(result, dict) else str(result)
+            if "429" in error_msg or "rate limit" in error_msg.lower() or "too many requests" in error_msg.lower():
+                task = {"id": task.get("id"), "status": "rate_limited", "result": {"error": "The AI service is currently busy. Please try again in a moment."}}
+        
         history.append({
             "goal": goal,
             "task_id": task.get("id"),
@@ -182,16 +194,35 @@ class TelegramBotService:
     @staticmethod
     def format_task(task: Dict[str, Any]) -> str:
         result = task.get("result")
-        if isinstance(result, dict):
-            body = result.get("error") or result.get("result") or json.dumps(result, default=str)
-        else:
-            body = result
-        lines = [f"Task {task.get('id')} [{task.get('status')}]"]
-        if task.get("agent"):
-            lines.append(f"Agent: {task['agent']}")
-        if body:
-            lines.append(str(body))
-        return "\n".join(lines)
+        status = task.get('status')
+        
+        if status == "rate_limited":
+            return "⏳ The AI service is busy. Please wait a moment and try again."
+        
+        if status == "failed":
+            if isinstance(result, dict):
+                error = result.get("error", "Unknown error")
+            else:
+                error = str(result)
+            return f"❌ Sorry, I couldn't process that: {error}"
+        
+        if status == "completed":
+            if isinstance(result, dict):
+                # Extract the actual response content
+                body = result.get("result") or result.get("output") or result.get("response") or result.get("text")
+                if body:
+                    return str(body)
+                # Fallback: try to find any meaningful content
+                for key in ["content", "message", "answer", "reply"]:
+                    if key in result and result[key]:
+                        return str(result[key])
+                # Last resort: pretty print the dict (but avoid raw technical output)
+                return "✅ Task completed successfully."
+            else:
+                return str(result)
+        
+        # Default for other statuses
+        return f"Status: {status}"
 
     @staticmethod
     def _format(title: str, provider: StatusProvider) -> str:

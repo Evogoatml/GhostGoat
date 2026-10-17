@@ -11,6 +11,10 @@ import logging
 import sys
 from pathlib import Path
 
+# Load .env file from project root
+from dotenv import load_dotenv
+load_dotenv()
+
 ROOT = Path(__file__).parent.absolute()
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
