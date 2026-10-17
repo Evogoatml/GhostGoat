@@ -11,7 +11,7 @@ export const AGENT_TYPES = {
 export const CAPABILITIES = [
   'CRYPTOGRAPHY', 'MACHINE_LEARNING', 'GRAPH_ANALYSIS',
   'DATA_STRUCTURES', 'MATHEMATICS', 'NETWORKING', 'GENERAL',
-  'MARKETING', 'CONTENT_GENERATION', 'SECURITY', 'REASONING',
+  'CONTENT_GENERATION', 'SECURITY', 'REASONING', 'GOVERNANCE',
 ];
 
 export const SYSTEM_TYPES = [
@@ -32,16 +32,24 @@ export const agents = [
   { id: 'agent-009', name: 'SmartMoE', type: AGENT_TYPES.SPECIALIST, status: 'active', health: 96, cpu: 38, memory: 720, capabilities: ['CRYPTOGRAPHY', 'MACHINE_LEARNING', 'GRAPH_ANALYSIS', 'MATHEMATICS'], module: 'integrations/smart_moe.py', tasks_completed: 780, uptime: '14d 6h' },
   { id: 'agent-010', name: 'Traversal Agent', type: AGENT_TYPES.WORKER, status: 'idle', health: 100, cpu: 0, memory: 64, capabilities: ['GRAPH_ANALYSIS'], module: 'frameworks/agents/traversal.py', tasks_completed: 340, uptime: '14d 6h' },
   { id: 'agent-011', name: 'Efficiency Engine', type: AGENT_TYPES.MONITOR, status: 'active', health: 97, cpu: 7, memory: 180, capabilities: ['GENERAL'], module: 'core/agents/agent_core/efficiency_engine.py', tasks_completed: 8900, uptime: '14d 6h' },
-  { id: 'agent-012', name: 'Content Researcher', type: AGENT_TYPES.SPECIALIST, status: 'idle', health: 100, cpu: 0, memory: 90, capabilities: ['MARKETING', 'CONTENT_GENERATION'], module: 'marketing/Agentic-Ads/backend/rag/agents.py', tasks_completed: 120, uptime: '2d 8h' },
-  { id: 'agent-013', name: 'Copywriter Agent', type: AGENT_TYPES.SPECIALIST, status: 'idle', health: 100, cpu: 0, memory: 85, capabilities: ['MARKETING', 'CONTENT_GENERATION'], module: 'marketing/Agentic-Ads/backend/rag/agents.py', tasks_completed: 95, uptime: '2d 8h' },
-  { id: 'agent-014', name: 'Visual Designer', type: AGENT_TYPES.SPECIALIST, status: 'offline', health: 0, cpu: 0, memory: 0, capabilities: ['MARKETING', 'CONTENT_GENERATION'], module: 'marketing/Agentic-Ads/backend/rag/agents.py', tasks_completed: 67, uptime: '0' },
-  { id: 'agent-015', name: 'Poster Generation Agent', type: AGENT_TYPES.SPECIALIST, status: 'offline', health: 0, cpu: 0, memory: 0, capabilities: ['MARKETING', 'CONTENT_GENERATION'], module: 'marketing/Agentic-Ads/backend/rag/poster_generation.py', tasks_completed: 45, uptime: '0' },
-  { id: 'agent-016', name: 'Video/GIF Generator', type: AGENT_TYPES.SPECIALIST, status: 'offline', health: 0, cpu: 0, memory: 0, capabilities: ['MARKETING', 'CONTENT_GENERATION'], module: 'marketing/Agentic-Ads/backend/rag/video_generation.py', tasks_completed: 23, uptime: '0' },
-  { id: 'agent-017', name: 'QA Agent', type: AGENT_TYPES.MONITOR, status: 'idle', health: 100, cpu: 0, memory: 70, capabilities: ['GENERAL'], module: 'marketing/Agentic-Ads/backend/rag/agents.py', tasks_completed: 210, uptime: '2d 8h' },
+  { id: 'agent-012', name: 'Thought Mapper', type: AGENT_TYPES.SPECIALIST, status: 'active', health: 96, cpu: 4, memory: 96, capabilities: ['GENERAL', 'DATA_STRUCTURES'], module: 'memory/ctms_wiring.py', tasks_completed: 340, uptime: '2d 8h' },
+  { id: 'agent-013', name: 'Task Governor', type: AGENT_TYPES.MONITOR, status: 'active', health: 100, cpu: 1, memory: 32, capabilities: ['GOVERNANCE', 'SECURITY'], module: 'core/governance/task_governor.py', tasks_completed: 1240, uptime: '2d 8h' },
+  { id: 'agent-014', name: 'Thought Store', type: AGENT_TYPES.WORKER, status: 'active', health: 99, cpu: 3, memory: 70, capabilities: ['GENERAL', 'DATA_STRUCTURES'], module: 'memory/thought_store.py', tasks_completed: 210, uptime: '2d 8h' },
+  { id: 'agent-015', name: 'LLM Gateway', type: AGENT_TYPES.WORKER, status: 'active', health: 95, cpu: 12, memory: 128, capabilities: ['GENERAL', 'MACHINE_LEARNING'], module: 'services/llm_gateway.py', tasks_completed: 5600, uptime: '2d 8h' },
   { id: 'agent-018', name: 'Decision Governor', type: AGENT_TYPES.SPECIALIST, status: 'active', health: 100, cpu: 3, memory: 64, capabilities: ['SECURITY', 'REASONING'], module: 'core/governance/decision_governor.py', tasks_completed: 12400, uptime: '14d 6h' },
   { id: 'agent-019', name: 'Service Registry', type: AGENT_TYPES.WORKER, status: 'active', health: 99, cpu: 2, memory: 48, capabilities: ['GENERAL'], module: 'core/service_registry.py', tasks_completed: 24000, uptime: '14d 6h' },
   { id: 'agent-020', name: 'Dataset Orchestrator', type: AGENT_TYPES.WORKER, status: 'idle', health: 85, cpu: 0, memory: 120, capabilities: ['DATA_STRUCTURES', 'MACHINE_LEARNING'], module: 'applications/empire/motif_dataset_builder.py', tasks_completed: 12, uptime: '1d 4h' },
   { id: 'agent-021', name: 'EvoGoat Agent', type: AGENT_TYPES.SELF_EVOLVING, status: 'active', health: 93, cpu: 55, memory: 950, capabilities: ['MACHINE_LEARNING', 'REASONING', 'GENERAL'], module: 'ACS_SYSTEM/asi/evoagent/agent/main.py', tasks_completed: 89, uptime: '5d 3h' },
+];
+
+// Optional add-ons — NOT part of the core brain fleet.
+// Marketing/content modules from vendor subprojects, kept for reference only.
+export const pluginAgents = [
+  { id: 'plugin-001', name: 'Content Researcher', type: AGENT_TYPES.SPECIALIST, status: 'offline', capabilities: ['CONTENT_GENERATION'], module: 'vendor/marketing/Agentic-Ads/backend/rag/agents.py' },
+  { id: 'plugin-002', name: 'Copywriter Agent', type: AGENT_TYPES.SPECIALIST, status: 'offline', capabilities: ['CONTENT_GENERATION'], module: 'vendor/marketing/Agentic-Ads/backend/rag/agents.py' },
+  { id: 'plugin-003', name: 'Visual Designer', type: AGENT_TYPES.SPECIALIST, status: 'offline', capabilities: ['CONTENT_GENERATION'], module: 'vendor/marketing/Agentic-Ads/backend/rag/agents.py' },
+  { id: 'plugin-004', name: 'Poster Generation Agent', type: AGENT_TYPES.SPECIALIST, status: 'offline', capabilities: ['CONTENT_GENERATION'], module: 'vendor/marketing/Agentic-Ads/backend/rag/poster_generation.py' },
+  { id: 'plugin-005', name: 'Video/GIF Generator', type: AGENT_TYPES.SPECIALIST, status: 'offline', capabilities: ['CONTENT_GENERATION'], module: 'vendor/marketing/Agentic-Ads/backend/rag/video_generation.py' },
 ];
 
 // Governance policies
@@ -67,12 +75,12 @@ export const systems = [
 export const generateTasks = () => [
   { id: 'task-001', description: 'Analyze graph connectivity patterns', status: 'running', agent: 'SmartMoE', priority: 8, progress: 67, created: '2m ago' },
   { id: 'task-002', description: 'Train neural embedding model', status: 'running', agent: 'Self-Evolving Agent', priority: 9, progress: 34, created: '15m ago' },
-  { id: 'task-003', description: 'Generate marketing copy batch', status: 'queued', agent: null, priority: 5, progress: 0, created: '1m ago' },
+  { id: 'task-003', description: 'Expand thought nodes via CTMS mapper', status: 'queued', agent: null, priority: 5, progress: 0, created: '1m ago' },
   { id: 'task-004', description: 'Validate decision governor policies', status: 'completed', agent: 'Decision Governor', priority: 10, progress: 100, created: '32m ago' },
   { id: 'task-005', description: 'Sync external intelligence feeds', status: 'running', agent: 'Agent Network', priority: 7, progress: 82, created: '5m ago' },
   { id: 'task-006', description: 'Optimize memory vector indices', status: 'queued', agent: null, priority: 6, progress: 0, created: '30s ago' },
   { id: 'task-007', description: 'Run efficiency diagnostics', status: 'completed', agent: 'Efficiency Engine', priority: 4, progress: 100, created: '1h ago' },
-  { id: 'task-008', description: 'Deploy poster generation workflow', status: 'failed', agent: 'Poster Generation Agent', priority: 3, progress: 45, created: '20m ago' },
+  { id: 'task-008', description: 'Sweep stale running tasks', status: 'failed', agent: 'Task Governor', priority: 3, progress: 45, created: '20m ago' },
   { id: 'task-009', description: 'Knowledge tank indexing', status: 'running', agent: 'Cognitive Engine', priority: 8, progress: 91, created: '8m ago' },
   { id: 'task-010', description: 'Self-modification safety check', status: 'completed', agent: 'Decision Governor', priority: 10, progress: 100, created: '45m ago' },
 ];
@@ -137,5 +145,5 @@ export const vectorMemoryEntries = [
   { id: 'vec-003', content: 'Decision governor approved 99.8% of policy-compliant requests', embedding_dim: 768, similarity: 0.88, metadata: { source: 'Decision Governor', domain: 'SECURITY' }, timestamp: '32m ago' },
   { id: 'vec-004', content: 'Reasoning chain depth-3 reflexion achieved consistency 0.87', embedding_dim: 768, similarity: 0.85, metadata: { source: 'Brain Core', domain: 'REASONING' }, timestamp: '1h ago' },
   { id: 'vec-005', content: 'Agent network latency reduced to avg 12ms after topology optimization', embedding_dim: 768, similarity: 0.82, metadata: { source: 'Agent Network', domain: 'NETWORKING' }, timestamp: '2h ago' },
-  { id: 'vec-006', content: 'Marketing copy A/B test: variant B +23% engagement', embedding_dim: 768, similarity: 0.79, metadata: { source: 'Copywriter Agent', domain: 'MARKETING' }, timestamp: '4h ago' },
+  { id: 'vec-006', content: 'CTMS node entanglement graph stable across 3 merge rounds', embedding_dim: 768, similarity: 0.79, metadata: { source: 'Thought Mapper', domain: 'DATA_STRUCTURES' }, timestamp: '4h ago' },
 ];
