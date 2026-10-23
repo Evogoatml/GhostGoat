@@ -1,5 +1,18 @@
 # GhostGoat
 
+GhostGoat is a mixed-language repository centered on a Python orchestration runtime, with a significant Go and TypeScript footprint. The project combines a Python orchestrator and API surface with a TypeScript front-end and Go-based tooling/services.
+
+## Language composition
+
+Based on the current repository state, the codebase is dominated by the following language areas:
+
+- Python (~9.7M): orchestrator runtime, API integration, agent logic, configuration, and service entry points
+- Go (~4.5M): backend/system components and Go-based tooling
+- TypeScript (~3.9M): dashboard and frontend application logic
+- Supporting web and automation assets: HTML, CSS, JavaScript, Shell, Makefile, Rust, and Docker configuration
+
+This mix reflects a hybrid architecture: Python drives the primary runtime, Go contributes backend/system code, and TypeScript powers the interactive dashboard experience.
+
 GhostGoat is a single full runtime. `python main.py` boots one orchestrator
 (`run_cognitive_system.py`) and serves the REST API, the Telegram service and
 the dashboard from that same instance. There are no optional or fallback
